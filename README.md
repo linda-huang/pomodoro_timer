@@ -1,5 +1,7 @@
-<<<<<<< HEAD
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+To run this project as a google chrome extension, refer to https://www.notion.so/Building-a-Google-Chrome-Extension-with-React-1a390d7051f34815b878d984bbe66010
+
 
 ## Available Scripts
 
@@ -67,6 +69,4 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `yarn build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-=======
-# pomodoro_timer
->>>>>>> 859306fcfd4d8f54acfb23f324a15a34d9ac7778
+
