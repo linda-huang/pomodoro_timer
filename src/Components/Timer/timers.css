@@ -1,0 +1,15 @@
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hideInput{
+    border: none;
+    opacity: 0;
+    position: absolute;
+}
+
+.timeDisplay{
+    color: #21b8a1;
+}
