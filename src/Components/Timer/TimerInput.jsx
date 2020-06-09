@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './timers.css';
 
 //sad version ;-;
-export default function TimerInput (){
+export default function TimerInput (hours, minutes, displayInput){
 
     const [hour, setHour] = useState(0);
     const [minute, setMinute] = useState(0);
@@ -64,6 +64,11 @@ export default function TimerInput (){
                 <button onClick={handleOnClick}>
                     Start
                 </button>
+                <h1 style = {{
+                    display: displayInput
+                }}>
+                    {hour < 10? `0${hour}` : hour}h {minute < 10? `0${minute}` : minute}m {second < 10? `o${second}`:second}s
+                </h1>
             </center>
          
         </div>
