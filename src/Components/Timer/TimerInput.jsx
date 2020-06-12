@@ -2,38 +2,22 @@ import React, { useState, useEffect } from 'react';
 import './timers.css';
 
 //sad version ;-;
-export default function TimerInput (hours, minutes, displayInput){
+export default function TimerInput ({hours, minutes, displayInput, submitted}){
+
 
     const [hour, setHour] = useState(0);
     const [minute, setMinute] = useState(0);
     const [second, setSecond] = useState(0);
-    const [start, setStart] = useState(false);
+    const [pause, setPause] = useState(true);
 
-
-    //recalculate hours and minutes when minutes > 59
-    function recalibrate (inputSecond, inputMinute){
-        if (inputSecond > 59){
-            const extraMinute = Math.floor(inputSecond/60);
-            inputSecond = inputSecond % 60;
-            setMinute(0 + extraMinute);
-            console.log(0+extraMinute);
-            setSecond(inputSecond);
-        }
-        if (minute > 59){
-            const extraHour = Math.floor(inputMinute/60);
-            inputMinute = inputMinute % 60;
-            setHour(parseInt(hour) + extraHour);
-            setMinute(inputMinute);
-        }
-    }
 
     const handleOnClick = event =>{
-        setStart(!start);
-        console.log("start timer", start);
+        setPause(!pause);
+        console.log("Paused: ", pause);
     }
 
     useEffect(()=>{  
-        if (start){
+        if (pause){
             const interval = setInterval(() => {
                 if (second > 0){
                     setSecond(second - 1);
@@ -47,6 +31,7 @@ export default function TimerInput (hours, minutes, displayInput){
                         }
                     }
                     else{
+                        console.log("decreasing minute by 1")
                         setMinute(minute-1);
                         setSecond(59);
                     }
@@ -54,23 +39,32 @@ export default function TimerInput (hours, minutes, displayInput){
             },1000)
             return () => clearInterval(interval)
         }
-    });
+    }, [submitted, pause, second, minute, hour]);
+
+
+    useEffect(()=>{
+        console.log("setting hours and minutes");
+        if( submitted){
+            setHour(hours);
+            setMinute(minutes);
+        }
+        
+    }, [submitted])
+
 
     return (
 
-        <div>
-        
+        <div style = {{
+            display: displayInput,
+        }}>
             <center>
-                <button onClick={handleOnClick}>
-                    Start
-                </button>
-                <h1 style = {{
-                    display: displayInput
-                }}>
-                    {hour < 10? `0${hour}` : hour}h {minute < 10? `0${minute}` : minute}m {second < 10? `o${second}`:second}s
+                <h1>
+                    {hour < 10? `0${hour}` : hour}h {minute < 10? `0${minute}` : minute}m {second < 10? `0${second}`:second}s
                 </h1>
+                <button onClick={handleOnClick}>
+                    Pause
+                </button>
             </center>
-         
         </div>
     )
 }
