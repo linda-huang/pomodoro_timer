@@ -32,10 +32,9 @@ function Countdown ({work_hour, work_min, break_hour, break_min, work_countdown,
                             setDisplayHour(displayHour - 1);
                         }
                     }
-                    else{
-                        console.log("decreasing minute by 1")
-                        setDisplayMinute(displayMinute-1);
+                    else {
                         setDisplaySecond(59);
+                        setDisplayMinute(displayMinute-1);
                     }
                 }
             },1000)
@@ -43,16 +42,11 @@ function Countdown ({work_hour, work_min, break_hour, break_min, work_countdown,
         }
     });
 
-    console.log(typeof displayHour)
-    console.log(typeof displayMinute)
-    console.log(typeof displaySecond)
-    console.log(displayHour == displayMinute == displaySecond)
 
     // trying to rewind --basically if all displayHour, displayMinute, displaySecond is 0, then
     // we want to reset the timer using the break_hour, break_min etc.
     useEffect(() => {
-        if (displayHour === displayMinute === displaySecond === 0) {
-            console.log('rewinding')
+        if (displayHour === 0 && displayMinute === 0 && displaySecond === 0) {
             // so this means, if we were previously counting work,
             // now we rewind to break
             if (work_countdown === true) {
