@@ -3,7 +3,8 @@
  * following contains the action and reducer to indicate current mission state
  */
 
-const WORK_COUNTDOWN = 'START_COUNTDOWN'
+const WORK_COUNTDOWN = 'START_COUNTDOWN';
+const BREAK_COUNTDOWN = 'BREAK_COUNTDOWN';
 
 /**
  * @description
@@ -15,6 +16,13 @@ const WORK_COUNTDOWN = 'START_COUNTDOWN'
 export const setWorkCountdown = start => (
     {
         type: WORK_COUNTDOWN,
+        start
+    }
+)
+
+export const setBreakCountdown = start => (
+    {
+        type: BREAK_COUNTDOWN,
         start
     }
 )

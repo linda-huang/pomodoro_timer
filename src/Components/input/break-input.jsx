@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { setBreakHour, setBreakMin } from './inputDucks'
 
 //sleek google version
-function BreakInput ({setBreakHour, setBreakMin, save, break_hour, break_min}){
+function BreakInput ({setBreakHour, setBreakMin, save, use, break_hour, break_min, work_countdown, break_countdown}){
 
     const [time, setTime] = useState(0);
     const [hour, setHour] = useState(break_hour);
@@ -61,47 +61,52 @@ function BreakInput ({setBreakHour, setBreakMin, save, break_hour, break_min}){
         setBreakMin(actionMinute);
         setBreakHour(actionHour);
     }
-
-    return(   
-        <div>
-            <div className ="container"
-                style = {{
-                display: 'flex',
-            }}
-            >  
-                <div>
-                    <input
-                        type = "text"
-                        className = "hideInput"
-                        placeholder = "0"
-                        // maxlength = "4"
-                        size = "19"
-                        value = {time}
-                        onBlur = {() => setColor("#21b8a1")}
-                        onFocus = {() => setColor("#84e3d1")}
-                        onChange = {changeTime}    
-                    />
+    
+    if (use === 'countdown' && (work_countdown === true || break_countdown === true)) {
+        return null
+    }
+    else{
+        return(   
+            <div>
+                <div className ="container"
+                    style = {{
+                    display: 'flex',
+                }}
+                >  
+                    <div>
+                        <input
+                            type = "text"
+                            className = "hideInput"
+                            placeholder = "0"
+                            // maxlength = "4"
+                            size = "19"
+                            value = {time}
+                            onBlur = {() => setColor("#21b8a1")}
+                            onFocus = {() => setColor("#84e3d1")}
+                            onChange = {changeTime}    
+                        />
+                    </div>
+    
+                    <div>
+                        <h1 className = "timeDisplay"
+                            style = {{
+                                color: color
+                            }}>
+                            {hour < 10? `0${hour}` : hour}h {minute < 10? `0${minute}` : minute}m
+                        </h1>
+                    </div>  
+    
+                    {/* <div style = {{
+                        display: hide,
+                    }}>
+                        <button onClick={handleOnClick}>
+                            Submit
+                        </button> 
+                    </div>  */}
                 </div>
-
-                <div>
-                    <h1 className = "timeDisplay"
-                        style = {{
-                            color: color
-                        }}>
-                        {hour < 10? `0${hour}` : hour}h {minute < 10? `0${minute}` : minute}m
-                    </h1>
-                </div>  
-
-                {/* <div style = {{
-                    display: hide,
-                }}>
-                    <button onClick={handleOnClick}>
-                        Submit
-                    </button> 
-                </div>  */}
             </div>
-        </div>
-        )
+            )
+    }
 }
 
 /**
@@ -125,7 +130,9 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({
     break_hour : state.breakLength.break_hour,
-    break_min : state.breakLength.break_min
+    break_min : state.breakLength.break_min,
+    work_countdown : state.countdown.work_countdown,
+    break_countdown : state.countdown.break_countdown
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BreakInput)

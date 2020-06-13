@@ -6,22 +6,10 @@ import { connect } from 'react-redux';
 import { setNumRepeats } from './settingsDucks';
 // import { Keyboard } from 'react-native';
 
-function SandboxModal ({hide, onClose, setNumRepeats, num_repeats}) {
+function SandboxModal ({hide, setNumRepeats, num_repeats}) {
     const [save, setSave] = useState(false);
     const [tempNumRepeats, setTempNumRepeats] = useState(num_repeats);
 
-    useEffect(() => {
-        if (onClose) {
-            window.addEventListener('keydown', listenKeyboard, true);
-            return () => window.removeEventListener('keydown', listenKeyboard, true);
-        }
-    }, [])
-          
-    const listenKeyboard = (event) => {
-        if (event.key === 'Escape' || event.keyCode === 27) {
-            onClose(true);
-        }
-    }
 
     const onDialogClick = (event) => {
         event.stopPropagation();
@@ -48,11 +36,11 @@ function SandboxModal ({hide, onClose, setNumRepeats, num_repeats}) {
                     <form onSubmit={handleConfigSubmit}>
                         <label>
                             How long should we work for?
-                            <WorkInput save={save}/>
+                            <WorkInput use="settings" save={save}/>
                         </label>
                         <label>
                             How long should we break for?
-                            <BreakInput save={save}/>
+                            <BreakInput use="settings" save={save}/>
                         </label>
                         <label>
                             How many repeats?
@@ -64,9 +52,6 @@ function SandboxModal ({hide, onClose, setNumRepeats, num_repeats}) {
                         <button type="submit">Save</button>
                     </form>
                 </div>
-                <button onClick={onClose}>
-                    Exit
-                </button>
               </div>
             </div>
           );
