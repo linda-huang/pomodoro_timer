@@ -1,8 +1,13 @@
-import{combineReducers} from 'redux';
-import {pomodoroReducer} from '../components/timer/timerDucks';
+import{ combineReducers } from 'redux';
+import { breakLenReducer, workLenReducer } from '../components/input/inputDucks';
+import { repeatsReducer } from '../components/settings/settingsDucks';
+import { countdownReducer } from '../components/timer/timerDucks';
 
 const allReducers = combineReducers({
-    workBreakSettings : pomodoroReducer
+    workLength : workLenReducer,
+    breakLength : breakLenReducer,
+    settings : repeatsReducer,
+    countdown : countdownReducer
 });
 
 export default allReducers;
