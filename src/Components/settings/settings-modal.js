@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import './modal.css';
-import { connect } from 'react-redux'
-import { setBreakLength, setWorkLength, setNumRepeats } from '../timerDucks';
+import BreakInput from '../input/break-input';
+import WorkInput from '../input/work-input';
+import { connect } from 'react-redux';
+import { setNumRepeats } from './settingsDucks';
 // import { Keyboard } from 'react-native';
 
-function SandboxModal ({hide, onClose, setBreakLength, setWorkLength, setNumRepeats, break_length, work_length, num_repeats}) {
-    const [tempWork, setTempWork] = useState(work_length);
-    const [tempBreak, setTempBreak] = useState(break_length);
+function SandboxModal ({hide, onClose, setNumRepeats, num_repeats}) {
+    const [save, setSave] = useState(false);
     const [tempNumRepeats, setTempNumRepeats] = useState(num_repeats);
 
     useEffect(() => {
@@ -27,19 +28,10 @@ function SandboxModal ({hide, onClose, setBreakLength, setWorkLength, setNumRepe
     }
 
     const handleConfigSubmit = (event) => {
-       setBreakLength(parseInt(tempBreak));
-       setWorkLength(parseInt(tempWork));
+       setSave(true)
        setNumRepeats(parseInt(tempNumRepeats));
        console.log('dispatching actions')
        event.preventDefault();
-    }
-
-    const handleBreakChange = (event) => {
-        setTempBreak(event.target.value);
-    }
-
-    const handleWorkChange = (event) => {
-        setTempWork(event.target.value);
     }
 
     const handleRepeatChange = (event) => {
@@ -56,17 +48,11 @@ function SandboxModal ({hide, onClose, setBreakLength, setWorkLength, setNumRepe
                     <form onSubmit={handleConfigSubmit}>
                         <label>
                             How long should we work for?
-                            <input 
-                                type='number'
-                                value={tempWork}
-                                onChange={handleWorkChange}/>
+                            <WorkInput save={save}/>
                         </label>
                         <label>
                             How long should we break for?
-                            <input 
-                                type='number'
-                                value={tempBreak}
-                                onChange={handleBreakChange}/>
+                            <BreakInput save={save}/>
                         </label>
                         <label>
                             How many repeats?
@@ -101,29 +87,13 @@ function SandboxModal ({hide, onClose, setBreakLength, setWorkLength, setNumRepe
  * it is a convention to  name the field key the same name as the action creator.
  */
 const mapDispatchToProps = dispatch => ({
-    setBreakLength: break_len => dispatch(setBreakLength(break_len)),
-    setWorkLength: work_len => dispatch(setWorkLength(work_len)),
     setNumRepeats: num_repeats => dispatch(setNumRepeats(num_repeats))
   })
 
-
-// NOTE TO Mina and Doanh I do not actually need the below function, this is to 
-// demonstrate how to access state values in the global state
-/**
- *
- * @constant mapStateToProps
- * Returns a plain object, where each field is a separate prop for the Classifier
- * component. 
- * 
- * @param {function} state
- * The entire Redux store state (the same value returned by a call to store.getState())
- * 
- */
 const mapStateToProps = state => ({
-    break_length : state.workBreakSettings.break_length,
-    work_length : state.workBreakSettings.work_length,
-    num_repeats : state.workBreakSettings.num_repeats
+    num_repeats : state.settings.num_repeats,
 })
+
 /* Merges the return of the mapDispatchToProps function to SandboxModal component 
 as props.*/
 export default connect(mapStateToProps, mapDispatchToProps)(SandboxModal)

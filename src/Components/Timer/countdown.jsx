@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './timers.css';
+import {connect} from 'react-redux'
 
 //sad version ;-;
-export default function TimerInput ({hours, minutes, displayInput, submitted}){
-
+function Countdown ({work_hour, work_min, displayInput, submitted}){
 
     const [hour, setHour] = useState(0);
     const [minute, setMinute] = useState(0);
@@ -68,3 +68,11 @@ export default function TimerInput ({hours, minutes, displayInput, submitted}){
         </div>
     )
 }
+
+const mapStateToProps = state => ({
+    break_hour : state.breakLength.break_hour,
+    break_min : state.breakLength.break_min,
+    work_hour : state.workLength.work_hour,
+    work_min : state.workLength.work_min
+})
+export default connect(mapStateToProps)(Countdown)

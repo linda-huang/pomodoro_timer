@@ -1,18 +1,15 @@
-import './timers.css';
-import React, { useState} from 'react';
-import TimerInput from './TimerInput';
+import '../timer/timers.css';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { setWorkHour, setWorkMin } from './inputDucks';
 
 //sleek google version
-export default function GoogleTimer (){
+function WorkInput ({setWorkHour, setWorkMin, save, work_hour, work_min}){
 
-    const [time, setTime] = useState();
-    const [hour, setHour] = useState(0);
-    const [minute, setMinute] = useState(0);
-    const [color, setColor] = useState("#21b8a1");
-    const [start, setStart] = useState("none");
-    const [hide, setHide] = useState("flex");
-    const [submit, setSubmit] = useState(false);
-
+    const [time, setTime] = useState(0);
+    const [hour, setHour] = useState(work_hour);
+    const [minute, setMinute] = useState(work_min);
+    const [color, setColor] = useState();
 
     const changeTime = (event) => {
         const time = event.currentTarget.value;
@@ -35,44 +32,46 @@ export default function GoogleTimer (){
         }
     }
 
+    // const handleOnClick = event =>{
+    //     recalibrate(minute);
+    //     setSubmit(true);
+    //     setStart("block");
+    //     setHide("none");
+    // }
 
-    const handleOnClick = event =>{
-        recalibrate(minute);
-        setSubmit(true);
-        setStart("block");
-        setHide("none");
-    }
-
+    useEffect(() => {
+        if (save === true) {
+            recalibrate(minute)
+        }
+    })
 
     //recalculate hours and minutes when minutes > 59
     function recalibrate (inputMinute){
+        let actionHour = hour
+        let actionMinute = minute
         if (minute > 59){
-            const extraHour = Math.floor(inputMinute/60);
+            let extraHour = Math.floor(inputMinute/60);
             inputMinute = inputMinute % 60;
-            setHour(hour + extraHour);
-            setMinute(inputMinute);
-            
+            actionHour = hour + extraHour;
+            actionMinute = inputMinute;
         }
+        setWorkMin(actionMinute);
+        setWorkHour(actionHour);
     }
 
     return(   
         <div>
-            <div>
-                <p>
-                    hello
-                </p>
-            </div>
-            <div class ="container"
+            <div className ="container"
                 style = {{
-                display: hide,
+                display: 'flex',
             }}
             >  
                 <div>
                     <input
                         type = "text"
-                        class = "hideInput"
+                        className = "hideInput"
                         placeholder = "0"
-                        maxlength = "4"
+                        // maxlength = "4"
                         size = "19"
                         value = {time}
                         onBlur = {() => setColor("#21b8a1")}
@@ -82,7 +81,7 @@ export default function GoogleTimer (){
                 </div>
 
                 <div>
-                    <h1 class = "timeDisplay"
+                    <h1 className = "timeDisplay"
                         style = {{
                             color: color
                         }}>
@@ -90,22 +89,26 @@ export default function GoogleTimer (){
                     </h1>
                 </div>  
 
-                <div style = {{
+                {/* <div style = {{
                     display: hide,
                 }}>
                     <button onClick={handleOnClick}>
                         Submit
                     </button> 
-                </div> 
+                </div>  */}
             </div>
-
-            <div>
-                <center>
-                    <div>
-                        <TimerInput hours = {hour} minutes = {minute} displayInput = {start} submitted = {submit}/>
-                    </div>
-                </center>
-            </div>
-        </div> 
+        </div>
         )
 }
+
+const mapDispatchToProps = dispatch => ({
+    setWorkMin: minutes => dispatch(setWorkMin(minutes)),
+    setWorkHour: hours => dispatch(setWorkHour(hours)),
+  })
+
+const mapStateToProps = state => ({
+    work_hour : state.workLength.work_hour,
+    work_min : state.workLength.work_min
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(WorkInput)

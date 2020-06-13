@@ -1,20 +1,18 @@
 import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import Timer from './components/timer/timer';
-import Settings from './components/timer/settings/settings-modal-wrapper';
 import { Provider } from 'react-redux';
 import { store } from './reducers/store';
-import GoogleTimer from './Components/Timer/GoogleTimer';
+import TimerWrapper from './components/timer/timer-wrapper';
+import Settings from './components/settings/settings-modal-wrapper';
 
 export default function App() {
   return (
     <div>
       <Provider store={store}>
-        <Timer/>
-        <div className="App">
-        <GoogleTimer/>
-        </div>
+          <div className="App">
+          <TimerWrapper/>
+          </div>
         <Settings/>
       </Provider>
     </div>
