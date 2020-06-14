@@ -1,19 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './timers.css';
+import '../timer/timers.css';
 import audiofile from "../../Audio/reflections.mp3";
 import {connect} from 'react-redux';
 import { setBreakCountdown, setWorkCountdown } from './timerDucks';
 import { setNumRepeats } from '../settings/settingsDucks'
 //sad version ;-;
-function Countdown ({work_hour, work_min, break_hour, break_min, break_second, work_countdown, break_countdown, num_repeats}){
+function Countdown ({work_hour, work_min, work_sec, break_hour, break_min, break_sec, work_countdown, break_countdown, num_repeats}){
 
     console.log(audiofile);
     const [displayHour, setDisplayHour] = useState(work_hour);
     const [displayMinute, setDisplayMinute] = useState(work_min);
-    const [displaySecond, setDisplaySecond] = useState(0);
-
-    console.log("display hour", displayHour);
-    console.log("display minute", displayMinute);
+    const [displaySecond, setDisplaySecond] = useState(work_sec);
 
     const [pause, setPause] = useState(true);
 
@@ -49,9 +46,9 @@ function Countdown ({work_hour, work_min, break_hour, break_min, break_second, w
     });
 
 
-
+    // audio element reference
     const breakaudio = useRef(null);
-
+    // play audio
     const playMusic = () => {
         if (breakaudio.current !== null) {
             breakaudio.current.play()
@@ -83,13 +80,13 @@ function Countdown ({work_hour, work_min, break_hour, break_min, break_second, w
     const rewindToWork = () => {
         setDisplayHour(work_hour)
         setDisplayMinute(work_min)
-        setDisplaySecond(0)
+        setDisplaySecond(work_sec)
     }
 
     const rewindToBreak = () => {
         setDisplayHour(break_hour)
         setDisplayMinute(break_min)
-        setDisplaySecond(break_second)
+        setDisplaySecond(break_sec)
     }
 
     // set the starting times
@@ -97,13 +94,13 @@ function Countdown ({work_hour, work_min, break_hour, break_min, break_second, w
         if (work_countdown === true) {    
             setDisplayHour(work_hour)
             setDisplayMinute(work_min)
-            setDisplaySecond(0)
+            setDisplaySecond(work_sec)
         } else {
             setDisplayHour(break_hour)
             setDisplayMinute(break_hour)
-            setDisplaySecond(0)
+            setDisplaySecond(break_sec)
         }
-    }, [work_hour, work_min, break_hour, break_min, work_countdown])
+    }, [work_hour, work_min, break_hour, break_min, work_countdown, break_sec, work_sec])
 
     if (work_countdown === false && break_countdown === false) return null;
 
@@ -129,9 +126,10 @@ function Countdown ({work_hour, work_min, break_hour, break_min, break_second, w
 const mapStateToProps = state => ({
     break_hour : state.breakLength.break_hour,
     break_min : state.breakLength.break_min,
-    break_second : state.breakLength.break_second,
+    break_sec : state.breakLength.break_sec,
     work_hour : state.workLength.work_hour,
     work_min : state.workLength.work_min,
+    work_sec : state.workLength.work_sec,
     work_countdown : state.countdown.work_countdown,
     break_countdown : state.countdown.break_countdown,
     num_repeats : state.settings.num_repeats

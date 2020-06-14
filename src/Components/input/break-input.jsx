@@ -11,24 +11,32 @@ function BreakInput ({setBreakHour, setBreakMin, setBreakSec, save, use, break_h
     const [minute, setMinute] = useState(break_min);
     const [second, setSecond] = useState(break_sec);
     const [color, setColor] = useState();
-    console.log(hour);
-    console.log(minute);
+
 
     const changeTime = (event) => {
         const time = event.currentTarget.value;
         if (!isNaN(parseInt(time)) || time === ""){
             setTime(time);
-            const temp = parseInt(time);
+            let temp = parseInt(time);
             if (isNaN(temp)){
                 setMinute(0);
                 setHour(0);
+                setSecond(0);
+            }
+            else if (temp > 9999){
+                setHour(Math.floor(temp / 10000));
+                const temp2 = temp - Math.floor(temp / 100)*100; //first four digits
+                setMinute(temp2 - hour * 100);
+                setSecond(temp - temp2);
             }
             else if (temp > 99){
-                setMinute(temp % 100);
-                setHour(Math.floor(temp/100));
+                setSecond(temp % 100);
+                setMinute(Math.floor(temp/100));
+                setHour(0);
             }
             else{
-                setMinute(temp);
+                setSecond(temp);
+                setMinute(0);
                 setHour(0);
             }
             
@@ -38,15 +46,24 @@ function BreakInput ({setBreakHour, setBreakMin, setBreakSec, save, use, break_h
 
     useEffect(() => {
         if (save === true) {
-            recalibrate(minute)
+            recalibrate(second, minute)
         }
     }, [save])
 
 
     //recalculate hours and minutes when minutes > 59
-    function recalibrate (inputMinute){
+    function recalibrate (inputSecond, inputMinute){
         let actionHour = hour
         let actionMinute = minute
+        let actionSecond = second
+
+        if (second > 59){
+            let extraMinute = Math.floor(inputSecond/60);
+            console.log("extra minute: ", extraMinute);
+            inputSecond = inputSecond % 60;
+            actionMinute = 0 + extraMinute;
+            actionSecond = inputSecond;
+        }
         if (minute > 59){
             let extraHour = Math.floor(inputMinute/60);
             inputMinute = inputMinute % 60;
@@ -55,7 +72,7 @@ function BreakInput ({setBreakHour, setBreakMin, setBreakSec, save, use, break_h
         }
         setBreakMin(actionMinute);
         setBreakHour(actionHour);
-        setBreakSec(0);
+        setBreakSec(actionSecond);
     }
     
     if (use === 'countdown' && (work_countdown === true || break_countdown === true)) {
@@ -70,7 +87,7 @@ function BreakInput ({setBreakHour, setBreakMin, setBreakSec, save, use, break_h
                             type = "text"
                             className = "hideInput"
                             //maxlength = "4"
-                            size = "19"
+                            size = "29"
                             value = {time}
                             onBlur = {() => setColor("#21b8a1")}
                             onFocus = {() => setColor("#84e3d1")}
