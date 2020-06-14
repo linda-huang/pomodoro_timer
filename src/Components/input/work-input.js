@@ -74,7 +74,7 @@ function WorkInput ({setWorkHour, setWorkMin, save, use, work_hour, work_min, wo
                             type = "text"
                             className = "hideInput"
                             placeholder = "0"
-                            // maxlength = "4"
+                            //maxlength = "4"
                             size = "19"
                             value = {time}
                             onBlur = {() => setColor("#21b8a1")}
