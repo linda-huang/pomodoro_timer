@@ -81,11 +81,13 @@ function Countdown ({work_hour, work_min, break_hour, break_min, work_countdown,
         if (work_countdown === true) {
             setDisplayHour(work_hour)
             setDisplayMinute(work_min)
+            setDisplaySecond(0)
         } else {
             setDisplayHour(break_hour)
             setDisplayMinute(break_hour)
+            setDisplaySecond(0)
         }
-    }, [work_hour, work_min, break_hour, break_min])
+    }, [work_hour, work_min, break_hour, break_min, work_countdown])
 
     if (work_countdown === false && break_countdown === false) return null;
 

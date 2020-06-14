@@ -46,7 +46,7 @@ function BreakInput ({setBreakHour, setBreakMin, save, use, break_hour, break_mi
         if (save === true) {
             recalibrate(minute)
         }
-    })
+    }, [save])
 
     //recalculate hours and minutes when minutes > 59
     function recalibrate (inputMinute){
