@@ -1,3 +1,7 @@
+
+import React from "react";
+import "./Toggle.css";
+
 const Toggle = ({ isChecked, handleToggle, size }) => {
   return (
     // <div id= {this.props.id} className={containerClass}>
