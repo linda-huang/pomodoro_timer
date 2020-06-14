@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import { setBreakCountdown, setWorkCountdown } from './timerDucks';
 import { setNumRepeats } from '../settings/settingsDucks'
 //sad version ;-;
-function Countdown ({work_hour, work_min, break_hour, break_min, work_countdown, break_countdown, num_repeats}){
+function Countdown ({work_hour, work_min, break_hour, break_min, work_countdown, break_countdown, num_repeats, setWorkCountdown, setBreakCountdown, setNumRepeats}){
 
     const [displayHour, setDisplayHour] = useState(work_hour);
     const [displayMinute, setDisplayMinute] = useState(work_min);
@@ -15,7 +15,6 @@ function Countdown ({work_hour, work_min, break_hour, break_min, work_countdown,
 
     const handleOnClick = () => {
         setPause(!pause);
-        console.log("Paused: ", pause);
     }
 
     useEffect(()=>{  
@@ -47,11 +46,10 @@ function Countdown ({work_hour, work_min, break_hour, break_min, work_countdown,
     // we want to reset the timer using the break_hour, break_min etc.
     useEffect(() => {
         if (displayHour === 0 && displayMinute === 0 && displaySecond === 0) {
-            // so this means, if we were previously counting work,
-            // now we rewind to break
+        
             if (work_countdown === true) {
-                setWorkCountdown(false);
                 setBreakCountdown(true);
+                setWorkCountdown(false);
                 rewindToBreak();
             // if we were previously counting break, but there are repeats left,
             // we want to rewind back to work and reduce the number of repeats left by 1
@@ -62,7 +60,7 @@ function Countdown ({work_hour, work_min, break_hour, break_min, work_countdown,
                 rewindToWork();
             }
         }
-    }, [displayHour, displayMinute, displaySecond])
+    }, [displayHour, displayMinute, displaySecond, work_countdown, break_countdown, num_repeats])
 
     const rewindToWork = () => {
         setDisplayHour(work_hour)
@@ -82,12 +80,7 @@ function Countdown ({work_hour, work_min, break_hour, break_min, work_countdown,
             setDisplayHour(work_hour)
             setDisplayMinute(work_min)
             setDisplaySecond(0)
-        } else {
-            setDisplayHour(break_hour)
-            setDisplayMinute(break_hour)
-            setDisplaySecond(0)
-        }
-    }, [work_hour, work_min, break_hour, break_min, work_countdown])
+    }}, [work_countdown])
 
     if (work_countdown === false && break_countdown === false) return null;
 

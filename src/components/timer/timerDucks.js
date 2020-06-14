@@ -3,7 +3,7 @@
  * following contains the action and reducer to indicate current mission state
  */
 
-const WORK_COUNTDOWN = 'START_COUNTDOWN';
+const WORK_COUNTDOWN = 'WORK_COUNTDOWN';
 const BREAK_COUNTDOWN = 'BREAK_COUNTDOWN';
 
 /**
@@ -47,6 +47,10 @@ export function countdownReducer (state = initialCountdown, action) {
         case WORK_COUNTDOWN:
             return Object.assign({}, state, {
                 work_countdown : action.start
+            })
+        case BREAK_COUNTDOWN:
+            return Object.assign({}, state, {
+                break_countdown : action.start
             })
         default:
             return state
