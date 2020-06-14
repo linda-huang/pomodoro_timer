@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { setNumRepeats } from './settingsDucks';
 // import { Keyboard } from 'react-native';
 
-function SandboxModal ({hide, setNumRepeats, num_repeats}) {
+function SandboxModal ({hide, setNumRepeats, num_repeats, work_countdown, break_countdown}) {
     const [save, setSave] = useState(false);
     const [tempNumRepeats, setTempNumRepeats] = useState(num_repeats);
 
@@ -25,7 +25,18 @@ function SandboxModal ({hide, setNumRepeats, num_repeats}) {
     const handleRepeatChange = (event) => {
         setTempNumRepeats(event.target.value);
     }
-  
+    
+    let breakInput = (work_countdown || break_countdown) ? 
+    <label>
+        How long should we break for?
+        <BreakInput use="settings" save={save}/>
+    </label> : null
+    let workInput  = (work_countdown || break_countdown) ? 
+    <label>
+        How long should we work for?
+        <WorkInput use="settings" save={save} setSave={(input) => {setSave(input)}}/>
+    </label> : null
+
     if (hide) return null;
 
     else {
@@ -34,14 +45,16 @@ function SandboxModal ({hide, setNumRepeats, num_repeats}) {
               <div className="modal-content-div">
                 <div className="modal-dialog-div" onClick={onDialogClick}>
                     <form onSubmit={handleConfigSubmit}>
-                        <label>
+                       {workInput}
+                       {/* <label>
                             How long should we work for?
-                            <WorkInput use="settings" save={save}/>
-                        </label>
-                        <label>
+                            <WorkInput use="settings" save={save} setSave={(input) => {setSave(input)}}/>
+                        </label> */}
+                        {breakInput}
+                        {/* <label>
                             How long should we break for?
                             <BreakInput use="settings" save={save}/>
-                        </label>
+                        </label> */}
                         <label>
                             How many repeats?
                             <input 
@@ -77,6 +90,8 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({
     num_repeats : state.settings.num_repeats,
+    work_countdown : state.countdown.work_countdown,
+    break_countdown : state.countdown.break_countdown
 })
 
 /* Merges the return of the mapDispatchToProps function to SandboxModal component 

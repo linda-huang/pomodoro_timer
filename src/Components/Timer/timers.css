@@ -7,7 +7,7 @@
 
 .hideInput{
     border: none;
-    opacity: 0;
+    opacity: 0.5;
     position: absolute;
     padding: 0px 0px;
     height: 40px;

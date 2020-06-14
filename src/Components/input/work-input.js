@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { setWorkHour, setWorkMin } from './inputDucks';
 
 //sleek google version
-function WorkInput ({setWorkHour, setWorkMin, save, use, work_hour, work_min, work_countdown, break_countdown}){
+function WorkInput ({setWorkHour, setWorkMin, save, setSave, use, work_hour, work_min, work_countdown, break_countdown}){
 
-    const [time, setTime] = useState(0);
+    const [time, setTime] = useState();
     const [hour, setHour] = useState(work_hour);
     const [minute, setMinute] = useState(work_min);
     const [color, setColor] = useState();
@@ -42,8 +42,9 @@ function WorkInput ({setWorkHour, setWorkMin, save, use, work_hour, work_min, wo
     useEffect(() => {
         if (save === true) {
             recalibrate(minute)
+            setSave(false)
         }
-    })
+    }, [save])
 
     //recalculate hours and minutes when minutes > 59
     function recalibrate (inputMinute){
@@ -64,16 +65,11 @@ function WorkInput ({setWorkHour, setWorkMin, save, use, work_hour, work_min, wo
     else {
         return(   
             <div>
-                <div className ="container"
-                    style = {{
-                    display: 'flex',
-                }}
-                >  
+                <div className ="container">  
                     <div>
                         <input
                             type = "text"
                             className = "hideInput"
-                            placeholder = "0"
                             //maxlength = "4"
                             size = "19"
                             value = {time}

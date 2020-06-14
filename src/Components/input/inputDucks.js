@@ -3,20 +3,28 @@
  * following contains the action and reducer to indicate current mission state
  */
 
+const BREAK_SEC = 'BREAK_SEC'
 const BREAK_MIN = 'BREAK_MIN'
 const BREAK_HOUR = 'BREAK_HOUR'
 const WORK_MIN = 'WORK_MIN'
 const WORK_HOUR = 'WORK_HOUR'
+
 
 /**
  * @constant setBreakMin
  * a redux action defined to be called in the pomodoroReducer to define break_length
  */
 export const setBreakMin = minutes => 
-    ({
-        type : BREAK_MIN,
-        minutes
-    })
+({
+    type : BREAK_MIN,
+    minutes
+})
+
+export const setBreakSec = seconds =>
+({
+    type: BREAK_SEC,
+    seconds
+})
 
 export const setBreakHour = hours => 
 ({
@@ -45,11 +53,13 @@ export const setWorkHour = hours => (
 const initialWorkLen = {
     work_hour: 0,
     work_min : 25,
+    work_sec: 0,
 }
 
 const initialBreakLen = {
     break_hour: 0,
-    break_min: 5
+    break_min: 5,
+    break_sec: 0,
 }
 
 /**
@@ -95,6 +105,11 @@ export function breakLenReducer(state = initialBreakLen, action) {
             return Object.assign({}, state, {
                 break_min : action.minutes
             }) 
+        case BREAK_SEC:
+            console.log('change break second')
+            return Object.assign({}, state, {
+                break_sec : action.seconds
+            })
         default:
             return state
         }

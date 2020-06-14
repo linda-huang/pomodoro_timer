@@ -5,16 +5,15 @@ import {connect} from 'react-redux';
 import { setBreakCountdown, setWorkCountdown } from './timerDucks';
 import { setNumRepeats } from '../settings/settingsDucks'
 //sad version ;-;
-function Countdown ({work_hour, work_min, break_hour, break_min, work_countdown, break_countdown, num_repeats}){
+function Countdown ({work_hour, work_min, break_hour, break_min, break_second, work_countdown, break_countdown, num_repeats}){
 
     console.log(audiofile);
     const [displayHour, setDisplayHour] = useState(work_hour);
     const [displayMinute, setDisplayMinute] = useState(work_min);
+    const [displaySecond, setDisplaySecond] = useState(0);
 
     console.log("display hour", displayHour);
     console.log("display minute", displayMinute);
-
-    const [displaySecond, setDisplaySecond] = useState(0);
 
     const [pause, setPause] = useState(true);
 
@@ -90,7 +89,7 @@ function Countdown ({work_hour, work_min, break_hour, break_min, work_countdown,
     const rewindToBreak = () => {
         setDisplayHour(break_hour)
         setDisplayMinute(break_min)
-        setDisplaySecond(0)
+        setDisplaySecond(break_second)
     }
 
     // set the starting times
@@ -104,7 +103,7 @@ function Countdown ({work_hour, work_min, break_hour, break_min, work_countdown,
             setDisplayMinute(break_hour)
             setDisplaySecond(0)
         }
-    }, [work_countdown, work_hour, work_min, break_hour, break_min,])
+    }, [work_hour, work_min, break_hour, break_min, work_countdown])
 
     if (work_countdown === false && break_countdown === false) return null;
 
@@ -130,6 +129,7 @@ function Countdown ({work_hour, work_min, break_hour, break_min, work_countdown,
 const mapStateToProps = state => ({
     break_hour : state.breakLength.break_hour,
     break_min : state.breakLength.break_min,
+    break_second : state.breakLength.break_second,
     work_hour : state.workLength.work_hour,
     work_min : state.workLength.work_min,
     work_countdown : state.countdown.work_countdown,
