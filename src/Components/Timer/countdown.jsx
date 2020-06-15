@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import '../timer/timers.css';
-import audiofile from "../../Audio/reflections.mp3";
 import {connect} from 'react-redux';
 import { setBreakCountdown, setWorkCountdown } from './timerDucks';
 import { setNumRepeats } from '../settings/settingsDucks'
