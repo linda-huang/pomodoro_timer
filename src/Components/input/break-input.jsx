@@ -6,7 +6,7 @@ import { setBreakHour, setBreakMin, setBreakSec } from './inputDucks'
 //sleek google version
 function BreakInput ({setBreakHour, setBreakMin, setBreakSec, save, use, break_hour, break_min, break_sec, work_countdown, break_countdown}){
 
-    const [time, setTime] = useState();
+    const [time, setTime] = useState(0);
     const [hour, setHour] = useState(break_hour);
     const [minute, setMinute] = useState(break_min);
     const [second, setSecond] = useState(break_sec);

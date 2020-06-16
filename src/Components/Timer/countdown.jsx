@@ -103,8 +103,6 @@ function Countdown ({work_hour, work_min, work_sec, break_hour, break_min, break
                     <button onClick={handleOnClick}>
                         {pauseLabel}
                     </button>
-                    <audio ref = {breakaudio} src = {audiofile} type = "audio/mpeg" >
-                    </audio>
                 </center>
             </div>
         )
