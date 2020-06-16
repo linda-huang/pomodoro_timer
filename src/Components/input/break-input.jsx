@@ -11,6 +11,8 @@ function BreakInput ({setBreakHour, setBreakMin, setBreakSec, save, use, break_h
     const [minute, setMinute] = useState(break_min);
     const [second, setSecond] = useState(break_sec);
     const [color, setColor] = useState();
+    const [cursor, setCursor] = useState("");
+    const [line, setLine] = useState("none");
 
 
     const changeTime = (event) => {
@@ -24,10 +26,12 @@ function BreakInput ({setBreakHour, setBreakMin, setBreakSec, save, use, break_h
                 setSecond(0);
             }
             else if (temp > 9999){
-                setHour(Math.floor(temp / 10000));
-                const temp2 = temp - Math.floor(temp / 100)*100; //first four digits
-                setMinute(temp2 - hour * 100);
-                setSecond(temp - temp2);
+                const tempHour = Math.floor(temp/10000)
+                const temp2 = temp % (tempHour * 10000);
+                const tempMinute = Math.floor(temp2/100);
+                setHour(tempHour);
+                setMinute(tempMinute);
+                setSecond(temp2 - tempMinute * 100);  
             }
             else if (temp > 99){
                 setSecond(temp % 100);
@@ -43,6 +47,18 @@ function BreakInput ({setBreakHour, setBreakMin, setBreakSec, save, use, break_h
         }
     }
 
+    const blur = (event) => {
+        setColor("#999999");
+        setCursor("");
+        setLine("none");
+
+    }
+
+    const focus = (event) => {
+        setColor("#CCCCCC");
+        setCursor("|");
+        setLine("block");
+    }
 
     useEffect(() => {
         if (save === true) {
@@ -89,8 +105,8 @@ function BreakInput ({setBreakHour, setBreakMin, setBreakSec, save, use, break_h
                             //maxlength = "4"
                             size = "29"
                             value = {time}
-                            onBlur = {() => setColor("#21b8a1")}
-                            onFocus = {() => setColor("#84e3d1")}
+                            onBlur = {blur}
+                            onFocus = {focus}
                             onChange = {changeTime}    
                         />
                     </div>
@@ -100,8 +116,10 @@ function BreakInput ({setBreakHour, setBreakMin, setBreakSec, save, use, break_h
                             style = {{
                                 color: color
                             }}>
-                            {hour < 10? `0${hour}` : hour}h {minute < 10? `0${minute}` : minute}m {second < 10? `0${second}` : second}s
-                        </h1>
+                           {hour < 10? `0${hour}` : hour}h {minute < 10? `0${minute}` : minute}m {second < 10? `0${second}` : second}{cursor}s </h1>
+                        <hr style = {{
+                            display: line
+                        }}></hr>
                     </div>  
     
                     {/* <div style = {{
