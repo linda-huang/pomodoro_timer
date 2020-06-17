@@ -3,6 +3,7 @@ import './timers.css';
 import {connect} from 'react-redux'
 import { setBreakCountdown, setWorkCountdown } from './timerDucks';
 import { setNumRepeats } from '../settings/settingsDucks'
+import WaveAnimation from '../animation/WaveAnimation'
 //sad version ;-;
 function Countdown ({work_hour, work_min, break_hour, break_min, work_countdown, break_countdown, num_repeats, setWorkCountdown, setBreakCountdown, setNumRepeats}){
 
@@ -88,6 +89,7 @@ function Countdown ({work_hour, work_min, break_hour, break_min, work_countdown,
         return (
 
             <div>
+                <WaveAnimation hr={displayHour} min={displayMinute} sec={displaySecond}/>
                 <center>
                     <h1>
                         {displayHour < 10? `0${displayHour}` : displayHour}h {displayMinute < 10? `0${displayMinute}` : displayMinute}m {displaySecond < 10? `0${displaySecond}`: displaySecond}s

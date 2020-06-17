@@ -1,0 +1,122 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.section{
+    position: relative;
+    width: 100%;
+   
+    border: 100px;
+    overflow: hidden;
+}
+
+.water{
+    position: absolute;
+    left:0;
+    width: 100%;
+  
+    transition: height 1.3s ease-out;
+    
+}
+
+
+
+
+#w1{
+    background: url(assets/w1.png);
+    animation: animate 20s linear infinite;
+    background-repeat: repeat-x;
+    z-index: 99;
+    background-size: cover;
+    opacity: 0.5;
+    animation-delay: 0;
+    bottom: 0;
+    left:0;
+    
+}
+
+#w2{
+    background: url(assets/w2.png);
+    animation: animate2 27s linear infinite;
+    background-repeat: repeat-x;
+    z-index: 80;
+    opacity: 0.5;
+    background-size: cover;
+    animation-delay: 0;
+    bottom: 0;
+    left:0;
+  
+}
+#w3{
+    background: url(assets/w3.png);
+    animation: animate3 19s linear infinite;
+    background-repeat: repeat-x;
+    z-index: 70;
+    opacity: 0.75;
+    background-size: cover;
+    animation-delay: 0;
+    bottom: 0;
+    left:0;
+   
+}
+
+#w4{
+    background: url(assets/w4.png);
+    animation: animate4 35s linear infinite;
+    background-repeat: repeat-x;
+    z-index: 20;
+    opacity: 0.5;
+    background-size: cover;
+    animation-delay: 0;
+    bottom: 0;
+    left:0;
+   
+}
+
+
+
+@keyframes animate{
+    0%{
+        background-position-x: 0px;
+    }
+    100%{
+        background-position-x: 1132px;
+    }
+
+}
+
+
+@keyframes animate2{
+    0%{
+        background-position-x: 1016px;
+    }
+    100%{
+        background-position-x: 0px;
+    }
+
+}
+
+@keyframes animate3{
+    0%{
+        background-position-x: 1211px;
+    }
+    100%{
+        background-position-x: 0px;
+    }
+
+}
+
+@keyframes animate4{
+    0%{
+        background-position-x: 0%;
+    }
+    100%{
+        background-position-x: 1211px;
+    }
+
+}
+
+
+
+
