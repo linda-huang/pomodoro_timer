@@ -18,7 +18,6 @@ function SandboxModal ({hide, setNumRepeats, num_repeats, work_countdown, break_
     const handleConfigSubmit = (event) => {
        setSave(true)
        setNumRepeats(parseInt(tempNumRepeats));
-       console.log('dispatching actions')
        event.preventDefault();
     }
 

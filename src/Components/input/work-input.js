@@ -100,11 +100,9 @@ function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, setSave, use, wo
     function extractNum(text) {
         let lastChar = text.slice(-1); //last character in the string
         if (numList.includes(lastChar)){
-            console.log("text",text)
             return text;
         }
         else{
-            console.log("text", text.slice(0,-1));
             return text.slice(0,-1);
         }
     }
