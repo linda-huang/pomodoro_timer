@@ -1,5 +1,5 @@
 import '../timer/timers.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { setWorkHour, setWorkMin, setWorkSec } from './inputDucks';
 
@@ -11,8 +11,6 @@ function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, setSave, use, wo
     const [minute, setMinute] = useState(work_min);
     const [second, setSecond] = useState(work_sec)
     const [color, setColor] = useState();
-    const [cursor, setCursor] = useState("");
-    const [line, setLine] = useState("none");
 
 
     const changeTime = (event) => {
@@ -47,18 +45,22 @@ function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, setSave, use, wo
         }
     }
 
+
+    const thecursor = useRef(null)
+    const fakeline = useRef(null)
+
     const blur = (event) => {
         setColor("#999999");
-        setCursor("");
-        setLine("none")
+        if (thecursor.current !== null) {thecursor.current.style.display = "none"};
+        if (fakeline.current !== null) {fakeline.current.style.visibility = "hidden"};
 
     }
 
     const focus = (event) => {
         setColor("#CCCCCC");
-        setCursor("|");
-        setLine("block");
-    }
+        if (thecursor.current !== null) {thecursor.current.style.display = "inline"};
+        if (fakeline.current !== null) {fakeline.current.style.visibility = "visible"};
+    } 
 
     useEffect(() => {
         if (save === true) {
@@ -115,10 +117,9 @@ function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, setSave, use, wo
                             style = {{
                                 color: color
                             }}>
-                            {hour < 10? `0${hour}` : hour}h {minute < 10? `0${minute}` : minute}m {second < 10? `0${second}` : second}{cursor}s
-                        </h1>
-                        <hr style = {{
-                            display: line
+                           {hour < 10? `0${hour}` : hour}h {minute < 10? `0${minute}` : minute}m {second < 10? `0${second}` : second}<hr class = "fakeCursor" ref = {thecursor} style = {{display : "none"}} width="1" size="35"></hr>s </h1>
+                        <hr ref = {fakeline} style = {{
+                            visibility: "hidden"
                         }}></hr>
 
                     </div>  

@@ -23,10 +23,13 @@ function TimerWrapper ({ setWorkCountdown, work_countdown, break_countdown}) {
     
     return (
         <div>
+            
             {workLabel}
             <WorkInput use="countdown" save={save} setSave={(input) => {setSave(input)}}/>
+
             {breakLabel}
             <BreakInput use="countdown" save={save}/>
+            
             {startButton}
             <Countdown/>
         </div>
