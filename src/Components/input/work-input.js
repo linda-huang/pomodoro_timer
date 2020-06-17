@@ -6,17 +6,14 @@ import { setWorkHour, setWorkMin, setWorkSec } from './inputDucks';
 //sleek google version
 function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, setSave, use, work_hour, work_min, work_sec, work_countdown, break_countdown}){
 
-<<<<<<< HEAD
 
-=======
-    const [time, setTime] = useState(0);
->>>>>>> a14e1b92cc530b58a16357b8fd992c536d6eebb6
     const [hour, setHour] = useState(work_hour);
     const [minute, setMinute] = useState(work_min);
     const [second, setSecond] = useState(work_sec);
     const [color, setColor] = useState();
 
     const inputText = useRef(null);
+    
     const changeTime = (event) => {
         const input = event.currentTarget.value;
         let time = extractNum(input);
