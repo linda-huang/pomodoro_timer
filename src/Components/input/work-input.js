@@ -9,7 +9,7 @@ function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, setSave, use, wo
 
     const [hour, setHour] = useState(work_hour);
     const [minute, setMinute] = useState(work_min);
-    const [second, setSecond] = useState(work_sec)
+    const [second, setSecond] = useState(work_sec);
     const [color, setColor] = useState();
 
     const inputText = useRef(null);

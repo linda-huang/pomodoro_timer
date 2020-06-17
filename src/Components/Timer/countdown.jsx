@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect} from 'react';
 import '../timer/timers.css';
 import {connect} from 'react-redux';
 import { setBreakCountdown, setWorkCountdown } from './timerDucks';
