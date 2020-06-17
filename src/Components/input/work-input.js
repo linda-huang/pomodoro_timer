@@ -6,43 +6,42 @@ import { setWorkHour, setWorkMin, setWorkSec } from './inputDucks';
 //sleek google version
 function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, setSave, use, work_hour, work_min, work_sec, work_countdown, break_countdown}){
 
-    const [time, setTime] = useState();
+
     const [hour, setHour] = useState(work_hour);
     const [minute, setMinute] = useState(work_min);
     const [second, setSecond] = useState(work_sec)
     const [color, setColor] = useState();
 
-
+    const inputText = useRef(null);
     const changeTime = (event) => {
-        const time = event.currentTarget.value;
-        if (!isNaN(parseInt(time)) || time === ""){
-            setTime(time);
-            const temp = parseInt(time);
-            if (isNaN(temp)){
-                setMinute(0);
-                setHour(0);
-                setSecond(0);
-            }
-            else if (temp > 9999){
-                const tempHour = Math.floor(temp/10000)
-                const temp2 = temp % (tempHour * 10000);
-                const tempMinute = Math.floor(temp2/100);
-                setHour(tempHour);
-                setMinute(tempMinute);
-                setSecond(temp2 - tempMinute * 100);  
-            }
-            else if (temp > 99){
-                setSecond(temp % 100);
-                setMinute(Math.floor(temp/100));
-                setHour(0);
-            }
-            else{
-                setSecond(temp);
-                setMinute(0);
-                setHour(0);
-            }
-            
+        const input = event.currentTarget.value;
+        let time = extractNum(input);
+        inputText.current.value = time;
+        let temp = parseInt(time);
+        
+        if (isNaN(temp)){
+            setMinute(0);
+            setHour(0);
+            setSecond(0);
         }
+        else if (temp > 9999){
+            const tempHour = Math.floor(temp/10000);
+            const temp2 = temp % (tempHour * 10000);
+            const tempMinute = Math.floor(temp2/100);
+            setHour(tempHour);
+            setMinute(tempMinute);
+            setSecond(temp2 - tempMinute * 100);  
+        }
+        else if (temp > 99){
+            setSecond(temp % 100);
+            setMinute(Math.floor(temp/100));
+            setHour(0);
+        }
+        else{
+            setSecond(temp);
+            setMinute(0);
+            setHour(0);
+        }  
     }
 
 
@@ -92,6 +91,24 @@ function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, setSave, use, wo
         setWorkHour(actionHour);
         setWorkSec(actionSecond);
     }
+
+
+    //list of acceptable characters
+    const numList = ['0','1','2','3','4','5','6','7','8','9'];
+    //extrac only numbers out of input box and returns a string of text containing at most 6 numbers
+    function extractNum(text) {
+        let lastChar = text.slice(-1); //last character in the string
+        if (numList.includes(lastChar)){
+            console.log("text",text)
+            return text;
+        }
+        else{
+            console.log("text", text.slice(0,-1));
+            return text.slice(0,-1);
+        }
+    }
+
+
     if (use === 'countdown' && (work_countdown === true || break_countdown === true)) {
         return null
     }
@@ -101,11 +118,11 @@ function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, setSave, use, wo
                 <div className ="container">  
                     <div>
                         <input
+                            ref = {inputText}
                             type = "text"
                             className = "hideInput"
-                            //maxlength = "4"
+                            maxlength = "6"
                             size = "29"
-                            value = {time}
                             onBlur = {blur}
                             onFocus = {focus}
                             onChange = {changeTime}    

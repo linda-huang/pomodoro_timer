@@ -6,48 +6,50 @@ import { setBreakHour, setBreakMin, setBreakSec } from './inputDucks'
 //sleek google version
 function BreakInput ({setBreakHour, setBreakMin, setBreakSec, save, use, break_hour, break_min, break_sec, work_countdown, break_countdown}){
 
-    const [time, setTime] = useState();
+    //const [time, setTime] = useState();
     const [hour, setHour] = useState(break_hour);
     const [minute, setMinute] = useState(break_min);
     const [second, setSecond] = useState(break_sec);
     const [color, setColor] = useState();
 
 
+    const inputText = useRef(null);
 
     const changeTime = (event) => {
-        const time = event.currentTarget.value;
-        if (!isNaN(parseInt(time)) || time === ""){
-            setTime(time);
-            let temp = parseInt(time);
-            if (isNaN(temp)){
-                setMinute(0);
-                setHour(0);
-                setSecond(0);
-            }
-            else if (temp > 9999){
-                const tempHour = Math.floor(temp/10000)
-                const temp2 = temp % (tempHour * 10000);
-                const tempMinute = Math.floor(temp2/100);
-                setHour(tempHour);
-                setMinute(tempMinute);
-                setSecond(temp2 - tempMinute * 100);  
-            }
-            else if (temp > 99){
-                setSecond(temp % 100);
-                setMinute(Math.floor(temp/100));
-                setHour(0);
-            }
-            else{
-                setSecond(temp);
-                setMinute(0);
-                setHour(0);
-            }
-            
+        console.log("text is changing")
+        const input = event.currentTarget.value;
+        let time = extractNum(input);
+        console.log("text", time);
+        inputText.current.value = time;
+        let temp = parseInt(time);
+        
+        if (isNaN(temp)){
+            setMinute(0);
+            setHour(0);
+            setSecond(0);
         }
+        else if (temp > 9999){
+            const tempHour = Math.floor(temp/10000);
+            const temp2 = temp % (tempHour * 10000);
+            const tempMinute = Math.floor(temp2/100);
+            setHour(tempHour);
+            setMinute(tempMinute);
+            setSecond(temp2 - tempMinute * 100);  
+        }
+        else if (temp > 99){
+            setSecond(temp % 100);
+            setMinute(Math.floor(temp/100));
+            setHour(0);
+        }
+        else{
+            setSecond(temp);
+            setMinute(0);
+            setHour(0);
+        }        
     }
 
-    const thecursor = useRef(null)
-    const fakeline = useRef(null)
+    const thecursor = useRef(null);
+    const fakeline = useRef(null);
 
     const blur = (event) => {
         setColor("#999999");
@@ -93,6 +95,20 @@ function BreakInput ({setBreakHour, setBreakMin, setBreakSec, save, use, break_h
         setBreakSec(actionSecond);
     }
     
+    //list of acceptable characters
+    const numList = ['0','1','2','3','4','5','6','7','8','9'];
+    //extrac only numbers out of input box and returns a string of text containing at most 6 numbers
+    function extractNum(text) {
+        let lastChar = text.slice(-1); //last character in the string
+        if (numList.includes(lastChar)){
+            console.log("text",text)
+            return text;
+        }
+        else{
+            console.log("text", text.slice(0,-1));
+            return text.slice(0,-1);
+        }
+    }
 
     if (use === 'countdown' && (work_countdown === true || break_countdown === true)) {
         return null
@@ -103,17 +119,16 @@ function BreakInput ({setBreakHour, setBreakMin, setBreakSec, save, use, break_h
                 <div className ="container">  
                     <div>
                         <input
+                            ref = {inputText}
                             type = "text"
                             className = "hideInput"
-                            //maxlength = "4"
+                            maxlength = "6"
                             size = "29"
-                            value = {time}
                             onBlur = {blur}
                             onFocus = {focus}
                             onChange = {changeTime}    
                         />
                     </div>
-    
                     <div>
                         <h1 className = "timeDisplay"
                             style = {{
