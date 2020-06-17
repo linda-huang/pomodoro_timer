@@ -104,7 +104,10 @@ function Countdown ({work_hour, work_min, work_sec, break_hour, break_min, break
                     <button onClick={handleOnClick}>
                         {pauseLabel}
                     </button>
+<<<<<<< HEAD
                     
+=======
+>>>>>>> a14e1b92cc530b58a16357b8fd992c536d6eebb6
                 </center>
             </div>
         )
