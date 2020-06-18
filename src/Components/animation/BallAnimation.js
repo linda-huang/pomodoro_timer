@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+
 //import css
 
 // I decided to put everything inside the same component fk it
@@ -6,22 +8,22 @@ import React from "react";
 /////////////////random generation///////////////////////////////
 // function to generate random int if min and max is int
 
-const time_minute = 30;
-const time_second = time_minute * 60;
-const time_Milsecond = time_minute * 60 * 1000;
-var time_left_ball_second = time_second;
+// const time_minute = 30;
+// const time_second = time_minute * 60;
+// const time_Milsecond = time_minute * 60 * 1000;
+// var time_left_ball_second = time_second;
 
-const ball_rad = 12;
+const ball_rad = 8;
 
 const ve = 0.45;
 //const background_Col = "#f5e8ce";
-const background_Col = "white";
+// const background_Col = "white";
 const color_options = ["#F2C5AE", "#818D97", "#86A5B5", "#779DA6", "#8EB6BF"];
 //["#F2C5AE", "#272840", "#464659", "#779DA6", "#8EB6BF"]
 
 //ball expansion
-const ball_fat = 18;
-const rad_f_m = 40;
+// const ball_fat = 18;
+// const rad_f_m = 40;
 
 function randomInt(min, max) {
   const num = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -34,13 +36,11 @@ function random(min, max) {
 }
 //return random position the ball should spawn
 function randomPosition(radius, width, height) {
-  console.log(width);
+ // console.log(width);
   var pos = {};
-  //ball position always drawn at least one ball width
-  // away from the edge of the canvas, to avoid drawing errors
   const x_coor = random(0 + radius, width - radius);
-  console.log("x coor");
-  console.log(x_coor);
+  //console.log("x coor");
+  //console.log(x_coor);
   const y_coor = random(0 + radius, height - radius);
   pos.x = x_coor;
   pos.y = y_coor;
@@ -92,23 +92,7 @@ Ball.prototype.update = function (width, height) {
     this.velY = -this.velY;
   }
 
-  //   var disX = Math.abs(this.x - mX);
-  //   var disY = Math.abs(this.y - mY);
 
-  //   if (in_window) {
-  //     if (disX < rad_f_m && disY < rad_f_m && this.size <= ball_fat) {
-  //       // console.log("makebig")
-  //       // console.log(mX)
-  //       this.size++;
-  //     } else if (this.size > ball_rad) {
-  //       this.size--;
-  //     }
-
-  // if (disX < this.size && disY < this.size) {
-  //   this.velY = -this.velY;
-  //   this.velX = -this.velX;
-  // }
-  //   }
 
   this.x += this.velX;
   this.y += this.velY;
@@ -119,8 +103,8 @@ function setup(numberOfBalls, width, height) {
   while (balls.length < numberOfBalls) {
     let size = ball_rad;
     let pos = randomPosition(size, width, height);
-    console.log("pos");
-    console.log(pos);
+    //console.log("pos");
+    //console.log(pos);
     let vX = random(-ve, ve);
     let vY = random(-ve, ve);
     //prevent the ball from not moving// temporary
@@ -140,25 +124,47 @@ class BallAnimation extends React.Component {
   constructor(props) {
     super(props);
     // console.log("cons");
-    this.state = { width: 0, height: 0, frame: 0, index: this.props.index };
+    
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     this.updateAnimationState = this.updateAnimationState.bind(this);
     this.canvasRef = React.createRef();
+    const tolsec = this.props.work_countdown
+      ? this.props.work_hour * 3600 + this.props.work_min * 60 + this.props.work_sec
+      : this.props.break_hour * 3600 + this.props.break_min * 60 + this.props.break_sec;
+    
+    console.log(` totoal time in second${tolsec}`);
+    let ball_num = Math.ceil(tolsec/2);
+     ball_num = ball_num>1800? 1800: ball_num;
+    
+    
+    console.log(` totoal number of ball at creation in second${ball_num}`);
+    this.state = { 
+      width: 0, height: 0, 
+      frame: 0, total_ball: ball_num };
+    
   }
 
   componentDidMount() {
     // console.log("mount");
     this.updateWindowDimensions();
     window.addEventListener("resize", this.updateWindowDimensions);
-    setup(20, window.innerWidth, window.innerHeight);
-    console.log(balls);
+    console.log("at component did mount");
+    console.log(this.state.total_ball)
+    setup(this.state.total_ball, window.innerWidth, window.innerHeight);
+    //console.log(balls);
+    console.log("num balls");
+    console.log(balls.length);
+    
 
     this.rAF = requestAnimationFrame(this.updateAnimationState);
   }
 
   updateWindowDimensions() {
     //console.log("update window di")
-    setup(20, window.innerWidth, window.innerHeight);
+    setup(this.state.total_ball, window.innerWidth, window.innerHeight);
+    const canvas = this.canvasRef.current;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
     this.setState({ width: window.innerWidth, height: window.innerHeight });
   }
 
@@ -166,10 +172,11 @@ class BallAnimation extends React.Component {
   updateAnimationState() {
     // console.log("update ani");
     this.setState((prevState) => ({ frame: prevState.frame + 1 }));
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < balls.length; i++) {
       balls[i].update(this.state.width, this.state.height);
     }
     this.rAF = requestAnimationFrame(this.updateAnimationState);
+   
   }
 
   componentWillUnmount() {
@@ -178,32 +185,60 @@ class BallAnimation extends React.Component {
     cancelAnimationFrame(this.rAF);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     //console.log("did update");
     const canvas = this.canvasRef.current;
     const ctx = canvas.getContext("2d");
-    canvas.width = this.state.width;
-    canvas.height = this.state.height;
-    //ctx.clearRect(0, 0, this.state.width, this.state.height);
+   
+   
+    ctx.clearRect(0, 0, this.state.width, this.state.height);
 
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < balls.length; i++) {
       balls[i].draw(ctx);
-      // const ball = balls[i];
-
-      //   ctx.beginPath();
-
-      //   ctx.fillStyle = ball.color;
-      //   // console.log(ball.color);
-      //   // console.log(ball.x);
-
-      //   ctx.arc(ball.x, ball.y, ball.size, 0, 2 * Math.PI);
-      //   // ctx.fill();
-
-      //   ctx.fill();
+      
     }
+    const current_time = this.props.sec+this.props.hr*3600 +this.props.min*60
+    const prev_time = prevProps.sec+prevProps.hr*3600 +prevProps.min*60;
+    //if time is less than and also devisable by two 
+    const total_ball = this.state.total_ball;
+    let should_be = Math.ceil(current_time/2);
+    should_be = should_be>1800? 1800: should_be;
+    console.log("should be");
+    console.log(should_be);
+
+
+    if (current_time < prev_time && (current_time%2)===0&& current_time<=3600)
+              
+      {
+        balls.pop();
+        this.setState((prevState)=>({total_ball:prevState.total_ball-1}));
+      }
+    else if (should_be> total_ball){
+      console.log("in should be")
+      var inc = 0;
+      while (balls.length < should_be){
+        
+        let pos = randomPosition(ball_rad, this.state.width, this.state.height);
+        let vX = random(-ve, ve);
+        let vY = random(-ve, ve);
+        //prevent the ball from not moving// temporary
+        while (vX === 0 || vY === 0) {
+          vX = random(-ve, ve);
+          vY = random(-ve, ve);
+        }
+        let ball = new Ball(pos, vX, vY, ball_rad);
+        balls.push(ball);
+        inc +=1;
+        
+      }
+      this.setState((prevState)=>({total_ball:prevState.total_ball+inc}));
+      }
+    }
+    
 
     //balls[i].draw(ctx);
-  }
+
+  
   // ctx.beginPath();
   // ctx.fillStyle = "black"
   // ctx.arc(20,20,9,0, 2 * Math.PI);
@@ -220,6 +255,19 @@ class BallAnimation extends React.Component {
       />
     );
   }
+
 }
 
-export default BallAnimation;
+
+const mapStateToProps = (state) => ({
+  break_hour: state.breakLength.break_hour,
+  break_min: state.breakLength.break_min,
+  work_hour: state.workLength.work_hour,
+  work_min: state.workLength.work_min,
+  work_countdown: state.countdown.work_countdown,
+  break_countdown: state.countdown.break_countdown,
+  work_sec: state.workLength.work_sec,
+  break_sec: state.breakLength.break_sec,
+});
+
+export default connect(mapStateToProps) (BallAnimation);

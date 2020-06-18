@@ -8,14 +8,14 @@ class WaveAnimation extends React.Component {
         super(props);
         
         const tolsec = this.props.work_countdown
-          ? (this.props.work_hour * 3600 + this.props.work_min * 60)
-          : (this.props.break_hour * 3600 + this.props.break_min * 60);
-        console.log(
-          `in construct the time is ${this.props.work_min} work min  ${this.props.break_min} sec`
-        );
-        console.log(`eval the total =${tolsec}`)
+          ? (this.props.work_hour * 3600 + this.props.work_min * 60 + this.props.work_sec)
+          : (this.props.break_hour * 3600 + this.props.break_min * 60 + this.props.break_sec);
+        //console.log(
+        //  `in construct the time is ${this.props.work_min} work min  ${this.props.break_min} sec`
+        //);
+        //console.log(`eval the total =${tolsec}`)
         const inH = this.props.work_hour? 100:0;
-         console.log(`in construnct height is set to ${inH}`);
+        //console.log(`in construnct height is set to ${inH}`);
         this.state= {total: tolsec, height: inH}
     }
 
@@ -101,8 +101,8 @@ const mapStateToProps = (state) => ({
   work_hour: state.workLength.work_hour,
   work_min: state.workLength.work_min,
   work_countdown: state.countdown.work_countdown,
-
-  
+  work_sec: state.workLength.work_sec,
+  break_sec: state.breakLength.break_sec,
 });
 
 export default connect(mapStateToProps) (WaveAnimation);

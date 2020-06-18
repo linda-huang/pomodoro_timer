@@ -2,8 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import '../timer/timers.css';
 import {connect} from 'react-redux';
 import { setBreakCountdown, setWorkCountdown } from './timerDucks';
-import { setNumRepeats } from '../settings/settingsDucks'
-import WaveAnimation from '../animation/WaveAnimation'
+import { setNumRepeats } from '../settings/settingsDucks';
+import WaveAnimation from '../animation/WaveAnimation';
+import BallAnimation from '../animation/BallAnimation';
 //sad version ;-;
 
 function Countdown ({work_hour, work_min, work_sec, break_hour, break_min, break_sec, work_countdown, break_countdown, num_repeats, setWorkCountdown, setBreakCountdown, setNumRepeats}){
