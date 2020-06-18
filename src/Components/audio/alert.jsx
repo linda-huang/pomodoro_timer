@@ -8,14 +8,20 @@ function Alert ({work_countdown, break_countdown}){
     const alertaudio = useRef(null)
 
     useEffect(() => {
-        console.log("break countdown", break_countdown);
+        
         if(break_countdown){
+            //console.log("playing alert sound");
+            //console.log("break countdown", break_countdown);
             alertaudio.current.play();
         }
-        else{
+        else if (!alertaudio.current.paused && !break_countdown){
+            //console.log("pausing alert sound");
+            //console.log("break countdown", break_countdown);
             alertaudio.current.pause();
         }
     },[work_countdown, break_countdown])
+
+
     return(
         <audio ref={alertaudio} src = {audiofile} type = "audio/mp4"></audio>
     )

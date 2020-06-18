@@ -9,17 +9,23 @@ function Sound ({work_countdown, break_countdown}){
     const workaudio = useRef(null);
     const breakaudio = useRef(null)
 
-    console.log(work_countdown);
+
     useEffect(() => {
-        console.log("work_countdown", work_countdown);
-        if(work_countdown === true){   
-            console.log("starting audio");
+        
+        if(work_countdown === true){  
+            //console.log("playing work audio");
+            //console.log("work_countdown", work_countdown); 
             workaudio.current.play();
-            breakaudio.current.pause();
+            if(!breakaudio.current.paused){
+                console.log("pausing breakaudio");
+                breakaudio.current.pause();
+            }
         }
         else{
+            //console.log("pausing work audio");
+            //console.log("work_countdown", work_countdown); 
             workaudio.current.pause();
-            breakaudio.current.play()
+            breakaudio.current.play();
 
         }
     },[work_countdown])

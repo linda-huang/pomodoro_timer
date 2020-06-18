@@ -15,8 +15,11 @@ function TimerWrapper ({ setWorkCountdown, work_countdown, break_countdown}) {
     let breakLabel = (work_countdown === false && break_countdown === false) ? <p>Break Length:</p> : null
 
     const handleStartClick = () => {
-        setSave(true)
-        setWorkCountdown(true)
+        setSave(true);
+        setWorkCountdown(true);
+        console.log("start button pressed");
+        console.log("work countdown", work_countdown);
+        console.log("break countdown", break_countdown);
     }
 
     let startButton = (work_countdown || break_countdown) ? null : <button onClick={handleStartClick}>
