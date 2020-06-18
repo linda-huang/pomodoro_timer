@@ -1,11 +1,11 @@
-import '../timer/timers.css';
+import './inputs.css';
 import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { setBreakHour, setBreakMin, setBreakSec } from './inputDucks'
 import {NONE} from '../timer/timerDucks'
 
 //sleek google version
-function BreakInput ({setBreakHour, setBreakMin, setBreakSec, save, use, break_hour, break_min, break_sec, countdown_state}){
+function BreakInput ({setBreakHour, setBreakMin, setBreakSec, start, use, break_hour, break_min, break_sec, countdown_state}){
 
     //const [time, setTime] = useState();
     const [hour, setHour] = useState(break_hour);
@@ -64,10 +64,10 @@ function BreakInput ({setBreakHour, setBreakMin, setBreakSec, save, use, break_h
     } 
 
     useEffect(() => {
-        if (save === true) {
+        if (start === true) {
             recalibrate(second, minute)
         }
-    }, [save])
+    }, [start])
 
 
     //recalculate hours and minutes when minutes > 59

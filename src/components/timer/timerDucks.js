@@ -4,11 +4,12 @@
  */
 
 const COUNTDOWN_STATE = 'COUNTDOWN_STATE';
+const PREV_STATE = 'PREV_STATE'
 export const NONE = 'NONE';
 export const WORK = 'WORK';
 export const BREAK = 'BREAK';
 export const INTERMEDIATE = 'INTERMEDIATE';
-const PREV_STATE = 'PREV_STATE'
+export const PAUSED = 'PAUSED'
 
 /**
  * @description
@@ -31,6 +32,13 @@ export const setPrevState = state => (
     }
 )
 
+export const setPaused = pause => (
+    {
+        type : PAUSED,
+        pause
+    }
+)
+
  /**
  * @constant initialPomodoroState
  * a intial state for the pomodoroReducer that indicates 25 min work and 5 min break
@@ -38,7 +46,8 @@ export const setPrevState = state => (
 
 const initialCountdown = {
     prev_state : NONE,
-    countdown_state : NONE
+    countdown_state : NONE,
+    pause : false
 }
 
 /**
@@ -55,6 +64,10 @@ export function countdownReducer (state = initialCountdown, action) {
         case PREV_STATE:
             return Object.assign({}, state, {
                 prev_state: action.state
+            })
+        case PAUSED:
+            return Object.assign({}, state, {
+                pause: action.pause
             })
         default:
             return state

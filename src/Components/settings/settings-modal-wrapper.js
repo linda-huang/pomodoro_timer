@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SandboxModal from './settings-modal';
 
-export default function ModalWrapper () {
+export default function ModalWrapper ({start}) {
 
     const [hide, setHide] = useState(true);
 
@@ -28,7 +28,7 @@ export default function ModalWrapper () {
                     Settings
             </button>
             <div>
-                <SandboxModal hide={hide} />
+                <SandboxModal hide={hide} start={start}/>
             </div>
         </div>
     )

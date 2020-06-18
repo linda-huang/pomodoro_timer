@@ -1,11 +1,11 @@
-import '../timer/timers.css';
+import './inputs.css';
 import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { setWorkHour, setWorkMin, setWorkSec } from './inputDucks';
 import {NONE} from '../timer/timerDucks';
 
 //sleek google version
-function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, setSave, use, work_hour, work_min, work_sec, countdown_state}){
+function WorkInput ({setWorkHour, setWorkMin, setWorkSec, start, setStart, use, work_hour, work_min, work_sec, countdown_state}){
 
 
     const [hour, setHour] = useState(work_hour);
@@ -64,11 +64,11 @@ function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, setSave, use, wo
     } 
 
     useEffect(() => {
-        if (save === true) {
+        if (start === true) {
             recalibrate(second, minute)
-            setSave(false)
+            setStart(false)
         }
-    }, [save])
+    }, [start])
 
     //recalculate hours and minutes when minutes > 59
     function recalibrate (inputSecond, inputMinute){
@@ -157,7 +157,6 @@ const mapStateToProps = state => ({
     work_min : state.workLength.work_min,
     work_sec : state.workLength.work_sec,
     countdown_state : state.countdown.countdown_state
-    
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(WorkInput)

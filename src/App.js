@@ -13,7 +13,6 @@ export default function App() {
           <div className="App">
           <TimerWrapper/>
           </div>
-        <Settings/>
       </Provider>
     </div>
   );

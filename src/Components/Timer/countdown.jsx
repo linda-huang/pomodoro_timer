@@ -1,24 +1,15 @@
 import React, { useState, useEffect} from 'react';
-import '../timer/timers.css';
 import {connect} from 'react-redux';
 import { setPrevState, setCountdownState, NONE, WORK, BREAK, INTERMEDIATE } from './timerDucks';
 import { setNumRepeats } from '../settings/settingsDucks';
-import Prompts from '../prompts/prompts'
+import './addTime/add-buttons.css';
 //sad version ;-;
 
-function Countdown ({work_hour, work_min, work_sec, break_hour, break_min, break_sec, countdown_state, num_repeats, setCountdownState, setPrevState, setNumRepeats}){
+function Countdown ({pause, work_hour, work_min, work_sec, break_hour, break_min, break_sec, countdown_state, num_repeats, setCountdownState, setPrevState, setNumRepeats}){
 
     const [displayHour, setDisplayHour] = useState(work_hour);
     const [displayMinute, setDisplayMinute] = useState(work_min);
     const [displaySecond, setDisplaySecond] = useState(work_sec);
-
-    const [pause, setPause] = useState(false);
-
-    let pauseLabel = (!pause) ? "Pause" : "Resume";
-
-    const handleOnClick = () => {
-        setPause(!pause);
-    }
 
     useEffect(()=>{  
         if (!pause && (countdown_state !== NONE && countdown_state !== INTERMEDIATE)) {
@@ -84,34 +75,34 @@ function Countdown ({work_hour, work_min, work_sec, break_hour, break_min, break
         setDisplaySecond(break_sec)
     }
 
-    // set the starting times
+   
     useEffect(() => {
         if (countdown_state === WORK) {    
             setDisplayHour(work_hour)
             setDisplayMinute(work_min)
             setDisplaySecond(work_sec)
         }
-    }, [work_hour, work_min, work_sec, countdown_state])
+        else if (countdown_state === BREAK) {
+            setDisplayHour(break_hour)
+            setDisplayMinute(break_min)
+            setDisplaySecond(break_sec)
+        }
+    }, [countdown_state])
 
-    if (countdown_state === NONE) return null;
 
-    else if (countdown_state === INTERMEDIATE) return <Prompts/>;
-
-    else {
-        return (
-            <div>
-                <center>
-                    <h1>
-                        {displayHour < 10? `0${displayHour}` : displayHour}h {displayMinute < 10? `0${displayMinute}` : displayMinute}m {displaySecond < 10? `0${displaySecond}`: displaySecond}s
-                    </h1>
-                    <button onClick={handleOnClick}>
-                        {pauseLabel}
-                    </button>
-                    
-                </center>
-            </div>
-        )
-    }
+    return (        
+        <div className='content'>
+            <h1 className='item'>
+                {displayHour < 10? `0${displayHour}` : displayHour}h
+            </h1>
+            <h1 className='item'>
+                {displayMinute < 10? `0${displayMinute}` : displayMinute}m 
+            </h1>
+            <h1 className='item'>
+                {displaySecond < 10? `0${displaySecond}`: displaySecond}s
+            </h1>
+        </div>      
+    )
 }
 
 const mapStateToProps = state => ({

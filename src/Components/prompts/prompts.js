@@ -6,13 +6,13 @@ function Prompts({countdown_state, prev_state, setPrevState, setCountdownState})
     const [prompt, setPrompt] = useState(null)
 
     useEffect(() => {
-        if (countdown_state == INTERMEDIATE ) {
+        if (countdown_state === INTERMEDIATE ) {
             (prev_state === WORK) ? setPrompt("YAY! You've finished work!") : setPrompt("Time to get to work!")
             setTimeout(() => {
                 setPrompt(null)
                 setCountdownState((prev_state === WORK) ? BREAK : WORK)
                 setPrevState(INTERMEDIATE)
-            }, 3000)
+            }, 1000)
         }
     }, [countdown_state])
 
