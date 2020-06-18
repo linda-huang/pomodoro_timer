@@ -2,9 +2,10 @@ import '../timer/timers.css';
 import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { setWorkHour, setWorkMin, setWorkSec } from './inputDucks';
+import {NONE} from '../timer/timerDucks';
 
 //sleek google version
-function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, setSave, use, work_hour, work_min, work_sec, work_countdown, break_countdown}){
+function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, setSave, use, work_hour, work_min, work_sec, countdown_state}){
 
 
     const [hour, setHour] = useState(work_hour);
@@ -108,7 +109,7 @@ function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, setSave, use, wo
     }
 
 
-    if (use === 'countdown' && (work_countdown === true || break_countdown === true)) {
+    if (use === 'countdown' && (countdown_state !== NONE)) {
         return null
     }
     else {
@@ -120,7 +121,7 @@ function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, setSave, use, wo
                             ref = {inputText}
                             type = "text"
                             className = "hideInput"
-                            maxlength = "6"
+                            maxLength = "6"
                             size = "29"
                             onBlur = {blur}
                             onFocus = {focus}
@@ -133,20 +134,12 @@ function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, setSave, use, wo
                             style = {{
                                 color: color
                             }}>
-                           {hour < 10? `0${hour}` : hour}h {minute < 10? `0${minute}` : minute}m {second < 10? `0${second}` : second}<hr class = "fakeCursor" ref = {thecursor} style = {{display : "none"}} width="1" size="35"></hr>s </h1>
+                           {hour < 10? `0${hour}` : hour}h {minute < 10? `0${minute}` : minute}m {second < 10? `0${second}` : second}<hr className = "fakeCursor" ref = {thecursor} style = {{display : "none"}} width="1" size="35"></hr>s </h1>
                         <hr ref = {fakeline} style = {{
                             visibility: "hidden"
                         }}></hr>
 
                     </div>  
-    
-                    {/* <div style = {{
-                        display: hide,
-                    }}>
-                        <button onClick={handleOnClick}>
-                            Submit
-                        </button> 
-                    </div>  */}
                 </div>
             </div>
             )
@@ -163,8 +156,7 @@ const mapStateToProps = state => ({
     work_hour : state.workLength.work_hour,
     work_min : state.workLength.work_min,
     work_sec : state.workLength.work_sec,
-    work_countdown : state.countdown.work_countdown,
-    break_countdown : state.countdown.break_countdown
+    countdown_state : state.countdown.countdown_state
     
 })
 
