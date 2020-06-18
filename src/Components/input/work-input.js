@@ -5,7 +5,7 @@ import { setWorkHour, setWorkMin, setWorkSec } from './inputDucks';
 import {NONE} from '../timer/timerDucks';
 
 //sleek google version
-function WorkInput ({setWorkHour, setWorkMin, setWorkSec, start, setStart, use, work_hour, work_min, work_sec, countdown_state}){
+function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, setSave, use, work_hour, work_min, work_sec, countdown_state}){
 
 
     const [hour, setHour] = useState(work_hour);
@@ -64,14 +64,18 @@ function WorkInput ({setWorkHour, setWorkMin, setWorkSec, start, setStart, use, 
     } 
 
     useEffect(() => {
-        if (start === true) {
-            recalibrate(second, minute)
-            setStart(false)
+        if (save === true) {
+            console.log("start button is pressed");
+            recalibrate(second, minute);
+            setSave(false);
+
         }
-    }, [start])
+    }, [save])
+
 
     //recalculate hours and minutes when minutes > 59
     function recalibrate (inputSecond, inputMinute){
+        console.log("recalibrating");
         let actionHour = hour
         let actionMinute = minute
         let actionSecond = second
@@ -82,6 +86,7 @@ function WorkInput ({setWorkHour, setWorkMin, setWorkSec, start, setStart, use, 
             actionMinute = minute + extraMinute;
             actionSecond = inputSecond;
         }
+
         if (minute > 59){
             let extraHour = Math.floor(inputMinute/60);
             inputMinute = inputMinute % 60;

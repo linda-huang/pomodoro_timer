@@ -55,17 +55,10 @@ function Countdown ({pause, work_hour, work_min, work_sec, break_hour, break_min
                 setPrevState(BREAK)
                 setNumRepeats(num_repeats-1);
                 rewindToWork();
-<<<<<<< HEAD
-            }
-            else if (num_repeats === 0){
-                setBreakCountdown(false);
-            }
-=======
             } else if (countdown_state === BREAK) {
                 setCountdownState(NONE)
                 setPrevState(BREAK)
             }   
->>>>>>> 3964546b4f6235151f6b7cfe04049d5d9cd6c622
         }
     }, [displayHour, displayMinute, displaySecond, countdown_state])
 
