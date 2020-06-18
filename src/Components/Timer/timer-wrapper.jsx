@@ -5,6 +5,8 @@ import BreakInput from '../input/break-input';
 import WorkInput from '../input/work-input';
 import { setWorkCountdown } from './timerDucks';
 import { connect } from 'react-redux';
+import Alert from '../audio/alert';
+import Sound from '../audio/sound';
 
 function TimerWrapper ({ setWorkCountdown, work_countdown, break_countdown}) {
 
@@ -32,6 +34,7 @@ function TimerWrapper ({ setWorkCountdown, work_countdown, break_countdown}) {
             
             {startButton}
             <Countdown/>
+           
         </div>
     )
 

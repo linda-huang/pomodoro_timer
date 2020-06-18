@@ -1,8 +1,12 @@
 import React, { useState, useEffect} from 'react';
 import '../timer/timers.css';
+import Sound from '../audio/sound';
+import Alert from '../audio/alert';
 import {connect} from 'react-redux';
 import { setBreakCountdown, setWorkCountdown } from './timerDucks';
 import { setNumRepeats } from '../settings/settingsDucks';
+
+
 //sad version ;-;
 
 function Countdown ({work_hour, work_min, work_sec, break_hour, break_min, break_sec, work_countdown, break_countdown, num_repeats, setWorkCountdown, setBreakCountdown, setNumRepeats}){
@@ -101,6 +105,8 @@ function Countdown ({work_hour, work_min, work_sec, break_hour, break_min, break
                     <h1>
                         {displayHour < 10? `0${displayHour}` : displayHour}h {displayMinute < 10? `0${displayMinute}` : displayMinute}m {displaySecond < 10? `0${displaySecond}`: displaySecond}s
                     </h1>
+                    <Sound/>
+                    <Alert/>
                     <button onClick={handleOnClick}>
                         {pauseLabel}
                     </button>

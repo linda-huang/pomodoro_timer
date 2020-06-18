@@ -94,16 +94,16 @@ function BreakInput ({setBreakHour, setBreakMin, setBreakSec, save, use, break_h
     }
     
     //list of acceptable characters
-    const numList = ['0','1','2','3','4','5','6','7','8','9'];
     //extrac only numbers out of input box and returns a string of text containing at most 6 numbers
+    
+    const numList = ['0','1','2','3','4','5','6','7','8','9'];
+
     function extractNum(text) {
-        let lastChar = text.slice(-1); //last character in the string
+        let lastChar = text.slice(-1); 
         if (numList.includes(lastChar)){
-            console.log("text",text)
             return text;
         }
         else{
-            console.log("text", text.slice(0,-1));
             return text.slice(0,-1);
         }
     }
