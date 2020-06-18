@@ -1,26 +1,18 @@
 import React, { useState, useEffect} from 'react';
-import '../timer/timers.css';
 import {connect} from 'react-redux';
-import { setBreakCountdown, setWorkCountdown } from './timerDucks';
+import { setPrevState, setCountdownState, NONE, WORK, BREAK, INTERMEDIATE } from './timerDucks';
 import { setNumRepeats } from '../settings/settingsDucks';
+import './addTime/add-buttons.css';
 //sad version ;-;
 
-function Countdown ({work_hour, work_min, work_sec, break_hour, break_min, break_sec, work_countdown, break_countdown, num_repeats, setWorkCountdown, setBreakCountdown, setNumRepeats}){
+function Countdown ({pause, work_hour, work_min, work_sec, break_hour, break_min, break_sec, countdown_state, num_repeats, setCountdownState, setPrevState, setNumRepeats}){
 
     const [displayHour, setDisplayHour] = useState(work_hour);
     const [displayMinute, setDisplayMinute] = useState(work_min);
     const [displaySecond, setDisplaySecond] = useState(work_sec);
 
-    const [pause, setPause] = useState(true);
-
-    let pauseLabel = (pause) ? "Pause" : "Resume";
-
-    const handleOnClick = () => {
-        setPause(!pause);
-    }
-
     useEffect(()=>{  
-        if (pause && (work_countdown || break_countdown)) {
+        if (!pause && (countdown_state !== NONE && countdown_state !== INTERMEDIATE)) {
             const interval = setInterval(() => {
                 if (displaySecond > 0){
                     setDisplaySecond(displaySecond - 1);
@@ -51,24 +43,33 @@ function Countdown ({work_hour, work_min, work_sec, break_hour, break_min, break
         if (displayHour === 0 && displayMinute === 0 && displaySecond === 0) {
             // so this means, if we were previously counting work,
             // now we rewind to break
-            if (work_countdown === true) {
-                setBreakCountdown(true);
-                setWorkCountdown(false);
+            if (countdown_state === WORK) {
+                setCountdownState(INTERMEDIATE)
+                setPrevState(WORK)
+                // setCountdownState(BREAK)
                 rewindToBreak();
             // if we were previously counting break, but there are repeats left,
             // we want to rewind back to work and reduce the number of repeats left by 1
-            } else if (num_repeats !== 0 && break_countdown === true) {
-                setBreakCountdown(false);
-                setWorkCountdown(true);
+            } else if (num_repeats !== 0 && countdown_state === BREAK) {
+                setCountdownState(INTERMEDIATE)
+                setPrevState(BREAK)
                 setNumRepeats(num_repeats-1);
                 rewindToWork();
+<<<<<<< HEAD
             }
             else if (num_repeats === 0){
                 setBreakCountdown(false);
             }
+=======
+            } else if (countdown_state === BREAK) {
+                setCountdownState(NONE)
+                setPrevState(BREAK)
+            }   
+>>>>>>> 3964546b4f6235151f6b7cfe04049d5d9cd6c622
         }
-    }, [displayHour, displayMinute, displaySecond, work_countdown, break_countdown, num_repeats])
+    }, [displayHour, displayMinute, displaySecond, countdown_state])
 
+    
     const rewindToWork = () => {
         setDisplayHour(work_hour)
         setDisplayMinute(work_min)
@@ -81,37 +82,34 @@ function Countdown ({work_hour, work_min, work_sec, break_hour, break_min, break
         setDisplaySecond(break_sec)
     }
 
-    // set the starting times
+   
     useEffect(() => {
-        if (work_countdown === true) {    
+        if (countdown_state === WORK) {    
             setDisplayHour(work_hour)
             setDisplayMinute(work_min)
             setDisplaySecond(work_sec)
-        // } else {
-        //     setDisplayHour(break_hour)
-        //     setDisplayMinute(break_hour)
-        //     setDisplaySecond(break_sec)
         }
-    }, [work_hour, work_min, break_hour, break_min, work_countdown, break_sec, work_sec])
+        else if (countdown_state === BREAK) {
+            setDisplayHour(break_hour)
+            setDisplayMinute(break_min)
+            setDisplaySecond(break_sec)
+        }
+    }, [countdown_state])
 
-    if (work_countdown === false && break_countdown === false) return null;
 
-    else {
-        return (
-
-            <div>
-                <center>
-                    <h1>
-                        {displayHour < 10? `0${displayHour}` : displayHour}h {displayMinute < 10? `0${displayMinute}` : displayMinute}m {displaySecond < 10? `0${displaySecond}`: displaySecond}s
-                    </h1>
-                    <button onClick={handleOnClick}>
-                        {pauseLabel}
-                    </button>
-                    
-                </center>
-            </div>
-        )
-    }
+    return (        
+        <div className='content'>
+            <h1 className='item'>
+                {displayHour < 10? `0${displayHour}` : displayHour}h
+            </h1>
+            <h1 className='item'>
+                {displayMinute < 10? `0${displayMinute}` : displayMinute}m 
+            </h1>
+            <h1 className='item'>
+                {displaySecond < 10? `0${displaySecond}`: displaySecond}s
+            </h1>
+        </div>      
+    )
 }
 
 const mapStateToProps = state => ({
@@ -121,14 +119,13 @@ const mapStateToProps = state => ({
     work_hour : state.workLength.work_hour,
     work_min : state.workLength.work_min,
     work_sec : state.workLength.work_sec,
-    work_countdown : state.countdown.work_countdown,
-    break_countdown : state.countdown.break_countdown,
+    countdown_state : state.countdown.countdown_state,
     num_repeats : state.settings.num_repeats
 })
 
 const mapDispatchToProps = dispatch => ({
-    setWorkCountdown: start => dispatch(setWorkCountdown(start)),
-    setBreakCountdown: start => dispatch(setBreakCountdown(start)),
+    setCountdownState: state => dispatch(setCountdownState(state)),
+    setPrevState : state => dispatch(setPrevState(state)),
     setNumRepeats: repeats => dispatch(setNumRepeats(repeats))
 })
 

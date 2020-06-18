@@ -1,10 +1,11 @@
-import '../timer/timers.css';
+import './inputs.css';
 import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { setWorkHour, setWorkMin, setWorkSec } from './inputDucks';
+import {NONE} from '../timer/timerDucks';
 
 //sleek google version
-function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, setSave, use, work_hour, work_min, work_sec, work_countdown, break_countdown}){
+function WorkInput ({setWorkHour, setWorkMin, setWorkSec, start, setStart, use, work_hour, work_min, work_sec, countdown_state}){
 
 
     const [hour, setHour] = useState(work_hour);
@@ -63,11 +64,11 @@ function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, setSave, use, wo
     } 
 
     useEffect(() => {
-        if (save === true) {
+        if (start === true) {
             recalibrate(second, minute)
-            setSave(false)
+            setStart(false)
         }
-    }, [save])
+    }, [start])
 
     //recalculate hours and minutes when minutes > 59
     function recalibrate (inputSecond, inputMinute){
@@ -100,17 +101,15 @@ function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, setSave, use, wo
     function extractNum(text) {
         let lastChar = text.slice(-1); //last character in the string
         if (numList.includes(lastChar)){
-            console.log("text",text)
             return text;
         }
         else{
-            console.log("text", text.slice(0,-1));
             return text.slice(0,-1);
         }
     }
 
 
-    if (use === 'countdown' && (work_countdown === true || break_countdown === true)) {
+    if (use === 'countdown' && (countdown_state !== NONE)) {
         return null
     }
     else {
@@ -135,20 +134,12 @@ function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, setSave, use, wo
                             style = {{
                                 color: color
                             }}>
-                           {hour < 10? `0${hour}` : hour}h {minute < 10? `0${minute}` : minute}m {second < 10? `0${second}` : second}<hr class = "fakeCursor" ref = {thecursor} style = {{display : "none"}} width="1" size="35"></hr>s </h1>
+                           {hour < 10? `0${hour}` : hour}h {minute < 10? `0${minute}` : minute}m {second < 10? `0${second}` : second}<hr className = "fakeCursor" ref = {thecursor} style = {{display : "none"}} width="1" size="35"></hr>s </h1>
                         <hr ref = {fakeline} style = {{
                             visibility: "hidden"
                         }}></hr>
 
                     </div>  
-    
-                    {/* <div style = {{
-                        display: hide,
-                    }}>
-                        <button onClick={handleOnClick}>
-                            Submit
-                        </button> 
-                    </div>  */}
                 </div>
             </div>
             )
@@ -165,9 +156,7 @@ const mapStateToProps = state => ({
     work_hour : state.workLength.work_hour,
     work_min : state.workLength.work_min,
     work_sec : state.workLength.work_sec,
-    work_countdown : state.countdown.work_countdown,
-    break_countdown : state.countdown.break_countdown
-    
+    countdown_state : state.countdown.countdown_state
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(WorkInput)

@@ -3,8 +3,13 @@
  * following contains the action and reducer to indicate current mission state
  */
 
-const WORK_COUNTDOWN = 'WORK_COUNTDOWN';
-const BREAK_COUNTDOWN = 'BREAK_COUNTDOWN';
+const COUNTDOWN_STATE = 'COUNTDOWN_STATE';
+const PREV_STATE = 'PREV_STATE'
+export const NONE = 'NONE';
+export const WORK = 'WORK';
+export const BREAK = 'BREAK';
+export const INTERMEDIATE = 'INTERMEDIATE';
+export const PAUSED = 'PAUSED'
 
 /**
  * @description
@@ -13,17 +18,24 @@ const BREAK_COUNTDOWN = 'BREAK_COUNTDOWN';
  * @param {*} start is true or false
  */
 
-export const setWorkCountdown = start => (
+export const setCountdownState = state => (
     {
-        type: WORK_COUNTDOWN,
-        start
+        type: COUNTDOWN_STATE,
+        state
     }
 )
 
-export const setBreakCountdown = start => (
+export const setPrevState = state => (
     {
-        type: BREAK_COUNTDOWN,
-        start
+        type : PREV_STATE,
+        state
+    }
+)
+
+export const setPaused = pause => (
+    {
+        type : PAUSED,
+        pause
     }
 )
 
@@ -33,8 +45,9 @@ export const setBreakCountdown = start => (
  */
 
 const initialCountdown = {
-    work_countdown : false,
-    break_countdown: false
+    prev_state : NONE,
+    countdown_state : NONE,
+    pause : false
 }
 
 /**
@@ -44,13 +57,17 @@ const initialCountdown = {
 **/
 export function countdownReducer (state = initialCountdown, action) {
     switch (action.type) {
-        case WORK_COUNTDOWN:
+        case COUNTDOWN_STATE:
             return Object.assign({}, state, {
-                work_countdown : action.start
+                countdown_state: action.state
             })
-        case BREAK_COUNTDOWN:
+        case PREV_STATE:
             return Object.assign({}, state, {
-                break_countdown : action.start
+                prev_state: action.state
+            })
+        case PAUSED:
+            return Object.assign({}, state, {
+                pause: action.pause
             })
         default:
             return state

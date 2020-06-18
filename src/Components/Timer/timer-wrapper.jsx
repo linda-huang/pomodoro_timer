@@ -1,23 +1,24 @@
-import './timers.css';
 import React, { useState } from 'react';
-import Countdown from './countdown';
+import CountdownWrapper from './countdown-wrapper';
 import BreakInput from '../input/break-input';
 import WorkInput from '../input/work-input';
-import { setWorkCountdown } from './timerDucks';
+import Settings from '../settings/settings-modal-wrapper';
+import { setCountdownState, NONE, WORK, BREAK, INTERMEDIATE } from './timerDucks';
 import { connect } from 'react-redux';
 
-function TimerWrapper ({ setWorkCountdown, work_countdown, break_countdown}) {
+function TimerWrapper ({ setCountdownState, countdown_state}) {
 
+    // start countdown
     const [save, setSave] = useState(false)
-    let workLabel = (work_countdown === false && break_countdown === false) ? <p>Work Length:</p> : null
-    let breakLabel = (work_countdown === false && break_countdown === false) ? <p>Break Length:</p> : null
+    let workLabel = (countdown_state === NONE) ? <p>Work Length:</p> : null
+    let breakLabel = (countdown_state === NONE) ? <p>Break Length:</p> : null
 
     const handleStartClick = () => {
         setSave(true)
-        setWorkCountdown(true)
+        setCountdownState(WORK)
     }
 
-    let startButton = (work_countdown || break_countdown) ? null : <button onClick={handleStartClick}>
+    let startButton = (countdown_state !==  NONE) ? null : <button onClick={handleStartClick}>
         START
     </button>
     
@@ -31,19 +32,21 @@ function TimerWrapper ({ setWorkCountdown, work_countdown, break_countdown}) {
             <BreakInput use="countdown" save={save}/>
             
             {startButton}
-            <Countdown/>
+            <CountdownWrapper/>
+
+            <Settings start={save}/>
+
         </div>
     )
 
 } 
 
 const mapDispatchToProps = dispatch => ({
-    setWorkCountdown: start => dispatch(setWorkCountdown(start))
+    setCountdownState: state => dispatch(setCountdownState(state))
 })
 
 const mapStateToProps = state => ({
-    work_countdown : state.countdown.work_countdown,
-    break_countdown : state.countdown.break_countdown
+    countdown_state : state.countdown.countdown_state
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimerWrapper)

@@ -1,10 +1,11 @@
-import '../timer/timers.css';
+import './inputs.css';
 import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { setBreakHour, setBreakMin, setBreakSec } from './inputDucks'
+import {NONE} from '../timer/timerDucks'
 
 //sleek google version
-function BreakInput ({setBreakHour, setBreakMin, setBreakSec, save, use, break_hour, break_min, break_sec, work_countdown, break_countdown}){
+function BreakInput ({setBreakHour, setBreakMin, setBreakSec, start, use, break_hour, break_min, break_sec, countdown_state}){
 
     //const [time, setTime] = useState();
     const [hour, setHour] = useState(break_hour);
@@ -63,10 +64,10 @@ function BreakInput ({setBreakHour, setBreakMin, setBreakSec, save, use, break_h
     } 
 
     useEffect(() => {
-        if (save === true) {
+        if (start === true) {
             recalibrate(second, minute)
         }
-    }, [save])
+    }, [start])
 
 
     //recalculate hours and minutes when minutes > 59
@@ -77,7 +78,6 @@ function BreakInput ({setBreakHour, setBreakMin, setBreakSec, save, use, break_h
 
         if (second > 59){
             let extraMinute = Math.floor(inputSecond/60);
-            console.log("extra minute: ", extraMinute);
             inputSecond = inputSecond % 60;
             actionMinute = 0 + extraMinute;
             actionSecond = inputSecond;
@@ -99,16 +99,14 @@ function BreakInput ({setBreakHour, setBreakMin, setBreakSec, save, use, break_h
     function extractNum(text) {
         let lastChar = text.slice(-1); //last character in the string
         if (numList.includes(lastChar)){
-            console.log("text",text)
             return text;
         }
         else{
-            console.log("text", text.slice(0,-1));
             return text.slice(0,-1);
         }
     }
 
-    if (use === 'countdown' && (work_countdown === true || break_countdown === true)) {
+    if (use === 'countdown' && (countdown_state !== NONE)) {
         return null
     }
     else{
@@ -132,19 +130,11 @@ function BreakInput ({setBreakHour, setBreakMin, setBreakSec, save, use, break_h
                             style = {{
                                 color: color
                             }}>
-                           {hour < 10? `0${hour}` : hour}h {minute < 10? `0${minute}` : minute}m {second < 10? `0${second}` : second}<hr class = "fakeCursor" ref = {thecursor} style = {{display : "none"}} width="1" size="35"></hr>s </h1>
+                           {hour < 10? `0${hour}` : hour}h {minute < 10? `0${minute}` : minute}m {second < 10? `0${second}` : second}<hr className = "fakeCursor" ref = {thecursor} style = {{display : "none"}} width="1" size="35"></hr>s </h1>
                         <hr ref = {fakeline} style = {{
                             visibility: "hidden"
                         }}></hr>
                     </div>  
-    
-                    {/* <div style = {{
-                        display: hide,
-                    }}>
-                        <button onClick={handleOnClick}>
-                            Submit
-                        </button> 
-                    </div>  */}
                 </div>
             </div>
             )
@@ -175,9 +165,7 @@ const mapStateToProps = state => ({
     break_hour : state.breakLength.break_hour,
     break_min : state.breakLength.break_min,
     break_sec: state.breakLength.break_sec,
-
-    work_countdown : state.countdown.work_countdown,
-    break_countdown : state.countdown.break_countdown,
+    countdown_state : state.countdown.countdown_state
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BreakInput)
