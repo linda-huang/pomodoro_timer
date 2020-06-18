@@ -43,7 +43,6 @@ const initialRepeats = {
 export function repeatsReducer (state = initialRepeats, action) {
     switch (action.type) {
         case NUM_REPEATS:
-            console.log('changing num repeats')
             return Object.assign({}, state, {
                 num_repeats : action.num_repeats
             })

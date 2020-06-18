@@ -4,13 +4,14 @@ import BreakInput from '../input/break-input';
 import WorkInput from '../input/work-input';
 import { connect } from 'react-redux';
 import { setNumRepeats } from './settingsDucks';
+import { NONE, WORK, BREAK, INTERMEDIATE } from '../timer/timerDucks';
 // import { Keyboard } from 'react-native';
 
-function SandboxModal ({hide, setNumRepeats, num_repeats, work_countdown, break_countdown}) {
+function SandboxModal ({hide, setNumRepeats, num_repeats, countdown_state, start}) {
     const [save, setSave] = useState(false);
     const [tempNumRepeats, setTempNumRepeats] = useState(num_repeats);
 
-
+    
     const onDialogClick = (event) => {
         event.stopPropagation();
     }
@@ -18,7 +19,6 @@ function SandboxModal ({hide, setNumRepeats, num_repeats, work_countdown, break_
     const handleConfigSubmit = (event) => {
        setSave(true)
        setNumRepeats(parseInt(tempNumRepeats));
-       console.log('dispatching actions')
        event.preventDefault();
     }
 
@@ -26,12 +26,12 @@ function SandboxModal ({hide, setNumRepeats, num_repeats, work_countdown, break_
         setTempNumRepeats(event.target.value);
     }
     
-    let breakInput = (work_countdown || break_countdown) ? 
+    let breakInput = (countdown_state !== 'NONE') ? 
     <label>
         How long should we break for?
         <BreakInput use="settings" save={save}/>
     </label> : null
-    let workInput  = (work_countdown || break_countdown) ? 
+    let workInput  = ( countdown_state !== 'NONE' )  ? 
     <label>
         How long should we work for?
         <WorkInput use="settings" save={save} setSave={(input) => {setSave(input)}}/>
@@ -90,8 +90,8 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({
     num_repeats : state.settings.num_repeats,
-    work_countdown : state.countdown.work_countdown,
-    break_countdown : state.countdown.break_countdown
+    countdown_state : state.countdown.countdown_state,
+    prev_state : state.countdown.prev_state
 })
 
 /* Merges the return of the mapDispatchToProps function to SandboxModal component 

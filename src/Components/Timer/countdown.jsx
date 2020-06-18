@@ -1,12 +1,8 @@
 import React, { useState, useEffect} from 'react';
 import '../timer/timers.css';
-import Sound from '../audio/sound';
-import Alert from '../audio/alert';
 import {connect} from 'react-redux';
 import { setBreakCountdown, setWorkCountdown } from './timerDucks';
 import { setNumRepeats } from '../settings/settingsDucks';
-
-
 //sad version ;-;
 
 function Countdown ({work_hour, work_min, work_sec, break_hour, break_min, break_sec, work_countdown, break_countdown, num_repeats, setWorkCountdown, setBreakCountdown, setNumRepeats}){
@@ -23,7 +19,7 @@ function Countdown ({work_hour, work_min, work_sec, break_hour, break_min, break
         setPause(!pause);
     }
 
-    useEffect(()=>{
+    useEffect(()=>{  
         if (pause && (work_countdown || break_countdown)) {
             const interval = setInterval(() => {
                 if (displaySecond > 0){
@@ -52,36 +48,28 @@ function Countdown ({work_hour, work_min, work_sec, break_hour, break_min, break
     // trying to rewind --basically if all displayHour, displayMinute, displaySecond is 0, then
     // we want to reset the timer using the break_hour, break_min etc.
     useEffect(() => {
-        
         if (displayHour === 0 && displayMinute === 0 && displaySecond === 0) {
             // so this means, if we were previously counting work,
             // now we rewind to break
             if (work_countdown === true) {
-                console.log("switching to break")
                 setBreakCountdown(true);
                 setWorkCountdown(false);
                 rewindToBreak();
             // if we were previously counting break, but there are repeats left,
             // we want to rewind back to work and reduce the number of repeats left by 1
             } else if (num_repeats !== 0 && break_countdown === true) {
-                console.log("switching to work")
                 setBreakCountdown(false);
                 setWorkCountdown(true);
                 setNumRepeats(num_repeats-1);
                 rewindToWork();
             }
             else if (num_repeats === 0){
-                console.log("resetting timer");
                 setBreakCountdown(false);
             }
-            console.log("workcountdown", work_countdown);
-            console.log("breakcountdown", break_countdown);
-            console.log("num repeats", num_repeats);
-            
         }
     }, [displayHour, displayMinute, displaySecond, work_countdown, break_countdown, num_repeats])
 
-
+    
     const rewindToWork = () => {
         setDisplayHour(work_hour)
         setDisplayMinute(work_min)
@@ -96,9 +84,7 @@ function Countdown ({work_hour, work_min, work_sec, break_hour, break_min, break
 
     // set the starting times
     useEffect(() => {
-        
-        if (work_countdown === true) { 
-            console.log("Starting Work Timer");   
+        if (work_countdown === true) {    
             setDisplayHour(work_hour)
             setDisplayMinute(work_min)
             setDisplaySecond(work_sec)
@@ -119,8 +105,6 @@ function Countdown ({work_hour, work_min, work_sec, break_hour, break_min, break
                     <h1>
                         {displayHour < 10? `0${displayHour}` : displayHour}h {displayMinute < 10? `0${displayMinute}` : displayMinute}m {displaySecond < 10? `0${displaySecond}`: displaySecond}s
                     </h1>
-                    <Sound/>
-                    <Alert/>
                     <button onClick={handleOnClick}>
                         {pauseLabel}
                     </button>
