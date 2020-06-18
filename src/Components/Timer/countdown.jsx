@@ -63,6 +63,9 @@ function Countdown ({work_hour, work_min, work_sec, break_hour, break_min, break
                 setNumRepeats(num_repeats-1);
                 rewindToWork();
             }
+            else if (num_repeats === 0){
+                setBreakCountdown(false);
+            }
         }
     }, [displayHour, displayMinute, displaySecond, work_countdown, break_countdown, num_repeats])
 

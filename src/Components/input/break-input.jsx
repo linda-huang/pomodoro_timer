@@ -120,7 +120,7 @@ function BreakInput ({setBreakHour, setBreakMin, setBreakSec, save, use, break_h
                             ref = {inputText}
                             type = "text"
                             className = "hideInput"
-                            maxlength = "6"
+                            maxLength = "6"
                             size = "29"
                             onBlur = {blur}
                             onFocus = {focus}

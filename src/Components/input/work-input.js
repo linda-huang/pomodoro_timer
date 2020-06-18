@@ -122,7 +122,7 @@ function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, setSave, use, wo
                             ref = {inputText}
                             type = "text"
                             className = "hideInput"
-                            maxlength = "6"
+                            maxLength = "6"
                             size = "29"
                             onBlur = {blur}
                             onFocus = {focus}
