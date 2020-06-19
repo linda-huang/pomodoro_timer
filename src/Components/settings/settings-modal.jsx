@@ -43,12 +43,6 @@ function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound
        setBreakMusic(checked3);
        event.preventDefault();
        if (countdown_state === NONE) setSave(false);
-       
-       else if (workChange===true && breakChange===true) {
-            setSave(false)
-            setWorkChange(false)
-            setBreakChange(false)
-       }
     }
 
     const handleRepeatChange = (event) => {
