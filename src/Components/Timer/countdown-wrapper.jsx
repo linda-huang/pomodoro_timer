@@ -5,7 +5,6 @@ import AddTime from './addTime/add-button';
 import Countdown from './countdown';
 import Prompts from '../prompts/prompts';
 import {NONE, INTERMEDIATE, setPaused } from './timerDucks';
-
 import './timer.css';
 
 function CountdownWrapper ({countdown_state, setPaused, pause}) {

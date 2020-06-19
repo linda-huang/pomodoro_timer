@@ -5,13 +5,12 @@ import WorkInput from '../input/work-input';
 import Settings from '../settings/settings-modal-wrapper';
 import { setCountdownState, NONE, WORK, BREAK, INTERMEDIATE } from './timerDucks';
 import { connect } from 'react-redux';
-import Alert from '../audio/alert';
-import Sound from '../audio/sound';
 
 function TimerWrapper ({ setCountdownState, countdown_state}) {
 
     // start countdown
-    const [save, setSave] = useState(false)
+    const [save, setSave] = useState(false);
+    
     let workLabel = (countdown_state === NONE) ? <p>Work Length:</p> : null
     let breakLabel = (countdown_state === NONE) ? <p>Break Length:</p> : null
 

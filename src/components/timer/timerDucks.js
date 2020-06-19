@@ -4,12 +4,13 @@
  */
 
 const COUNTDOWN_STATE = 'COUNTDOWN_STATE';
-const PREV_STATE = 'PREV_STATE'
+const PREV_STATE = 'PREV_STATE';
+
 export const NONE = 'NONE';
 export const WORK = 'WORK';
 export const BREAK = 'BREAK';
 export const INTERMEDIATE = 'INTERMEDIATE';
-export const PAUSED = 'PAUSED'
+export const PAUSED = 'PAUSED';
 
 /**
  * @description
