@@ -20,9 +20,7 @@ function TimerWrapper ({ setCountdownState, countdown_state}) {
     const handleStartClick = () => {
         setSave(true);
         setCountdownState(WORK);
-
     }
-
     useEffect(() => {
         if (workChange === true && breakChange === true) {
             setSave(false)
