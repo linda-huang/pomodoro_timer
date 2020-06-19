@@ -6,17 +6,14 @@ import audiofile from './Zen_mg_SHIBUYA_long.m4r';
 //Play alert sound when a countdown reaches 0
 function Alert ({countdown_state, alert_sound}){
 
-    console.log("alert",alert_sound);
     const alertaudio = useRef(null)
 
     useEffect(() => {
         if (alert_sound){
             if(countdown_state === INTERMEDIATE){
-                console.log("playing alert sound");
                 alertaudio.current.play();
             }
             else{
-                console.log("pausing alert sound");
                 alertaudio.current.pause();
             }
         }
