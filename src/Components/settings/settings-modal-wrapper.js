@@ -28,7 +28,7 @@ export default function ModalWrapper ({start}) {
                     Settings
             </button>
             <div>
-                <SandboxModal hide={hide} start={start}/>
+                <SandboxModal hide={hide} start={start} setHide={(input) => setHide(input)}/>
             </div>
         </div>
     )

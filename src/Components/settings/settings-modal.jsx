@@ -7,11 +7,16 @@ import { setNumRepeats } from './settingsDucks';
 import { NONE, WORK, BREAK, INTERMEDIATE } from '../timer/timerDucks';
 // import { Keyboard } from 'react-native';
 
-function SandboxModal ({hide, setNumRepeats, num_repeats, countdown_state, start}) {
+function SandboxModal ({hide, setHide, setNumRepeats, num_repeats, countdown_state, start}) {
     const [save, setSave] = useState(false);
     const [tempNumRepeats, setTempNumRepeats] = useState(num_repeats);
 
-    
+    useEffect(() => {
+        if (start===true) {
+            setHide(true)
+        }
+    })
+
     const onDialogClick = (event) => {
         event.stopPropagation();
     }
@@ -20,13 +25,14 @@ function SandboxModal ({hide, setNumRepeats, num_repeats, countdown_state, start
        setSave(true)
        setNumRepeats(parseInt(tempNumRepeats));
        event.preventDefault();
+       if (countdown_state === NONE) setSave(false);
     }
 
     const handleRepeatChange = (event) => {
         setTempNumRepeats(event.target.value);
     }
     
-    let breakInput = (countdown_state !== 'NONE') ? 
+    let breakInput = (countdown_state !== NONE) ? 
     <label>
         How long should we break for?
         <BreakInput use="settings" save={save}/>
@@ -36,7 +42,7 @@ function SandboxModal ({hide, setNumRepeats, num_repeats, countdown_state, start
         How long should we work for?
         <WorkInput use="settings" save={save} setSave={(input) => {setSave(input)}}/>
     </label> : null
-
+  
     if (hide) return null;
 
     else {

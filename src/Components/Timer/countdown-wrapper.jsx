@@ -23,14 +23,15 @@ function CountdownWrapper ({countdown_state, setPaused, pause}) {
     else {
         return (
             <center>
-                <div className='parent'>
+                {/* <div className='parent'>
                             <div className='child'>
                                 <AddTime/>
                             </div>
                             <div className='child'>
                                 <Countdown pause={pause}/>
                             </div>
-                </div>
+                </div> */}
+                <Countdown pause={pause}/>
                 <button onClick={handleOnClick}>
                                 {pauseLabel}
                 </button>
