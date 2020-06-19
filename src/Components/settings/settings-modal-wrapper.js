@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
-// import Draggable from 'react-draggable';
 import SandboxModal from './settings-modal';
-// import Draggable from './draggable';
-// import Button from './button';
 
-export default function ModalWrapper () {
+export default function ModalWrapper ({start}) {
 
     const [hide, setHide] = useState(true);
 
@@ -31,7 +28,7 @@ export default function ModalWrapper () {
                     Settings
             </button>
             <div>
-                <SandboxModal hide={hide} />
+                <SandboxModal hide={hide} start={start}/>
             </div>
         </div>
     )

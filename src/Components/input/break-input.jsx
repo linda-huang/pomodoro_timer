@@ -1,52 +1,71 @@
-import '../timer/timers.css';
-import React, { useState, useEffect } from 'react';
+import './inputs.css';
+import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { setBreakHour, setBreakMin, setBreakSec } from './inputDucks'
+import {NONE} from '../timer/timerDucks'
 
 //sleek google version
-function BreakInput ({setBreakHour, setBreakMin, setBreakSec, save, use, break_hour, break_min, break_sec, work_countdown, break_countdown}){
+function BreakInput ({setBreakHour, setBreakMin, setBreakSec, save, use, break_hour, break_min, break_sec, countdown_state}){
 
-    const [time, setTime] = useState(0);
+    //const [time, setTime] = useState();
     const [hour, setHour] = useState(break_hour);
     const [minute, setMinute] = useState(break_min);
     const [second, setSecond] = useState(break_sec);
     const [color, setColor] = useState();
 
 
+    const inputText = useRef(null);
+
     const changeTime = (event) => {
-        const time = event.currentTarget.value;
-        if (!isNaN(parseInt(time)) || time === ""){
-            setTime(time);
-            let temp = parseInt(time);
-            if (isNaN(temp)){
-                setMinute(0);
-                setHour(0);
-                setSecond(0);
-            }
-            else if (temp > 9999){
-                setHour(Math.floor(temp / 10000));
-                const temp2 = temp - Math.floor(temp / 100)*100; //first four digits
-                setMinute(temp2 - hour * 100);
-                setSecond(temp - temp2);
-            }
-            else if (temp > 99){
-                setSecond(temp % 100);
-                setMinute(Math.floor(temp/100));
-                setHour(0);
-            }
-            else{
-                setSecond(temp);
-                setMinute(0);
-                setHour(0);
-            }
-            
+        const input = event.currentTarget.value;
+        let time = extractNum(input);
+        inputText.current.value = time;
+        let temp = parseInt(time);
+        
+        if (isNaN(temp)){
+            setMinute(0);
+            setHour(0);
+            setSecond(0);
         }
+        else if (temp > 9999){
+            const tempHour = Math.floor(temp/10000);
+            const temp2 = temp % (tempHour * 10000);
+            const tempMinute = Math.floor(temp2/100);
+            setHour(tempHour);
+            setMinute(tempMinute);
+            setSecond(temp2 - tempMinute * 100);  
+        }
+        else if (temp > 99){
+            setSecond(temp % 100);
+            setMinute(Math.floor(temp/100));
+            setHour(0);
+        }
+        else{
+            setSecond(temp);
+            setMinute(0);
+            setHour(0);
+        }        
     }
 
+    const thecursor = useRef(null);
+    const fakeline = useRef(null);
+
+    const blur = (event) => {
+        setColor("#999999");
+        if (thecursor.current !== null) {thecursor.current.style.display = "none"};
+        if (fakeline.current !== null) {fakeline.current.style.visibility = "hidden"};
+
+    }
+
+    const focus = (event) => {
+        setColor("#CCCCCC");
+        if (thecursor.current !== null) {thecursor.current.style.display = "inline"};
+        if (fakeline.current !== null) {fakeline.current.style.visibility = "visible"};
+    } 
 
     useEffect(() => {
         if (save === true) {
-            recalibrate(second, minute)
+            recalibrate(second, minute);
         }
     }, [save])
 
@@ -59,7 +78,6 @@ function BreakInput ({setBreakHour, setBreakMin, setBreakSec, save, use, break_h
 
         if (second > 59){
             let extraMinute = Math.floor(inputSecond/60);
-            console.log("extra minute: ", extraMinute);
             inputSecond = inputSecond % 60;
             actionMinute = 0 + extraMinute;
             actionSecond = inputSecond;
@@ -75,7 +93,22 @@ function BreakInput ({setBreakHour, setBreakMin, setBreakSec, save, use, break_h
         setBreakSec(actionSecond);
     }
     
-    if (use === 'countdown' && (work_countdown === true || break_countdown === true)) {
+    //list of acceptable characters
+    //extrac only numbers out of input box and returns a string of text containing at most 6 numbers
+    
+    const numList = ['0','1','2','3','4','5','6','7','8','9'];
+
+    function extractNum(text) {
+        let lastChar = text.slice(-1); 
+        if (numList.includes(lastChar)){
+            return text;
+        }
+        else{
+            return text.slice(0,-1);
+        }
+    }
+
+    if (use === 'countdown' && (countdown_state !== NONE)) {
         return null
     }
     else{
@@ -84,33 +117,26 @@ function BreakInput ({setBreakHour, setBreakMin, setBreakSec, save, use, break_h
                 <div className ="container">  
                     <div>
                         <input
+                            ref = {inputText}
                             type = "text"
                             className = "hideInput"
-                            //maxlength = "4"
+                            maxLength = "6"
                             size = "29"
-                            value = {time}
-                            onBlur = {() => setColor("#21b8a1")}
-                            onFocus = {() => setColor("#84e3d1")}
+                            onBlur = {blur}
+                            onFocus = {focus}
                             onChange = {changeTime}    
                         />
                     </div>
-    
                     <div>
                         <h1 className = "timeDisplay"
                             style = {{
                                 color: color
                             }}>
-                            {hour < 10? `0${hour}` : hour}h {minute < 10? `0${minute}` : minute}m {second < 10? `0${second}` : second}s
-                        </h1>
+                           {hour < 10? `0${hour}` : hour}h {minute < 10? `0${minute}` : minute}m {second < 10? `0${second}` : second}<hr className = "fakeCursor" ref = {thecursor} style = {{display : "none"}} width="1" size="35"></hr>s </h1>
+                        <hr ref = {fakeline} style = {{
+                            visibility: "hidden"
+                        }}></hr>
                     </div>  
-    
-                    {/* <div style = {{
-                        display: hide,
-                    }}>
-                        <button onClick={handleOnClick}>
-                            Submit
-                        </button> 
-                    </div>  */}
                 </div>
             </div>
             )
@@ -141,9 +167,8 @@ const mapStateToProps = state => ({
     break_hour : state.breakLength.break_hour,
     break_min : state.breakLength.break_min,
     break_sec: state.breakLength.break_sec,
-
-    work_countdown : state.countdown.work_countdown,
-    break_countdown : state.countdown.break_countdown,
+    countdown_state : state.countdown.countdown_state,
+    
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BreakInput)
