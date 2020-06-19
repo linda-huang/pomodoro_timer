@@ -7,16 +7,12 @@ import reflections from "./Toshifumi Hinata-Reflections.mp3";
 
 //Play Sound during work countdown
 function Sound ({countdown_state, pause, work_music, break_music}){
-    
-    console.log("work", work_music);
-    console.log("break",break_music);
 
     const workaudio = useRef(null);
     const breakaudio = useRef(null);
 
 
     useEffect(() => {
-        console.log("pause", pause);
         if (!pause){
             if(countdown_state === WORK){  
                 //console.log("playing work audio");
