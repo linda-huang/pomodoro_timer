@@ -1,16 +1,14 @@
 import './inputs.css';
 import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
-import { setWorkHour, setWorkMin, setWorkSec } from './inputDucks';
-import {NONE} from '../timer/timerDucks';
+import { setWorkTime, setBreakTime } from './inputDucks';
+import {NONE, WORK, BREAK} from '../timer/timerDucks';
 
 //sleek google version
-function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, use, work_hour, work_min, work_sec, countdown_state, setWorkChange}){
+function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time, break_time, countdown_state, setWorkChange, setBreakChange}){
+    
+    const [totalTime, setTotalTime] = useState((workBreak===WORK) ? work_time : break_time);
 
-
-    const [hour, setHour] = useState(work_hour);
-    const [minute, setMinute] = useState(work_min);
-    const [second, setSecond] = useState(work_sec);
     const [color, setColor] = useState();
 
     const inputText = useRef(null);
@@ -22,27 +20,24 @@ function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, use, work_hour, 
         let temp = parseInt(time);
         
         if (isNaN(temp)){
-            setMinute(0);
-            setHour(0);
-            setSecond(0);
+            setTotalTime(0);
         }
         else if (temp > 9999){
             const tempHour = Math.floor(temp/10000);
             const temp2 = temp % (tempHour * 10000);
             const tempMinute = Math.floor(temp2/100);
-            setHour(tempHour);
-            setMinute(tempMinute);
-            setSecond(temp2 - tempMinute * 100);  
+            setTotalTime(tempHour * 3600 + tempMinute * 60 + (temp2 - tempMinute * 100));
+            // setHour(tempHour);
+            // setMinute(tempMinute);
+            // setSecond(temp2 - tempMinute * 100);  
         }
         else if (temp > 99){
-            setSecond(temp % 100);
-            setMinute(Math.floor(temp/100));
-            setHour(0);
+            // setSecond(temp % 100);
+            // setMinute(Math.floor(temp/100));
+            setTotalTime(Math.floor(temp/100) * 60 + temp % 100);
         }
         else{
-            setSecond(temp);
-            setMinute(0);
-            setHour(0);
+            setTotalTime(temp);
         }  
     }
 
@@ -65,35 +60,40 @@ function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, use, work_hour, 
 
     useEffect(() => {
         if (save === true) {
-            recalibrate(second, minute)
-            setWorkChange(true)
+            if (workBreak === WORK) {
+                setWorkTime(totalTime)
+                setWorkChange(true)
+            } else {
+                setBreakTime(totalTime)
+                setBreakChange(true)
+            }
         }
     }, [save])
 
     //recalculate hours and minutes when minutes > 59
-    function recalibrate (inputSecond, inputMinute){
-        console.log("recalibrating");
-        let actionHour = hour
-        let actionMinute = minute
-        let actionSecond = second
+    // function recalibrate (inputSecond, inputMinute){
+    //     console.log("recalibrating");
+    //     let actionHour = hour
+    //     let actionMinute = minute
+    //     let actionSecond = second
 
-        if (second > 59){
-            let extraMinute = Math.floor(inputSecond/60);
-            inputSecond = inputSecond % 60;
-            actionMinute = minute + extraMinute;
-            actionSecond = inputSecond;
-        }
+    //     if (second > 59){
+    //         let extraMinute = Math.floor(inputSecond/60);
+    //         inputSecond = inputSecond % 60;
+    //         actionMinute = minute + extraMinute;
+    //         actionSecond = inputSecond;
+    //     }
 
-        if (minute > 59){
-            let extraHour = Math.floor(inputMinute/60);
-            inputMinute = inputMinute % 60;
-            actionHour = hour + extraHour;
-            actionMinute = inputMinute;
-        }
-        setWorkMin(actionMinute);
-        setWorkHour(actionHour);
-        setWorkSec(actionSecond);
-    }
+    //     if (minute > 59){
+    //         let extraHour = Math.floor(inputMinute/60);
+    //         inputMinute = inputMinute % 60;
+    //         actionHour = hour + extraHour;
+    //         actionMinute = inputMinute;
+    //     }
+    //     setWorkMin(actionMinute);
+    //     setWorkHour(actionHour);
+    //     setWorkSec(actionSecond);
+    // }
 
 
     //list of acceptable characters
@@ -113,6 +113,7 @@ function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, use, work_hour, 
     if (use === 'countdown' && (countdown_state !== NONE)) {
         return null
     }
+
     else {
         return(   
             <div>
@@ -135,7 +136,9 @@ function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, use, work_hour, 
                             style = {{
                                 color: color
                             }}>
-                           {hour < 10? `0${hour}` : hour}h {minute < 10? `0${minute}` : minute}m {second < 10? `0${second}` : second}<hr className = "fakeCursor" ref = {thecursor} style = {{display : "none"}} width="1" size="35"></hr>s </h1>
+                           {Math.floor(totalTime / 3600) < 10 ? `0${Math.floor(totalTime / 3600)}` : Math.floor(totalTime / 3600)}h {Math.floor((totalTime % 3600) / 60) < 10 ? `0${Math.floor((totalTime % 3600) / 60)}` : Math.floor((totalTime % 3600) / 60)}m {Math.floor(totalTime % 60) < 10 ? `0${Math.floor(totalTime % 60)}` :  Math.floor(totalTime % 60)}s
+                           <hr className = "fakeCursor" ref = {thecursor} style = {{display : "none"}} width="1" size="35"></hr>
+                        </h1>
                         <hr ref = {fakeline} style = {{
                             visibility: "hidden"
                         }}></hr>
@@ -148,16 +151,14 @@ function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, use, work_hour, 
 }
 
 const mapDispatchToProps = dispatch => ({
-    setWorkMin: minutes => dispatch(setWorkMin(minutes)),
-    setWorkHour: hours => dispatch(setWorkHour(hours)),
-    setWorkSec: seconds => dispatch(setWorkSec(seconds)),
+    setWorkTime: seconds => dispatch(setWorkTime(seconds)),
+    setBreakTime: seconds => dispatch(setBreakTime(seconds))
   })
 
 const mapStateToProps = state => ({
-    work_hour : state.workLength.work_hour,
-    work_min : state.workLength.work_min,
-    work_sec : state.workLength.work_sec,
+    work_time : state.time.work_time,
+    break_time : state.time.break_time,
     countdown_state : state.countdown.countdown_state
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(WorkInput)
+export default connect(mapStateToProps, mapDispatchToProps)(TimerInput)

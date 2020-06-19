@@ -4,10 +4,10 @@ import React, { useState, useEffect } from 'react';
 //import { setWorkHour, setWorkMin, setWorkSec, setBreakHour, setBreakMin, setBreakSec } from '../../input/inputDucks'
 import './add-buttons.css'
 
-export default function AddTime ({addTime, sec}) {
+export default function AddTime ({addTime, totalTime}) {
 
     const handleHourClick = () => {
-        addTime(sec + 3600);
+        addTime(totalTime + 3600);
     }
 
     const handleMinClick = () => {
@@ -17,7 +17,7 @@ export default function AddTime ({addTime, sec}) {
         // } else {
         //     addMin(min+5)
         // }
-        addTime(sec+5*60)
+        addTime(totalTime+5*60)
     }
 
     const handleSecClick = () => {
@@ -27,7 +27,7 @@ export default function AddTime ({addTime, sec}) {
         // } else {
         //     addSec(sec + 10)
         // }
-        addTime(sec+10)
+        addTime(totalTime+10)
     }
 
     return(

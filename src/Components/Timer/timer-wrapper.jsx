@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import CountdownWrapper from './countdown-wrapper';
-import BreakInput from '../input/break-input';
-import WorkInput from '../input/work-input';
+// import BreakInput from '../input/break-input';
+import TimerInput from '../input/work-input';
 import Settings from '../settings/settings-modal-wrapper';
 import { setCountdownState, NONE, WORK, BREAK, INTERMEDIATE } from './timerDucks';
 import { connect } from 'react-redux';
@@ -10,21 +10,10 @@ import { useEffect } from 'react';
 function TimerWrapper ({ setCountdownState, countdown_state}) {
 
     // start countdown
-<<<<<<< HEAD
-<<<<<<< HEAD
-    const [save, setSave] = useState(false)
-    
-=======
-=======
->>>>>>> b8efee6d515a4da4a3ebfd9981616149f758beab
     const [save, setSave] = useState(false);
     const[workChange, setWorkChange] = useState(false);
     const[breakChange, setBreakChange] = useState(false);
 
-<<<<<<< HEAD
->>>>>>> trying to fix bug
-=======
->>>>>>> b8efee6d515a4da4a3ebfd9981616149f758beab
     let workLabel = (countdown_state === NONE) ? <p>Work Length:</p> : null
     let breakLabel = (countdown_state === NONE) ? <p>Break Length:</p> : null
 
@@ -50,10 +39,10 @@ function TimerWrapper ({ setCountdownState, countdown_state}) {
         <div>
             
             {workLabel}
-            <WorkInput use="countdown" save={save} setWorkChange={(input) => setWorkChange(input)}/>
+            <TimerInput workBreak={WORK} use="countdown" save={save} setWorkChange={(input) => setWorkChange(input)}/>
 
             {breakLabel}
-            <BreakInput use="countdown" save={save} setBreakChange={(input) => setBreakChange(input)}/>
+            <TimerInput workBreak={BREAK} use="countdown" save={save} setBreakChange={(input) => setBreakChange(input)}/>
             
             {startButton}
             <CountdownWrapper/>
