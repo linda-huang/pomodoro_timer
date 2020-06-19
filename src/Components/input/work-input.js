@@ -65,13 +65,10 @@ function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, setSave, use, wo
 
     useEffect(() => {
         if (save === true) {
-            console.log("start button is pressed");
-            recalibrate(second, minute);
-            setSave(false);
-
+            recalibrate(second, minute)
+            setSave(false)
         }
     }, [save])
-
 
     //recalculate hours and minutes when minutes > 59
     function recalibrate (inputSecond, inputMinute){
@@ -93,7 +90,6 @@ function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, setSave, use, wo
             actionHour = hour + extraHour;
             actionMinute = inputMinute;
         }
-
         setWorkMin(actionMinute);
         setWorkHour(actionHour);
         setWorkSec(actionSecond);
