@@ -2,13 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { setPrevState, setCountdownState, WORK, BREAK, INTERMEDIATE } from '../timer/timerDucks';
 import {connect} from 'react-redux';
 import Alert from '../audio/alert';
+import sadcat from './679796247967694906.png';
+import happycat from './568124064485343241.gif';
 
 function Prompts({countdown_state, prev_state, setPrevState, setCountdownState}) {
-    const [prompt, setPrompt] = useState(null)
+    const [prompt, setPrompt] = useState(null);
+    const [imgfile, setImgFile] = useState(null);
 
     useEffect(() => {
         if (countdown_state === INTERMEDIATE ) {
-            (prev_state === WORK) ? setPrompt("YAY! You've finished work!") : setPrompt("Time to get to work!")
+            if (prev_state === WORK) {
+                setPrompt("YAY! You've finished work!")
+                setImgFile(happycat);
+            }else{
+                setPrompt("Time to get to work!")
+                setImgFile(sadcat);
+            }
             setTimeout(() => {
                 setPrompt(null)
                 setCountdownState((prev_state === WORK) ? BREAK : WORK)
@@ -23,6 +32,7 @@ function Prompts({countdown_state, prev_state, setPrevState, setCountdownState})
         return(
             <div>
             <h1>{prompt}</h1>
+            <img src = {imgfile} alt = "either sad or happy cat who knows"/>
             <Alert/>
             </div>
 
