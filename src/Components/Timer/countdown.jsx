@@ -1,10 +1,11 @@
 import React, { useState, useEffect} from 'react';
-import './timer.css';
 import {connect} from 'react-redux';
 import { setPrevState, setCountdownState, NONE, WORK, BREAK, INTERMEDIATE } from './timerDucks';
 import { setNumRepeats } from '../settings/settingsDucks';
 import './addTime/add-buttons.css';
-//sad version ;-;
+import './timer.css';
+import Sound from '../audio/sound';
+
 
 function Countdown ({pause, work_hour, work_min, work_sec, break_hour, break_min, break_sec, countdown_state, num_repeats, setCountdownState, setPrevState, setNumRepeats}){
 
@@ -91,7 +92,8 @@ function Countdown ({pause, work_hour, work_min, work_sec, break_hour, break_min
     }, [countdown_state])
 
 
-    return (        
+    return (   
+        <div>  
         <div className='content'>
             <h1 className='item'>
                 {displayHour < 10? `0${displayHour}` : displayHour}h
@@ -102,7 +104,11 @@ function Countdown ({pause, work_hour, work_min, work_sec, break_hour, break_min
             <h1 className='item'>
                 {displaySecond < 10? `0${displaySecond}`: displaySecond}s
             </h1>
-        </div>      
+        </div>     
+        <div>
+            <Sound/>
+        </div> 
+        </div>   
     )
 }
 

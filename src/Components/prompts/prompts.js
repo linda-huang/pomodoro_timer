@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { setPrevState, setCountdownState, WORK, BREAK, INTERMEDIATE } from '../timer/timerDucks';
 import {connect} from 'react-redux';
+import Alert from '../audio/alert';
 
 function Prompts({countdown_state, prev_state, setPrevState, setCountdownState}) {
     const [prompt, setPrompt] = useState(null)
@@ -12,7 +13,7 @@ function Prompts({countdown_state, prev_state, setPrevState, setCountdownState})
                 setPrompt(null)
                 setCountdownState((prev_state === WORK) ? BREAK : WORK)
                 setPrevState(INTERMEDIATE)
-            }, 1000)
+            }, 2000)
         }
     }, [countdown_state])
 
@@ -20,7 +21,11 @@ function Prompts({countdown_state, prev_state, setPrevState, setCountdownState})
     
     else {
         return(
+            <div>
             <h1>{prompt}</h1>
+            <Alert/>
+            </div>
+
         )
     
     }

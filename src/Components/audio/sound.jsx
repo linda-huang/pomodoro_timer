@@ -1,49 +1,47 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {connect} from 'react-redux';
+import {WORK} from '../timer/timerDucks';
 import birds from "./BirdsInTheRain.mp3";
 import oceanwaves from "./OceanWaves.mp3";
+import reflections from "./Toshifumi Hinata-Reflections.mp3";
 
 //Play Sound during work countdown
-function Sound ({work_countdown, break_countdown}){
+function Sound ({countdown_state}){
 
     const workaudio = useRef(null);
-    const breakaudio = useRef(null)
+    const breakaudio = useRef(null);
 
 
     useEffect(() => {
         
-        if(work_countdown === true){  
+        if(countdown_state === WORK ){  
             //console.log("playing work audio");
-            //console.log("work_countdown", work_countdown); 
             workaudio.current.play();
             if(!breakaudio.current.paused){
-                console.log("pausing breakaudio");
                 breakaudio.current.pause();
             }
         }
-        else{
-            //console.log("pausing work audio");
-            //console.log("work_countdown", work_countdown); 
+        else {
+            //console.log("playing break audio");
             workaudio.current.pause();
             breakaudio.current.play();
 
         }
-    },[work_countdown])
+    },[countdown_state])
     
     
 
 
     return (
         <div>
-        <audio loop ref = {workaudio} src = {oceanwaves} type = "audio/mpeg"></audio>
-        <audio loop ref = {breakaudio} src = {birds} type = "audio/mpeg"></audio>
+            <audio loop ref = {workaudio} src = {oceanwaves} type = "audio/mpeg"></audio>
+            <audio loop ref = {breakaudio} src = {reflections} type = "audio/mpeg"></audio>
         </div>
     )
 
 }
 const mapStateToProps = state =>({
-    work_countdown : state.countdown.work_countdown,
-    break_countdown : state.countdown.break_countdown,
+    countdown_state : state.countdown.countdown_state,
 })
 
 export default connect(mapStateToProps)(Sound)
