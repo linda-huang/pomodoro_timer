@@ -11,14 +11,20 @@ function TimerWrapper ({ setCountdownState, countdown_state}) {
 
     // start countdown
 <<<<<<< HEAD
+<<<<<<< HEAD
     const [save, setSave] = useState(false)
     
 =======
+=======
+>>>>>>> b8efee6d515a4da4a3ebfd9981616149f758beab
     const [save, setSave] = useState(false);
     const[workChange, setWorkChange] = useState(false);
     const[breakChange, setBreakChange] = useState(false);
 
+<<<<<<< HEAD
 >>>>>>> trying to fix bug
+=======
+>>>>>>> b8efee6d515a4da4a3ebfd9981616149f758beab
     let workLabel = (countdown_state === NONE) ? <p>Work Length:</p> : null
     let breakLabel = (countdown_state === NONE) ? <p>Break Length:</p> : null
 

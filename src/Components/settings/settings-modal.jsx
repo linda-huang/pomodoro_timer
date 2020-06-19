@@ -10,12 +10,18 @@ import { NONE, WORK, BREAK, INTERMEDIATE } from '../timer/timerDucks';
 function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound, alert_sound, setWorkMusic, work_music, setBreakMusic, break_music, countdown_state, start}) {
     const [save, setSave] = useState(false);
     const [tempNumRepeats, setTempNumRepeats] = useState(num_repeats);
+<<<<<<< HEAD
     const [checked1 , setChecked1] = useState(alert_sound);
     const [checked2 , setChecked2] = useState(work_music);
     const [checked3, setChecked3] = useState(break_music);
     const[workChange, setWorkChange] = useState(false);
     const[breakChange, setBreakChange] = useState(false);
     
+=======
+    const[workChange, setWorkChange] = useState(false);
+    const[breakChange, setBreakChange] = useState(false);
+
+>>>>>>> b8efee6d515a4da4a3ebfd9981616149f758beab
     useEffect(() => {
         if (start===true) {
             setHide(true)
