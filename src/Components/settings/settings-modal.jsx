@@ -25,14 +25,14 @@ function SandboxModal ({hide, setHide, setNumRepeats, num_repeats, countdown_sta
        setSave(true)
        setNumRepeats(parseInt(tempNumRepeats));
        event.preventDefault();
-       setSave(false)
+       if (countdown_state === NONE) setSave(false);
     }
 
     const handleRepeatChange = (event) => {
         setTempNumRepeats(event.target.value);
     }
     
-    let breakInput = (countdown_state !== 'NONE') ? 
+    let breakInput = (countdown_state !== NONE) ? 
     <label>
         How long should we break for?
         <BreakInput use="settings" save={save}/>
