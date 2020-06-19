@@ -5,7 +5,7 @@ import { setBreakHour, setBreakMin, setBreakSec } from './inputDucks'
 import {NONE} from '../timer/timerDucks'
 
 //sleek google version
-function BreakInput ({setBreakHour, setBreakMin, setBreakSec, start, use, break_hour, break_min, break_sec, countdown_state}){
+function BreakInput ({setBreakHour, setBreakMin, setBreakSec, save, use, break_hour, break_min, break_sec, countdown_state, setBreakChange}){
 
     //const [time, setTime] = useState();
     const [hour, setHour] = useState(break_hour);
@@ -64,10 +64,12 @@ function BreakInput ({setBreakHour, setBreakMin, setBreakSec, start, use, break_
     } 
 
     useEffect(() => {
-        if (start === true) {
+        if (save === true) {
+            console.log('updating stuff')
             recalibrate(second, minute)
+            setBreakChange(true)
         }
-    }, [start])
+    }, [save])
 
 
     //recalculate hours and minutes when minutes > 59

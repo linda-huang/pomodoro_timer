@@ -10,12 +10,14 @@ import { NONE, WORK, BREAK, INTERMEDIATE } from '../timer/timerDucks';
 function SandboxModal ({hide, setHide, setNumRepeats, num_repeats, countdown_state, start}) {
     const [save, setSave] = useState(false);
     const [tempNumRepeats, setTempNumRepeats] = useState(num_repeats);
+    const[workChange, setWorkChange] = useState(false);
+    const[breakChange, setBreakChange] = useState(false);
 
     useEffect(() => {
         if (start===true) {
             setHide(true)
         }
-    })
+    }, [start])
 
     const onDialogClick = (event) => {
         event.stopPropagation();
@@ -23,9 +25,16 @@ function SandboxModal ({hide, setHide, setNumRepeats, num_repeats, countdown_sta
 
     const handleConfigSubmit = (event) => {
        setSave(true)
+       console.log(save)
        setNumRepeats(parseInt(tempNumRepeats));
        event.preventDefault();
        if (countdown_state === NONE) setSave(false);
+       
+       else if (workChange===true && breakChange===true) {
+            setSave(false)
+            setWorkChange(false)
+            setBreakChange(false)
+       }
     }
 
     const handleRepeatChange = (event) => {
@@ -35,12 +44,12 @@ function SandboxModal ({hide, setHide, setNumRepeats, num_repeats, countdown_sta
     let breakInput = (countdown_state !== NONE) ? 
     <label>
         How long should we break for?
-        <BreakInput use="settings" save={save}/>
+        <BreakInput use="settings" save={save} setBreakChange={(input) => setBreakChange(input)}/>
     </label> : null
     let workInput  = ( countdown_state !== 'NONE' )  ? 
     <label>
         How long should we work for?
-        <WorkInput use="settings" save={save} setSave={(input) => {setSave(input)}}/>
+        <WorkInput use="settings" save={save} setWorkChange={(input) => setWorkChange(input)}/>
     </label> : null
   
     if (hide) return null;

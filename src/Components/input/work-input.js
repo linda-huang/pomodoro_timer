@@ -5,7 +5,7 @@ import { setWorkHour, setWorkMin, setWorkSec } from './inputDucks';
 import {NONE} from '../timer/timerDucks';
 
 //sleek google version
-function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, setSave, use, work_hour, work_min, work_sec, countdown_state}){
+function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, use, work_hour, work_min, work_sec, countdown_state, setWorkChange}){
 
 
     const [hour, setHour] = useState(work_hour);
@@ -66,7 +66,7 @@ function WorkInput ({setWorkHour, setWorkMin, setWorkSec, save, setSave, use, wo
     useEffect(() => {
         if (save === true) {
             recalibrate(second, minute)
-            setSave(false)
+            setWorkChange(true)
         }
     }, [save])
 
