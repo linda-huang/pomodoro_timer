@@ -85,33 +85,34 @@ function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound
                         </label>
                         </div>
                         <div>
-                        <label>
-                            Alert Sound
-                            <input
+                        <input
                             type = 'checkbox'
                             checked = {checked1}
                             onChange ={() => setChecked1(!checked1)}
                             />
+                        <label>
+                            Alert Sound
                         </label>
                         </div>
                         <div>
-                        <label>
-                            Work Music
-                            <input
+                        <input
                             type = 'checkbox'
                             checked = {checked2}
                             onChange = {() => setChecked2(!checked2)}
                             />
+                        <label>
+                            Work Music
+                            
                         </label>
                         </div>
                         <div>
-                        <label>
-                            Break Music
-                            <input
+                        <input
                             type = 'checkbox'
                             checked = {checked3}
                             onChange = {() => setChecked3(!checked3)}
                             />
+                        <label>
+                            Break Music
                         </label>
                         </div>
                         <button type="submit">Save</button>

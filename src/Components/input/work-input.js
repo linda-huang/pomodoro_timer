@@ -7,7 +7,11 @@ import {NONE, WORK, BREAK} from '../timer/timerDucks';
 //sleek google version
 function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time, break_time, countdown_state, setWorkChange, setBreakChange}){
     
-    const [totalTime, setTotalTime] = useState((workBreak===WORK) ? work_time : break_time);
+    //const [totalTime, setTotalTime] = useState((workBreak===WORK) ? work_time : break_time);
+
+    const [hour, setHour] = useState(0);
+    const [minute, setMinute] = useState(0);
+    const [second, setSecond] = useState(0);
 
     const [color, setColor] = useState();
 
@@ -20,24 +24,30 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
         let temp = parseInt(time);
         
         if (isNaN(temp)){
-            setTotalTime(0);
+            //setTotalTime(0);
+            setHour(0);
+            setMinute(0);
+            setSecond(0);
         }
         else if (temp > 9999){
             const tempHour = Math.floor(temp/10000);
             const temp2 = temp % (tempHour * 10000);
             const tempMinute = Math.floor(temp2/100);
-            setTotalTime(tempHour * 3600 + tempMinute * 60 + (temp2 - tempMinute * 100));
-            // setHour(tempHour);
-            // setMinute(tempMinute);
-            // setSecond(temp2 - tempMinute * 100);  
+            //setTotalTime(tempHour * 3600 + tempMinute * 60 + (temp2 - tempMinute * 100));
+            setHour(tempHour);
+            setMinute(tempMinute);
+            setSecond(temp2 - tempMinute * 100);  
         }
         else if (temp > 99){
-            // setSecond(temp % 100);
-            // setMinute(Math.floor(temp/100));
-            setTotalTime(Math.floor(temp/100) * 60 + temp % 100);
+            setSecond(temp % 100);
+            setMinute(Math.floor(temp/100));
+            setHour(0);
+            //setTotalTime((Math.floor(temp/100) * 60) + (temp % 100));
         }
         else{
-            setTotalTime(temp);
+            //setTotalTime(temp);
+            setSecond(temp);
+            setMinute(0);
         }  
     }
 
@@ -62,10 +72,10 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
     useEffect(() => {
         if (save === true) {
             if (workBreak === WORK) {
-                setWorkTime(totalTime)
+                setWorkTime(hour*3600 + minute*60 + second)
                 setWorkChange(true)
             } else {
-                setBreakTime(totalTime)
+                setBreakTime(hour*3600 + minute*60 + second)
                 setBreakChange(true)
             }
         }
@@ -97,11 +107,18 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
     // }
 
 
+   
+    /* Extract only numbers out of input box and returns a string of text containing at most 6 numbers
+    Parameter: text is a string
+    Returns a string of only numbers or empty string*/
+
     //list of acceptable characters
     const numList = ['0','1','2','3','4','5','6','7','8','9'];
-    //extrac only numbers out of input box and returns a string of text containing at most 6 numbers
     function extractNum(text) {
-        let lastChar = text.slice(-1); //last character in the string
+        //last character in the string
+        let lastChar = text.slice(-1); 
+
+        //Check if the lastChar is in list of acceptable characters
         if (numList.includes(lastChar)){
             return text;
         }
@@ -125,7 +142,7 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
                             type = "text"
                             className = "hideInput"
                             maxLength = "6"
-                            size = "29"
+                            size = "31"
                             onBlur = {blur}
                             onFocus = {focus}
                             onChange = {changeTime}    
@@ -137,9 +154,11 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
                             style = {{
                                 color: color
                             }}>
-                           {Math.floor(totalTime / 3600) < 10 ? `0${Math.floor(totalTime / 3600)}` : Math.floor(totalTime / 3600)}h {Math.floor((totalTime % 3600) / 60) < 10 ? `0${Math.floor((totalTime % 3600) / 60)}` : Math.floor((totalTime % 3600) / 60)}m {Math.floor(totalTime % 60) < 10 ? `0${Math.floor(totalTime % 60)}` :  Math.floor(totalTime % 60)}
-                           <hr className = "fakeCursor" ref = {thecursor} style = {{display : "none"}} width="1" size="35"></hr>s
-                           
+                           {hour < 10 ? `0${hour}` : hour}h &#160;
+                           {minute < 10 ? `0${minute}` : minute}m &#160;
+                           {second < 10 ? `0${second}` :  second}
+                           <hr className = "fakeCursor" ref = {thecursor} style = {{display : "none"}} width = "1" size = "35"></hr>
+                           s   
                         </h1>
                         <hr ref = {fakeline} style = {{
                             visibility: "hidden"
