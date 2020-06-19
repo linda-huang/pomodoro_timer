@@ -2,6 +2,8 @@ import React, { useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import { setPrevState, setCountdownState, NONE, WORK, BREAK, INTERMEDIATE } from './timerDucks';
 import { setNumRepeats } from '../settings/settingsDucks';
+import AddTime from './addTime/add-button';
+import './timer.css';
 import './addTime/add-buttons.css';
 import './timer.css';
 import Sound from '../audio/sound';
@@ -92,22 +94,34 @@ function Countdown ({pause, work_hour, work_min, work_sec, break_hour, break_min
     }, [countdown_state])
 
 
-    return (   
-        <div>  
-        <div className='content'>
-            <h1 className='item'>
-                {displayHour < 10? `0${displayHour}` : displayHour}h
-            </h1>
-            <h1 className='item'>
-                {displayMinute < 10? `0${displayMinute}` : displayMinute}m 
-            </h1>
-            <h1 className='item'>
-                {displaySecond < 10? `0${displaySecond}`: displaySecond}s
-            </h1>
-        </div>     
-        <div>
-            <Sound/>
-        </div> 
+    return (        
+        <div className='parent'>
+            <div className='child'>
+                <div className='content'>
+                    <h1 className='item'>
+                        {displayHour < 10? `0${displayHour}` : displayHour}h
+                    </h1>
+                    <h1 className='item'>
+                        {displayMinute < 10? `0${displayMinute}` : displayMinute}m 
+                    </h1>
+                    <h1 className='item'>
+                        {displaySecond < 10? `0${displaySecond}`: displaySecond}s
+                    </h1>
+                </div>   
+            </div>
+            <div className='child'>
+                <AddTime 
+                    addHour={(input) => setDisplayHour(input)}
+                    addMin={(input) => setDisplayMinute(input)}
+                    addSec={(input) => setDisplaySecond(input)}
+                    hour={displayHour}
+                    min={displayMinute}
+                    sec={displaySecond}
+                />
+            </div>
+            <div>
+                <Sound/>
+            </div> 
         </div>   
     )
 }

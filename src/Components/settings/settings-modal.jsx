@@ -7,14 +7,19 @@ import { setNumRepeats, setAlertSound, setWorkMusic, setBreakMusic} from './sett
 import { NONE, WORK, BREAK, INTERMEDIATE } from '../timer/timerDucks';
 // import { Keyboard } from 'react-native';
 
-function SandboxModal ({hide, setNumRepeats, num_repeats, setAlertSound, alert_sound, setWorkMusic, work_music, setBreakMusic, break_music, countdown_state, start}) {
+function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound, alert_sound, setWorkMusic, work_music, setBreakMusic, break_music, countdown_state, start}) {
     const [save, setSave] = useState(false);
     const [tempNumRepeats, setTempNumRepeats] = useState(num_repeats);
     const [checked1 , setChecked1] = useState(alert_sound);
     const [checked2 , setChecked2] = useState(work_music);
     const [checked3, setChecked3] = useState(break_music);
 
-    
+    useEffect(() => {
+        if (start===true) {
+            setHide(true)
+        }
+    })
+
     const onDialogClick = (event) => {
         event.stopPropagation();
     }
@@ -28,13 +33,14 @@ function SandboxModal ({hide, setNumRepeats, num_repeats, setAlertSound, alert_s
        setWorkMusic(checked2);
        setBreakMusic(checked3);
        event.preventDefault();
+       if (countdown_state === NONE) setSave(false);
     }
 
     const handleRepeatChange = (event) => {
         setTempNumRepeats(event.target.value);
     }
     
-    let breakInput = (countdown_state !== 'NONE') ? 
+    let breakInput = (countdown_state !== NONE) ? 
     <label>
         How long should we break for?
         <BreakInput use="settings" save={save}/>
@@ -44,7 +50,7 @@ function SandboxModal ({hide, setNumRepeats, num_repeats, setAlertSound, alert_s
         How long should we work for?
         <WorkInput use="settings" save={save} setSave={(input) => {setSave(input)}}/>
     </label> : null
-
+  
     if (hide) return null;
 
     else {

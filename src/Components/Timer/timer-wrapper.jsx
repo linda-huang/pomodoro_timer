@@ -9,8 +9,13 @@ import { connect } from 'react-redux';
 function TimerWrapper ({ setCountdownState, countdown_state}) {
 
     // start countdown
+<<<<<<< HEAD
     const [save, setSave] = useState(false);
     
+=======
+    const [save, setSave] = useState(false)
+    console.log(save)
+>>>>>>> 3182bee101b99aa855bb72ffb7e888ff50c23b4f
     let workLabel = (countdown_state === NONE) ? <p>Work Length:</p> : null
     let breakLabel = (countdown_state === NONE) ? <p>Break Length:</p> : null
 
