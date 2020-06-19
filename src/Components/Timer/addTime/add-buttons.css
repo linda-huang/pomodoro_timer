@@ -19,7 +19,7 @@
     height: 50px;
     background-color: rgb(52, 52, 52, 0);
     border: none;
-    z-index: 51;
+    z-index: 1051;
     transition-duration: 0.4s;
     border-radius:8px;
     outline: none;
@@ -29,7 +29,7 @@
   flex: 1;
   /* align-items: stretch; */
   border: none;
-  z-index: 50;
+  z-index: 1050;
   border-radius:8px;
   justify-content : center;
   align-content: center;

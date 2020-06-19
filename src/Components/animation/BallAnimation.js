@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { WORK, BREAK } from "../timer/timerDucks";
 
 //import css
 
@@ -13,13 +14,16 @@ import { connect } from "react-redux";
 // const time_Milsecond = time_minute * 60 * 1000;
 // var time_left_ball_second = time_second;
 
-const ball_rad = 8;
+const ball_rad_work = 8;
+const ball_rad_break= 16;
 
-const ve = 0.45;
+const ve_work = 0.45;
+const ve_break= 1;
+
 //const background_Col = "#f5e8ce";
 // const background_Col = "white";
 const color_options = ["#F2C5AE", "#818D97", "#86A5B5", "#779DA6", "#8EB6BF"];
-//["#F2C5AE", "#272840", "#464659", "#779DA6", "#8EB6BF"]
+
 
 //ball expansion
 // const ball_fat = 18;
@@ -98,10 +102,10 @@ Ball.prototype.update = function (width, height) {
   this.y += this.velY;
 };
 
-function setup(numberOfBalls, width, height) {
+function setup(numberOfBalls, width, height,size,ve) {
   balls = [];
   while (balls.length < numberOfBalls) {
-    let size = ball_rad;
+    
     let pos = randomPosition(size, width, height);
     //console.log("pos");
     //console.log(pos);
@@ -128,10 +132,23 @@ class BallAnimation extends React.Component {
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     this.updateAnimationState = this.updateAnimationState.bind(this);
     this.canvasRef = React.createRef();
-    const tolsec = this.props.work_countdown
-      ? this.props.work_hour * 3600 + this.props.work_min * 60 + this.props.work_sec
-      : this.props.break_hour * 3600 + this.props.break_min * 60 + this.props.break_sec;
-    
+    let tolsec;
+    let b_size;
+    let b_vel;
+    if (this.props.countdown_state === WORK){
+      tolsec = this.props.work_hour * 3600 + this.props.work_min * 60 + this.props.work_sec
+      b_size = ball_rad_work;
+      b_vel = ve_work;
+
+    }
+    else if (this.props.countdown_state === BREAK){
+           tolsec =
+             this.props.break_hour * 3600 +
+             this.props.break_min * 60 +
+             this.props.break_sec;
+           b_size = ball_rad_break;
+           b_vel = ve_break;
+    }
     console.log(` totoal time in second${tolsec}`);
     let ball_num = Math.ceil(tolsec/2);
      ball_num = ball_num>1800? 1800: ball_num;
@@ -140,7 +157,7 @@ class BallAnimation extends React.Component {
     console.log(` totoal number of ball at creation in second${ball_num}`);
     this.state = { 
       width: 0, height: 0, 
-      frame: 0, total_ball: ball_num };
+      frame: 0, total_ball: ball_num ,size: b_size, velocity: b_vel};
     
   }
 
@@ -150,7 +167,7 @@ class BallAnimation extends React.Component {
     window.addEventListener("resize", this.updateWindowDimensions);
     console.log("at component did mount");
     console.log(this.state.total_ball)
-    setup(this.state.total_ball, window.innerWidth, window.innerHeight);
+    setup(this.state.total_ball, window.innerWidth, window.innerHeight, this.state.size, this.state.velocity);
     //console.log(balls);
     console.log("num balls");
     console.log(balls.length);
@@ -161,7 +178,7 @@ class BallAnimation extends React.Component {
 
   updateWindowDimensions() {
     //console.log("update window di")
-    setup(this.state.total_ball, window.innerWidth, window.innerHeight);
+    setup(this.state.total_ball, window.innerWidth, window.innerHeight, this.state.size, this.state.velocity);
     const canvas = this.canvasRef.current;
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -198,13 +215,14 @@ class BallAnimation extends React.Component {
       
     }
     const current_time = this.props.sec+this.props.hr*3600 +this.props.min*60
+
     const prev_time = prevProps.sec+prevProps.hr*3600 +prevProps.min*60;
     //if time is less than and also devisable by two 
     const total_ball = this.state.total_ball;
     let should_be = Math.ceil(current_time/2);
     should_be = should_be>1800? 1800: should_be;
-    console.log("should be");
-    console.log(should_be);
+    //console.log("should be");
+    //console.log(should_be);
 
 
     if (current_time < prev_time && (current_time%2)===0&& current_time<=3600)
@@ -215,24 +233,35 @@ class BallAnimation extends React.Component {
       }
     else if (should_be> total_ball){
       console.log("in should be")
+      console.log(should_be);
+      console.log("current time")
+      console.log(current_time);
+      console.log("hr");
+      console.log(this.props.hr);
+       console.log(this.props.min);
+        console.log(this.props.sec);
+
+
       var inc = 0;
       while (balls.length < should_be){
         
-        let pos = randomPosition(ball_rad, this.state.width, this.state.height);
-        let vX = random(-ve, ve);
-        let vY = random(-ve, ve);
+        let pos = randomPosition(this.state.size, this.state.width, this.state.height);
+        let vX = random(-this.state.velocity, this.state.velocity);
+        let vY = random(-this.state.velocity, this.state.velocity);
         //prevent the ball from not moving// temporary
         while (vX === 0 || vY === 0) {
-          vX = random(-ve, ve);
-          vY = random(-ve, ve);
+          vX = random(-this.state.velocity, this.state.velocity);
+          vY = random(-this.state.velocity, this.state.velocity);
         }
-        let ball = new Ball(pos, vX, vY, ball_rad);
+        let ball = new Ball(pos, vX, vY, this.state.size);
         balls.push(ball);
         inc +=1;
         
       }
       this.setState((prevState)=>({total_ball:prevState.total_ball+inc}));
       }
+
+      
     }
     
 
@@ -262,12 +291,11 @@ class BallAnimation extends React.Component {
 const mapStateToProps = (state) => ({
   break_hour: state.breakLength.break_hour,
   break_min: state.breakLength.break_min,
+  break_sec: state.breakLength.break_sec,
   work_hour: state.workLength.work_hour,
   work_min: state.workLength.work_min,
-  work_countdown: state.countdown.work_countdown,
-  break_countdown: state.countdown.break_countdown,
   work_sec: state.workLength.work_sec,
-  break_sec: state.breakLength.break_sec,
+  countdown_state: state.countdown.countdown_state,
 });
 
 export default connect(mapStateToProps) (BallAnimation);

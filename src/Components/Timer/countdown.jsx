@@ -101,9 +101,7 @@ function Countdown ({pause, work_hour, work_min, work_sec, break_hour, break_min
 
     return (   
         <div>  
-        <div className="animation_container">
-            <WaveAnimation hr={displayHour} min={displayMinute} sec={displaySecond}/>
-        </div>
+        
         <div className='content'>
             <h1 className='item'>
                 {displayHour < 10? `0${displayHour}` : displayHour}h
@@ -116,6 +114,8 @@ function Countdown ({pause, work_hour, work_min, work_sec, break_hour, break_min
             </h1>
         </div>     
         <div>
+            <BallAnimation hr={displayHour} min={displayMinute} sec={displaySecond}/>
+      
             <Sound/>
         </div> 
         </div>   
