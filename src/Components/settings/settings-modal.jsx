@@ -23,12 +23,13 @@ function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound
     }, [start])
 
     useEffect(() => {
+        setTempNumRepeats(num_repeats);
         if (workChange === true && breakChange === true) {
             setSave(false)
             setWorkChange(false)
             setBreakChange(false)
         }
-    }, [workChange, breakChange])
+    }, [workChange, breakChange, num_repeats])
 
     const onDialogClick = (event) => {
         event.stopPropagation();
