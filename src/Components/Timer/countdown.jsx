@@ -1,5 +1,9 @@
 import React, { useState, useEffect} from 'react';
 import {connect} from 'react-redux';
+
+import WaveAnimation from '../animation/WaveAnimation';
+import BallAnimation from '../animation/BallAnimation';
+
 import { setPrevState, setCountdownState, NONE, WORK, BREAK, INTERMEDIATE } from './timerDucks';
 import { setNumRepeats } from '../settings/settingsDucks';
 import AddTime from './addTime/add-button';
@@ -9,31 +13,33 @@ import './timer.css';
 import Sound from '../audio/sound';
 
 
-function Countdown ({pause, work_hour, work_min, work_sec, break_hour, break_min, break_sec, countdown_state, num_repeats, setCountdownState, setPrevState, setNumRepeats}){
+function Countdown ({pause, work_time, break_time, countdown_state, num_repeats, setCountdownState, setPrevState, setNumRepeats}){
 
-    const [displayHour, setDisplayHour] = useState(work_hour);
-    const [displayMinute, setDisplayMinute] = useState(work_min);
-    const [displaySecond, setDisplaySecond] = useState(work_sec);
+    // const [displayHour, setDisplayHour] = useState(work_hour);
+    // const [displayMinute, setDisplayMinute] = useState(work_min);
+    // const [displaySecond, setDisplaySecond] = useState(work_sec);
+    const [totalTime, setTotalTime] = useState((countdown_state === WORK) ? work_time : break_time);
 
     useEffect(()=>{  
         if (!pause && (countdown_state !== NONE && countdown_state !== INTERMEDIATE)) {
             const interval = setInterval(() => {
-                if (displaySecond > 0){
-                    setDisplaySecond(displaySecond - 1);
-                }
-                else {
-                    if (displayMinute === 0){
-                        if (displayHour > 0){
-                            setDisplaySecond(59)
-                            setDisplayMinute(59);
-                            setDisplayHour(displayHour - 1);
-                        }
-                    }
-                    else {
-                        setDisplaySecond(59);
-                        setDisplayMinute(displayMinute-1);
-                    }
-                }
+                setTotalTime(totalTime -1)
+                // if (displaySecond > 0){
+                //     setDisplaySecond(displaySecond - 1);
+                // }
+                // else {
+                //     if (displayMinute === 0){
+                //         if (displayHour > 0){
+                //             setDisplaySecond(59)
+                //             setDisplayMinute(59);
+                //             setDisplayHour(displayHour - 1);
+                //         }
+                //     }
+                //     else {
+                //         setDisplaySecond(59);
+                //         setDisplayMinute(displayMinute-1);
+                //     }
+                // }
             },1000)
             return () => clearInterval(interval)
         }
@@ -44,7 +50,10 @@ function Countdown ({pause, work_hour, work_min, work_sec, break_hour, break_min
     // trying to rewind --basically if all displayHour, displayMinute, displaySecond is 0, then
     // we want to reset the timer using the break_hour, break_min etc.
     useEffect(() => {
-        if (displayHour === 0 && displayMinute === 0 && displaySecond === 0) {
+        if (
+            // displayHour === 0 && displayMinute === 0 && displaySecond === 0
+            totalTime < 0
+            ) {
             // so this means, if we were previously counting work,
             // now we rewind to break
             if (countdown_state === WORK) {
@@ -64,32 +73,40 @@ function Countdown ({pause, work_hour, work_min, work_sec, break_hour, break_min
                 setPrevState(BREAK)
             }   
         }
-    }, [displayHour, displayMinute, displaySecond, countdown_state])
+    }, [
+        // displayHour, displayMinute, displaySecond, 
+        totalTime, countdown_state])
 
     
     const rewindToWork = () => {
-        setDisplayHour(work_hour)
-        setDisplayMinute(work_min)
-        setDisplaySecond(work_sec)
+        // setDisplayHour(work_hour)
+        // setDisplayMinute(work_min)
+        // setDisplaySecond(work_sec)
+        setTotalTime(work_time);
     }
 
     const rewindToBreak = () => {
-        setDisplayHour(break_hour)
-        setDisplayMinute(break_min)
-        setDisplaySecond(break_sec)
+        // setDisplayHour(break_hour)
+        // setDisplayMinute(break_min)
+        // setDisplaySecond(break_sec)
+        setTotalTime(break_time);
+
     }
 
    
     useEffect(() => {
         if (countdown_state === WORK) {    
-            setDisplayHour(work_hour)
-            setDisplayMinute(work_min)
-            setDisplaySecond(work_sec)
+            setTotalTime(work_time);
+            // setDisplayHour(work_hour)
+            // setDisplayMinute(work_min)
+            // setDisplaySecond(work_sec)
         }
         else if (countdown_state === BREAK) {
-            setDisplayHour(break_hour)
-            setDisplayMinute(break_min)
-            setDisplaySecond(break_sec)
+            setTotalTime(break_time)
+
+            // setDisplayHour(break_hour)
+            // setDisplayMinute(break_min)
+            // setDisplaySecond(break_sec)
         }
     }, [countdown_state])
 
@@ -99,24 +116,20 @@ function Countdown ({pause, work_hour, work_min, work_sec, break_hour, break_min
             <div className='child'>
                 <div className='content'>
                     <h1 className='item'>
-                        {displayHour < 10? `0${displayHour}` : displayHour}h
+                        {Math.floor(totalTime / 3600) < 10 ? `0${Math.floor(totalTime / 3600)}` : Math.floor(totalTime / 3600)}h
                     </h1>
                     <h1 className='item'>
-                        {displayMinute < 10? `0${displayMinute}` : displayMinute}m 
+                        {Math.floor((totalTime % 3600) / 60) < 10 ? `0${Math.floor((totalTime % 3600) / 60)}` : Math.floor((totalTime % 3600) / 60)}m 
                     </h1>
                     <h1 className='item'>
-                        {displaySecond < 10? `0${displaySecond}`: displaySecond}s
+                        {Math.floor(totalTime % 60) < 10 ? `0${Math.floor(totalTime % 60)}` :  Math.floor(totalTime % 60)}s
                     </h1>
                 </div>   
             </div>
             <div className='child'>
                 <AddTime 
-                    addHour={(input) => setDisplayHour(input)}
-                    addMin={(input) => setDisplayMinute(input)}
-                    addSec={(input) => setDisplaySecond(input)}
-                    hour={displayHour}
-                    min={displayMinute}
-                    sec={displaySecond}
+                    addTime={(input) => setTotalTime(input)}
+                    totalTime={totalTime}
                 />
             </div>
             <div>
@@ -127,12 +140,8 @@ function Countdown ({pause, work_hour, work_min, work_sec, break_hour, break_min
 }
 
 const mapStateToProps = state => ({
-    break_hour : state.breakLength.break_hour,
-    break_min : state.breakLength.break_min,
-    break_sec : state.breakLength.break_sec,
-    work_hour : state.workLength.work_hour,
-    work_min : state.workLength.work_min,
-    work_sec : state.workLength.work_sec,
+    work_time : state.time.work_time,
+    break_time : state.time.break_time,
     countdown_state : state.countdown.countdown_state,
     num_repeats : state.settings.num_repeats
 })

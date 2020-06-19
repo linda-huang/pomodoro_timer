@@ -1,31 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import {connect} from 'react-redux';
-import { WORK, BREAK } from '../timerDucks';
-import { setWorkHour, setWorkMin, setWorkSec, setBreakHour, setBreakMin, setBreakSec } from '../../input/inputDucks'
+// import {connect} from 'react-redux';
+// import { WORK, BREAK } from '../timerDucks';
+//import { setWorkHour, setWorkMin, setWorkSec, setBreakHour, setBreakMin, setBreakSec } from '../../input/inputDucks'
 import './add-buttons.css'
 
-export default function AddTime ({hour, min, sec, addHour, addMin, addSec}) {
+export default function AddTime ({addTime, totalTime}) {
 
     const handleHourClick = () => {
-        addHour(hour + 1);
+        addTime(totalTime + 3600);
     }
 
     const handleMinClick = () => {
-        if (min >= 55) {
-            addHour(hour+1)
-            addMin(min-60+5)
-        } else {
-            addMin(min+5)
-        }
+        // if (min >= 55) {
+        //     addHour(hour+1)
+        //     addMin(min-60+5)
+        // } else {
+        //     addMin(min+5)
+        // }
+        addTime(totalTime+5*60)
     }
 
     const handleSecClick = () => {
-        if (sec >= 50) {
-            addMin(min+1)
-            addSec(sec-60+10)
-        } else {
-            addSec(sec + 10)
-        }
+        // if (sec >= 50) {
+        //     addMin(min+1)
+        //     addSec(sec-60+10)
+        // } else {
+        //     addSec(sec + 10)
+        // }
+        addTime(totalTime+10)
     }
 
     return(
