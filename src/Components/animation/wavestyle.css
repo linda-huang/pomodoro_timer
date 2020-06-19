@@ -27,9 +27,9 @@
     background: url(assets/w1.png);
     animation: animate 20s linear infinite;
     background-repeat: repeat-x;
-    z-index: 99;
-    background-size: cover;
-    opacity: 0.5;
+    z-index: -1;
+    background-size: 1132px;
+    opacity: 0.4;
     animation-delay: 0;
     bottom: 0;
     left:0;
@@ -40,9 +40,9 @@
     background: url(assets/w2.png);
     animation: animate2 27s linear infinite;
     background-repeat: repeat-x;
-    z-index: 80;
-    opacity: 0.5;
-    background-size: cover;
+    z-index: -2;
+    opacity: 0.7;
+    background-size: 1016px;
     animation-delay: 0;
     bottom: 0;
     left:0;
@@ -52,9 +52,9 @@
     background: url(assets/w3.png);
     animation: animate3 19s linear infinite;
     background-repeat: repeat-x;
-    z-index: 70;
+    z-index: -3;
     opacity: 0.75;
-    background-size: cover;
+    background-size: 1211px;
     animation-delay: 0;
     bottom: 0;
     left:0;
@@ -63,11 +63,11 @@
 
 #w4{
     background: url(assets/w4.png);
-    animation: animate4 35s linear infinite;
+    animation: animate4 23s ease infinite;
     background-repeat: repeat-x;
-    z-index: 20;
+    z-index: -4;
     opacity: 0.5;
-    background-size: cover;
+    background-size: 1211px;
     animation-delay: 0;
     bottom: 0;
     left:0;

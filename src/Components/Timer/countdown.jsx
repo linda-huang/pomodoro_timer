@@ -9,7 +9,7 @@ import { setNumRepeats } from '../settings/settingsDucks';
 import AddTime from './addTime/add-button';
 import './timer.css';
 import './addTime/add-buttons.css';
-import './timer.css';
+
 import Sound from '../audio/sound';
 
 
@@ -133,6 +133,7 @@ function Countdown ({pause, work_time, break_time, countdown_state, num_repeats,
                 />
             </div>
             <div>
+                <WaveAnimation time={totalTime}/>
                 <Sound/>
             </div> 
         </div>   

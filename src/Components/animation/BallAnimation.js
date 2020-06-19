@@ -96,8 +96,6 @@ Ball.prototype.update = function (width, height) {
     this.velY = -this.velY;
   }
 
-
-
   this.x += this.velX;
   this.y += this.velY;
 };
@@ -107,12 +105,10 @@ function setup(numberOfBalls, width, height,size,ve) {
   while (balls.length < numberOfBalls) {
     
     let pos = randomPosition(size, width, height);
-    //console.log("pos");
-    //console.log(pos);
     let vX = random(-ve, ve);
     let vY = random(-ve, ve);
-    //prevent the ball from not moving// temporary
-    while (vX === 0 || vY === 0) {
+    //prevent the ball from having valicity of zero
+    while (vX === 0 && vY === 0) {
       vX = random(-ve, ve);
       vY = random(-ve, ve);
     }
@@ -127,8 +123,6 @@ class BallAnimation extends React.Component {
   //call before mount
   constructor(props) {
     super(props);
-    // console.log("cons");
-    
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     this.updateAnimationState = this.updateAnimationState.bind(this);
     this.canvasRef = React.createRef();
@@ -136,16 +130,13 @@ class BallAnimation extends React.Component {
     let b_size;
     let b_vel;
     if (this.props.countdown_state === WORK){
-      tolsec = this.props.work_hour * 3600 + this.props.work_min * 60 + this.props.work_sec
+      tolsec = this.props.work_time;
       b_size = ball_rad_work;
       b_vel = ve_work;
 
     }
     else if (this.props.countdown_state === BREAK){
-           tolsec =
-             this.props.break_hour * 3600 +
-             this.props.break_min * 60 +
-             this.props.break_sec;
+           tolsec =this.props.break_time;
            b_size = ball_rad_break;
            b_vel = ve_break;
     }
@@ -189,9 +180,14 @@ class BallAnimation extends React.Component {
   updateAnimationState() {
     // console.log("update ani");
     this.setState((prevState) => ({ frame: prevState.frame + 1 }));
-    for (let i = 0; i < balls.length; i++) {
-      balls[i].update(this.state.width, this.state.height);
+    if (!this.props.pause){
+      for (let i = 0; i < balls.length; i++) {
+        balls[i].update(this.state.width, this.state.height);
+      }
+     
+
     }
+    
     this.rAF = requestAnimationFrame(this.updateAnimationState);
    
   }
@@ -204,62 +200,112 @@ class BallAnimation extends React.Component {
 
   componentDidUpdate(prevProps) {
     //console.log("did update");
+    
+
+    if (
+      this.props.countdown_state !== prevProps.countdown_state &&
+      this.props.countdown_state === WORK
+    ) {
+      let tolsec = this.props.work_time;
+
+      let ball_num = Math.ceil(tolsec / 2);
+      ball_num = ball_num > 1800 ? 1800 : ball_num;
+      this.setState({
+        total_ball: ball_num,
+        size: ball_rad_work,
+        velocity: ve_work,
+      });
+      setup(
+        ball_num,
+        window.innerWidth,
+        window.innerHeight,
+        ball_rad_work,
+        ve_work
+      );
+    } else if (
+      this.props.countdown_state !== prevProps.countdown_state &&
+      this.props.countdown_state === BREAK
+    ) {
+      let tolsec = this.props.break_time;
+      let ball_num = Math.ceil(tolsec / 2);
+      ball_num = ball_num > 1800 ? 1800 : ball_num;
+      this.setState({
+        total_ball: ball_num,
+        size: ball_rad_break,
+        velocity: ve_break,
+      });
+      setup(
+        ball_num,
+        window.innerWidth,
+        window.innerHeight,
+        ball_rad_break,
+        ve_break
+      );
+    }
+
     const canvas = this.canvasRef.current;
     const ctx = canvas.getContext("2d");
-   
-   
+
     ctx.clearRect(0, 0, this.state.width, this.state.height);
 
     for (let i = 0; i < balls.length; i++) {
       balls[i].draw(ctx);
-      
     }
-    const current_time = this.props.sec+this.props.hr*3600 +this.props.min*60
 
-    const prev_time = prevProps.sec+prevProps.hr*3600 +prevProps.min*60;
+   
     //if time is less than and also devisable by two 
-    const total_ball = this.state.total_ball;
-    let should_be = Math.ceil(current_time/2);
-    should_be = should_be>1800? 1800: should_be;
+    
+    
     //console.log("should be");
     //console.log(should_be);
 
 
-    if (current_time < prev_time && (current_time%2)===0&& current_time<=3600)
-              
-      {
+    if (this.props.time<prevProps.time){
+    if (this.props.time < 3600 && this.props.time % 2 === 0) {
+      if (balls.length > 0) {
         balls.pop();
-        this.setState((prevState)=>({total_ball:prevState.total_ball-1}));
+        this.setState((prevState) => ({
+          total_ball: prevState.total_ball - 1,
+        }));
       }
-    else if (should_be> total_ball){
-      console.log("in should be")
-      console.log(should_be);
-      console.log("current time")
-      console.log(current_time);
-      console.log("hr");
-      console.log(this.props.hr);
-       console.log(this.props.min);
-        console.log(this.props.sec);
+    }
+    }
+     else if (this.props.time > prevProps.time) {
+       let should_be = Math.ceil(this.props.time / 2);
+       should_be = should_be > 1800 ? 1800 : should_be;
+            console.log("in should be");
 
+            console.log("current time");
 
-      var inc = 0;
-      while (balls.length < should_be){
-        
-        let pos = randomPosition(this.state.size, this.state.width, this.state.height);
-        let vX = random(-this.state.velocity, this.state.velocity);
-        let vY = random(-this.state.velocity, this.state.velocity);
-        //prevent the ball from not moving// temporary
-        while (vX === 0 || vY === 0) {
-          vX = random(-this.state.velocity, this.state.velocity);
-          vY = random(-this.state.velocity, this.state.velocity);
-        }
-        let ball = new Ball(pos, vX, vY, this.state.size);
-        balls.push(ball);
-        inc +=1;
-        
-      }
-      this.setState((prevState)=>({total_ball:prevState.total_ball+inc}));
-      }
+            console.log("hr");
+            console.log(this.props.hr);
+            console.log(this.props.min);
+            console.log(this.props.sec);
+
+            var inc = 0;
+            while (balls.length < should_be) {
+              let pos = randomPosition(
+                this.state.size,
+                this.state.width,
+                this.state.height
+              );
+              let vX = random(-this.state.velocity, this.state.velocity);
+              let vY = random(-this.state.velocity, this.state.velocity);
+              //prevent the ball from not moving// temporary
+              while (vX === 0 || vY === 0) {
+                vX = random(-this.state.velocity, this.state.velocity);
+                vY = random(-this.state.velocity, this.state.velocity);
+              }
+              let ball = new Ball(pos, vX, vY, this.state.size);
+              balls.push(ball);
+              inc += 1;
+            }
+            this.setState((prevState) => ({
+              total_ball: prevState.total_ball + inc,
+            }));
+          }
+
+      
 
       
     }
@@ -276,6 +322,7 @@ class BallAnimation extends React.Component {
   //will do something
 
   render() {
+   
     return (
       <canvas
         ref={this.canvasRef}
@@ -283,18 +330,16 @@ class BallAnimation extends React.Component {
         height={this.state.height}
       />
     );
+  
   }
 
 }
 
 
 const mapStateToProps = (state) => ({
-  break_hour: state.breakLength.break_hour,
-  break_min: state.breakLength.break_min,
-  break_sec: state.breakLength.break_sec,
-  work_hour: state.workLength.work_hour,
-  work_min: state.workLength.work_min,
-  work_sec: state.workLength.work_sec,
+  work_time: state.time.work_time,
+  break_time: state.time.break_time,
+  pause: state.countdown.pause,
   countdown_state: state.countdown.countdown_state,
 });
 
