@@ -91,28 +91,6 @@ function Countdown ({pause, work_hour, work_min, work_sec, break_hour, break_min
             setDisplayMinute(work_min)
             setDisplaySecond(work_sec)
         }
-<<<<<<< HEAD
-    }, [work_hour, work_min, break_hour, break_min, work_countdown, break_sec, work_sec])
-
-    if (work_countdown === false && break_countdown === false) return null;
-
-    else {
-        return (
-
-            <div>
-                <WaveAnimation hr={displayHour} min={displayMinute} sec={displaySecond}/>
-                <center>
-                    <h1>
-                        {displayHour < 10? `0${displayHour}` : displayHour}h {displayMinute < 10? `0${displayMinute}` : displayMinute}m {displaySecond < 10? `0${displaySecond}`: displaySecond}s
-                    </h1>
-                    <button onClick={handleOnClick}>
-                        {pauseLabel}
-                    </button>
-                </center>
-            </div>
-        )
-    }
-=======
         else if (countdown_state === BREAK) {
             setDisplayHour(break_hour)
             setDisplayMinute(break_min)
@@ -123,6 +101,9 @@ function Countdown ({pause, work_hour, work_min, work_sec, break_hour, break_min
 
     return (   
         <div>  
+        <div className="animation_container">
+            <WaveAnimation hr={displayHour} min={displayMinute} sec={displaySecond}/>
+        </div>
         <div className='content'>
             <h1 className='item'>
                 {displayHour < 10? `0${displayHour}` : displayHour}h
@@ -139,7 +120,6 @@ function Countdown ({pause, work_hour, work_min, work_sec, break_hour, break_min
         </div> 
         </div>   
     )
->>>>>>> d759568cc1db304eeb724ccd150b00a47471c0df
 }
 
 const mapStateToProps = state => ({
