@@ -13,12 +13,14 @@ function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound
     const [checked1 , setChecked1] = useState(alert_sound);
     const [checked2 , setChecked2] = useState(work_music);
     const [checked3, setChecked3] = useState(break_music);
-
+    const[workChange, setWorkChange] = useState(false);
+    const[breakChange, setBreakChange] = useState(false);
+    
     useEffect(() => {
         if (start===true) {
             setHide(true)
         }
-    })
+    }, [start])
 
     const onDialogClick = (event) => {
         event.stopPropagation();
@@ -27,13 +29,20 @@ function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound
 
 
     const handleConfigSubmit = (event) => {
-       setSave(true);
+       setSave(true)
+       console.log(save)
        setNumRepeats(parseInt(tempNumRepeats));
        setAlertSound(checked1);
        setWorkMusic(checked2);
        setBreakMusic(checked3);
        event.preventDefault();
        if (countdown_state === NONE) setSave(false);
+       
+       else if (workChange===true && breakChange===true) {
+            setSave(false)
+            setWorkChange(false)
+            setBreakChange(false)
+       }
     }
 
     const handleRepeatChange = (event) => {
@@ -43,12 +52,12 @@ function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound
     let breakInput = (countdown_state !== NONE) ? 
     <label>
         How long should we break for?
-        <BreakInput use="settings" save={save}/>
+        <BreakInput use="settings" save={save} setBreakChange={(input) => setBreakChange(input)}/>
     </label> : null
     let workInput  = ( countdown_state !== 'NONE' )  ? 
     <label>
         How long should we work for?
-        <WorkInput use="settings" save={save} setSave={(input) => {setSave(input)}}/>
+        <WorkInput use="settings" save={save} setWorkChange={(input) => setWorkChange(input)}/>
     </label> : null
   
     if (hide) return null;

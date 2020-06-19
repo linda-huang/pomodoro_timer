@@ -5,7 +5,11 @@ import { setBreakHour, setBreakMin, setBreakSec } from './inputDucks'
 import {NONE} from '../timer/timerDucks'
 
 //sleek google version
+<<<<<<< HEAD
 function BreakInput ({setBreakHour, setBreakMin, setBreakSec, save, use, break_hour, break_min, break_sec, countdown_state}){
+=======
+function BreakInput ({setBreakHour, setBreakMin, setBreakSec, save, use, break_hour, break_min, break_sec, countdown_state, setBreakChange}){
+>>>>>>> trying to fix bug
 
     //const [time, setTime] = useState();
     const [hour, setHour] = useState(break_hour);
@@ -65,7 +69,13 @@ function BreakInput ({setBreakHour, setBreakMin, setBreakSec, save, use, break_h
 
     useEffect(() => {
         if (save === true) {
+<<<<<<< HEAD
             recalibrate(second, minute);
+=======
+            console.log('updating stuff')
+            recalibrate(second, minute)
+            setBreakChange(true)
+>>>>>>> trying to fix bug
         }
     }, [save])
 
