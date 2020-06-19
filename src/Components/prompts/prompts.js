@@ -7,16 +7,16 @@ import happycat from './568124064485343241.gif';
 
 function Prompts({countdown_state, prev_state, setPrevState, setCountdownState}) {
     const [prompt, setPrompt] = useState(null);
-    const [imgfile, setImgFile] = useState(null);
+    const [img, setImg] = useState(null);
 
     useEffect(() => {
         if (countdown_state === INTERMEDIATE ) {
-            if (prev_state === WORK) {
-                setPrompt("YAY! You've finished work!")
-                setImgFile(happycat);
+            if (prev_state === WORK){
+                setPrompt("YAY! You've finished work!");
+                setImg(happycat);
             }else{
-                setPrompt("Time to get to work!")
-                setImgFile(sadcat);
+                setPrompt ("Time to get to work!");
+                setImg(sadcat);
             }
             setTimeout(() => {
                 setPrompt(null)
@@ -31,11 +31,10 @@ function Prompts({countdown_state, prev_state, setPrevState, setCountdownState})
     else {
         return(
             <div>
-            <h1>{prompt}</h1>
-            <img src = {imgfile} alt = "either sad or happy cat who knows"/>
-            <Alert/>
+                <h1>{prompt}</h1>
+                <img src = {img} alt = "cat"/>
+                <Alert/>
             </div>
-
         )
     
     }
