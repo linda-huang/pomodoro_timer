@@ -22,6 +22,15 @@ function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound
         }
     }, [start])
 
+    useEffect(() => {
+        setTempNumRepeats(num_repeats);
+        if (workChange === true && breakChange === true) {
+            setSave(false)
+            setWorkChange(false)
+            setBreakChange(false)
+        }
+    }, [workChange, breakChange, num_repeats])
+
     const onDialogClick = (event) => {
         event.stopPropagation();
     }
@@ -34,12 +43,6 @@ function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound
        setBreakMusic(checked3);
        event.preventDefault();
        if (countdown_state === NONE) setSave(false);
-       
-       else if (workChange===true && breakChange===true) {
-            setSave(false)
-            setWorkChange(false)
-            setBreakChange(false)
-       }
     }
 
     const handleRepeatChange = (event) => {
@@ -48,12 +51,12 @@ function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound
     
     let breakInput = (countdown_state !== NONE) ? 
     <label>
-        How long should we break for?
+        How long should next we break for?
         <TimerInput workBreak={BREAK} use="settings" save={save} setBreakChange={(input) => setBreakChange(input)}/>
     </label> : null
     let workInput  = ( countdown_state !== 'NONE' )  ? 
     <label>
-        How long should we work for?
+        How long should next we work for?
         <TimerInput workBreak={WORK} use="settings" save={save} setWorkChange={(input) => setWorkChange(input)}/>
     </label> : null
   
@@ -76,13 +79,13 @@ function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound
                             <BreakInput use="settings" save={save}/>
                         </label> */}
                         <div>
-                        <label>
-                            How many repeats?
-                            <input 
-                            type='number'
-                            value={tempNumRepeats}
-                            onChange={handleRepeatChange}/>
-                        </label>
+                            <label>
+                                How many repeats? 
+                                <input 
+                                    type='number'
+                                    value={tempNumRepeats}
+                                    onChange={handleRepeatChange}/>
+                            </label>
                         </div>
                         <div>
                         <input

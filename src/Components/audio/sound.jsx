@@ -1,9 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import {connect} from 'react-redux';
 import {WORK} from '../timer/timerDucks';
-import birds from "./BirdsInTheRain.mp3";
 import oceanwaves from "./OceanWaves.mp3";
+
 import reflections from "./Toshifumi Hinata-Reflections.mp3";
+import water from './18 - Water Lapping Wind.mp3';
 
 //Play Sound during work countdown
 function Sound ({countdown_state, pause, work_music, break_music}){
@@ -45,7 +46,7 @@ function Sound ({countdown_state, pause, work_music, break_music}){
 
     return (
         <div>
-            <audio loop ref = {workaudio} src = {oceanwaves} type = "audio/mpeg"></audio>
+            <audio loop ref = {workaudio} src = {water} type = "audio/mpeg"></audio>
             <audio loop ref = {breakaudio} src = {reflections} type = "audio/mpeg"></audio>
         </div>
     )

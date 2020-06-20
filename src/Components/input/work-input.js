@@ -163,7 +163,6 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
                         <hr ref = {fakeline} style = {{
                             visibility: "hidden"
                         }}></hr>
-
                     </div>  
                 </div>
             </div>
