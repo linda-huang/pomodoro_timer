@@ -101,6 +101,7 @@ function Countdown ({pause, work_time, break_time, countdown_state, num_repeats,
             console.log("updating to work time");
             console.log("work time", work_time);
             setTotalTime(work_time);
+            console.log(work_time)
             // setDisplayHour(work_hour)
             // setDisplayMinute(work_min)
             // setDisplaySecond(work_sec)
@@ -114,7 +115,8 @@ function Countdown ({pause, work_time, break_time, countdown_state, num_repeats,
             // setDisplayMinute(break_min)
             // setDisplaySecond(break_sec)
         }
-    }, [countdown_state, work_time, break_time])
+        
+    }, [countdown_state])
 
 
     return (        
