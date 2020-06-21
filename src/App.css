@@ -35,7 +35,7 @@
 .BreakInput {
   /*grid-area: main2;*/
   grid-area: main;
-  *text-align: center;
+  text-align: center;
   justify-self: center;
   align-self: center
 }
