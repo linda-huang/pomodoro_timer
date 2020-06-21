@@ -1,8 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 
-import WaveAnimation from '../animation/WaveAnimation';
-import BallAnimation from '../animation/BallAnimation';
+import AnimationWrapper from '../animation/animation-wrapper';
 
 import { setPrevState, setCountdownState, NONE, WORK, BREAK, INTERMEDIATE } from './timerDucks';
 import { setNumRepeats } from '../settings/settingsDucks';
@@ -113,6 +112,8 @@ function Countdown ({pause, work_time, break_time, countdown_state, num_repeats,
 
     return (        
         <div className='parent'>
+            <AnimationWrapper time={totalTime} />
+          
             <div className='child'>
                 <div className='content'>
                     <h1 className='item'>
@@ -133,7 +134,7 @@ function Countdown ({pause, work_time, break_time, countdown_state, num_repeats,
                 />
             </div>
             <div>
-                <WaveAnimation time={totalTime}/>
+               
                 <Sound/>
             </div> 
         </div>   

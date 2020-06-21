@@ -6,6 +6,7 @@ import Settings from '../settings/settings-modal-wrapper';
 import { setCountdownState, NONE, WORK, BREAK, INTERMEDIATE } from './timerDucks';
 import { connect } from 'react-redux';
 import { useEffect } from 'react';
+import AnimationController from '../animation/animationController';
 
 function TimerWrapper ({ setCountdownState, countdown_state}) {
 
@@ -34,21 +35,31 @@ function TimerWrapper ({ setCountdownState, countdown_state}) {
     </button>
 
     return (
-        <div>
-            
-            {workLabel}
-            <TimerInput workBreak={WORK} use="countdown" save={save} setWorkChange={(input) => setWorkChange(input)}/>
+      <div>
+        {workLabel}
+        <TimerInput
+          workBreak={WORK}
+          use="countdown"
+          save={save}
+          setWorkChange={(input) => setWorkChange(input)}
+        />
 
-            {breakLabel}
-            <TimerInput workBreak={BREAK} use="countdown" save={save} setBreakChange={(input) => setBreakChange(input)}/>
-            
-            {startButton}
-            <CountdownWrapper/>
+        {breakLabel}
+        <TimerInput
+          workBreak={BREAK}
+          use="countdown"
+          save={save}
+          setBreakChange={(input) => setBreakChange(input)}
+        />
 
-            <Settings start={save}/>
+        {startButton}
+        <CountdownWrapper />
 
-        </div>
-    )
+        <Settings start={save} />
+
+        <AnimationController />
+      </div>
+    );
 
 } 
 

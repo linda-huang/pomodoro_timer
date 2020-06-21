@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { WORK, BREAK } from "../timer/timerDucks";
+import "./wavestyle.css";
 
 //import css
 
@@ -324,11 +325,13 @@ class BallAnimation extends React.Component {
   render() {
    
     return (
-      <canvas
-        ref={this.canvasRef}
-        width={this.state.width}
-        height={this.state.height}
-      />
+      <section id="ball_container">
+        <canvas
+          ref={this.canvasRef}
+          width={this.state.width}
+          height={this.state.height}
+        />
+      </section>
     );
   
   }
