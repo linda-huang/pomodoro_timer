@@ -84,6 +84,7 @@ function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound
                                 How many repeats? 
                                 <input 
                                     type='number'
+                                    min="0"
                                     value={tempNumRepeats}
                                     onChange={handleRepeatChange}/>
                             </label>

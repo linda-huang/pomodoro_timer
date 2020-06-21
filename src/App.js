@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { store } from './reducers/store';
 import TimerWrapper from './components/timer/timer-wrapper';
 import Settings from './components/settings/settings-modal-wrapper';
+import Sprite from './components/css-animation/sprite';
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
       <Provider store={store}>
           <div className="App">
           <TimerWrapper/>
+          <Sprite/>
           </div>
       </Provider>
     </div>

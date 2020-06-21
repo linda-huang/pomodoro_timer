@@ -1,0 +1,78 @@
+$bubble-d: 3.5rem; // bubble diameter
+$bubble-r: .5*$bubble-d; // bubble-radius
+
+$particle-d: 0.375rem;
+$particle-r: 0.5 * $particle-d;
+
+@mixin bubble($ext) {
+    transform: scale(1);
+    border-color: #97BC62FF;
+    border-width: $ext;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    height: 100vh;
+}
+
+[id='toggle-plus'] {
+  position: absolute;
+  left: -100vw;
+    
+    &:focus + label {
+        color: #367937;
+        will-change: font-size;
+        animation: plus 1s cubic-bezier(.17, .89, .32, 1.49);
+        
+        &:before, &:after {
+            animation: inherit;
+            animation-timing-function: cubic-bezier(.21, .61, .35, 1);
+        }
+        
+        &:before {
+            will-change: transform, border-width, border-color;
+            animation-name: bubble;
+        }
+        
+    }
+}
+
+[for='toggle-plus'] {
+    align-self: center;
+    position: relative;
+    color: #aab8c2;
+    font-size: 2em;
+    cursor: pointer;
+    
+    &:before, &:after {
+        position: absolute;
+        z-index: -1;
+        top: 50%; left: 50%;
+        border-radius: 50%;
+        content: '';
+    }
+    
+    &:before {
+        box-sizing: border-box;
+        margin: -$bubble-r;
+        border: solid $bubble-r #367937;
+        width: $bubble-d; height: $bubble-d;
+        transform: scale(0);
+    }
+
+    &:after {
+        margin: -$particle-r;
+        width: $particle-d; height: $particle-d;
+    }
+}
+
+@keyframes plus {
+    0%, 17.5% { font-size: 0; }
+}
+
+@keyframes bubble {
+    15% { @include bubble($bubble-r); }
+    30%, 100% { @include bubble(0); }
+}
