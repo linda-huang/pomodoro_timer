@@ -7,6 +7,8 @@ import BallAnimation from '../animation/BallAnimation';
 import { setPrevState, setCountdownState, NONE, WORK, BREAK, INTERMEDIATE } from './timerDucks';
 import { setNumRepeats } from '../settings/settingsDucks';
 import AddTime from './addTime/add-button';
+
+
 import './timer.css';
 import './addTime/add-buttons.css';
 import './timer.css';

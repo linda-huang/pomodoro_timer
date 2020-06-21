@@ -2,10 +2,13 @@ import React, { useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 
 import AddTime from './addTime/add-button';
+
 import Countdown from './countdown';
 import Prompts from '../prompts/prompts';
 import {NONE, INTERMEDIATE, setPaused } from './timerDucks';
 import './timer.css';
+
+import '../../App.css';
 
 function CountdownWrapper ({countdown_state, setPaused, pause}) {
 
@@ -21,7 +24,7 @@ function CountdownWrapper ({countdown_state, setPaused, pause}) {
 
     else {
         return (
-            <center>
+            <div className = "CountdownWrapper">
                 {/* <div className='parent'>
                             <div className='child'>
                                 <AddTime/>
@@ -30,11 +33,16 @@ function CountdownWrapper ({countdown_state, setPaused, pause}) {
                                 <Countdown pause={pause}/>
                             </div>
                 </div> */}
-                <Countdown pause={pause}/>
-                <button onClick={handleOnClick}>
-                                {pauseLabel}
-                </button>
-            </center>
+                <div className = "countdownDisplay">
+                    <Countdown pause={pause}/>
+                </div>
+               
+                <div className = "pauseBttn">
+                    <button onClick={handleOnClick}>
+                                    {pauseLabel}
+                    </button>
+                </div>
+            </div>
         )
     }
 }

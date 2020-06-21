@@ -30,9 +30,12 @@ function Prompts({countdown_state, prev_state, setPrevState, setCountdownState})
     
     else {
         return(
-            <div>
-                <h1>{prompt}</h1>
+            <div className = "CountdownWrapper">
+                <h1 className = "cat">{prompt}</h1>
+
+                <div className = "cat">
                 <img src = {img} alt = "cat"/>
+                </div>
                 <Alert/>
             </div>
         )

@@ -1,5 +1,88 @@
-.App {
+.GridLayout{
+  display: grid;
+  grid-template-columns: [vstart] 25% [v1] auto [v2] 25%[vend];
+  grid-template-rows: [hstart] 25% [h1] auto [h2] 25% [hend];
+  grid-template-areas: 
+  "corner1 top corner2"
+  "left main right"
+  "corner3 bottom corner4";
+  width: 100vw;
+  height: 100vh;
+
+}
+
+
+.MainLayout{
+  /*display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas:
+  "main1"
+  "main2"
+  "main3";
+  place-self: stretch;*/
+  grid-area: main;
+}
+
+.WorkInput {
+  grid-area: main;
   text-align: center;
+  align-self: start;
+  justify-self: center;
+
+  
+}
+
+.BreakInput {
+  /*grid-area: main2;*/
+  grid-area: main;
+  *text-align: center;
+  justify-self: center;
+  align-self: center
+}
+
+.startBttn{
+  /*grid-area: main3;*/
+  grid-area: main;
+  text-align: center;
+  align-self: end;
+  justify-self: center;
+}
+
+.Settings {
+  grid-area: corner2;
+  align-self: start;
+  justify-self: end;
+}
+
+.CountdownWrapper{
+  display: grid;
+  grid-area: main;
+  place-self: stretch;
+  /*grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas:
+  "main1"
+  "main2"
+  "main3";*/
+}
+
+.pauseBttn{
+  /*grid-area: main3;*/
+  text-align: center;
+  align-self: end;
+  justify-self: center;
+}
+
+.countdownDisplay{
+  /*grid-area: main2;*/
+  text-align: center;
+  align-self: center;
+  justify-self:center;
+}
+
+.cat{
+  text-align: center;
+  align-self: center;
+  justify-self:center;
 }
 
 .App-logo {
