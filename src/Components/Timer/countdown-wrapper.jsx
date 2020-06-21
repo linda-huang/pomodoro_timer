@@ -13,7 +13,7 @@ function CountdownWrapper ({countdown_state, setPaused, pause, updateTime}) {
 
     let pauseLabel = (!pause) ? "Pause" : "Resume";
 
-    const[value, setValue] = useState();
+
 
     
     const handleOnClick = () => {

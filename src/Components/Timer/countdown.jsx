@@ -26,7 +26,7 @@ function Countdown ({pause, work_time, break_time, countdown_state, num_repeats,
         if (!pause && (countdown_state !== NONE && countdown_state !== INTERMEDIATE)) {
             const interval = setInterval(() => {
                 console.log(totalTime);
-                setTotalTime(totalTime -1);
+                setTotalTime(totalTime - 1);
                 updateTime(totalTime);
                 // if (displaySecond > 0){
                 //     setDisplaySecond(displaySecond - 1);
@@ -77,10 +77,8 @@ function Countdown ({pause, work_time, break_time, countdown_state, num_repeats,
                 setPrevState(BREAK)
             }   
         }
-    }, [
-        // displayHour, displayMinute, displaySecond, 
-        totalTime, countdown_state])
-
+    }, [totalTime, countdown_state])
+    
     
     const rewindToWork = () => {
         // setDisplayHour(work_hour)

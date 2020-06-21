@@ -94,6 +94,7 @@ input[type="radio"]{
 .animation{
   position: absolute;
   display: grid;
+  z-index: -100000;
 }
 
 .pauseBttn{
