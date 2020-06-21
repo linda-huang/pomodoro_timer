@@ -3,8 +3,7 @@ import React, { useState, useEffect } from 'react';
 // import { WORK, BREAK } from '../timerDucks';
 //import { setWorkHour, setWorkMin, setWorkSec, setBreakHour, setBreakMin, setBreakSec } from '../../input/inputDucks'
 import './add-buttons.scss'
-import AddPlus from '../../css-animation/sprite';
-import './add-plus.scss';
+// import './add-plus.scss';
 
 export default function AddTime ({addTime, totalTime}) {
 

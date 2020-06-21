@@ -28,11 +28,7 @@ function TimerWrapper ({ setCountdownState, countdown_state}) {
         setSave(true);
         setCountdownState(WORK);
     }
-<<<<<<< HEAD
-
-=======
     
->>>>>>> the_messy_amalgamation
     useEffect(() => {
         if (workChange === true && breakChange === true) {
             setSave(false)

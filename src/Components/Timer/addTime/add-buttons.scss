@@ -3,7 +3,7 @@ $bubble-r: .5*$bubble-d; // bubble-radius
 
 @mixin bubble($ext) {
   transform: scale(1);
-  border-color: #97BC62FF;
+  border-color: rgb(116, 188, 98);
   border-width: $ext;
 }
 
@@ -100,7 +100,8 @@ $bubble-r: .5*$bubble-d; // bubble-radius
 .button:focus > span {
   align-self: center;
   position: relative;
-  color: rgb(145, 238, 145);
+  color:  rgb(242,197, 174);
+  // rgb(145, 238, 145);
   font-size: 2em;
   cursor: pointer;
   
@@ -115,7 +116,8 @@ $bubble-r: .5*$bubble-d; // bubble-radius
   &:before {
       box-sizing: border-box;
       margin: -$bubble-r;
-      border: solid $bubble-r rgba(152, 255, 152, 0.6);
+      border: solid $bubble-r  rgb(242,197, 174);
+      //  rgba(152, 255, 152, 0.6);
       width: $bubble-d; height: $bubble-d;
       transform: scale(0);
   }

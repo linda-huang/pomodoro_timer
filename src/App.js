@@ -5,11 +5,9 @@ import { Provider } from 'react-redux';
 import { store } from './reducers/store';
 import TimerWrapper from './components/timer/timer-wrapper';
 import Settings from './components/settings/settings-modal-wrapper';
-import Sprite from './components/css-animation/sprite';
 
 export default function App() {
   return (
-<<<<<<< HEAD
       <div>
         <Provider store={store}>
 
@@ -17,16 +15,6 @@ export default function App() {
   
         </Provider>
       </div>
-=======
-    <div>
-      <Provider store={store}>
-          <div className="App">
-          <TimerWrapper/>
-          <Sprite/>
-          </div>
-      </Provider>
-    </div>
->>>>>>> the_messy_amalgamation
   );
 }
 
