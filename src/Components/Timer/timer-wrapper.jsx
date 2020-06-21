@@ -45,19 +45,19 @@ function TimerWrapper ({ setCountdownState, countdown_state}) {
         <div className = "GridLayout">
             {/*<div className = "MainLayout">*/}
                 <div className = "WorkInput">
-                {workLabel}
-                <TimerInput workBreak={WORK} use="countdown" save={save} setWorkChange={(input) => setWorkChange(input)}/>
+                    {workLabel}
+                    <TimerInput workBreak={WORK} use="countdown" save={save} setWorkChange={(input) => setWorkChange(input)}/>
                 </div>
                 <div className = "BreakInput">
-                {breakLabel}
-                <TimerInput workBreak={BREAK} use="countdown" save={save} setBreakChange={(input) => setBreakChange(input)}/>
+                    {breakLabel}
+                    <TimerInput workBreak={BREAK} use="countdown" save={save} setBreakChange={(input) => setBreakChange(input)}/>
                 </div>
                 <div className = "startBttn">
-                {startButton}
+                    {startButton}
                 </div>
+
                 <CountdownWrapper updateTime={(input) => setTotalTime(input)} />  
                 
-            {/*</div>*/}
              
             <div className = "Settings">
                 <Settings start={save}/>

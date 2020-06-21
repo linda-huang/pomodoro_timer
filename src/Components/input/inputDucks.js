@@ -53,7 +53,7 @@ export const setWorkTime = seconds =>
  * a intial state for the pomodoroReducer that indicates 25 min work and 5 min break
  */
 const initialTime = {
-    work_time : 25,
+    work_time : 25*60,
     break_time : 5*60
 }
 

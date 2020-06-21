@@ -114,7 +114,7 @@ function Countdown ({pause, work_time, break_time, countdown_state, num_repeats,
             // setDisplayMinute(break_min)
             // setDisplaySecond(break_sec)
         }
-    }, [countdown_state])
+    }, [countdown_state, work_time, break_time])
 
 
     return (        
