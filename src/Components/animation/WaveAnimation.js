@@ -1,44 +1,40 @@
 import React from "react";
 import './wavestyle.css';
 import { connect } from "react-redux";
+import { WORK, BREAK } from "../timer/timerDucks";
 
 
 class WaveAnimation extends React.Component {
     constructor(props){
         super(props);
-        
-        const tolsec = this.props.work_countdown
-          ? (this.props.work_hour * 3600 + this.props.work_min * 60 + this.props.work_sec)
-          : (this.props.break_hour * 3600 + this.props.break_min * 60 + this.props.break_sec);
-        //console.log(
-        //  `in construct the time is ${this.props.work_min} work min  ${this.props.break_min} sec`
-        //);
-        //console.log(`eval the total =${tolsec}`)
-        const inH = this.props.work_hour? 100:0;
+        let tolsec;
+        if (this.props.countdown_state === WORK){
+          tolsec = this.props.work_time;
+        }
+        else if (this.props.countdown_state === BREAK){
+           tolsec =this.props.break_time;}
+     
+        const inH = this.props.countdown_state===WORK? 0:100;
         //console.log(`in construnct height is set to ${inH}`);
         this.state= {total: tolsec, height: inH}
     }
 
     componentDidUpdate(prevProps){
-      if (
-        
-        this.props.sec !== prevProps.sec ||
-        this.props.hr !== prevProps.hr ||
-        this.props.min !== prevProps.min
-      ) {
-        console.log(`currently it ${this.props.hr}hr ${this.props.min}min ${this.props.sec}sec`)
-        const current =
-          this.props.hr * 3600 + this.props.min * 60 + this.props.sec;
-        // console.log(`current time eval in to ${current}`);
-       
-        // console.log(`total time ${this.state.total}`);
-        
-       
 
-        const percent = (current / this.state.total) * 100;
-        console.log(`percent height=${percent}%`);
+      if (
+       this.props.time !== prevProps.time
+      ) {
+        let total = this.state.total;
+        if (this.props.time > total){
+          total = this.props.time;
+          this.setState({total: this.props.time});
+        }
+
+        const percent = (this.props.time / total) * 100;
+
+       // console.log(`percent height=${percent}%`);
         
-        if (this.props.work_countdown) {
+        if (this.props.countdown_state===WORK) {
           console.log("in work");
           this.setState({ height: 100 - percent });
 
@@ -46,7 +42,7 @@ class WaveAnimation extends React.Component {
           console.log(100 - percent);
           console.log("current height setted")
           console.log(this.state.height);
-        } else {
+        } else if (this.props.countdown_state===BREAK) {
           this.setState({ height: percent });
           console.log("in break");
           console.log("height");
@@ -54,56 +50,77 @@ class WaveAnimation extends React.Component {
         }
       }
 
-      if (this.props.work_countdown!== prevProps.work_countdown){
-         const tolsec = this.props.work_countdown
-           ? this.props.work_hour * 3600 + this.props.work_min * 60
-           : this.props.break_hour * 3600 + this.props.break_min * 60;
-         const inH = this.props.work_hour ? 100 : 0;
-         console.log(`in update height is set to ${inH}`)
-           this.setState({total:tolsec, height: inH});
+      if (this.props.work_countdown!== prevProps.work_countdown && this.props.work_countdown ===WORK){
+         
+           this.setState({total:this.props.work_time, height: 0});
 
+      }
+      else if (this.props.work_countdown!== prevProps.work_countdown && this.props.work_countdown ===BREAK){
+        this.setState({ total: this.props.break_time, height: 100 });
       }
 
     }
 
     render(){
-
+     
         return (
           <section id="container">
             <div
               id="w1"
               className="water"
-              style={{ height: `${this.state.height}%` }}
+              style={{
+                height: `${this.state.height}%`,
+                animationPlayState: `${
+                  this.props.pause ? "paused" : "running"
+                }`,
+              }}
             ></div>
             <div
               id="w2"
               className="water"
-              style={{ height: `${this.state.height}%` }}
+              style={{
+                height: `${this.state.height}%`,
+                animationPlayState: `${
+                  this.props.pause ? "paused" : "running"
+                }`
+              }}
             ></div>
             <div
               id="w3"
               className="water"
-              style={{ height: `${this.state.height}%` }}
+              style={{
+                height: `${this.state.height}%`,
+                animationPlayState: `${
+                  this.props.pause ? "paused" : "running"
+                }`
+              }}
             ></div>
             <div
               id="w4"
               className="water"
-              style={{ height: `${this.state.height}%` }}
+              style={{
+                height: `${this.state.height}%`,
+                animationPlayState: `${
+                  this.props.pause ? "paused" : "running"
+                }`
+              }}
             ></div>
           </section>
         );
-    }
+
+      }
+     
+      
+    
 }
 
 const mapStateToProps = (state) => ({
-  break_hour: state.breakLength.break_hour,
-  break_min: state.breakLength.break_min,
-  work_hour: state.workLength.work_hour,
-  work_min: state.workLength.work_min,
-  work_countdown: state.countdown.work_countdown,
-  work_sec: state.workLength.work_sec,
-  break_sec: state.breakLength.break_sec,
+  work_time: state.time.work_time,
+  break_time: state.time.break_time,
+  pause: state.countdown.pause,
+  countdown_state: state.countdown.countdown_state,
 });
+
 
 export default connect(mapStateToProps) (WaveAnimation);
 

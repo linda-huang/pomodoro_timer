@@ -9,6 +9,7 @@ import '../../App.css';
 import { setCountdownState, NONE, WORK, BREAK, INTERMEDIATE } from './timerDucks';
 import { connect } from 'react-redux';
 import { useEffect } from 'react';
+import AnimationController from '../animation/animationController';
 
 function TimerWrapper ({ setCountdownState, countdown_state}) {
 

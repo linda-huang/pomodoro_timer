@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SandboxModal from './settings-modal';
+import "./modal.css";
+
 
 export default function ModalWrapper ({start}) {
 
@@ -22,14 +24,18 @@ export default function ModalWrapper ({start}) {
         }
     }
 
-    return(
+    return (
+      <div>
+        <button onClick={handleClick} >
+          Settings
+        </button>
         <div>
-            <button onClick={handleClick}>
-                    Settings
-            </button>
-            <div>
-                <SandboxModal hide={hide} start={start} setHide={(input) => setHide(input)}/>
-            </div>
+          <SandboxModal
+            hide={hide}
+            start={start}
+            setHide={(input) => setHide(input)}
+          />
         </div>
-    )
+      </div>
+    );
 }

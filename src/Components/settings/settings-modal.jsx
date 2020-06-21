@@ -5,6 +5,7 @@ import TimerInput from '../input/work-input';
 import { connect } from 'react-redux';
 import { setNumRepeats, setAlertSound, setWorkMusic, setBreakMusic} from './settingsDucks';
 import { NONE, WORK, BREAK, INTERMEDIATE } from '../timer/timerDucks';
+import Toggle from '../UIKits/Toggle'
 // import { Keyboard } from 'react-native';
 
 function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound, alert_sound, setWorkMusic, work_music, setBreakMusic, break_music, countdown_state, start}) {
@@ -88,13 +89,14 @@ function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound
                             </label>
                         </div>
                         <div>
-                        <input
+                        <label>
+                            Alert Sound
+                            <Toggle isChecked={checked1} handleToggle={()=>setChecked1(!checked1)} size="small"/>
+                            {/* <input
                             type = 'checkbox'
                             checked = {checked1}
                             onChange ={() => setChecked1(!checked1)}
-                            />
-                        <label>
-                            Alert Sound
+                            /> */}
                         </label>
                         </div>
                         <div>
