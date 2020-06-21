@@ -10,6 +10,8 @@ import AddTime from './addTime/add-button';
 import './timer.css';
 import './addTime/add-buttons.css';
 
+import './addTime/add-buttons.scss';
+import './timer.css';
 import Sound from '../audio/sound';
 
 
