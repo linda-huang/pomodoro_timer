@@ -141,12 +141,12 @@ class BallAnimation extends React.Component {
            b_size = ball_rad_break;
            b_vel = ve_break;
     }
-    console.log(` totoal time in second${tolsec}`);
+    //console.log(` totoal time in second${tolsec}`);
     let ball_num = Math.ceil(tolsec/2);
      ball_num = ball_num>1800? 1800: ball_num;
     
     
-    console.log(` totoal number of ball at creation in second${ball_num}`);
+    //console.log(` totoal number of ball at creation in second${ball_num}`);
     this.state = { 
       width: 0, height: 0, 
       frame: 0, total_ball: ball_num ,size: b_size, velocity: b_vel};
@@ -157,12 +157,12 @@ class BallAnimation extends React.Component {
     // console.log("mount");
     this.updateWindowDimensions();
     window.addEventListener("resize", this.updateWindowDimensions);
-    console.log("at component did mount");
-    console.log(this.state.total_ball)
+    //console.log("at component did mount");
+    //console.log(this.state.total_ball)
     setup(this.state.total_ball, window.innerWidth, window.innerHeight, this.state.size, this.state.velocity);
     //console.log(balls);
-    console.log("num balls");
-    console.log(balls.length);
+    //console.log("num balls");
+    //console.log(balls.length);
     
 
     this.rAF = requestAnimationFrame(this.updateAnimationState);
@@ -274,14 +274,14 @@ class BallAnimation extends React.Component {
      else if (this.props.time > prevProps.time) {
        let should_be = Math.ceil(this.props.time / 2);
        should_be = should_be > 1800 ? 1800 : should_be;
-            console.log("in should be");
+            //console.log("in should be");
 
-            console.log("current time");
+            //console.log("current time");
 
-            console.log("hr");
-            console.log(this.props.hr);
-            console.log(this.props.min);
-            console.log(this.props.sec);
+            //console.log("hr");
+            //console.log(this.props.hr);
+            //console.log(this.props.min);
+            //console.log(this.props.sec);
 
             var inc = 0;
             while (balls.length < should_be) {

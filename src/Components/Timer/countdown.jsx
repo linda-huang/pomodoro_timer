@@ -7,24 +7,25 @@ import { setPrevState, setCountdownState, NONE, WORK, BREAK, INTERMEDIATE } from
 import { setNumRepeats } from '../settings/settingsDucks';
 import AddTime from './addTime/add-button';
 
-
+import './addTime/add-buttons.scss';
 import './timer.css';
-import './addTime/add-buttons.css';
-
 import Sound from '../audio/sound';
 
 
-function Countdown ({pause, work_time, break_time, countdown_state, num_repeats, setCountdownState, setPrevState, setNumRepeats}){
+function Countdown ({pause, work_time, break_time, countdown_state, num_repeats, setCountdownState, setPrevState, setNumRepeats, updateTime}){
 
     // const [displayHour, setDisplayHour] = useState(work_hour);
     // const [displayMinute, setDisplayMinute] = useState(work_min);
     // const [displaySecond, setDisplaySecond] = useState(work_sec);
     const [totalTime, setTotalTime] = useState((countdown_state === WORK) ? work_time : break_time);
 
+    console.log(totalTime)
     useEffect(()=>{  
         if (!pause && (countdown_state !== NONE && countdown_state !== INTERMEDIATE)) {
             const interval = setInterval(() => {
-                setTotalTime(totalTime -1)
+                console.log(totalTime);
+                setTotalTime(totalTime - 1);
+                updateTime(totalTime);
                 // if (displaySecond > 0){
                 //     setDisplaySecond(displaySecond - 1);
                 // }
@@ -74,9 +75,7 @@ function Countdown ({pause, work_time, break_time, countdown_state, num_repeats,
                 setPrevState(BREAK)
             }   
         }
-    }, [
-        // displayHour, displayMinute, displaySecond, 
-        totalTime, countdown_state])
+    }, [totalTime, countdown_state])
 
     
     const rewindToWork = () => {
@@ -96,8 +95,9 @@ function Countdown ({pause, work_time, break_time, countdown_state, num_repeats,
 
    
     useEffect(() => {
-        if (countdown_state === WORK) {    
+        if (countdown_state === WORK) {  
             setTotalTime(work_time);
+            console.log(work_time)
             // setDisplayHour(work_hour)
             // setDisplayMinute(work_min)
             // setDisplaySecond(work_sec)
@@ -109,13 +109,14 @@ function Countdown ({pause, work_time, break_time, countdown_state, num_repeats,
             // setDisplayMinute(break_min)
             // setDisplaySecond(break_sec)
         }
-    }, [countdown_state])
+        
+    }, [countdown_state, break_time, work_time])
 
 
     return (        
         <div className='parent'>
-            <AnimationWrapper time={totalTime} />
-          
+            
+
             <div className='child'>
                 <div className='content'>
                     <h1 className='item'>
