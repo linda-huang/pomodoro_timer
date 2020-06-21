@@ -29,6 +29,7 @@
   align-self: start;
   justify-self: center;
 
+
   
 }
 
@@ -37,7 +38,8 @@
   grid-area: main;
   text-align: center;
   justify-self: center;
-  align-self: center
+  align-self: center;
+
 }
 
 .startBttn{
@@ -92,9 +94,8 @@ input[type="radio"]{
 }
 
 .animation{
-  position: absolute;
   display: grid;
-  z-index: -100000;
+  z-index: -10000;
 }
 
 .pauseBttn{

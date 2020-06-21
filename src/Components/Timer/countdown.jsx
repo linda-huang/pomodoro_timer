@@ -78,7 +78,7 @@ function Countdown ({pause, work_time, break_time, countdown_state, num_repeats,
             }   
         }
     }, [totalTime, countdown_state])
-    
+
     
     const rewindToWork = () => {
         // setDisplayHour(work_hour)
@@ -97,13 +97,17 @@ function Countdown ({pause, work_time, break_time, countdown_state, num_repeats,
 
    
     useEffect(() => {
-        if (countdown_state === WORK) {    
+        if (countdown_state === WORK) {  
+            console.log("updating to work time");
+            console.log("work time", work_time);
             setTotalTime(work_time);
             // setDisplayHour(work_hour)
             // setDisplayMinute(work_min)
             // setDisplaySecond(work_sec)
         }
         else if (countdown_state === BREAK) {
+            console.log("updating to break time");
+            console.log("break time", break_time);
             setTotalTime(break_time)
 
             // setDisplayHour(break_hour)
