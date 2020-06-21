@@ -3,6 +3,7 @@ import CountdownWrapper from './countdown-wrapper';
 // import BreakInput from '../input/break-input'
 import TimerInput from '../input/work-input';
 import Settings from '../settings/settings-modal-wrapper';
+import AnimationWrapper from '../animation/animation-wrapper';
 
 import '../../App.css';
 
@@ -11,7 +12,7 @@ import { connect } from 'react-redux';
 import { useEffect } from 'react';
 import AnimationController from '../animation/animationController';
 
-function TimerWrapper ({ setCountdownState, countdown_state}) {
+function TimerWrapper ({ setCountdownState, countdown_state, totalTime}) {
 
     // start countdown
     const [save, setSave] = useState(false);
@@ -57,6 +58,13 @@ function TimerWrapper ({ setCountdownState, countdown_state}) {
              
             <div className = "Settings">
                 <Settings start={save}/>
+            </div>
+
+            <div className = "AnimationController">
+                <AnimationController/>
+            </div>
+            <div>
+                <AnimationWrapper time={totalTime} />
             </div>
         </div>
     )

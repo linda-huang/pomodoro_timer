@@ -7,7 +7,6 @@ import { setPrevState, setCountdownState, NONE, WORK, BREAK, INTERMEDIATE } from
 import { setNumRepeats } from '../settings/settingsDucks';
 import AddTime from './addTime/add-button';
 
-
 import './timer.css';
 import './addTime/add-buttons.css';
 
@@ -114,7 +113,7 @@ function Countdown ({pause, work_time, break_time, countdown_state, num_repeats,
 
     return (        
         <div className='parent'>
-            <AnimationWrapper time={totalTime} />
+            
           
             <div className='child'>
                 <div className='content'>

@@ -12,7 +12,7 @@ export default function App() {
         <Provider store={store}>
 
               <TimerWrapper/>
-            
+  
         </Provider>
       </div>
   );

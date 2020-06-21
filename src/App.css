@@ -54,6 +54,25 @@
   justify-self: end;
 }
 
+/*.block {
+  display:grid;
+  grid-area: left;
+} 
+
+input[type="radio"]{
+  position:absolute;
+  right:1000%;
+}
+
+.animation_lab{
+
+  width:15%; padding-bottom:15%;
+  margin:0 2.5%;
+  background:rgba(247, 46, 46, 0.2);
+  border-radius:50%;
+  cursor:pointer;
+}*/
+
 .CountdownWrapper{
   display: grid;
   grid-area: main;
@@ -63,6 +82,13 @@
   "main1"
   "main2"
   "main3";*/
+}
+
+.AnimationController{
+  display:grid;
+  grid-area:left;
+  place-self: stretch;
+  
 }
 
 .pauseBttn{
