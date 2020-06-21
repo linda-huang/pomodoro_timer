@@ -58,6 +58,9 @@ function TimerWrapper ({ setCountdownState, countdown_state}) {
             <div className = "Settings">
                 <Settings start={save}/>
             </div>
+            <div className = "AnimationController">
+                <AnimationController/>
+            </div>
         </div>
     )
 
