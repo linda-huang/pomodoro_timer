@@ -7,11 +7,11 @@ import {NONE, WORK, BREAK} from '../timer/timerDucks';
 //sleek google version
 function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time, break_time, countdown_state, setWorkChange, setBreakChange}){
     
-    //const [totalTime, setTotalTime] = useState((workBreak===WORK) ? work_time : break_time);
+    const [totalTime, setTotalTime] = useState((workBreak===WORK) ? work_time : break_time);
 
-    const [hour, setHour] = useState(0);
-    const [minute, setMinute] = useState(0);
-    const [second, setSecond] = useState(0);
+    const [hour, setHour] = useState(Math.floor(totalTime / 3600));
+    const [minute, setMinute] = useState((totalTime % 3600)/60);
+    const [second, setSecond] = useState(totalTime % 60);
 
     const [color, setColor] = useState();
 
@@ -126,7 +126,6 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
             return text.slice(0,-1);
         }
     }
-
 
     if (use === 'countdown' && (countdown_state !== NONE)) {
         return null

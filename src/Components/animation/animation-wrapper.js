@@ -7,6 +7,7 @@ import BallAnimation from './BallAnimation';
 
 function AnimationWrapper({animation_state, time}){
     if (animation_state===WAVE){
+        
         return (<WaveAnimation time={time}/>);
     }
 
@@ -18,9 +19,6 @@ function AnimationWrapper({animation_state, time}){
         return null;
     }
 }
-
-
-
 
 
 const mapStateToProps = (state) => ({

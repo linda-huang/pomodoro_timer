@@ -68,7 +68,7 @@ function TimerWrapper ({ setCountdownState, countdown_state}) {
             </div>
 
             <div className = "animation">
-                <AnimationWrapper time={totalTime} />
+                <AnimationWrapper time={totalTime}/>
             </div>
            
         </div>

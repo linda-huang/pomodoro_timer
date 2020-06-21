@@ -9,6 +9,8 @@ class WaveAnimation extends React.Component {
         super(props);
         let tolsec;
         if (this.props.countdown_state === WORK){
+          console.log('this prop')
+          console.log(this.props.work_time)
           tolsec = this.props.work_time;
         }
         else if (this.props.countdown_state === BREAK){
@@ -20,11 +22,19 @@ class WaveAnimation extends React.Component {
     }
 
     componentDidUpdate(prevProps){
-
+      if (this.props.work_countdown !== prevProps.work_countdown && this.props.work_countdown === WORK) {
+        this.setState({total:this.props.work_time, height:0})
+      } else if (this.props.work_countdown !== prevProps.work_countdown && this.props.work_countdown === BREAK) {
+        this.setState({total: this.props.break_time, height:100})
+      }
       if (
        this.props.time !== prevProps.time
       ) {
         let total = this.state.total;
+        console.log('this is total')
+        console.log(total)
+        console.log('this is current')
+        console.log(this.props.time)
         if (this.props.time > total){
           total = this.props.time;
           this.setState({total: this.props.time});

@@ -20,8 +20,7 @@ function Countdown ({pause, work_time, break_time, countdown_state, num_repeats,
     // const [displaySecond, setDisplaySecond] = useState(work_sec);
     const [totalTime, setTotalTime] = useState((countdown_state === WORK) ? work_time : break_time);
 
-    
-
+    console.log(totalTime)
     useEffect(()=>{  
         if (!pause && (countdown_state !== NONE && countdown_state !== INTERMEDIATE)) {
             const interval = setInterval(() => {
@@ -98,8 +97,6 @@ function Countdown ({pause, work_time, break_time, countdown_state, num_repeats,
    
     useEffect(() => {
         if (countdown_state === WORK) {  
-            console.log("updating to work time");
-            console.log("work time", work_time);
             setTotalTime(work_time);
             console.log(work_time)
             // setDisplayHour(work_hour)
@@ -107,8 +104,6 @@ function Countdown ({pause, work_time, break_time, countdown_state, num_repeats,
             // setDisplaySecond(work_sec)
         }
         else if (countdown_state === BREAK) {
-            console.log("updating to break time");
-            console.log("break time", break_time);
             setTotalTime(break_time)
 
             // setDisplayHour(break_hour)
@@ -116,7 +111,7 @@ function Countdown ({pause, work_time, break_time, countdown_state, num_repeats,
             // setDisplaySecond(break_sec)
         }
         
-    }, [countdown_state])
+    }, [countdown_state, break_time, work_time])
 
 
     return (        
