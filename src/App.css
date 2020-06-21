@@ -85,10 +85,15 @@ input[type="radio"]{
 }
 
 .AnimationController{
-  display:grid;
-  grid-area:left;
+  display: grid;
+  grid-area: left;
   place-self: stretch;
   
+}
+
+.animation{
+  position: absolute;
+  display: grid;
 }
 
 .pauseBttn{

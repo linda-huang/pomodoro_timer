@@ -13,17 +13,21 @@ import './addTime/add-buttons.css';
 import Sound from '../audio/sound';
 
 
-function Countdown ({pause, work_time, break_time, countdown_state, num_repeats, setCountdownState, setPrevState, setNumRepeats}){
+function Countdown ({pause, work_time, break_time, countdown_state, num_repeats, setCountdownState, setPrevState, setNumRepeats, updateTime}){
 
     // const [displayHour, setDisplayHour] = useState(work_hour);
     // const [displayMinute, setDisplayMinute] = useState(work_min);
     // const [displaySecond, setDisplaySecond] = useState(work_sec);
     const [totalTime, setTotalTime] = useState((countdown_state === WORK) ? work_time : break_time);
 
+    
+
     useEffect(()=>{  
         if (!pause && (countdown_state !== NONE && countdown_state !== INTERMEDIATE)) {
             const interval = setInterval(() => {
-                setTotalTime(totalTime -1)
+                console.log(totalTime);
+                setTotalTime(totalTime -1);
+                updateTime(totalTime);
                 // if (displaySecond > 0){
                 //     setDisplaySecond(displaySecond - 1);
                 // }
@@ -114,7 +118,7 @@ function Countdown ({pause, work_time, break_time, countdown_state, num_repeats,
     return (        
         <div className='parent'>
             
-          
+
             <div className='child'>
                 <div className='content'>
                     <h1 className='item'>

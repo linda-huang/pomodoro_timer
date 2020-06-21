@@ -12,15 +12,17 @@ import { connect } from 'react-redux';
 import { useEffect } from 'react';
 import AnimationController from '../animation/animationController';
 
-function TimerWrapper ({ setCountdownState, countdown_state, totalTime}) {
+function TimerWrapper ({ setCountdownState, countdown_state}) {
 
     // start countdown
     const [save, setSave] = useState(false);
     const[workChange, setWorkChange] = useState(false);
     const[breakChange, setBreakChange] = useState(false);
+    const[totalTime, setTotalTime] = useState();
 
     let workLabel = (countdown_state === NONE) ? <p>Work Length:</p> : null
     let breakLabel = (countdown_state === NONE) ? <p>Break Length:</p> : null
+
 
     const handleStartClick = () => {
         setSave(true);
@@ -52,7 +54,7 @@ function TimerWrapper ({ setCountdownState, countdown_state, totalTime}) {
                 <div className = "startBttn">
                 {startButton}
                 </div>
-                <CountdownWrapper/>  
+                <CountdownWrapper updateTime={(input) => setTotalTime(input)} />  
                 
             {/*</div>*/}
              
@@ -63,9 +65,11 @@ function TimerWrapper ({ setCountdownState, countdown_state, totalTime}) {
             <div className = "AnimationController">
                 <AnimationController/>
             </div>
-            <div>
+
+            <div className = "animation">
                 <AnimationWrapper time={totalTime} />
             </div>
+           
         </div>
     )
 

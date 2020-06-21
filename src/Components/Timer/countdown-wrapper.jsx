@@ -9,10 +9,13 @@ import './timer.css';
 
 import '../../App.css';
 
-function CountdownWrapper ({countdown_state, setPaused, pause}) {
+function CountdownWrapper ({countdown_state, setPaused, pause, updateTime}) {
 
     let pauseLabel = (!pause) ? "Pause" : "Resume";
 
+    const[value, setValue] = useState();
+
+    
     const handleOnClick = () => {
         setPaused(!pause);
     }
@@ -33,7 +36,7 @@ function CountdownWrapper ({countdown_state, setPaused, pause}) {
                             </div>
                 </div> */}
                 <div className = "countdownDisplay">
-                    <Countdown pause={pause}/>
+                    <Countdown pause={pause}  updateTime = {updateTime}/>
                 </div>
                
                 <div className = "pauseBttn">
