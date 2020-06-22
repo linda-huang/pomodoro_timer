@@ -5,7 +5,7 @@ import { setWorkTime, setBreakTime } from './inputDucks';
 import {NONE, WORK, BREAK} from '../timer/timerDucks';
 
 //sleek google version
-function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time, break_time, countdown_state, setWorkChange, setBreakChange}){
+function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time, break_time, countdown_state, setWorkChange, setBreakChange, text_size}){
     
     const [totalTime, setTotalTime] = useState((workBreak===WORK) ? work_time : break_time);
 
@@ -18,6 +18,7 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
 
     const inputText = useRef(null);
     
+    const [size, setSize] = useState(50);
 
     const changeTime = (event) => {
         const input = event.currentTarget.value;
@@ -118,7 +119,19 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
     }, [save])
 
 
-    //recalculate hours and minutes when minutes > 59
+    /*Change display size*/
+    useEffect(() => {
+        setSize(text_size);
+    }, [text_size])
+
+
+    /*recalculate hours and minutes when minutes > 59
+    Parameters:
+    inputSecond: seconds inputed by user
+    inputMinute: minutes inputed by user
+    
+    Precondition:
+    inputSecond and inputMinute are integers*/
     function recalibrate (inputSecond, inputMinute){
 
         let seconds = hour*3600 + minute*60 + second;
@@ -162,7 +175,8 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
                             type = "text"
                             className = "hideInput"
                             maxLength = "6"
-                            size = "47"
+                            size = {size*22/25}
+                            style = {{ height: `${size*6/5}px`}}
                             onBlur = {blur}
                             onFocus = {focus}
                             onMouseEnter = {mouseEnter}
@@ -172,9 +186,11 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
                     </div>
     
                     <div>
-                        <h3 className = "timeDisplay"
+                        <h3 className = "timeDisplay" 
                             style = {{
-                                color: color
+                                color: color,
+                                fontSize: `${size}px`,
+                                lineHeight: `${size*7/5}px`,
                             }}>
                            {hour < 10 ? `0${hour}` : hour}h &#160;
                            {minute < 10 ? `0${minute}` : minute}m &#160;

@@ -26,6 +26,12 @@
   height: 54px;
   font-size: 18px;
 }
+
+.btn-xsmall{
+  width: 40px;
+  height: 18px;
+  font-size: 6px;
+}
 .button{
   cursor: pointer;
 }
