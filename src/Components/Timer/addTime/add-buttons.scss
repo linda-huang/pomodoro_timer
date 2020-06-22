@@ -21,10 +21,11 @@ $bubble-r: .5*$bubble-d; // bubble-radius
 
 .content {
     align-items: center;
-    //width: 210px;
+    width: 980px;
     //height: 60px;
     border: 0px; 
-    display: flex;
+    display: inline-flex;
+    min-width: 100%;
     flex-direction: row;
     /*padding-top: 50px*/
   }
