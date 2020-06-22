@@ -111,7 +111,7 @@ function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound
                         <label>
                             Work Music
                         </label>
-                            <Toggle isChecked={checked2} handleToggle={()=>setChecked1(!checked2)} size="small"/>
+                            <Toggle isChecked={checked2} handleToggle={()=>setChecked2(!checked2)} size="small"/>
                         </div>
                         <div>
                         {/*<input
@@ -122,7 +122,7 @@ function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound
                         <label>
                             Break Music
                         </label>
-                            <Toggle isChecked={checked3} handleToggle={()=>setChecked1(!checked3)} size="small"/>
+                            <Toggle isChecked={checked3} handleToggle={()=>setChecked3(!checked3)} size="small"/>
                         </div>
                         <button type="submit">Save</button>
                     </form>
