@@ -172,7 +172,7 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
                     </div>
     
                     <div>
-                        <h1 className = "timeDisplay"
+                        <h3 className = "timeDisplay"
                             style = {{
                                 color: color
                             }}>
@@ -181,7 +181,7 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
                            {second < 10 ? `0${second}` :  second}
                            <hr className = "fakeCursor" ref = {thecursor} style = {{display : "none"}} width = "1" size = "35"></hr>
                            s   
-                        </h1>
+                        </h3>
                         <hr ref = {fakeline} style = {{
                             visibility: "hidden"
                         }}></hr>
