@@ -15,13 +15,19 @@ import "./wavestyle.css";
 // const time_Milsecond = time_minute * 60 * 500;
 // var time_left_ball_second = time_second;
 
-const ball_rad_work = 12;
-const ball_rad_break= 18;
+const ball_rad_work = 26;
+const ball_rad_break= 28;
 const ball_rad_none = 24;
 
 
+// requirements: startReducing/reduceEveryMin=maxBallNum
+const reduceEveryMin = 15;// reduce number of balls every () seconds
+const startReducing = 1800; //start reducing once timer reach
+const maxBallNum = 120; // max number of ball
+
+
 const ve_work = 0.5;
-const ve_break= 1;
+const ve_break= 0.8;
 
 //const background_Col = "#f5e8ce";
 // const background_Col = "white";
@@ -137,12 +143,12 @@ class BallAnimation extends React.Component {
     this.canvasRef = React.createRef();
     
     if (this.props.countdown_state === WORK){
-      const ball_num = Math.ceil(this.props.work_time/4);
+      const ball_num = Math.ceil(this.props.work_time/reduceEveryMin);
       this.state = {
         width: 0,
         height: 0,
         frame: 0,
-        total_ball:ball_num>900? 900:ball_num,
+        total_ball:ball_num>maxBallNum? maxBallNum:ball_num,
         size: ball_rad_work,
         velocity: ve_work,
       };
@@ -150,12 +156,12 @@ class BallAnimation extends React.Component {
 
     }
     else if (this.props.countdown_state === BREAK){
-           const ball_num = Math.ceil(this.props.break_time / 4);
+           const ball_num = Math.ceil(this.props.break_time / reduceEveryMin);
            this.state = {
              width: 0,
              height: 0,
              frame: 0,
-             total_ball: ball_num > 900 ? 900 : ball_num,
+             total_ball: ball_num > maxBallNum ? maxBallNum : ball_num,
              size: ball_rad_break,
              velocity: ve_break,
            };
@@ -221,8 +227,8 @@ class BallAnimation extends React.Component {
       this.props.countdown_state === WORK
     ) {
       let tolsec = this.props.work_time;
-      let ball_num = Math.ceil(tolsec / 4);
-      ball_num = ball_num > 900 ? 900 : ball_num;
+      let ball_num = Math.ceil(tolsec / reduceEveryMin);
+      ball_num = ball_num > maxBallNum ? maxBallNum : ball_num;
       this.setState({
         total_ball: ball_num,
         size: ball_rad_work,
@@ -241,8 +247,8 @@ class BallAnimation extends React.Component {
       this.props.countdown_state === BREAK
     ) {
       let tolsec = this.props.break_time;
-      let ball_num = Math.ceil(tolsec / 4);
-      ball_num = ball_num > 900 ? 900 : ball_num;
+      let ball_num = Math.ceil(tolsec / reduceEveryMin);
+      ball_num = ball_num > maxBallNum ? maxBallNum : ball_num;
       this.setState({
         total_ball: ball_num,
         frame:0,
@@ -276,11 +282,11 @@ class BallAnimation extends React.Component {
    
 
 if(this.props.countdown_state===WORK||this.props.countdown_state===BREAK){
-  let should_be = Math.ceil(this.props.time / 4);
-      should_be = should_be > 900 ? 900 : should_be;
+  let should_be = Math.ceil(this.props.time / reduceEveryMin);
+      should_be = should_be > maxBallNum ? maxBallNum : should_be;
 
     if (this.props.time<prevProps.time){
-    if (this.props.time < 3600 && this.props.time % 4 === 0) {
+    if (this.props.time < startReducing && this.props.time % reduceEveryMin === 0) {
       while (balls.length > 0&& balls.length>should_be) {
         balls.pop();
         this.setState((prevState) => ({
