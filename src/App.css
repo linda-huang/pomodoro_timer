@@ -1,6 +1,6 @@
 .GridLayout{
   display: grid;
-  grid-template-columns: [vstart] 25% [v1] auto [v2] 25%[vend];
+  grid-template-columns: [vstart] 15% [v1] auto [v2] 15%[vend];
   grid-template-rows: [hstart] 25% [h1] auto [h2] 25% [hend];
   grid-template-areas: 
   "corner1 top corner2"
@@ -48,6 +48,7 @@
   text-align: center;
   align-self: end;
   justify-self: center;
+  padding-bottom: 40px;
 }
 
 .Settings {
@@ -89,7 +90,10 @@ input[type="radio"]{
 .AnimationController{
   display: grid;
   grid-area: left;
-  place-self: stretch;
+  align-self: center;
+  justify-self: stretch;
+  padding-bottom: 70%;
+  
   
 }
 
@@ -103,6 +107,7 @@ input[type="radio"]{
   text-align: center;
   align-self: end;
   justify-self: center;
+  padding-bottom: 40px;
 }
 
 .countdownDisplay{

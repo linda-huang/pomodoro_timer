@@ -133,7 +133,8 @@
 
 
 .block {
-    display:block;
+    display:flex;
+    flex-direction: column;
 } 
 
 input[type="radio"]{
@@ -142,11 +143,11 @@ input[type="radio"]{
 }
 
 .animation_lab{
-  width:15%; 
-  padding-bottom:15%;
-  margin:0 2.5%;
-  background:rgba(247, 46, 46, 0.2);
-  border-radius:50%;
+  width:30%; 
+  padding-bottom:30%;
+  /*margin:0 2.5%;*/
+  background:rgba(247, 46, 46, 0.5);
+  border-radius:100%;
   cursor: pointer;
 }
 

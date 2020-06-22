@@ -8,6 +8,7 @@ import {NONE, INTERMEDIATE, setPaused } from './timerDucks';
 import './timer.css';
 
 import '../../App.css';
+import Button from '../UIKits/Button';
 
 function CountdownWrapper ({countdown_state, setPaused, pause, updateTime}) {
 
@@ -40,9 +41,9 @@ function CountdownWrapper ({countdown_state, setPaused, pause, updateTime}) {
                 </div>
                
                 <div className = "pauseBttn">
-                    <button onClick={handleOnClick}>
+                    <Button type = "primary" size = "small" onClick={handleOnClick}>
                                     {pauseLabel}
-                    </button>
+                    </Button>
                 </div>
             </div>
         )

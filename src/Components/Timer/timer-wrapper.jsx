@@ -6,6 +6,7 @@ import Settings from '../settings/settings-modal-wrapper';
 import AnimationWrapper from '../animation/animation-wrapper';
 
 import '../../App.css';
+import Button from '../UIKits/Button';
 
 import { setCountdownState, NONE, WORK, BREAK, INTERMEDIATE } from './timerDucks';
 import { connect } from 'react-redux';
@@ -20,8 +21,8 @@ function TimerWrapper ({ setCountdownState, countdown_state}) {
     const[breakChange, setBreakChange] = useState(false);
     const[totalTime, setTotalTime] = useState();
 
-    let workLabel = (countdown_state === NONE) ? <p>Work Length:</p> : null
-    let breakLabel = (countdown_state === NONE) ? <p>Break Length:</p> : null
+    let workLabel = (countdown_state === NONE) ? <h5>Set Work Time</h5> : null
+    let breakLabel = (countdown_state === NONE) ? <h5>Set Break Time</h5> : null
 
 
     const handleStartClick = () => {
@@ -37,9 +38,9 @@ function TimerWrapper ({ setCountdownState, countdown_state}) {
         }
     }, [workChange, breakChange])
 
-    let startButton = (countdown_state !==  NONE) ? null : <button onClick={handleStartClick}>
+    let startButton = (countdown_state !==  NONE) ? null : <Button type = "primary" size = "small" onClick={handleStartClick}>
         START
-    </button>
+    </Button>
 
     return (
         <div className = "GridLayout">
