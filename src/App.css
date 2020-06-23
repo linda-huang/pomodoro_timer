@@ -171,6 +171,11 @@ input[type="radio"]{
   justify-self:center;
 }
 
+.AnimationController{
+  display:grid;
+  grid-area: left;
+  align-self: center;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

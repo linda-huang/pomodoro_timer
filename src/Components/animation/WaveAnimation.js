@@ -20,7 +20,7 @@ class WaveAnimation extends React.Component {
         }
         
         else if(this.props.countdown_state===NONE){
-          this.state={total:0, height: 25}
+          this.state={total:0, height: 10}
         }
 
         }
@@ -95,27 +95,60 @@ class WaveAnimation extends React.Component {
                   this.props.pause ? "paused" : "running"
                 }`,
               }}
-            ></div>
+            >
+              <span
+                id="wave1"
+                className="wave animation"
+                style={{
+                  animationPlayState: `${
+                    this.props.pause ? "paused" : "running"
+                  }`,
+                }}
+              ></span>
+              <span id="deep1" className="deep animation"></span>
+            </div>
             <div
+              className="water"
               id="w2"
-              className="water"
               style={{
                 height: `${this.state.height}%`,
                 animationPlayState: `${
                   this.props.pause ? "paused" : "running"
-                }`
+                }`,
               }}
-            ></div>
+            >
+              <span
+                id="wave2"
+                className="wave animation"
+                style={{
+                  animationPlayState: `${
+                    this.props.pause ? "paused" : "running"
+                  }`,
+                }}
+              ></span>
+              <span id="deep2" className="deep animation"></span>
+            </div>
             <div
-              id="w3"
               className="water"
+              id="w3"
               style={{
                 height: `${this.state.height}%`,
                 animationPlayState: `${
                   this.props.pause ? "paused" : "running"
-                }`
+                }`,
               }}
-            ></div>
+            >
+              <span
+                id="wave3"
+                className="wave animation"
+                style={{
+                  animationPlayState: `${
+                    this.props.pause ? "paused" : "running"
+                  }`,
+                }}
+              ></span>
+              <span id="deep3" className="deep animation"></span>
+            </div>
             <div
               id="w4"
               className="water"
@@ -123,9 +156,20 @@ class WaveAnimation extends React.Component {
                 height: `${this.state.height}%`,
                 animationPlayState: `${
                   this.props.pause ? "paused" : "running"
-                }`
+                }`,
               }}
-            ></div>
+            >
+              <span
+                id="wave4"
+                className="wave animation"
+                style={{
+                  animationPlayState: `${
+                    this.props.pause ? "paused" : "running"
+                  }`,
+                }}
+              ></span>
+              <span id="deep4" className="deep animation"></span>
+            </div>
           </section>
         );
 

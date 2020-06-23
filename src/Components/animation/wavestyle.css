@@ -16,9 +16,39 @@
     position: absolute;
     left:0;
     width: 100%;
-  
-    transition: height 1.3s ease-out;
+ 
     
+   
+    transition: height 1.3s ease-out; 
+}
+#w1{
+    z-index: -1;
+  
+   
+    bottom: 0;
+ 
+
+}
+#w2{
+    z-index: -2;
+ 
+    
+   
+    bottom: 0;
+ 
+
+}
+#w3{
+    z-index: -3;
+    bottom: 0;
+
+    
+
+}
+#w4{
+    z-index: -4;
+    bottom: 0;
+
 }
 
 .canvas{
@@ -31,15 +61,120 @@
 
 }
 
+span.animation{
+    display: block;
+    width: 100%;
+
+}
+
+#wave1{
+    height:82px;
+    background: url(assets/12ww.png);
+    background-size: 1437px;
+    animation: animate 20s linear infinite;
+    z-index: -1;
+    opacity: 0.4;
+   
+
+}
+#deep1{
+    background-color: #8EB6BF;
+    z-index: -1;
+    opacity: 0.4;
+    height: 100%;
+    background-size: cover;
+}
+
+#wave2{
+    height: 82px;
+    background: url(assets/22ww.png);
+    background-size: 1437px;
+    animation: animate2 19s linear infinite;
+   opacity: 0.5;
+  
+   
+
+}
+#deep2{
+    background-color: #779DA6;
+    opacity: 0.5;
+    height: 100%;
+   
+}
+#wave3{
+    height: 82px;
+    background: url(assets/32ww.png);
+    background-size: 1437px;
+    animation: animate2 29s linear infinite;
+    opacity: 0.5;
+ 
+   
+
+}
+#deep3{
+    background-color: #86A5B5;
+    opacity: 0.4;
+    
+    height: 100%;
+}
+
+#wave4{
+    height: 82px;
+    background: url(assets/42ww.png);
+    background-size: 1437px;
+    
+   
+    animation: animate 27s linear infinite;
+    opacity: 0.4;
+   
+   
+
+}
+#deep4{
+    background-color: #F2C5AE;
+    opacity: 0.6;
+    
+   
+    height: 100%;
+}
+
+.deep{
+    
+    height: 100%;
+}
+
+
+@keyframes animate{
+    0%{
+        background-position-x: 0px;
+    }
+    100%{
+        background-position-x: 1437px;
+    }
+
+}
+
+@keyframes animate2{
+    0%{
+        background-position-x: 1437px;
+    }
+    100%{
+        background-position-x: 0px;
+    }
+
+}
 
 
 
-#w1{
+
+
+
+/* #w1{
     background: url(assets/w1.png);
     animation: animate 20s linear infinite;
     background-repeat: repeat-x;
     z-index: -1;
-    background-size: 1132px;
+    background-size: 1132px 100%;
     opacity: 0.4;
     animation-delay: 0;
     bottom: 0;
@@ -53,7 +188,7 @@
     background-repeat: repeat-x;
     z-index: -2;
     opacity: 0.7;
-    background-size: 1016px;
+    background-size: 1016px 100%;
     animation-delay: 0;
     bottom: 0;
     left:0;
@@ -65,7 +200,7 @@
     background-repeat: repeat-x;
     z-index: -3;
     opacity: 0.75;
-    background-size: 1211px;
+    background-size: 1211px 100%;
     animation-delay: 0;
     bottom: 0;
     left:0;
@@ -78,16 +213,16 @@
     background-repeat: repeat-x;
     z-index: -4;
     opacity: 0.5;
-    background-size: 1211px;
+    background-size: 1211px 100%;
     animation-delay: 0;
     bottom: 0;
     left:0;
    
-}
+} */
 
 
 
-@keyframes animate{
+/* @keyframes animate{
     0%{
         background-position-x: 0px;
     }
@@ -126,14 +261,39 @@
         background-position-x: 1211px;
     }
 
-}
+}*/
 
 
 
 /* animation controller */
+
+#animation_slider{
+    position: absolute;
+    left:0%; top:0;
+    z-index: 5;
+
+    width:100%; padding-bottom:100%;
+    margin:0% 0 0 0%;
+    
+    background: #BDBDBD;
+    box-shadow: 0px 0.4vw 0.4vw rgba(0, 0, 0, 0.4);
+  
+    border-radius:50%;
+
+    transition: all 400ms ease-in-out;
+   
+}
+#wave_input:checked  ~ #animation_slider{top :0; }
+#ball_input:checked ~ #animation_slider{top:50%; }
+
+
+
+
+
 .block {
     display:flex;
     flex-direction: column;
+    z-index: 10;
 } 
 
 input[type="radio"]{
@@ -142,13 +302,50 @@ input[type="radio"]{
 }
 
 .animation_lab{
-  width:30%; 
-  padding-bottom:30%;
-  margin:0 2.5%;
-  background:rgba(247, 46, 46, 0.5);
-  border-radius:100%;
+
+  width:70%;
+  position: relative;
+  z-index: 7;
+  padding-bottom:70%;
+  box-shadow: 0px 0.5vw 0.3vw rgba(0, 0, 0, 0.25);
+
+  
+  background:rgb(155, 182, 196);
+  border-radius:50%;
+
   cursor: pointer;
 }
+
+#wave_lab{
+    margin: 15% 15% 15% 15%;
+    background-image: url(assets/waveball.png);
+    background-size: contain;
+   
+}
+#ball_lab{
+    margin: 30% 15% 15% 15%;
+     background-image: url(assets/ballball.png);
+    background-size: contain;
+   
+   
+}
+ #animation_con{
+    position: relative;
+    width:40%;
+    
+    margin:10%;
+    
+    background: #F4F4F4;
+    box-shadow: inset 0px 0.5vw 0.5vw rgba(0, 0, 0, 0.4);
+    border-radius: 60vw;
+
+
+
+} 
+ 
+
+
+
 
 
 
