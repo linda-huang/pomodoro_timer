@@ -6,7 +6,7 @@ import Countdown from './countdown';
 import Prompts from '../prompts/prompts';
 import {NONE, INTERMEDIATE, setPaused } from './timerDucks';
 import './timer.css';
-
+import AnimationWrapper from '../animation/animation-wrapper';
 import '../../App.css';
 import Button from '../UIKits/Button';
 
@@ -24,6 +24,7 @@ function CountdownWrapper ({countdown_state, setPaused, pause, updateTime}) {
     if (countdown_state === NONE) return null;
 
     else if (countdown_state === INTERMEDIATE) return <Prompts/>;
+    
 
     else {
         return (

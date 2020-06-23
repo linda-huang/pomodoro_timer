@@ -1,3 +1,9 @@
+.generic{
+  display: grid;
+  grid-area: main;
+  place-self: stretch;
+}
+
 .GridLayout{
   display: grid;
   grid-template-columns: [vstart] 15% [v1] auto [v2] 15%[vend];
@@ -134,9 +140,32 @@ input[type="radio"]{
   display: grid;
   z-index: -10000;
 }
-.cat{
+
+/*prompt*/
+.intermission{
+  display: grid;
+  grid-area: main;
+  place-self: stretch;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: 
+  "prompt"
+  "cat";
+}
+
+.prompt{
+  grid-area: prompt;
   text-align: center;
   align-self: center;
+  justify-self:center;
+  font-size: 4vw;
+  font-weight: normal;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.cat{
+  grid-area:cat;
+  text-align: center;
+  align-self: start;
   justify-self:center;
 }
 
