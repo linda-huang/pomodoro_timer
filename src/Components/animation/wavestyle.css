@@ -276,7 +276,7 @@ span.animation{
     margin:0% 0 0 0%;
     
     background: #BDBDBD;
-    box-shadow: 0px 0.6vw 0.6vw rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 0.4vw 0.4vw rgba(0, 0, 0, 0.4);
   
     border-radius:50%;
 
@@ -307,7 +307,7 @@ input[type="radio"]{
   position: relative;
   z-index: 7;
   padding-bottom:70%;
-  box-shadow: 0px 0.8vw 0.5vw rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0.5vw 0.3vw rgba(0, 0, 0, 0.25);
 
   
   background:rgb(155, 182, 196);
@@ -331,12 +331,12 @@ input[type="radio"]{
 }
  #animation_con{
     position: relative;
-    width:60%;
+    width:40%;
     
     margin:10%;
     
     background: #F4F4F4;
-    box-shadow: inset 0px 0.8vw 0.8vw rgba(0, 0, 0, 0.4);
+    box-shadow: inset 0px 0.5vw 0.5vw rgba(0, 0, 0, 0.4);
     border-radius: 60vw;
 
 
