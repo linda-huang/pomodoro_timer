@@ -54,12 +54,12 @@ function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound
     }
     
     let breakInput = (countdown_state !== NONE) ? 
-    <label>
+    <label className>
         Set Break Time
         <TimerInput workBreak={BREAK} use="settings" save={save} text_size = {2} setBreakChange={(input) => setBreakChange(input)}/>
     </label> : null
     let workInput  = ( countdown_state !== 'NONE' )  ? 
-    <label>
+    <label className>
         Set Work Time
         <TimerInput workBreak={WORK} use="settings" save={save} text_size = {2} setWorkChange={(input) => setWorkChange(input)}/>
     </label> : null
@@ -69,13 +69,13 @@ function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound
     else {
         return (
             <StyledMenu>
-                    <h5> SETTINGS </h5>
-                    <div />
+                    <h4> SETTINGS </h4>
+                    <hr id='firstLine'/>
                     <form onSubmit={handleConfigSubmit}>
                        {workInput}
                         {breakInput}
                         <div>
-                            <label>
+                            <label className>
                                 Number of Repeats 
                             </label>
                             <input 
@@ -84,29 +84,29 @@ function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound
                                     value={tempNumRepeats}
                                     onChange={handleRepeatChange}/>
                         </div>
-                        <div>
-                            <label>
-                                Alert Sound
-                            </label>
-                                <Toggle isChecked={checked1} handleToggle={()=>setChecked1(!checked1)} size="small"/>
+                        <hr id='secondLine'/>
+                        <div className='soundSetting'>
+                            <label className='soundLabel'>Alert Sound</label>
+                            <Toggle isChecked={checked1} handleToggle={()=>setChecked1(!checked1)} size="small"/>
                         </div>
-                        <div>
-                        <label>
+                        <div className='soundSetting'>
+                        <label className='soundLabel'>
                             Work Music
                         </label>
                             <Toggle isChecked={checked2} handleToggle={()=>setChecked2(!checked2)} size="small"/>
                         </div>
-                        <div>
+                        <div className='soundSetting'>
                         {/*<input
                             type = 'checkbox'
                             checked = {checked3}
                             onChange = {() => setChecked3(!checked3)}
                             />*/}
-                        <label>
+                        <label className='soundLabel'>
                             Break Music
                         </label>
                             <Toggle isChecked={checked3} handleToggle={()=>setChecked3(!checked3)} size="small"/>
                         </div>
+                        <hr id='thirdLine'/>
                         <button type="submit">Save</button>
                     </form>
             </StyledMenu>

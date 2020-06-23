@@ -113,14 +113,16 @@ input[type="radio"]{
   text-align: center;
   align-self: center;
   justify-self:center;
-  
 }
 /*---------------------*/
 
 
 /*Other controllers*/
 .Settings {
-  grid-area: corner2;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  grid-column-start: 3;
+  grid-column-end: 3;
   align-self: start;
   justify-self: end;
 }

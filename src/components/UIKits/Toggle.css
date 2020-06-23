@@ -79,13 +79,13 @@
 }
 
 input:checked + .slider {
-  background: #8EB6BF;
+  background: #40a84e;
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
 border-radius: 50px;
 }
 
 input:checked + .slider.tg-small {
-  background: #8EB6BF;
+  background:  #40a84e;
   box-shadow: inset 0px 2px 2px rgba(0, 0, 0, 0.25);
 border-radius: 25px;
 }
