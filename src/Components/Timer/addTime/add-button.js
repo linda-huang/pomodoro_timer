@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 // import {connect} from 'react-redux';
 // import { WORK, BREAK } from '../timerDucks';
 //import { setWorkHour, setWorkMin, setWorkSec, setBreakHour, setBreakMin, setBreakSec } from '../../input/inputDucks'
-import './add-buttons.css'
+import './add-buttons.scss'
+// import './add-plus.scss';
 
 export default function AddTime ({addTime, totalTime}) {
 
@@ -11,30 +12,21 @@ export default function AddTime ({addTime, totalTime}) {
     }
 
     const handleMinClick = () => {
-        // if (min >= 55) {
-        //     addHour(hour+1)
-        //     addMin(min-60+5)
-        // } else {
-        //     addMin(min+5)
-        // }
         addTime(totalTime+5*60)
     }
 
     const handleSecClick = () => {
-        // if (sec >= 50) {
-        //     addMin(min+1)
-        //     addSec(sec-60+10)
-        // } else {
-        //     addSec(sec + 10)
-        // }
         addTime(totalTime+10)
     }
 
     return(
         <div className='content'>
-            <button className='button' onClick={handleHourClick}>button 1</button>
-            <button className='button' onClick={handleMinClick}>button 2</button>
-            <button className='button' onClick={handleSecClick}>button 3</button>
+            <button className='button'  onClick={handleHourClick}><span>+1</span></button>
+            <button className='button' onClick={handleMinClick}><span>+5</span></button> 
+            <button className='button'  onClick={handleSecClick}><span>+10</span></button>
+            {/* <AddPlus time={1}/>
+            <AddPlus time={5}/>
+            <AddPlus time={10}/> */}
         </div>
     )
 

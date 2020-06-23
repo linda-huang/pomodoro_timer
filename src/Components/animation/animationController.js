@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { WAVE, BALL , HIDE} from "./animationDucks";
 import {setAnimationState} from './animationDucks';
 import "./wavestyle.css";
+import "../../App.css";
 
 
 class AnimationController extends React.Component {
@@ -36,6 +37,7 @@ class AnimationController extends React.Component {
     render(){
         return (
           <div id="animation_con">
+            
             <label htmlFor="wave" className="block animation_lab">
               
             </label>
@@ -46,6 +48,7 @@ class AnimationController extends React.Component {
               name="animation_con"
               defaultChecked={this.props.animation_state === WAVE}
             />
+
             <label htmlFor="ball" className="block animation_lab">
               
             </label>
@@ -59,13 +62,7 @@ class AnimationController extends React.Component {
             <span id="animation_slider"></span>
           </div>
         );
-    }
-
-
-
-
-
-
+      }
 }
 
 

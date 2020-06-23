@@ -6,13 +6,17 @@ import Countdown from './countdown';
 import Prompts from '../prompts/prompts';
 import {NONE, INTERMEDIATE, setPaused } from './timerDucks';
 import './timer.css';
-
+import AnimationWrapper from '../animation/animation-wrapper';
 import '../../App.css';
+import Button from '../UIKits/Button';
 
-function CountdownWrapper ({countdown_state, setPaused, pause}) {
+function CountdownWrapper ({countdown_state, setPaused, pause, updateTime}) {
 
     let pauseLabel = (!pause) ? "Pause" : "Resume";
 
+
+
+    
     const handleOnClick = () => {
         setPaused(!pause);
     }
@@ -20,6 +24,7 @@ function CountdownWrapper ({countdown_state, setPaused, pause}) {
     if (countdown_state === NONE) return null;
 
     else if (countdown_state === INTERMEDIATE) return <Prompts/>;
+    
 
     else {
         return (
@@ -33,13 +38,13 @@ function CountdownWrapper ({countdown_state, setPaused, pause}) {
                             </div>
                 </div> */}
                 <div className = "countdownDisplay">
-                    <Countdown pause={pause}/>
+                    <Countdown pause={pause}  updateTime = {updateTime}/>
                 </div>
                
                 <div className = "pauseBttn">
-                    <button onClick={handleOnClick}>
+                    <Button type = "primary" size = "medium" onClick={handleOnClick}>
                                     {pauseLabel}
-                    </button>
+                    </Button>
                 </div>
             </div>
         )

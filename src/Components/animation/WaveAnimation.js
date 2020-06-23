@@ -1,30 +1,53 @@
 import React from "react";
 import './wavestyle.css';
 import { connect } from "react-redux";
-import { WORK, BREAK } from "../timer/timerDucks";
+import { WORK, BREAK, NONE, INTERMEDIATE } from "../timer/timerDucks";
 
 
 class WaveAnimation extends React.Component {
     constructor(props){
         super(props);
-        let tolsec;
+        
         if (this.props.countdown_state === WORK){
-          tolsec = this.props.work_time;
+          console.log('this prop')
+          console.log(this.props.work_time)
+          const tolsec = this.props.work_time;
+          this.state = { total: tolsec, height: 0};
         }
         else if (this.props.countdown_state === BREAK){
-           tolsec =this.props.break_time;}
+           const tolsec =this.props.break_time;
+           this.state = { total: tolsec, height: 100};
+        }
+        
+        else if(this.props.countdown_state===NONE){
+          this.state={total:0, height: 25}
+        }
+
+        }
+
+      
      
-        const inH = this.props.countdown_state===WORK? 0:100;
-        //console.log(`in construnct height is set to ${inH}`);
-        this.state= {total: tolsec, height: inH}
-    }
+       
+    
 
     componentDidUpdate(prevProps){
 
+      if (this.props.work_countdown !== prevProps.work_countdown && this.props.work_countdown === WORK) {
+        this.setState({total:this.props.work_time, height:0})
+      } else if (this.props.work_countdown !== prevProps.work_countdown && this.props.work_countdown === BREAK) {
+        this.setState({total: this.props.break_time, height:100})
+      }
+
+      
+      if(this.props.countdown_state===WORK || this.props.countdown_state===BREAK){
       if (
        this.props.time !== prevProps.time
       ) {
         let total = this.state.total;
+        console.log('this is total')
+        console.log(total)
+        console.log('this is current')
+        console.log(this.props.time)
         if (this.props.time > total){
           total = this.props.time;
           this.setState({total: this.props.time});
@@ -48,16 +71,14 @@ class WaveAnimation extends React.Component {
           console.log("height");
           console.log(this.state.height);
         }
+      
+
+      
       }
 
-      if (this.props.work_countdown!== prevProps.work_countdown && this.props.work_countdown ===WORK){
-         
-           this.setState({total:this.props.work_time, height: 0});
+    }
 
-      }
-      else if (this.props.work_countdown!== prevProps.work_countdown && this.props.work_countdown ===BREAK){
-        this.setState({ total: this.props.break_time, height: 100 });
-      }
+      
 
     }
 

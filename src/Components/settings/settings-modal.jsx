@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import { setNumRepeats, setAlertSound, setWorkMusic, setBreakMusic} from './settingsDucks';
 import { NONE, WORK, BREAK, INTERMEDIATE } from '../timer/timerDucks';
 import Toggle from '../UIKits/Toggle'
+
+import Button from '../UIKits/Button';
 // import { Keyboard } from 'react-native';
 
 function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound, alert_sound, setWorkMusic, work_music, setBreakMusic, break_music, countdown_state, start}) {
@@ -52,13 +54,13 @@ function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound
     
     let breakInput = (countdown_state !== NONE) ? 
     <label>
-        How long should next we break for?
-        <TimerInput workBreak={BREAK} use="settings" save={save} setBreakChange={(input) => setBreakChange(input)}/>
+        Set Break Time
+        <TimerInput workBreak={BREAK} use="settings" save={save} text_size = {2} setBreakChange={(input) => setBreakChange(input)}/>
     </label> : null
     let workInput  = ( countdown_state !== 'NONE' )  ? 
     <label>
-        How long should next we work for?
-        <TimerInput workBreak={WORK} use="settings" save={save} setWorkChange={(input) => setWorkChange(input)}/>
+        Set Work Time
+        <TimerInput workBreak={WORK} use="settings" save={save} text_size = {2} setWorkChange={(input) => setWorkChange(input)}/>
     </label> : null
   
     if (hide) return null;
@@ -81,44 +83,46 @@ function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound
                         </label> */}
                         <div>
                             <label>
-                                How many repeats? 
-                                <input 
+                                Number of Repeats 
+                            </label>
+                            <input 
                                     type='number'
+                                    min="0"
                                     value={tempNumRepeats}
                                     onChange={handleRepeatChange}/>
-                            </label>
                         </div>
                         <div>
-                        <label>
-                            Alert Sound
-                            <Toggle isChecked={checked1} handleToggle={()=>setChecked1(!checked1)} size="small"/>
+                            <label>
+                                Alert Sound
+                            </label>
+                                <Toggle isChecked={checked1} handleToggle={()=>setChecked1(!checked1)} size="small"/>
                             {/* <input
                             type = 'checkbox'
                             checked = {checked1}
                             onChange ={() => setChecked1(!checked1)}
                             /> */}
-                        </label>
                         </div>
                         <div>
-                        <input
+                       {/*<input
                             type = 'checkbox'
                             checked = {checked2}
                             onChange = {() => setChecked2(!checked2)}
-                            />
+                       />*/}
                         <label>
                             Work Music
-                            
                         </label>
+                            <Toggle isChecked={checked2} handleToggle={()=>setChecked2(!checked2)} size="small"/>
                         </div>
                         <div>
-                        <input
+                        {/*<input
                             type = 'checkbox'
                             checked = {checked3}
                             onChange = {() => setChecked3(!checked3)}
-                            />
+                            />*/}
                         <label>
                             Break Music
                         </label>
+                            <Toggle isChecked={checked3} handleToggle={()=>setChecked3(!checked3)} size="small"/>
                         </div>
                         <button type="submit">Save</button>
                     </form>

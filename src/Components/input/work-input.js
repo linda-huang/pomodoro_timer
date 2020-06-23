@@ -5,18 +5,21 @@ import { setWorkTime, setBreakTime } from './inputDucks';
 import {NONE, WORK, BREAK} from '../timer/timerDucks';
 
 //sleek google version
-function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time, break_time, countdown_state, setWorkChange, setBreakChange}){
+function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time, break_time, countdown_state, setWorkChange, setBreakChange, text_size}){
     
-    //const [totalTime, setTotalTime] = useState((workBreak===WORK) ? work_time : break_time);
+    const [totalTime, setTotalTime] = useState((workBreak===WORK) ? work_time : break_time);
 
-    const [hour, setHour] = useState(0);
-    const [minute, setMinute] = useState(0);
-    const [second, setSecond] = useState(0);
+    const [hour, setHour] = useState(Math.floor(totalTime / 3600));
+    const [minute, setMinute] = useState(Math.floor((totalTime % 3600)/60));
+    const [second, setSecond] = useState(totalTime % 60);
 
-    const [color, setColor] = useState();
+    const [color, setColor] = useState(); //display color
+    const [focused, setFocused] = useState(false); //whethere the input box was clicked
 
     const inputText = useRef(null);
     
+    const [size, setSize] = useState(50);
+
     const changeTime = (event) => {
         const input = event.currentTarget.value;
         let time = extractNum(input);
@@ -57,17 +60,52 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
 
     const blur = (event) => {
         inputText.current.value = ''; //clear input box when user clicks out of textbox
+        if(hour === 0 && minute === 0 && second === 0){
+            (workBreak===WORK) ? setMinute(25) : setMinute(5);
+        }
+        else{
+            recalibrate();
+        }
         setColor("#999999");
+        setFocused(false);
         if (thecursor.current !== null) {thecursor.current.style.display = "none"};
-        if (fakeline.current !== null) {fakeline.current.style.visibility = "hidden"};
+        if (fakeline.current !== null) {
+            fakeline.current.style.visibility = "hidden";
+            
+        };
 
     }
 
+
     const focus = (event) => {       
         setColor("#CCCCCC");
+        setHour(0);
+        setMinute(0);
+        setSecond(0);
+        setFocused(true);
         if (thecursor.current !== null) {thecursor.current.style.display = "inline"};
-        if (fakeline.current !== null) {fakeline.current.style.visibility = "visible"};
+        if (fakeline.current !== null) {
+            fakeline.current.color = "#8eb6bf"};
+            fakeline.current.style.visibility = "visible";
     } 
+
+
+    const mouseLeave = (event) =>{
+        if(!focused){
+            setColor("#999999");
+            fakeline.current.style.visibility = "hidden";
+        }
+    }
+
+
+    const mouseEnter = (event) =>{
+        if(!focused){
+        fakeline.current.style.visibility = "visible";
+        fakeline.current.color = "#bbbbbb";
+        setColor("#cccccc");
+        }
+    }
+
 
     useEffect(() => {
         if (save === true) {
@@ -81,30 +119,27 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
         }
     }, [save])
 
-    //recalculate hours and minutes when minutes > 59
-    // function recalibrate (inputSecond, inputMinute){
-    //     console.log("recalibrating");
-    //     let actionHour = hour
-    //     let actionMinute = minute
-    //     let actionSecond = second
 
-    //     if (second > 59){
-    //         let extraMinute = Math.floor(inputSecond/60);
-    //         inputSecond = inputSecond % 60;
-    //         actionMinute = minute + extraMinute;
-    //         actionSecond = inputSecond;
-    //     }
+    /*Change display size*/
+    useEffect(() => {
+        setSize(text_size);
+    }, [text_size])
 
-    //     if (minute > 59){
-    //         let extraHour = Math.floor(inputMinute/60);
-    //         inputMinute = inputMinute % 60;
-    //         actionHour = hour + extraHour;
-    //         actionMinute = inputMinute;
-    //     }
-    //     setWorkMin(actionMinute);
-    //     setWorkHour(actionHour);
-    //     setWorkSec(actionSecond);
-    // }
+
+    /*recalculate hours and minutes when minutes > 59
+    Parameters:
+    inputSecond: seconds inputed by user
+    inputMinute: minutes inputed by user
+    
+    Precondition:
+    inputSecond and inputMinute are integers*/
+    function recalibrate (inputSecond, inputMinute){
+
+        let seconds = hour*3600 + minute*60 + second;
+        setHour(Math.floor(seconds / 3600));
+        setMinute(Math.floor((seconds % 3600)/60));
+        setSecond(seconds % 60);
+     }
 
 
    
@@ -127,7 +162,6 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
         }
     }
 
-
     if (use === 'countdown' && (countdown_state !== NONE)) {
         return null
     }
@@ -142,26 +176,37 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
                             type = "text"
                             className = "hideInput"
                             maxLength = "6"
-                            size = "31"
+                            size = {size*22/25}
+                            style = {{ 
+                                height: `${size*1.5}vw`,
+                                width: `${size*6.4}vw`
+                            }}
                             onBlur = {blur}
                             onFocus = {focus}
+                            onMouseEnter = {mouseEnter}
+                            onMouseLeave = {mouseLeave}
                             onChange = {changeTime}    
                         />
                     </div>
     
                     <div>
-                        <h1 className = "timeDisplay"
+                        <h3 className = "timeDisplay" 
                             style = {{
-                                color: color
+                                color: color,
+                                fontSize: `${size}vw`,
+                                lineHeight: `${size*7/5}vw`,
                             }}>
                            {hour < 10 ? `0${hour}` : hour}h &#160;
                            {minute < 10 ? `0${minute}` : minute}m &#160;
                            {second < 10 ? `0${second}` :  second}
-                           <hr className = "fakeCursor" ref = {thecursor} style = {{display : "none"}} width = "1" size = "35"></hr>
+                           <hr className = "fakeCursor" ref = {thecursor} style = {{display : "none"}} width = "1" ></hr>
                            s   
-                        </h1>
+                        </h3>
                         <hr ref = {fakeline} style = {{
-                            visibility: "hidden"
+                            visibility: "hidden",
+                            marginBottom: `${1}vw`,
+                            border: "none",
+                            height: `${1}%`
                         }}></hr>
                     </div>  
                 </div>
