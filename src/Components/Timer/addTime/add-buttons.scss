@@ -1,4 +1,4 @@
-$bubble-d: 3.5rem; // bubble diameter
+$bubble-d: 10rem; // bubble diameter
 $bubble-r: .5*$bubble-d; // bubble-radius
 
 @mixin bubble($ext) {
@@ -10,7 +10,7 @@ $bubble-r: .5*$bubble-d; // bubble-radius
 .button > span {
     display: none;
     color: whitesmoke;
-    font-size: 2em;
+    font-size: 9em;
 }
 
 .parentTimer {
@@ -81,11 +81,11 @@ $bubble-r: .5*$bubble-d; // bubble-radius
   30%, 100% { @include bubble(0); }
 }
 
-.button:focus{
+.button:active {
   background-color: rgba(0, 78, 56, 0.5);
 }
 
-.button:focus > span{
+.button:active > span{
   will-change: font-size;
   animation: plus 1s cubic-bezier(.17, .89, .32, 1.49);
   
@@ -100,12 +100,12 @@ $bubble-r: .5*$bubble-d; // bubble-radius
   }
 }
 
-.button:focus > span {
+.button:active > span {
   align-self: center;
   position: relative;
-  color:  rgb(242,197, 174);
+  color:   rgb(242,197, 174);
   // rgb(145, 238, 145);
-  font-size: 2em;
+  font-size: 9em;
   cursor: pointer;
   
   &:before, &:after {

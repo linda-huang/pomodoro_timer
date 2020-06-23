@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import CountdownWrapper from './countdown-wrapper';
 // import BreakInput from '../input/break-input'
 import TimerInput from '../input/work-input';
-import Settings from '../settings/settings-modal-wrapper';
+// import Settings from '../settings/settings-modal-wrapper';
+import Settings from '../settings/sliding-menu';
 import AnimationWrapper from '../animation/animation-wrapper';
 
 import '../../App.css';

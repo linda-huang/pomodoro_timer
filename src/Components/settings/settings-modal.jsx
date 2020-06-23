@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { setNumRepeats, setAlertSound, setWorkMusic, setBreakMusic} from './settingsDucks';
 import { NONE, WORK, BREAK, INTERMEDIATE } from '../timer/timerDucks';
 import Toggle from '../UIKits/Toggle'
+import StyledMenu from './menu.styles'
 
 import Button from '../UIKits/Button';
 // import { Keyboard } from 'react-native';
@@ -67,20 +68,12 @@ function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound
 
     else {
         return (
-            <div>
-              <div className="modal-content-div">
-                <div className="modal-dialog-div" onClick={onDialogClick}>
+            <StyledMenu>
+                    <h5> SETTINGS </h5>
+                    <div />
                     <form onSubmit={handleConfigSubmit}>
                        {workInput}
-                       {/* <label>
-                            How long should we work for?
-                            <WorkInput use="settings" save={save} setSave={(input) => {setSave(input)}}/>
-                        </label> */}
                         {breakInput}
-                        {/* <label>
-                            How long should we break for?
-                            <BreakInput use="settings" save={save}/>
-                        </label> */}
                         <div>
                             <label>
                                 Number of Repeats 
@@ -96,18 +89,8 @@ function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound
                                 Alert Sound
                             </label>
                                 <Toggle isChecked={checked1} handleToggle={()=>setChecked1(!checked1)} size="small"/>
-                            {/* <input
-                            type = 'checkbox'
-                            checked = {checked1}
-                            onChange ={() => setChecked1(!checked1)}
-                            /> */}
                         </div>
                         <div>
-                       {/*<input
-                            type = 'checkbox'
-                            checked = {checked2}
-                            onChange = {() => setChecked2(!checked2)}
-                       />*/}
                         <label>
                             Work Music
                         </label>
@@ -126,9 +109,7 @@ function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound
                         </div>
                         <button type="submit">Save</button>
                     </form>
-                </div>
-              </div>
-            </div>
+            </StyledMenu>
           );
     }
 }
