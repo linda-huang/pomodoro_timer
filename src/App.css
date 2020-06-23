@@ -7,7 +7,7 @@
 .GridLayout{
   display: grid;
   grid-template-columns: [vstart] 15% [v1] auto [v2] 15%[vend];
-  grid-template-rows: [hstart] 20% [h1] auto [h2] 20% [hend];
+  grid-template-rows: [hstart] 15% [h1] auto [h2] 20% [hend];
   grid-template-areas: 
   "corner1 top corner2"
   "left main right"
