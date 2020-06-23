@@ -73,14 +73,14 @@ span.animation{
     background-size: 1437px;
     animation: animate 20s linear infinite;
     z-index: -1;
-    opacity: 0.75;
+    opacity: 0.4;
    
 
 }
 #deep1{
     background-color: #8EB6BF;
     z-index: -1;
-    opacity: 0.75;
+    opacity: 0.4;
     height: 100%;
     background-size: cover;
 }
@@ -90,14 +90,14 @@ span.animation{
     background: url(assets/22ww.png);
     background-size: 1437px;
     animation: animate2 19s linear infinite;
-   opacity: 0.8;
+   opacity: 0.5;
   
    
 
 }
 #deep2{
     background-color: #779DA6;
-    opacity: 0.8;
+    opacity: 0.5;
     height: 100%;
    
 }
@@ -106,14 +106,14 @@ span.animation{
     background: url(assets/32ww.png);
     background-size: 1437px;
     animation: animate2 29s linear infinite;
-    opacity: 0.8;
+    opacity: 0.5;
  
    
 
 }
 #deep3{
     background-color: #86A5B5;
-    opacity: 0.8;
+    opacity: 0.4;
     
     height: 100%;
 }
@@ -122,8 +122,10 @@ span.animation{
     height: 82px;
     background: url(assets/42ww.png);
     background-size: 1437px;
+    
+   
     animation: animate 27s linear infinite;
-    opacity: 0.6;
+    opacity: 0.4;
    
    
 
@@ -264,9 +266,34 @@ span.animation{
 
 
 /* animation controller */
+
+#animation_slider{
+    position: absolute;
+    left:0%; top:0;
+    z-index: 5;
+
+    width:100%; padding-bottom:100%;
+    margin:0% 0 0 0%;
+    
+    background: #BDBDBD;
+    box-shadow: 0px 0.6vw 0.6vw rgba(0, 0, 0, 0.4);
+  
+    border-radius:50%;
+
+    transition: all 400ms ease-in-out;
+   
+}
+#wave_input:checked  ~ #animation_slider{top :0; }
+#ball_input:checked ~ #animation_slider{top:50%; }
+
+
+
+
+
 .block {
     display:flex;
     flex-direction: column;
+    z-index: 10;
 } 
 
 input[type="radio"]{
@@ -275,13 +302,50 @@ input[type="radio"]{
 }
 
 .animation_lab{
-  width:30%; 
-  padding-bottom:30%;
-  margin:0 2.5%;
-  background:rgba(247, 46, 46, 0.5);
-  border-radius:100%;
+
+  width:70%;
+  position: relative;
+  z-index: 7;
+  padding-bottom:70%;
+  box-shadow: 0px 0.8vw 0.5vw rgba(0, 0, 0, 0.25);
+
+  
+  background:rgb(155, 182, 196);
+  border-radius:50%;
+
   cursor: pointer;
 }
+
+#wave_lab{
+    margin: 15% 15% 15% 15%;
+    background-image: url(assets/waveball.png);
+    background-size: contain;
+   
+}
+#ball_lab{
+    margin: 30% 15% 15% 15%;
+     background-image: url(assets/ballball.png);
+    background-size: contain;
+   
+   
+}
+ #animation_con{
+    position: relative;
+    width:60%;
+    
+    margin:10%;
+    
+    background: #F4F4F4;
+    box-shadow: inset 0px 0.8vw 0.8vw rgba(0, 0, 0, 0.4);
+    border-radius: 60vw;
+
+
+
+} 
+ 
+
+
+
 
 
 

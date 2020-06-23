@@ -20,7 +20,7 @@ class WaveAnimation extends React.Component {
         }
         
         else if(this.props.countdown_state===NONE){
-          this.state={total:0, height: 25}
+          this.state={total:0, height: 10}
         }
 
         }

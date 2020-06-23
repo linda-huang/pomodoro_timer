@@ -15,9 +15,13 @@ import "./wavestyle.css";
 // const time_Milsecond = time_minute * 60 * 500;
 // var time_left_ball_second = time_second;
 
-const ball_rad_work = 26;
-const ball_rad_break= 28;
-const ball_rad_none = 24;
+// const ball_rad_work = 26;
+// const ball_rad_break= 28;
+// const ball_rad_none = 24;
+
+const ball_rad_work = 0.024;
+const ball_rad_break= 0.028;
+const ball_rad_none = 0.030;
 
 
 // requirements: startReducing/reduceEveryMin=maxBallNum
@@ -32,11 +36,11 @@ const ve_break= 0.8;
 //const background_Col = "#f5e8ce";
 // const background_Col = "white";
 const color_options = [
-  "rgba(242, 197, 174, 0.6)",
-  "rgba(129, 141, 151, 0.6)",
-  "rgba(134, 165, 181, 0.6)",
-  "rgba(119, 157, 166, 0.6)",
-  "rgba(141, 182, 191, 0.6)",
+  "rgba(242, 197, 174, 0.4)",
+  "rgba(129, 141, 151, 0.4)",
+  "rgba(134, 165, 181, 0.4)",
+  "rgba(119, 157, 166, 0.4)",
+  "rgba(141, 182, 191, 0.4)",
 ];
 
 
@@ -187,12 +191,12 @@ class BallAnimation extends React.Component {
   componentDidMount() {
     this.updateWindowDimensions();
     window.addEventListener("resize", this.updateWindowDimensions);
-    setup(this.state.total_ball, window.innerWidth, window.innerHeight, this.state.size, this.state.velocity);
+    setup(this.state.total_ball, window.innerWidth, window.innerHeight, window.innerWidth*this.state.size, this.state.velocity);
     this.rAF = requestAnimationFrame(this.updateAnimationState);
   }
 
   updateWindowDimensions() {
-    setup(this.state.total_ball, window.innerWidth, window.innerHeight, this.state.size, this.state.velocity);
+    setup(this.state.total_ball, window.innerWidth, window.innerHeight, window.innerWidth*this.state.size, this.state.velocity);
     const canvas = this.canvasRef.current;
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -239,7 +243,7 @@ class BallAnimation extends React.Component {
         ball_num,
         window.innerWidth,
         window.innerHeight,
-        ball_rad_work,
+        window.innerWidth*ball_rad_work,
         ve_work
       );
     } else if (
@@ -259,7 +263,7 @@ class BallAnimation extends React.Component {
         ball_num,
         window.innerWidth,
         window.innerHeight,
-        ball_rad_break,
+        window.innerWidth*ball_rad_break,
         ve_break
       );
     }
@@ -273,7 +277,13 @@ class BallAnimation extends React.Component {
         size: ball_rad_break,
         velocity: ve_work,
       });
-      setup(50, window.innerWidth, window.innerHeight, ball_rad_none, ve_work);
+      setup(
+        50,
+        window.innerWidth,
+        window.innerHeight,
+        window.innerWidth*ball_rad_none,
+        ve_work
+      );
            }
 
 
