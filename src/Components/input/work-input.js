@@ -99,10 +99,11 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
 
 
     const mouseEnter = (event) =>{
+        if(!focused){
         fakeline.current.style.visibility = "visible";
         fakeline.current.color = "#bbbbbb";
         setColor("#cccccc");
-
+        }
     }
 
 
@@ -176,7 +177,10 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
                             className = "hideInput"
                             maxLength = "6"
                             size = {size*22/25}
-                            style = {{ height: `${size*6/5}px`}}
+                            style = {{ 
+                                height: `${size*1.5}vw`,
+                                width: `${size*6.4}vw`
+                            }}
                             onBlur = {blur}
                             onFocus = {focus}
                             onMouseEnter = {mouseEnter}
@@ -189,17 +193,20 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
                         <h3 className = "timeDisplay" 
                             style = {{
                                 color: color,
-                                fontSize: `${size}px`,
-                                lineHeight: `${size*7/5}px`,
+                                fontSize: `${size}vw`,
+                                lineHeight: `${size*7/5}vw`,
                             }}>
                            {hour < 10 ? `0${hour}` : hour}h &#160;
                            {minute < 10 ? `0${minute}` : minute}m &#160;
                            {second < 10 ? `0${second}` :  second}
-                           <hr className = "fakeCursor" ref = {thecursor} style = {{display : "none"}} width = "1" size = "35"></hr>
+                           <hr className = "fakeCursor" ref = {thecursor} style = {{display : "none"}} width = "1" ></hr>
                            s   
                         </h3>
                         <hr ref = {fakeline} style = {{
-                            visibility: "hidden"
+                            visibility: "hidden",
+                            marginBottom: `${1}vw`,
+                            border: "none",
+                            height: `${1}%`
                         }}></hr>
                     </div>  
                 </div>

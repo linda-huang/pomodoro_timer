@@ -37,6 +37,7 @@ class AnimationController extends React.Component {
     render(){
         return (
           <div id="animation_con">
+            
             <label htmlFor="wave" className="block animation_lab">
               
             </label>

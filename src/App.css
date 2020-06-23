@@ -1,7 +1,7 @@
 .GridLayout{
   display: grid;
   grid-template-columns: [vstart] 15% [v1] auto [v2] 15%[vend];
-  grid-template-rows: [hstart] 25% [h1] auto [h2] 25% [hend];
+  grid-template-rows: [hstart] 20% [h1] auto [h2] 20% [hend];
   grid-template-areas: 
   "corner1 top corner2"
   "left main right"
@@ -12,6 +12,7 @@
 }
 
 
+/*Main grid layout*/
 .MainLayout{
   /*display: grid;
   grid-template-rows: 1fr 1fr 1fr;
@@ -23,39 +24,45 @@
   grid-area: main;
 }
 
-.WorkInput {
+
+/*home page layout*/
+
+.main{
+  display: grid;
   grid-area: main;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas:
+  "main1"
+  "main2"
+  "main3";
+
+}
+
+.WorkInput {
+  grid-area: main1;
   text-align: center;
-  align-self: start;
+  align-self: center;
   justify-self: center;
 
-
-  
 }
 
 .BreakInput {
-  /*grid-area: main2;*/
-  grid-area: main;
+  grid-area: main2;
   text-align: center;
   justify-self: center;
-  align-self: center;
+  align-self:center;
 
 }
 
 .startBttn{
-  /*grid-area: main3;*/
-  grid-area: main;
+  grid-area: main3;
   text-align: center;
-  align-self: end;
+  align-self: center;
   justify-self: center;
-  padding-bottom: 40px;
 }
 
-.Settings {
-  grid-area: corner2;
-  align-self: start;
-  justify-self: end;
-}
+
+/*---------------------*/
 
 /*.block {
   display:grid;
@@ -76,15 +83,40 @@ input[type="radio"]{
   cursor:pointer;
 }*/
 
+/*Countdown Display*/
 .CountdownWrapper{
   display: grid;
   grid-area: main;
   place-self: stretch;
-  /*grid-template-rows: 1fr 1fr 1fr;
+
+  grid-template-rows: 2fr 1fr;
   grid-template-areas:
   "main1"
-  "main2"
-  "main3";*/
+  "main2";
+}
+
+.pauseBttn{
+  grid-area: main2;
+  text-align: center;
+  align-self: center;
+  justify-self: center;
+}
+
+.countdownDisplay{
+  grid-area: main1;
+  text-align: center;
+  align-self: center;
+  justify-self:center;
+  
+}
+/*---------------------*/
+
+
+/*Other controllers*/
+.Settings {
+  grid-area: corner2;
+  align-self: start;
+  justify-self: end;
 }
 
 .AnimationController{
@@ -97,26 +129,11 @@ input[type="radio"]{
   
 }
 
+
 .animation{
   display: grid;
   z-index: -10000;
 }
-
-.pauseBttn{
-  /*grid-area: main3;*/
-  text-align: center;
-  align-self: end;
-  justify-self: center;
-  padding-bottom: 40px;
-}
-
-.countdownDisplay{
-  /*grid-area: main2;*/
-  text-align: center;
-  align-self: center;
-  justify-self:center;
-}
-
 .cat{
   text-align: center;
   align-self: center;

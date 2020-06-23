@@ -41,7 +41,7 @@ function CountdownWrapper ({countdown_state, setPaused, pause, updateTime}) {
                 </div>
                
                 <div className = "pauseBttn">
-                    <Button type = "primary" size = "small" onClick={handleOnClick}>
+                    <Button type = "primary" size = "medium" onClick={handleOnClick}>
                                     {pauseLabel}
                     </Button>
                 </div>

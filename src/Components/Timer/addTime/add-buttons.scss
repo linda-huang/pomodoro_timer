@@ -10,48 +10,56 @@ $bubble-r: .5*$bubble-d; // bubble-radius
 .button > span {
     display: none;
     color: whitesmoke;
-    font-size: 2em;
+    font-size: 4vw;
 }
 
 .parentTimer {
   display: grid;
-  grid-template-columns: 250px 1fr;
-  grid-template-rows: 150px 1fr;
+  //grid-template-columns: 250px 1fr;
+  //grid-template-rows: 150px 1fr;
 }
 
 .content {
     align-items: center;
-    width: 980px;
+    width: 70vw;
+    height: 100%;
     //height: 60px;
     border: 0px; 
     display: inline-flex;
     min-width: 100%;
     flex-direction: row;
-    /*padding-top: 50px*/
+    //padding-top: 50px;
   }
 
 .button {
     flex: 1;
-    height: 50px;
     background-color: rgba(52, 52, 52, 0);
     border: none;
     z-index: 1051;
     transition-duration: 0.4s;
     border-radius:8px;
     outline: none;
-    height: 170px;
+    height: 100%;
+    place-self: stretch;
     cursor: pointer;
+
     
 }
 
 .item {
   flex: 1;
   align-items: stretch; 
+  
   border: none;
   z-index: 1050;
   border-radius:8px;
   justify-content : center;
   align-content: center;
+  padding-left: 2%;
+  padding-right: 2%;
+  width: 32%;
+  height: 100%;
+
 }
 
 .countdown {
