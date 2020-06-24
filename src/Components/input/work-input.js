@@ -163,7 +163,7 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
     }
 
     if (use === 'countdown' && (countdown_state !== NONE)) {
-        return null
+        return null;
     }
 
     else {
