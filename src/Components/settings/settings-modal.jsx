@@ -1,6 +1,4 @@
 import React, { useEffect, useState, useRef } from 'react';
-import './modal.css';
-// import TimerInput from '../input/break-input';
 import TimerInput from '../input/work-input';
 import { connect } from 'react-redux';
 import { setNumRepeats, setAlertSound, setWorkMusic, setBreakMusic} from './settingsDucks';
@@ -9,7 +7,6 @@ import Toggle from '../UIKits/Toggle'
 import StyledMenu from './menu.styles'
 
 import Button from '../UIKits/Button';
-// import { Keyboard } from 'react-native';
 
 function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound, alert_sound, setWorkMusic, work_music, setBreakMusic, break_music, countdown_state, start}) {
     const [save, setSave] = useState(false);
@@ -67,12 +64,11 @@ function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound
     if (hide) return null;
 
     else {
-        return (
-            <StyledMenu>
+        return (<StyledMenu>
                     <h4> SETTINGS </h4>
                     <hr id='firstLine'/>
                     <form onSubmit={handleConfigSubmit}>
-                       {workInput}
+                        {workInput}
                         {breakInput}
                         <div>
                             <label className>
@@ -96,11 +92,6 @@ function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound
                             <Toggle isChecked={checked2} handleToggle={()=>setChecked2(!checked2)} size="small"/>
                         </div>
                         <div className='soundSetting'>
-                        {/*<input
-                            type = 'checkbox'
-                            checked = {checked3}
-                            onChange = {() => setChecked3(!checked3)}
-                            />*/}
                         <label className='soundLabel'>
                             Break Music
                         </label>
@@ -144,6 +135,4 @@ const mapStateToProps = state => ({
     
 })
 
-/* Merges the return of the mapDispatchToProps function to SandboxModal component 
-as props.*/
 export default connect(mapStateToProps, mapDispatchToProps)(SandboxModal)
