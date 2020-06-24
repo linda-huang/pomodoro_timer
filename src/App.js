@@ -1,4 +1,4 @@
-import React, {useLayoutEffect, useState} from 'react';
+import React, {useLayoutEffect, useEffect, useState} from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import { Provider } from 'react-redux';
@@ -10,16 +10,20 @@ export default function App() {
   const [height, setHeight] = useState(window.innerHeight); 
 
   function updateSize (){
+
     if (window.outerHeight < 300){
+      window.blur();
       window.resizeTo(window.outerWidth, 300);
     }
     if (window.outerWidth < 300){
+      window.blur();
       window.resizeTo(300, window.outerHeight);
     }
   };
 
-  useLayoutEffect(()=> {
+  useEffect(()=> {
     window.addEventListener("resize", updateSize);
+    updateSize();
     return () => window.removeEventListener("resize", updateSize);
   });
 
