@@ -13,7 +13,9 @@
 }
 
 .water{
-    position: absolute;
+    position: fixed;
+    overflow: hidden;
+    
     left:0;
     width: 100%;
  

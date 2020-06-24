@@ -310,7 +310,7 @@ if(this.props.countdown_state===WORK||this.props.countdown_state===BREAK){
             var inc = 0;
             while (balls.length < should_be) {
               let pos = randomPosition(
-                this.state.size,
+                this.state.size*this.state.width,
                 this.state.width,
                 this.state.height
               );
@@ -321,7 +321,7 @@ if(this.props.countdown_state===WORK||this.props.countdown_state===BREAK){
                 vX = random(-this.state.velocity, this.state.velocity);
                 vY = random(-this.state.velocity, this.state.velocity);
               }
-              let ball = new Ball(pos, vX, vY, this.state.size);
+              let ball = new Ball(pos, vX, vY, this.state.size*this.state.width);
               balls.push(ball);
               inc += 1;
             }
