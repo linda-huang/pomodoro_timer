@@ -8,13 +8,14 @@ import reflections from "./Toshifumi Hinata-Reflections.mp3";
 import water from './18 - Water Lapping Wind.mp3';
 import rain from './9 - Rain On Rooftop.mp3';
 
-//Play Sound during work countdown
+/* Play Sound during work countdown and break countdown*/
 function Sound ({countdown_state, pause, work_music, break_music, animation_state}){
     
 
     const workaudio = useRef(null);
     const breakaudio = useRef(null);
 
+    /* switch audio file when the animation changes*/
     useEffect(() => {
         if (animation_state === WAVE){
             workaudio.current.src = water;

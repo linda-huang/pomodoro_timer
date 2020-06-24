@@ -39,7 +39,7 @@ function TimerWrapper ({ setCountdownState, countdown_state}) {
         }
     }, [workChange, breakChange])
 
-    let startButton = (countdown_state !==  NONE) ? null : <Button type = "primary" size = "medium" onClick={handleStartClick}>
+    let startButton = (countdown_state !==  NONE) ? null : <Button type = "primary" size = "big" onClick={handleStartClick}>
         START
     </Button>
 
@@ -49,11 +49,11 @@ function TimerWrapper ({ setCountdownState, countdown_state}) {
             <div className = "main">
                 <div className = "WorkInput">
                     {workLabel}
-                    <TimerInput workBreak={WORK} use="countdown" save={save} text_size={5} setWorkChange={(input) => setWorkChange(input)}/>
+                    <TimerInput workBreak={WORK} use="countdown" save={save} text_size={6.5} setWorkChange={(input) => setWorkChange(input)}/>
                 </div>
                 <div className = "BreakInput">
                     {breakLabel}
-                    <TimerInput workBreak={BREAK} use="countdown" save={save} text_size={5} setBreakChange={(input) => setBreakChange(input)}/>
+                    <TimerInput workBreak={BREAK} use="countdown" save={save} text_size={6.5} setBreakChange={(input) => setBreakChange(input)}/>
                 </div>
                 <div className = "startBttn">
                     {startButton}

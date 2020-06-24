@@ -10,9 +10,9 @@
 }
 
 .btn-big{
-  width: 200px;
-  height: 90px;
-  font-size: 30px;
+  width: 16vmin;
+  height: 7.2vmin;
+  font-size: 2.4vmin;
 }
 
 .btn-medium{

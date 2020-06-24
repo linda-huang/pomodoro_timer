@@ -176,6 +176,7 @@ input[type="radio"]{
   grid-area: left;
   align-self: center;
 }
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -188,7 +189,7 @@ input[type="radio"]{
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #215eda;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
