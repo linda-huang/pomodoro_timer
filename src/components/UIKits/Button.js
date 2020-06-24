@@ -9,7 +9,7 @@ class Button extends React.Component {
   }
 
   render() {
-    const classes = `btn-${this.type} btn-${this.size}`;
+    const classes = `btn-${this.type} btn-${this.size} my-btn`;
     return (
       <button
         id={this.props.id}
@@ -21,6 +21,5 @@ class Button extends React.Component {
     );
   }
 }
-
 
 export default Button;
