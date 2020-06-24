@@ -16,15 +16,15 @@
 }
 
 .btn-medium{
-  width: 12vw;
-  height: 5.4vw;
-  font-size: 1.8vw;
+  width: 12vmin;
+  height: 5.4vmin;
+  font-size: 1.8vmin;
 }
 
 .btn-small{
-  width: 8vw;
-  height: 3.6vw;
-  font-size: 1.2vw;
+  width: 8vmin;
+  height: 3.6vmin;
+  font-size: 1.2vmin;
 }
 
 .btn-xsmall{

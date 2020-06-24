@@ -178,8 +178,8 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
                             maxLength = "6"
                             size = {size*22/25}
                             style = {{ 
-                                height: `${size*1.5}vw`,
-                                width: `${size*6.4}vw`
+                                height: `${size*1.5}vmin`,
+                                width: `${size*6.4}vmin`
                             }}
                             onBlur = {blur}
                             onFocus = {focus}
@@ -193,8 +193,8 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
                         <h3 className = "timeDisplay" 
                             style = {{
                                 color: color,
-                                fontSize: `${size}vw`,
-                                lineHeight: `${size*7/5}vw`,
+                                fontSize: `${size}vmin`,
+                                lineHeight: `${size*7/5}vmin`,
                             }}>
                            {hour < 10 ? `0${hour}` : hour}h &#160;
                            {minute < 10 ? `0${minute}` : minute}m &#160;
@@ -204,7 +204,7 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
                         </h3>
                         <hr ref = {fakeline} style = {{
                             visibility: "hidden",
-                            marginBottom: `${1}vw`,
+                            marginBottom: `${1}vmin`,
                             border: "none",
                             height: `${1}%`
                         }}></hr>
