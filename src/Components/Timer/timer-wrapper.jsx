@@ -50,6 +50,16 @@ function TimerWrapper({ setCountdownState, countdown_state }) {
       </Button>
     );
 
+  const handleHomeClick = () => {
+    if (countdown_state !== NONE) {
+      setCountdownState(NONE);
+    }
+  };
+
+  let homeBut = (
+    <button className="my-btn home-btn" onClick={handleHomeClick}></button>
+  );
+
   return (
     <div className="GridLayout">
       {/*<div className = "MainLayout">*/}
@@ -89,6 +99,8 @@ function TimerWrapper({ setCountdownState, countdown_state }) {
       <div className="animation">
         <AnimationWrapper time={totalTime} />
       </div>
+
+      <div className="home-btn-con">{homeBut}</div>
     </div>
   );
 }
