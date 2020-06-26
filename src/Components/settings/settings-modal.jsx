@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import "./modal.css";
+//import "./modal.css";
 // import TimerInput from '../input/break-input';
 import TimerInput from "../input/work-input";
 import { connect } from "react-redux";
@@ -11,22 +11,20 @@ import StyledMenu from "./menu.styles";
 
 import Button from "../UIKits/Button";
 import "../UIKits/Button.css";
-
 // import { Keyboard } from 'react-native';
 
-function SandboxModal({
-  setHide,
-  hide,
-  setNumRepeats,
-  num_repeats,
-  setAlertSound,
-  alert_sound,
-  setWorkMusic,
-  work_music,
-  setBreakMusic,
-  break_music,
-  countdown_state,
-  start,
+function SandboxModal({ setHide,
+                        hide,
+                        setNumRepeats,
+                        num_repeats,
+                        setAlertSound,
+                        alert_sound,
+                        setWorkMusic,
+                        work_music,
+                        setBreakMusic,
+                        break_music,
+                        countdown_state,
+                        start,
 }) {
   const [save, setSave] = useState(false);
   const [tempNumRepeats, setTempNumRepeats] = useState(num_repeats);

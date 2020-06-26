@@ -20,24 +20,6 @@
   border: none;
 }
 
-<<<<<<< HEAD
-.btn-big{
-  width: 16vmin;
-  height: 7.2vmin;
-  font-size: 2.4vmin;
-}
-
-.btn-medium{
-  width: 12vmin;
-  height: 5.4vmin;
-  font-size: 1.8vmin;
-}
-
-.btn-small{
-  width: 8vmin;
-  height: 3.6vmin;
-  font-size: 1.2vmin;
-=======
 button.btn-primary:hover {
   background: #7fa2aa;
   outline: none;
@@ -80,7 +62,6 @@ button.btn-small:active {
   font-size: 1.8vw;
   border-radius: 6vw;
   box-shadow: 0vw 0.4vw 0.4vw rgba(0, 0, 0, 0.3);
->>>>>>> 37aec4b3504b20570b6207cb984e00949f63e21d
 }
 
 .btn-xsmall {
