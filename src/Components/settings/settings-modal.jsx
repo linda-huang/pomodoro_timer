@@ -53,12 +53,12 @@ function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound
     let breakInput = (countdown_state !== NONE) ? 
     <label className>
         Set Break Time
-        <TimerInput workBreak={BREAK} use="settings" save={save} text_size = {2.2} setBreakChange={(input) => setBreakChange(input)}/>
+        <TimerInput workBreak={BREAK} use="settings" save={save} text_size = {3} setBreakChange={(input) => setBreakChange(input)}/>
     </label> : null
     let workInput  = ( countdown_state !== 'NONE' )  ? 
     <label className>
         Set Work Time
-        <TimerInput workBreak={WORK} use="settings" save={save} text_size = {2.2} setWorkChange={(input) => setWorkChange(input)}/>
+        <TimerInput workBreak={WORK} use="settings" save={save} text_size = {3} setWorkChange={(input) => setWorkChange(input)}/>
     </label> : null
   
     if (hide) return null;
@@ -71,14 +71,15 @@ function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound
                         {workInput}
                         {breakInput}
                         <div>
-                            <label className>
+                            <label>
                                 Number of Repeats 
                             </label>
-                            <input 
+                            <input  className = "repeatNum"
                                     type='number'
                                     min="0"
                                     value={tempNumRepeats}
                                     onChange={handleRepeatChange}/>
+                                    
                         </div>
                         <hr id='secondLine'/>
                         <div className='soundSetting'>

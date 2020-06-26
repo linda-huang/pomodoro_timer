@@ -17,13 +17,15 @@ function Sound ({countdown_state, pause, work_music, break_music, animation_stat
 
     /* switch audio file when the animation changes*/
     useEffect(() => {
-        if (animation_state === WAVE){
+        if (animation_state === WAVE){     
             workaudio.current.src = water;
             if (!pause){
-            workaudio.current.play();
+                workaudio.current.play();
+
             }
         }
         else if (animation_state === BALL){
+            
             workaudio.current.src = rain;
             if (!pause){
                 workaudio.current.play();
@@ -36,6 +38,9 @@ function Sound ({countdown_state, pause, work_music, break_music, animation_stat
 
     useEffect(() => {
         if (!pause){
+            
+            workaudio.current.volume = 0.75;
+            console.log("volume", workaudio.current.volume);
             if(countdown_state === WORK){  
                 if (work_music){
                     
@@ -69,7 +74,7 @@ function Sound ({countdown_state, pause, work_music, break_music, animation_stat
     return (
         <div>
             <audio loop ref = {workaudio} src = {water} type = "audio/mpeg"></audio>
-            <audio loop ref = {breakaudio} src = {reflections} type = "audio/mpeg"></audio>
+            <audio loop ref = {breakaudio} src = {reflections}  type = "audio/mpeg"></audio>
         </div>
     )
 

@@ -22,7 +22,7 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
 
     const changeTime = (event) => {
         const input = event.currentTarget.value;
-        let time = extractNum(input);
+        let time = onlyNum(input);
         inputText.current.value = time;
         let temp = parseInt(time);
         
@@ -147,6 +147,21 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
     Parameter: text is a string
     Returns a string of only numbers or empty string*/
 
+    //more efficient version without loop
+    function onlyNum(text){
+        let lastChar = text.slice(-1);
+        let ascii = lastChar.charCodeAt(0);
+        console.log("ascii", ascii);
+        if (48 <= ascii && ascii <= 57){
+            return text;
+        }
+        else{
+            return text.slice(0,-1);
+        }
+    }
+
+    /* Less efficient version
+
     //list of acceptable characters
     const numList = ['0','1','2','3','4','5','6','7','8','9'];
     function extractNum(text) {
@@ -160,8 +175,10 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
         else{
             return text.slice(0,-1);
         }
-    }
+    }*/
 
+
+    
     if (use === 'countdown' && (countdown_state !== NONE)) {
         return null;
     }

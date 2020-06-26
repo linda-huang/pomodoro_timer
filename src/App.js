@@ -12,11 +12,9 @@ export default function App() {
   function updateSize (){
 
     if (window.outerHeight < 300){
-      window.blur();
       window.resizeTo(window.outerWidth, 300);
     }
     if (window.outerWidth < 300){
-      window.blur();
       window.resizeTo(300, window.outerHeight);
     }
   };

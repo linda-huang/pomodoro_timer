@@ -32,7 +32,6 @@
 
 
 /*home page layout*/
-
 .main{
   display: grid;
   grid-area: main;
@@ -117,7 +116,7 @@ input[type="radio"]{
 /*---------------------*/
 
 
-/*Other controllers*/
+/*Settings*/
 .Settings {
   grid-row-start: 1;
   grid-row-end: 3;
@@ -126,15 +125,14 @@ input[type="radio"]{
   align-self: start;
   justify-self: end;
 }
+/*---------------------*/
 
+
+/* Animation*/
 .AnimationController{
-  display: grid;
+  display:grid;
   grid-area: left;
   align-self: center;
-  justify-self: stretch;
-  padding-bottom: 70%;
-  
-  
 }
 
 
@@ -142,6 +140,8 @@ input[type="radio"]{
   display: grid;
   z-index: -10000;
 }
+/*---------------------*/
+
 
 /*prompt*/
 .intermission{
@@ -170,12 +170,8 @@ input[type="radio"]{
   align-self: start;
   justify-self:center;
 }
+/*---------------------*/
 
-.AnimationController{
-  display:grid;
-  grid-area: left;
-  align-self: center;
-}
 
 .App-logo {
   height: 40vmin;

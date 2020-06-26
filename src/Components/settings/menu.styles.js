@@ -5,7 +5,7 @@ const StyledMenu = styled.nav`
   flex-direction: column;
   justify-content: center;
   height: 100vh;
-  width: 25vw;
+  width: 18vw;
   text-align: left;
   padding: 2rem;
 //   background: rgba(10, 186, 181, 0.3);
@@ -16,7 +16,7 @@ background: rgba(245, 245, 245, 0.7);
   transform: ${({ hide }) => hide ? 'translateX(+100%)' : 'translateX(0)'};
   transition: transform 0.3s ease-in-out;
   z-index : 1000000;
-  font-size: 4.5vw;
+  font-size: 4.5vmin;
 
   #firstLine {
     width: 100%;
@@ -52,9 +52,25 @@ background: rgba(245, 245, 245, 0.7);
       height: 80%;
   }
 
+  .repeatNum{
+    height: 5vmin;
+    width: 5vmin;
+    font-size: 1vmin;
+    color: #779da6;
+    font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 2.5vmin;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: hidden;
+    background-color: rgba(255,255,255,0.5);
+    outline: none;
+    text-align: right;
+
+  }
   .soundLabel{
     font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 2.5vw;
+    font-size: 2.5vmin;
     color: #779da6;
     margin-top: 5%;
     margin-right: 19%;
@@ -62,7 +78,7 @@ background: rgba(245, 245, 245, 0.7);
   
   label {
     font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 2.5vw;
+    font-size: 2.5vmin;
     color: #779da6;
     margin-top: 1%;
     margin-bottom: 1%;
