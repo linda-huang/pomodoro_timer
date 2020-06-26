@@ -1,25 +1,31 @@
-.generic{
+.generic {
   display: grid;
   grid-area: main;
   place-self: stretch;
 }
 
-.GridLayout{
+.GridLayout {
   display: grid;
   grid-template-columns: [vstart] 15% [v1] auto [v2] 15%[vend];
+<<<<<<< HEAD
   grid-template-rows: [hstart] 20% [h1] auto [h2] 20% [hend];
   grid-template-areas: 
   "corner1 top corner2"
   "left main right"
   "corner3 bottom corner4";
+=======
+  grid-template-rows: [hstart] 15% [h1] auto [h2] 20% [hend];
+  grid-template-areas:
+    "corner1 top corner2"
+    "left main right"
+    "corner3 bottom corner4";
+>>>>>>> 37aec4b3504b20570b6207cb984e00949f63e21d
   width: 100vw;
   height: 100vh;
-
 }
 
-
 /*Main grid layout*/
-.MainLayout{
+.MainLayout {
   /*display: grid;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-areas:
@@ -30,17 +36,20 @@
   grid-area: main;
 }
 
-
 /*home page layout*/
+<<<<<<< HEAD
 .main{
+=======
+
+.main {
+>>>>>>> 37aec4b3504b20570b6207cb984e00949f63e21d
   display: grid;
   grid-area: main;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-areas:
-  "main1"
-  "main2"
-  "main3";
-
+    "main1"
+    "main2"
+    "main3";
 }
 
 .WorkInput {
@@ -48,24 +57,21 @@
   text-align: center;
   align-self: center;
   justify-self: center;
-
 }
 
 .BreakInput {
   grid-area: main2;
   text-align: center;
   justify-self: center;
-  align-self:center;
-
+  align-self: center;
 }
 
-.startBttn{
+.startBttn {
   grid-area: main3;
   text-align: center;
   align-self: center;
   justify-self: center;
 }
-
 
 /*---------------------*/
 
@@ -89,34 +95,38 @@ input[type="radio"]{
 }*/
 
 /*Countdown Display*/
-.CountdownWrapper{
+.CountdownWrapper {
   display: grid;
   grid-area: main;
   place-self: stretch;
 
   grid-template-rows: 2fr 1fr;
   grid-template-areas:
-  "main1"
-  "main2";
+    "main1"
+    "main2";
 }
 
-.pauseBttn{
+.pauseBttn {
   grid-area: main2;
   text-align: center;
   align-self: center;
   justify-self: center;
 }
 
-.countdownDisplay{
+.countdownDisplay {
   grid-area: main1;
   text-align: center;
   align-self: center;
-  justify-self:center;
+  justify-self: center;
 }
 /*---------------------*/
 
+<<<<<<< HEAD
 
 /*Settings*/
+=======
+/*Other controllers*/
+>>>>>>> 37aec4b3504b20570b6207cb984e00949f63e21d
 .Settings {
   grid-row-start: 1;
   grid-row-end: 3;
@@ -127,52 +137,111 @@ input[type="radio"]{
 }
 /*---------------------*/
 
+<<<<<<< HEAD
 
 /* Animation*/
 .AnimationController{
   display:grid;
   grid-area: left;
   align-self: center;
+=======
+.AnimationController {
+  display: grid;
+  grid-area: left;
+  align-self: center;
+  justify-self: stretch;
+  padding-bottom: 70%;
+>>>>>>> 37aec4b3504b20570b6207cb984e00949f63e21d
 }
 
-
-.animation{
+.animation {
   display: grid;
   z-index: -10000;
 }
 /*---------------------*/
 
 
+/* home button */
+.home-btn-con {
+  display: grid;
+  grid-area: corner1;
+  border: none;
+
+  z-index: 1000001;
+}
+
+.home-btn {
+  display: absolute;
+  border: none;
+  width: 35%;
+  top: 10%;
+  background-repeat: no-repeat;
+  margin-top: 20%;
+  margin-left: 12.2%;
+  height: 50%;
+  cursor: pointer;
+  background-color: transparent;
+  padding-top: 5vw;
+  background-image: url(./components/animation/assets/normelhome.png);
+  background-size: contain;
+}
+
+.home-btn:hover {
+  background-image: url(./components/animation/assets/hoverhome.png);
+}
+
+.home-btn:active {
+  background-image: url(./components/animation/assets/clickhome.png);
+  transform: translateY(0.07vw);
+  width: 30%;
+  top: 10%;
+  background-repeat: no-repeat;
+  margin-top: 20%;
+  margin-left: 14%;
+  height: 40%;
+  cursor: pointer;
+  background-color: transparent;
+  padding-top: 5vw;
+}
+
 /*prompt*/
-.intermission{
+.intermission {
   display: grid;
   grid-area: main;
   place-self: stretch;
   grid-template-rows: 1fr 1fr;
-  grid-template-areas: 
-  "prompt"
-  "cat";
+  grid-template-areas:
+    "prompt"
+    "cat";
 }
 
-.prompt{
+.prompt {
   grid-area: prompt;
   text-align: center;
   align-self: center;
-  justify-self:center;
+  justify-self: center;
   font-size: 4vw;
   font-weight: normal;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
 }
 
-.cat{
-  grid-area:cat;
+.cat {
+  grid-area: cat;
   text-align: center;
   align-self: start;
-  justify-self:center;
+  justify-self: center;
 }
 /*---------------------*/
 
 
+<<<<<<< HEAD
+=======
+.AnimationController {
+  display: grid;
+  grid-area: left;
+  align-self: center;
+}
+>>>>>>> 37aec4b3504b20570b6207cb984e00949f63e21d
 .App-logo {
   height: 40vmin;
   pointer-events: none;
