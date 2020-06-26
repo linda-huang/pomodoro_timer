@@ -136,8 +136,6 @@ input[type="radio"]{
 .home-btn-con {
   display: grid;
   grid-area: corner1;
-  display: flex;
-
   border: none;
 
   z-index: 1000001;

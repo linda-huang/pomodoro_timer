@@ -99,7 +99,6 @@ function TimerWrapper({ setCountdownState, countdown_state }) {
       <div className="animation">
         <AnimationWrapper time={totalTime} />
       </div>
-
       <div className="home-btn-con">{homeBut}</div>
     </div>
   );
