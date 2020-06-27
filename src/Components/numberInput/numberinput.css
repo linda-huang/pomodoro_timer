@@ -1,0 +1,70 @@
+.input-wrapper{
+    display: flex;
+    /*width:160px;*/
+    height: 4vmin;
+    justify-content: center;
+ }
+ 
+ /* it will support chrome and firefox */
+ .input-wrapper input[type=number]::-webkit-inner-spin-button,
+ .input-wrapper input[type=number]::-webkit-outer-spin-button{
+    -webkit-appearance:none;
+ }
+ 
+ .input-wrapper input{
+    width:5vmin;
+    padding:1vmin;
+    font-size: 2vmin;
+    text-align:center;
+    font-weight: normal;
+    background:white;
+    border:1px solid #aaa;
+    color: #818d97;
+    border-radius: 5px 0px 0px 5px;
+ }
+ 
+ .input-wrapper input:focus{
+    border-radius: 5px 0px 0px 5px;
+    outline: none;
+ }
+ .input-wrapper input{
+    border-right:none;
+ }
+
+ .arrows-wrapper{
+     display: flex;
+     flex-direction: column;
+     width: 2vmin;
+     height: 4vmin;
+ }
+
+
+
+ .arrows-wrapper button{
+     width: 2vmin;
+     height: 2vmin;
+     border:1px solid #aaa;
+     position: relative;
+     font-size: 1.2vmin;
+     color: #818d97;
+     background-color: #f4f4f4;
+     
+ }
+
+.plus-btn{
+    border-radius: 0px 5px 0px 0px;
+}
+
+.minus-btn{
+    border-radius: 0px 0px 5px 0px;
+}
+
+ .arrows-wrapper button:active{
+    background-color: #8eb6bf;
+
+}
+
+.arrows-wrapper button:focus{
+    border-radius: 0px;
+    outline: none;
+}

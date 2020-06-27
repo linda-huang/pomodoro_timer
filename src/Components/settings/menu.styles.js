@@ -66,8 +66,8 @@ background: rgba(245, 245, 245, 0.7);
     background-color: rgba(255,255,255,0.5);
     outline: none;
     text-align: right;
-
   }
+
   .soundLabel{
     font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 2.5vmin;
@@ -78,7 +78,7 @@ background: rgba(245, 245, 245, 0.7);
   
   label {
     font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 2.5vmin;
+    font-size: 2.3vmin;
     color: #779da6;
     margin-top: 1%;
     margin-bottom: 1%;

@@ -8,6 +8,7 @@ import {setNumRepeats, setAlertSound, setWorkMusic, setBreakMusic} from "./setti
 import { NONE, WORK, BREAK, INTERMEDIATE } from "../timer/timerDucks";
 import Toggle from "../UIKits/Toggle";
 import StyledMenu from "./menu.styles";
+import NumberInput from '../numberInput/NumberInput';
 
 import Button from "../UIKits/Button";
 import "../UIKits/Button.css";
@@ -73,7 +74,7 @@ function SandboxModal({ setHide,
                                                   workBreak={BREAK}
                                                   use="settings"
                                                   save={save}
-                                                  text_size={2}
+                                                  text_size={2.3}
                                                   setBreakChange={(input) => setBreakChange(input)} />
                                               </label>) : null;
 
@@ -83,7 +84,7 @@ function SandboxModal({ setHide,
                                                   workBreak={WORK}
                                                   use="settings"
                                                   save={save}
-                                                  text_size={2}
+                                                  text_size={2.3}
                                                   setWorkChange={(input) => setWorkChange(input)}
                                                 />
                                               </label>) : null;
@@ -99,13 +100,16 @@ function SandboxModal({ setHide,
           {workInput}
           {breakInput}
           <div>
-            <label className>Number of Repeats</label>
-            <input
+            <label>Number of Repeats</label>
+            {/*<input
               type="number"
               min="0"
               value={tempNumRepeats}
               onChange={handleRepeatChange}
-            />
+            />*/}
+            <div>
+              <NumberInput handleRepeatChange = {(input) => setTempNumRepeats(input)}/>
+            </div>
           </div>
           <hr id="secondLine" />
           <div className="soundSetting">

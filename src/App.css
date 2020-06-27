@@ -119,10 +119,12 @@ input[type="radio"]{
 
 /*Settings*/
 .Settings {
-  grid-row-start: 1;
-  grid-row-end: 3;
-  grid-column-start: 3;
-  grid-column-end: 3;
+  /*grid-row-start: 1;     This part is unnecessary because it actually has no
+  grid-row-end: 3;         effect on the layout. There are also no lines named 1 and 3
+  grid-column-start: 3;    cuz I custome named them in GridLayout ;-;
+  grid-column-end: 3;*/
+  grid-area: corner2;
+
   align-self: start;
   justify-self: end;
 }
@@ -178,7 +180,7 @@ input[type="radio"]{
 .home-btn-con {
   display: grid;
   grid-area: corner1;
-  place-content: stretch;
+  place-self: stretch;
 
 
   /*z-index: 1000001;*/
