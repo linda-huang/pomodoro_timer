@@ -123,28 +123,27 @@ input[type="radio"]{
   grid-row-end: 3;         effect on the layout. There are also no lines named 1 and 3
   grid-column-start: 3;    cuz I custome named them in GridLayout ;-;
   grid-column-end: 3;*/
+  display:grid;
   grid-area: corner2;
-
-  align-self: start;
-  justify-self: end;
+  place-self: stretch;
 }
 /*---------------------*/
 
 
 /* Animation*/
 .AnimationController{
-  display:grid;
+  display: grid;
   grid-area: left;
   align-self: center;
 }
 
 
-.animation{
+/*.animation{
   display: grid;
   z-index: -10000;
   grid-column: vstart / vend;
   grid-row: hstart/ hend;
-}
+}*/
 /*---------------------*/
 
 
@@ -190,14 +189,16 @@ input[type="radio"]{
   /*display: absolute;*/
   border: none;
 
-  width: 35%;
-  top: 10%;
+  width: 7vmin;
+  height: 6.3vmin;
+  /*top: 2vw;*/
+  /*left: 2.5vmin;*/
   cursor: pointer;
   
-  margin-top: 20%;
-  margin-left: 12.2%;
-  height: 50%;
-  padding-top: 5vw;
+  margin-top: 2vw;
+  margin-left: 2.5vmin;
+  
+
   
   background-color: transparent;
   background-repeat: no-repeat;
@@ -211,13 +212,15 @@ input[type="radio"]{
 
 .home-btn:active {
   background-image: url(./components/animation/assets/clickhome.png);
-  transform: translateY(0.07vw);
-  width: 30%;
-  top: 10%;
+  transform: translateY(0.07vmin);
+  width: 7vmin;
+  height: 6.3vmin;
+  top: 2vw;
+  left: 2.5vmin;
   background-repeat: no-repeat;
-  margin-top: 20%;
-  margin-left: 14%;
-  height: 40%;
+  margin-top: 2vw;
+  margin-left: 2.5vmin;
+  
   cursor: pointer;
   background-color: transparent;
   padding-top: 5vw;
@@ -225,6 +228,10 @@ input[type="radio"]{
 
 /*---------------------*/
 
+.canvas {
+  position: absolute;
+  z-index:-10000000;
+}
 
 .App-logo {
   height: 40vmin;

@@ -25,8 +25,8 @@ export default function NumberInput ({handleRepeatChange}){
         <div className="input-wrapper">
              <input className="quantity" id="id_form-0-quantity" min="0" name="form-0-quantity" value={value} type="number" onChange = {changeInput}/>
              <div className = "arrows-wrapper">
-                <button class="plus-btn" onClick = {increaseNum}>+</button>
-                <button class="minus-btn" onClick = {decreaseNum}>-</button>
+                <button className="plus-btn" onClick = {increaseNum}>+</button>
+                <button className="minus-btn" onClick = {decreaseNum}>-</button>
             </div>
         </div>
     )

@@ -54,6 +54,11 @@ function TimerWrapper({ setCountdownState, countdown_state }) {
   let homeBut = (<button className="my-btn home-btn" onClick={handleHomeClick}></button>);
     
   return (
+    <div>
+      <div className = "canvas"> 
+      <AnimationWrapper time={totalTime} />
+      </div>
+      
           <div className="GridLayout">
             {/*<div className = "MainLayout">*/}
             <div className="main">
@@ -91,14 +96,16 @@ function TimerWrapper({ setCountdownState, countdown_state }) {
               <AnimationController />
             </div>
 
-            <div className="animation">
+            {/*<div className="animation">
               <AnimationWrapper time={totalTime} />
-            </div>
+            </div>*/}
 
             <div className = "home-btn-con">
               <button className="my-btn home-btn" onClick={handleHomeClick}></button>
             </div>  
 
+          </div>
+          
           </div>
   )
 }

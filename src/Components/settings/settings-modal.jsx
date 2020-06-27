@@ -68,26 +68,36 @@ function SandboxModal({ setHide,
     setTempNumRepeats(event.target.value);
   };
 
-  let breakInput = countdown_state !== NONE ? (<label className> 
-                                                Set Break Time
-                                                <TimerInput
-                                                  workBreak={BREAK}
-                                                  use="settings"
-                                                  save={save}
-                                                  text_size={2.3}
-                                                  setBreakChange={(input) => setBreakChange(input)} />
-                                              </label>) : null;
+  let breakInput = countdown_state !== NONE ? (
+                                                  <label> 
+                                                  Set Break Time
+                                                    <div className = "inputBox">
+                                                      <TimerInput
+                                                        workBreak={BREAK}
+                                                        use="settings"
+                                                        save={save}
+                                                        text_size={2.3}
+                                                        setBreakChange={(input) => setBreakChange(input)} />
+                                                    </div>
+                                             
+                                                </label>
+                                              ) : null;
 
-  let workInput =countdown_state !== "NONE" ? (<label className>
-                                                Set Work Time
-                                                <TimerInput
-                                                  workBreak={WORK}
-                                                  use="settings"
-                                                  save={save}
-                                                  text_size={2.3}
-                                                  setWorkChange={(input) => setWorkChange(input)}
-                                                />
-                                              </label>) : null;
+
+  let workInput =countdown_state !== "NONE" ? (
+                                                <label>
+                                                  Set Work Time
+                                                  <div className = "inputBox">
+                                                    <TimerInput
+                                                      workBreak={WORK}
+                                                      use="settings"
+                                                      save={save}
+                                                      text_size={2.3}
+                                                      setWorkChange={(input) => setWorkChange(input)}
+                                                    />
+                                                    </div>
+                                                </label>
+                                               ) : null;
 
   if (hide) return null;
   
@@ -114,11 +124,13 @@ function SandboxModal({ setHide,
           <hr id="secondLine" />
           <div className="soundSetting">
             <label className="soundLabel">Alert Sound</label>
-            <Toggle
-              isChecked={checked1}
-              handleToggle={() => setChecked1(!checked1)}
-              size="small"
-            />
+          
+              <Toggle
+                isChecked={checked1}
+                handleToggle={() => setChecked1(!checked1)}
+                size="small"
+              />
+            
           </div>
           <div className="soundSetting">
             <label className="soundLabel">Work Music</label>

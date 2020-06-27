@@ -5,11 +5,11 @@ const StyledMenu = styled.nav`
   flex-direction: column;
   justify-content: center;
   height: 100vh;
-  width: 18vw;
+  width: 28vw;
   text-align: left;
-  padding: 2rem;
-//   background: rgba(10, 186, 181, 0.3);
-background: rgba(245, 245, 245, 0.7);
+  padding: 2.5%;
+  //background: rgba(10, 186, 181, 0.3);
+  background: rgba(245, 245, 245, 0.7);
   position: absolute;
   top: 0;
   right: 0;
@@ -68,12 +68,26 @@ background: rgba(245, 245, 245, 0.7);
     text-align: right;
   }
 
+  .inputBox{
+    margin: auto;
+    justify-content:center;
+    border-radius: 5px;
+    background-color: white;
+    border: 1px solid #aaa;
+    width: 20vmin;
+    height: 3min;
+    padding-top: 2%;
+
+  }
   .soundLabel{
     font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 2.5vmin;
+    font-size: 2.3 vmin;
     color: #779da6;
     margin-top: 5%;
-    margin-right: 19%;
+    margin-right: 20%;
+    width: 80%;
+    text-align: left;
+
 }
   
   label {
@@ -82,12 +96,13 @@ background: rgba(245, 245, 245, 0.7);
     color: #779da6;
     margin-top: 1%;
     margin-bottom: 1%;
+
   }
 
   .soundSetting {
       display: flex;
       flex-direction: row;
-      justify-content: center;
+      /*justify-content: center;*/
       align-items: center;
   }
 
