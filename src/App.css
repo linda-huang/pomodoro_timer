@@ -123,10 +123,10 @@ input[type="radio"]{
   grid-row-end: 3;         effect on the layout. There are also no lines named 1 and 3
   grid-column-start: 3;    cuz I custome named them in GridLayout ;-;
   grid-column-end: 3;*/
+  display: grid;
   grid-area: corner2;
+  place-self: stretch;
 
-  align-self: start;
-  justify-self: end;
 }
 /*---------------------*/
 
@@ -238,7 +238,7 @@ input[type="radio"]{
 }
 
 .App-header {
-  background-color: #215eda;
+  background-color: #B2C6B8;
   min-height: 100vh;
   display: flex;
   flex-direction: column;

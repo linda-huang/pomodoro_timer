@@ -66,7 +66,7 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
         else{
             recalibrate();
         }
-        setColor("#999999");
+        setColor("#4D737C");
         setFocused(false);
         if (thecursor.current !== null) {thecursor.current.style.display = "none"};
         if (fakeline.current !== null) {
@@ -78,7 +78,7 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
 
 
     const focus = (event) => {       
-        setColor("#CCCCCC");
+        setColor("#BDD1D6");
         setHour(0);
         setMinute(0);
         setSecond(0);
@@ -92,7 +92,7 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
 
     const mouseLeave = (event) =>{
         if(!focused){
-            setColor("#999999");
+            setColor("#4D737C");
             fakeline.current.style.visibility = "hidden";
         }
     }
@@ -102,7 +102,7 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
         if(!focused){
         fakeline.current.style.visibility = "visible";
         fakeline.current.color = "#bbbbbb";
-        setColor("#cccccc");
+        setColor("#BDD1D6");
         }
     }
 

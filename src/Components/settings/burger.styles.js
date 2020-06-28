@@ -1,14 +1,12 @@
 import styled from 'styled-components';
 
 export const StyledBurger = styled.button`
-  position: absolute;
-  top: 5%;
-  right: 2rem;
+  height: 35%;
+  width: 35%;
+
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 2rem;
-  height: 2rem;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -20,13 +18,14 @@ export const StyledBurger = styled.button`
   }
 
   div {
-    width: 2rem;
-    height: 0.25rem;
+    width: 100%;
+    height: 0.25em;
     background: rgb(52, 52, 52);
     border-radius: 10px;
     transition: all 0.3s linear;
     position: relative;
     transform-origin: 1px;
+    z-index: 1000002;
 
     :first-child {
       transform: ${({ hide }) => hide ? 'rotate(0)' : 'rotate(45deg)'};
