@@ -8,21 +8,24 @@ import reflections from "./Toshifumi Hinata-Reflections.mp3";
 import water from './18 - Water Lapping Wind.mp3';
 import rain from './9 - Rain On Rooftop.mp3';
 
-//Play Sound during work countdown
+/* Play Sound during work countdown and break countdown*/
 function Sound ({countdown_state, pause, work_music, break_music, animation_state}){
     
 
     const workaudio = useRef(null);
     const breakaudio = useRef(null);
 
+    /* switch audio file when the animation changes*/
     useEffect(() => {
-        if (animation_state === WAVE){
+        if (animation_state === WAVE){     
             workaudio.current.src = water;
             if (!pause){
-            workaudio.current.play();
+                workaudio.current.play();
+
             }
         }
         else if (animation_state === BALL){
+            
             workaudio.current.src = rain;
             if (!pause){
                 workaudio.current.play();
@@ -35,6 +38,9 @@ function Sound ({countdown_state, pause, work_music, break_music, animation_stat
 
     useEffect(() => {
         if (!pause){
+            
+            workaudio.current.volume = 0.75;
+            console.log("volume", workaudio.current.volume);
             if(countdown_state === WORK){  
                 if (work_music){
                     
@@ -68,7 +74,7 @@ function Sound ({countdown_state, pause, work_music, break_music, animation_stat
     return (
         <div>
             <audio loop ref = {workaudio} src = {water} type = "audio/mpeg"></audio>
-            <audio loop ref = {breakaudio} src = {reflections} type = "audio/mpeg"></audio>
+            <audio loop ref = {breakaudio} src = {reflections}  type = "audio/mpeg"></audio>
         </div>
     )
 
