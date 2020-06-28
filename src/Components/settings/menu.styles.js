@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const StyledMenu = styled.nav`
   display: flex;
@@ -9,11 +9,11 @@ const StyledMenu = styled.nav`
   text-align: left;
   padding: 2.5%;
   //background: rgba(10, 186, 181, 0.3);
-  background: rgba(245, 245, 245, 0.7);
+  background: rgba(241, 249, 255, 0.9);
   position: absolute;
   top: 0;
   right: 0;
-  transform: ${({ hide }) => hide ? 'translateX(+100%)' : 'translateX(0)'};
+  transform: ${({ hide }) => (hide ? "translateX(+100%)" : "translateX(0)")};
   transition: transform 0.3s ease-in-out;
   z-index : 1000000;
   font-size: 4.5vmin;
@@ -106,6 +106,6 @@ const StyledMenu = styled.nav`
       align-items: center;
   }
 
-  `
+  `;
 
-export default StyledMenu
+export default StyledMenu;

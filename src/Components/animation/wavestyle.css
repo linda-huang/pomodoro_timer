@@ -236,8 +236,9 @@ span.animation {
   width: 100%;
   padding-bottom: 100%;
   margin: 0% 0 0 0%;
+  background: #828b93;
 
-  background: #c7807a;
+  /* background: #c7807a; */
   box-shadow: 0px 0.4vmin 0.4vmin rgba(0, 0, 0, 0.4);
 
   border-radius: 50%;

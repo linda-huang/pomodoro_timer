@@ -21,19 +21,32 @@ class WaveAnimation extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    console.log("component update call");
+    console.log("the state is");
+    console.log(this.props.countdown_state);
+    console.log("the prevstate is ");
+    console.log(prevProps.countdown_state);
+    console.log("this.props.countdown_state !== prevProps.countdown_state is");
+    console.log(this.props.countdown_state != prevProps.countdown_state);
+    console.log(" this.props.countdown_state === NONE");
+    console.log(this.props.countdown_state);
+    console.log(NONE);
+
+    console.log(this.props.countdown_state == NONE);
+
     if (
-      this.props.work_countdown !== prevProps.work_countdown &&
-      this.props.work_countdown === WORK
+      this.props.countdown_state !== prevProps.countdown_state &&
+      this.props.countdown_state === WORK
     ) {
       this.setState({ total: this.props.work_time, height: 0 });
     } else if (
-      this.props.work_countdown !== prevProps.work_countdown &&
-      this.props.work_countdown === BREAK
+      this.props.countdown_state !== prevProps.countdown_state &&
+      this.props.countdown_state === BREAK
     ) {
       this.setState({ total: this.props.break_time, height: 100 });
     } else if (
-      this.props.work_countdown !== prevProps.work_countdown &&
-      this.props.work_countdown === NONE
+      this.props.countdown_state !== prevProps.countdown_state &&
+      this.props.countdown_state === NONE
     ) {
       console.log("in chaging to none");
       this.setState({ total: 0, height: 20 });
@@ -77,6 +90,8 @@ class WaveAnimation extends React.Component {
   }
 
   render() {
+    console.log("height");
+    console.log(this.state.height);
     return (
       <section id="container">
         <div
@@ -157,6 +172,7 @@ const mapStateToProps = (state) => ({
   break_time: state.time.break_time,
   pause: state.countdown.pause,
   countdown_state: state.countdown.countdown_state,
+  prev_state: state.countdown.prev_state,
 });
 
 export default connect(mapStateToProps)(WaveAnimation);

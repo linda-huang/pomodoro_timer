@@ -17,6 +17,7 @@ import {
   BREAK,
   INTERMEDIATE,
   setPrevState,
+  setPaused,
 } from "./timerDucks";
 import { connect } from "react-redux";
 import { useEffect } from "react";
@@ -46,7 +47,10 @@ function TimerWrapper({ setCountdownState, countdown_state }) {
 
   const handleHomeClick = () => {
     if (countdown_state !== NONE) {
+      console.log("set curent state to prev");
+      console.log(countdown_state);
       setPrevState(countdown_state);
+      setPaused(false);
       setCountdownState(NONE);
     }
   };
@@ -124,6 +128,7 @@ function TimerWrapper({ setCountdownState, countdown_state }) {
 const mapDispatchToProps = (dispatch) => ({
   setCountdownState: (state) => dispatch(setCountdownState(state)),
   setPrevState: (state) => dispatch(setPrevState(state)),
+  setPaused: (state) => dispatch(setPaused(state)),
 });
 
 const mapStateToProps = (state) => ({

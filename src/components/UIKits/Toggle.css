@@ -27,7 +27,7 @@
   bottom: 0;
   border-radius: 3vw;
   box-shadow: inset 0px 0.2vw 0.4vw rgba(0, 0, 0, 0.3);
-  background-color: #ccc;
+  background-color: #c1cdd7;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
@@ -41,7 +41,7 @@
   bottom: 0;
   border-radius: 2vw;
   box-shadow: inset 0px 0.3vw 0.3vw rgba(0, 0, 0, 0.3);
-  background-color: #ccc;
+  background-color: #c1cdd7;
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
@@ -77,13 +77,13 @@
 }
 
 input:checked + .slider {
-  background: #a0d8a6;
+  background: #72a3a0;
   box-shadow: inset 0px 0.2vw 0.2vw rgba(0, 0, 0, 0.3);
   border-radius: 4vw;
 }
 
 input:checked + .slider.tg-small {
-  background: #a0d8a6;
+  background: #72a3a0;
   box-shadow: inset 0px 0.3vw 0.3vw rgba(0, 0, 0, 0.3);
   border-radius: 2vw;
 }

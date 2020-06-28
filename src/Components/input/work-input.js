@@ -74,7 +74,7 @@ function TimerInput({
     } else {
       recalibrate();
     }
-    setColor("#001858");
+    setColor("#094B68");
     setFocused(false);
     if (thecursor.current !== null) {
       thecursor.current.style.display = "none";
@@ -85,7 +85,7 @@ function TimerInput({
   };
 
   const focus = (event) => {
-    setColor("#66749B");
+    setColor("#5C91A8");
     setHour(0);
     setMinute(0);
     setSecond(0);
@@ -94,14 +94,14 @@ function TimerInput({
       thecursor.current.style.display = "inline";
     }
     if (fakeline.current !== null) {
-      fakeline.current.color = "#f582ae";
+      fakeline.current.color = "#DE7E7F";
     }
     fakeline.current.style.visibility = "visible";
   };
 
   const mouseLeave = (event) => {
     if (!focused) {
-      setColor("#001858");
+      setColor("#094B68");
       fakeline.current.style.visibility = "hidden";
     }
   };
@@ -109,9 +109,9 @@ function TimerInput({
   const mouseEnter = (event) => {
     if (!focused) {
       fakeline.current.style.visibility = "visible";
-      fakeline.current.color = "#f3d2c1";
+      fakeline.current.color = "#EEA6A6";
 
-      setColor("#66749B");
+      setColor("#5C91A8");
     }
   };
 
