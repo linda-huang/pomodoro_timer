@@ -8,13 +8,13 @@ import Settings from './components/settings/settings-modal-wrapper';
 
 export default function App() {
   return (
-    <div>
-      <Provider store={store}>
-          <div className="App">
-          <TimerWrapper/>
-          </div>
-      </Provider>
-    </div>
+      <div>
+        <Provider store={store}>
+
+              <TimerWrapper/>
+            
+        </Provider>
+      </div>
   );
 }
 

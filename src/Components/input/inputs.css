@@ -7,7 +7,7 @@
 
 .hideInput{
     border: none;
-    opacity: 0.5;
+    opacity: 0;
     position: absolute;
     padding: 0px 0px;
     height: 40px;
@@ -24,4 +24,9 @@
     margin: 0px 0px 0px 0px;
     padding: 0px 0px;
     display: inline;
+
 }
+
+/* *{
+    z-index: 23;
+} */

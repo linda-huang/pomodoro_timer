@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import CountdownWrapper from './countdown-wrapper';
-// import BreakInput from '../input/break-input';
+// import BreakInput from '../input/break-input'
 import TimerInput from '../input/work-input';
 import Settings from '../settings/settings-modal-wrapper';
+
+import '../../App.css';
+
 import { setCountdownState, NONE, WORK, BREAK, INTERMEDIATE } from './timerDucks';
 import { connect } from 'react-redux';
 import { useEffect } from 'react';
+import AnimationController from '../animation/animationController';
 
 function TimerWrapper ({ setCountdownState, countdown_state}) {
 
@@ -20,9 +24,7 @@ function TimerWrapper ({ setCountdownState, countdown_state}) {
     const handleStartClick = () => {
         setSave(true);
         setCountdownState(WORK);
-
     }
-
     useEffect(() => {
         if (workChange === true && breakChange === true) {
             setSave(false)
@@ -36,19 +38,29 @@ function TimerWrapper ({ setCountdownState, countdown_state}) {
     </button>
 
     return (
-        <div>
-            
-            {workLabel}
-            <TimerInput workBreak={WORK} use="countdown" save={save} setWorkChange={(input) => setWorkChange(input)}/>
-
-            {breakLabel}
-            <TimerInput workBreak={BREAK} use="countdown" save={save} setBreakChange={(input) => setBreakChange(input)}/>
-            
-            {startButton}
-            <CountdownWrapper/>
-
-            <Settings start={save}/>
-
+        <div className = "GridLayout">
+            {/*<div className = "MainLayout">*/}
+                <div className = "WorkInput">
+                {workLabel}
+                <TimerInput workBreak={WORK} use="countdown" save={save} setWorkChange={(input) => setWorkChange(input)}/>
+                </div>
+                <div className = "BreakInput">
+                {breakLabel}
+                <TimerInput workBreak={BREAK} use="countdown" save={save} setBreakChange={(input) => setBreakChange(input)}/>
+                </div>
+                <div className = "startBttn">
+                {startButton}
+                </div>
+                <CountdownWrapper/>  
+                
+            {/*</div>*/}
+             
+            <div className = "Settings">
+                <Settings start={save}/>
+            </div>
+            <div className = "AnimationController">
+                <AnimationController/>
+            </div>
         </div>
     )
 

@@ -5,6 +5,7 @@ import TimerInput from '../input/work-input';
 import { connect } from 'react-redux';
 import { setNumRepeats, setAlertSound, setWorkMusic, setBreakMusic} from './settingsDucks';
 import { NONE, WORK, BREAK, INTERMEDIATE } from '../timer/timerDucks';
+import Toggle from '../UIKits/Toggle'
 // import { Keyboard } from 'react-native';
 
 function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound, alert_sound, setWorkMusic, work_music, setBreakMusic, break_music, countdown_state, start}) {
@@ -22,6 +23,15 @@ function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound
         }
     }, [start])
 
+    useEffect(() => {
+        setTempNumRepeats(num_repeats);
+        if (workChange === true && breakChange === true) {
+            setSave(false)
+            setWorkChange(false)
+            setBreakChange(false)
+        }
+    }, [workChange, breakChange, num_repeats])
+
     const onDialogClick = (event) => {
         event.stopPropagation();
     }
@@ -34,12 +44,6 @@ function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound
        setBreakMusic(checked3);
        event.preventDefault();
        if (countdown_state === NONE) setSave(false);
-       
-       else if (workChange===true && breakChange===true) {
-            setSave(false)
-            setWorkChange(false)
-            setBreakChange(false)
-       }
     }
 
     const handleRepeatChange = (event) => {
@@ -48,12 +52,12 @@ function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound
     
     let breakInput = (countdown_state !== NONE) ? 
     <label>
-        How long should we break for?
+        How long should next we break for?
         <TimerInput workBreak={BREAK} use="settings" save={save} setBreakChange={(input) => setBreakChange(input)}/>
     </label> : null
     let workInput  = ( countdown_state !== 'NONE' )  ? 
     <label>
-        How long should we work for?
+        How long should next we work for?
         <TimerInput workBreak={WORK} use="settings" save={save} setWorkChange={(input) => setWorkChange(input)}/>
     </label> : null
   
@@ -76,42 +80,44 @@ function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound
                             <BreakInput use="settings" save={save}/>
                         </label> */}
                         <div>
-                        <label>
-                            How many repeats?
-                            <input 
-                            type='number'
-                            value={tempNumRepeats}
-                            onChange={handleRepeatChange}/>
-                        </label>
+                            <label>
+                                How many repeats? 
+                                <input 
+                                    type='number'
+                                    value={tempNumRepeats}
+                                    onChange={handleRepeatChange}/>
+                            </label>
                         </div>
                         <div>
                         <label>
                             Alert Sound
-                            <input
+                            <Toggle isChecked={checked1} handleToggle={()=>setChecked1(!checked1)} size="small"/>
+                            {/* <input
                             type = 'checkbox'
                             checked = {checked1}
                             onChange ={() => setChecked1(!checked1)}
-                            />
+                            /> */}
                         </label>
                         </div>
                         <div>
-                        <label>
-                            Work Music
-                            <input
+                        <input
                             type = 'checkbox'
                             checked = {checked2}
                             onChange = {() => setChecked2(!checked2)}
                             />
+                        <label>
+                            Work Music
+                            
                         </label>
                         </div>
                         <div>
-                        <label>
-                            Break Music
-                            <input
+                        <input
                             type = 'checkbox'
                             checked = {checked3}
                             onChange = {() => setChecked3(!checked3)}
                             />
+                        <label>
+                            Break Music
                         </label>
                         </div>
                         <button type="submit">Save</button>
