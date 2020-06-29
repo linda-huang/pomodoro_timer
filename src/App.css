@@ -164,6 +164,20 @@ input[type="radio"]{
 }
 /*---------------------*/
 
+.catGif {
+  max-width: 100%;
+  height: auto;
+}
+
+.full_cat {
+  display: relative;
+  left: 0;
+  width: 100%;
+  background-image: url(components/prompts/assets/pawnwalk.gif);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 .home-btn-con {
   display: grid;
   grid-area: corner1;

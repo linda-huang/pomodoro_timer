@@ -11,7 +11,7 @@ class WaveAnimation extends React.Component {
       console.log("this prop");
       console.log(this.props.work_time);
       const tolsec = this.props.work_time;
-      this.state = { total: tolsec, height: 0 };
+      this.state = { total: tolsec, height: 3 };
     } else if (this.props.countdown_state === BREAK) {
       const tolsec = this.props.break_time;
       this.state = { total: tolsec, height: 100 };
@@ -32,13 +32,13 @@ class WaveAnimation extends React.Component {
     console.log(this.props.countdown_state);
     console.log(NONE);
 
-    console.log(this.props.countdown_state == NONE);
+    console.log(this.props.countdown_state === NONE);
 
     if (
       this.props.countdown_state !== prevProps.countdown_state &&
       this.props.countdown_state === WORK
     ) {
-      this.setState({ total: this.props.work_time, height: 0 });
+      this.setState({ total: this.props.work_time, height: 3 });
     } else if (
       this.props.countdown_state !== prevProps.countdown_state &&
       this.props.countdown_state === BREAK
@@ -73,7 +73,11 @@ class WaveAnimation extends React.Component {
 
         if (this.props.countdown_state === WORK) {
           console.log("in work");
-          this.setState({ height: 100 - percent });
+          if (100 - percent < 3) {
+            this.setState({ height: 3 });
+          } else {
+            this.setState({ height: 100 - percent });
+          }
 
           console.log("height is set");
           console.log(100 - percent);
