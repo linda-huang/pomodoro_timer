@@ -28,7 +28,6 @@ function SandboxModal ({setHide, hide, setNumRepeats, num_repeats, setAlertSound
 
     const handleConfigSubmit = (event) => {
        setSave(true)
-       console.log(save)
        setNumRepeats(parseInt(tempNumRepeats));
        setAlertSound(checked1);
        setWorkMusic(checked2);

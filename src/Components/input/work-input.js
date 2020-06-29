@@ -46,13 +46,14 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
     const fakeline = useRef(null)
 
     const blur = (event) => {
+        inputText.current.value = ''; //clear input box when user clicks out of textbox
         setColor("#999999");
         if (thecursor.current !== null) {thecursor.current.style.display = "none"};
         if (fakeline.current !== null) {fakeline.current.style.visibility = "hidden"};
 
     }
 
-    const focus = (event) => {
+    const focus = (event) => {       
         setColor("#CCCCCC");
         if (thecursor.current !== null) {thecursor.current.style.display = "inline"};
         if (fakeline.current !== null) {fakeline.current.style.visibility = "visible"};
@@ -136,8 +137,9 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
                             style = {{
                                 color: color
                             }}>
-                           {Math.floor(totalTime / 3600) < 10 ? `0${Math.floor(totalTime / 3600)}` : Math.floor(totalTime / 3600)}h {Math.floor((totalTime % 3600) / 60) < 10 ? `0${Math.floor((totalTime % 3600) / 60)}` : Math.floor((totalTime % 3600) / 60)}m {Math.floor(totalTime % 60) < 10 ? `0${Math.floor(totalTime % 60)}` :  Math.floor(totalTime % 60)}s
-                           <hr className = "fakeCursor" ref = {thecursor} style = {{display : "none"}} width="1" size="35"></hr>
+                           {Math.floor(totalTime / 3600) < 10 ? `0${Math.floor(totalTime / 3600)}` : Math.floor(totalTime / 3600)}h {Math.floor((totalTime % 3600) / 60) < 10 ? `0${Math.floor((totalTime % 3600) / 60)}` : Math.floor((totalTime % 3600) / 60)}m {Math.floor(totalTime % 60) < 10 ? `0${Math.floor(totalTime % 60)}` :  Math.floor(totalTime % 60)}
+                           <hr className = "fakeCursor" ref = {thecursor} style = {{display : "none"}} width="1" size="35"></hr>s
+                           
                         </h1>
                         <hr ref = {fakeline} style = {{
                             visibility: "hidden"
