@@ -138,8 +138,15 @@ input[type="radio"]{
 /*prompt*/
 .intermission {
   display: grid;
+  width: 100vw;
+  height: 100vh;
   grid-area: main;
-  place-self: stretch;
+
+  position: fixed;
+  overflow: hidden;
+
+  left: 0;
+
   grid-template-rows: 1fr 1fr;
   grid-template-areas:
     "prompt"
@@ -148,9 +155,15 @@ input[type="radio"]{
 
 .prompt {
   grid-area: prompt;
+
+  margin-top: 5vw;
+
   text-align: center;
   align-self: center;
   justify-self: center;
+}
+
+.promptText {
   font-size: 4vw;
   font-weight: normal;
   font-family: "Courier New", Courier, monospace;
@@ -161,23 +174,31 @@ input[type="radio"]{
   text-align: center;
   align-self: start;
   justify-self: center;
+  object-fit: contain;
+  width: 40vw;
+  height: 40vh;
+  margin-bottom: 20vh;
+
+  object-fit: contain;
 }
 /*---------------------*/
 
 .catGif {
-  max-width: 100%;
-  height: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .full_cat {
   display: relative;
-  left: 0;
-  width: 100%;
-  background-image: url(components/prompts/assets/pawnwalk.gif);
-  background-size: cover;
-  background-repeat: no-repeat;
+  left: 10vw;
 }
-
+.fullcatGif {
+  object-fit: contain;
+  width: 80%;
+  margin-left: 10vw;
+  margin-right: 10vw;
+}
 .home-btn-con {
   display: grid;
   grid-area: corner1;

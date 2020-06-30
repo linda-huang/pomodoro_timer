@@ -11,13 +11,13 @@ import {
 import { connect } from "react-redux";
 import Alert from "../audio/alert";
 
-import walk from "./assets/pawnwalk.gif";
-import rSleep from "./assets/catmorealsleep.gif";
-import hideCat from "./assets/hidecat.gif";
-import studyCat from "./assets/studycat3.gif";
-import thumb from "./assets/thumb.gif";
-import sleep2 from "./assets/sleepVer3.gif";
-import tail from "./assets/cantailv2.gif";
+import walk from "./assets/pawnwalkT.gif";
+import rSleep from "./assets/catmorealsleepT.gif";
+import hideCat from "./assets/hidecatT.gif";
+import studyCat from "./assets/studycat3T.gif";
+import thumb from "./assets/thumbT.gif";
+import sleep2 from "./assets/sleepVer3T.gif";
+import tail from "./assets/cantailv2T.gif";
 
 function randomInt(min, max) {
   const num = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -37,7 +37,7 @@ function Prompts({
 
   const pawn = (
     <div className="full_cat">
-      {/* <img src={walk} alt="cat walk" className="fullcatGif" /> */}
+      <img src={walk} alt="cat walk" className="fullcatGif" />
     </div>
   );
 
@@ -91,15 +91,15 @@ function Prompts({
 
   useEffect(() => {
     if (countdown_state === INTERMEDIATE || countdown_state === SESSION_END) {
-      if (prev_state === WORK) {
+      if (countdown_state === SESSION_END) {
+        setPrompt(endSession[randomInt(0, endSession.length - 1)]);
+        setImg(endSessionPic[randomInt(0, endSessionPic.length - 1)]);
+      } else if (prev_state === WORK) {
         setPrompt(workDone[randomInt(0, workDone.length - 1)]);
         setImg(workDonePic[randomInt(0, workDonePic.length - 1)]);
       } else if (prev_state === BREAK) {
         setPrompt(breakDone[randomInt(0, breakDone.length - 1)]);
         setImg(breakDonePic[randomInt(0, breakDonePic.length - 1)]);
-      } else if (countdown_state === SESSION_END) {
-        setPrompt(endSession[randomInt(0, endSession.length - 1)]);
-        setImg(endSessionPic[randomInt(0, endSessionPic.length - 1)]);
       }
 
       setTimeout(() => {
@@ -111,7 +111,7 @@ function Prompts({
           setCountdownState(prev_state === WORK ? BREAK : WORK);
           setPrevState(INTERMEDIATE);
         }
-      }, 4000);
+      }, 5000);
     }
   }, [countdown_state]);
 
@@ -119,8 +119,9 @@ function Prompts({
   else {
     return (
       <div className="intermission">
-        <h2 className="prompt">{prompt}</h2>
-
+        <div className="prompt">
+          <h2 className="promptText">{prompt}</h2>
+        </div>
         {img}
         <Alert />
       </div>
