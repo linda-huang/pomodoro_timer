@@ -15,6 +15,10 @@ function Sound ({countdown_state, pause, work_music, break_music, animation_stat
     const workaudio = useRef(null);
     const breakaudio = useRef(null);
 
+    const breakPromise = useRef(undefined);
+    const workPromise = useRef(undefined);
+    
+
     /* switch audio file when the animation changes*/
     useEffect(() => {
         if (animation_state === WAVE){     
@@ -37,33 +41,84 @@ function Sound ({countdown_state, pause, work_music, break_music, animation_stat
     
 
     useEffect(() => {
+        
         if (!pause){
             
             workaudio.current.volume = 0.75;
-            console.log("volume", workaudio.current.volume);
+            
             if(countdown_state === WORK){  
+                //console.log("work sound", work_music);
+                //console.log("workPromise", workPromise);
                 if (work_music){ 
-                    workaudio.current.play();
+                    //console.log("playing work audio")
+                    workPromise.current = workaudio.current.play();
+                    //console.log("workPromise", workPromise);
+                    
                 }
-                else{
-                    workaudio.current.pause();
+                else if (workPromise.current !== undefined){
+                    //console.log("pausing work sound")
+                    workPromise.current.then(_ => {
+                        workaudio.current.pause();
+                    })
+                    .catch(error => {
+                        console.log("problem pausing work aduio during work");
+                    })  
                 }
-                breakaudio.current.pause();
+                if (breakPromise.current !== undefined){
+                    breakPromise.current.then(_ => {
+                        breakaudio.current.pause();
+                    })
+                    .catch(error => {
+                        console.log("problem pausing break audio during work");
+                    })
+                    
+                }
                 
             }
             else { 
-                workaudio.current.pause();
+                
                 if (break_music){
-                    breakaudio.current.play();
+                    breakPromise.current = breakaudio.current.play();
                 }
-                else{
-                    breakaudio.current.pause();
+
+                else if (breakPromise.current !== undefined){
+                    breakPromise.current.then(_ => {
+                        breakaudio.current.pause();
+                    })
+                    .catch(error => {
+                        console.log("problem pausing break audio");
+                    })
+                }
+                    
+                if (workPromise.current !== undefined){
+                    workPromise.current.then(_ => {
+                        workaudio.current.pause();
+                    })
+                    .catch(error => {
+                        console.log("problem pausing work audio during break")
+                    })
+                }
                 }
             }
-        }
         else{
-            workaudio.current.pause();
-            breakaudio.current.pause();
+            if (workPromise.current !== undefined){
+                workPromise.current.then (_ =>{
+                    workaudio.current.pause();
+                })
+                .catch(error => {
+                    console.log("problem pausing work audio in pause")
+                })
+            }
+            
+            if (breakPromise.current !== undefined){
+                breakPromise.current.then (_ =>{
+                    breakaudio.current.pause();
+                })
+                .catch(error => {
+                    console.log("problem pausing break audio in pause")
+                })
+            }
+           
         }
     },[countdown_state, pause, work_music, break_music])
     

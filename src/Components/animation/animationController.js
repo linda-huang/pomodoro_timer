@@ -14,11 +14,11 @@ class AnimationController extends React.Component {
     }
 
     ballClick(){
-        console.log("ball out")
+        //console.log("ball out")
         if (this.props.animation_state!== BALL &&this.props.animation_state!==HIDE){
-            console.log("ball")
+            //console.log("ball")
             this.props.setAnimationState(BALL);
-            console.log(this.props.animation_state);
+            //console.log(this.props.animation_state);
         }
     }
 

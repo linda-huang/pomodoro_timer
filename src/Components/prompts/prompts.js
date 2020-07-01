@@ -111,7 +111,7 @@ function Prompts({
           setCountdownState(prev_state === WORK ? BREAK : WORK);
           setPrevState(INTERMEDIATE);
         }
-      }, 30000);
+      }, 5000);
     }
   }, [countdown_state]);
 

@@ -21,7 +21,7 @@ class WaveAnimation extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log("component update call");
+    /*console.log("component update call");
     console.log("the state is");
     console.log(this.props.countdown_state);
     console.log("the prevstate is ");
@@ -32,7 +32,7 @@ class WaveAnimation extends React.Component {
     console.log(this.props.countdown_state);
     console.log(NONE);
 
-    console.log(this.props.countdown_state === NONE);
+    console.log(this.props.countdown_state === NONE);*/
 
     if (
       this.props.countdown_state !== prevProps.countdown_state &&
@@ -48,7 +48,7 @@ class WaveAnimation extends React.Component {
       this.props.countdown_state !== prevProps.countdown_state &&
       this.props.countdown_state === NONE
     ) {
-      console.log("in chaging to none");
+      //console.log("in chaging to none");
       this.setState({ total: 0, height: 20 });
     }
 
@@ -58,10 +58,10 @@ class WaveAnimation extends React.Component {
     ) {
       if (this.props.time !== prevProps.time) {
         let total = this.state.total;
-        console.log("this is total");
+        /*console.log("this is total");
         console.log(total);
         console.log("this is current");
-        console.log(this.props.time);
+        console.log(this.props.time);*/
         if (this.props.time > total) {
           total = this.props.time;
           this.setState({ total: this.props.time });
@@ -72,30 +72,30 @@ class WaveAnimation extends React.Component {
         // console.log(`percent height=${percent}%`);
 
         if (this.props.countdown_state === WORK) {
-          console.log("in work");
+          //console.log("in work");
           if (100 - percent < 3) {
             this.setState({ height: 3 });
           } else {
             this.setState({ height: 100 - percent });
           }
 
-          console.log("height is set");
+          /*console.log("height is set");
           console.log(100 - percent);
           console.log("current height setted");
-          console.log(this.state.height);
+          console.log(this.state.height);*/
         } else if (this.props.countdown_state === BREAK) {
           this.setState({ height: percent });
-          console.log("in break");
+          /*console.log("in break");
           console.log("height");
-          console.log(this.state.height);
+          console.log(this.state.height);*/
         }
       }
     }
   }
 
   render() {
-    console.log("height");
-    console.log(this.state.height);
+    /*console.log("height");
+    console.log(this.state.height);*/
     return (
       <section id="container">
         <div

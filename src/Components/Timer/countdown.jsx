@@ -25,7 +25,6 @@ function Countdown ({pause, work_time, break_time, countdown_state, num_repeats,
     useEffect(()=>{  
         if (!pause && (countdown_state !== NONE && countdown_state !== INTERMEDIATE)) {
             const interval = setInterval(() => {
-                console.log(totalTime);
                 setTotalTime(totalTime - 1);
                 updateTime(totalTime);
                 // if (displaySecond > 0){

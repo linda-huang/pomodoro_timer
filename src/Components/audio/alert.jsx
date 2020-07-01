@@ -7,16 +7,23 @@ import audiofile from './Zen_mg_SHIBUYA_long.m4r';
 function Alert ({countdown_state, alert_sound}){
 
     const alertaudio = useRef(null)
+    const alertPromise = useRef(undefined)
 
     useEffect(() => {
         if (alert_sound){
             if(countdown_state === INTERMEDIATE || countdown_state === SESSION_END){
                 alertaudio.current.play();
             }
-            else{
-                alertaudio.current.pause();
+            else if (alertPromise !== undefined){
+                alertPromise.current.then(_ =>{
+                    alertaudio.current.pause();
+                })
+                .catch(error =>{
+                    console.log("problem stopping alert audio");
+                })
             }
-        }
+                
+            }
     }, [countdown_state, alert_sound])
 
 
