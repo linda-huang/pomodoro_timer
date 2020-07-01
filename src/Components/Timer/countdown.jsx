@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import AnimationWrapper from '../animation/animation-wrapper';
 
-import { setPrevState, setCountdownState, NONE, WORK, BREAK, INTERMEDIATE } from './timerDucks';
+import { setPrevState, setCountdownState, NONE, WORK, BREAK, INTERMEDIATE, SESSION_END } from './timerDucks';
 import { setNumRepeats } from '../settings/settingsDucks';
 import AddTime from './addTime/add-button';
 
@@ -73,7 +73,7 @@ function Countdown ({pause, work_time, break_time, countdown_state, num_repeats,
                 setNumRepeats(num_repeats-1);
                 rewindToWork();
             } else if (countdown_state === BREAK) {
-                setCountdownState(NONE)
+                setCountdownState(SESSION_END)
                 setPrevState(BREAK)
             }   
         }
