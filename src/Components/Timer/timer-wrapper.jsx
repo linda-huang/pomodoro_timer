@@ -6,6 +6,7 @@ import TimerInput from "../input/work-input";
 import Settings from "../settings/sliding-menu";
 import AnimationWrapper from "../animation/animation-wrapper";
 import AnimationController from "../animation/animationController";
+import MiniPrompt from "../prompts/miniPrompt";
 
 import "../../App.css";
 import Button from "../UIKits/Button";
@@ -67,17 +68,16 @@ function TimerWrapper({
       </Button>
     );
 
-  let homeBut = (
-    <button className="my-btn home-btn" onClick={handleHomeClick}></button>
-  );
-
   return (
     <div>
-      <div className = "canvas">
+      <div className="canvas">
         <AnimationWrapper time={totalTime} />
       </div>
 
       <div className="GridLayout">
+        <div className="miniPrompt">
+          <MiniPrompt time={totalTime} />
+        </div>
         {/*<div className = "MainLayout">*/}
         <div className="main">
           <div className="WorkInput">

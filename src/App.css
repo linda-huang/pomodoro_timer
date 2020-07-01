@@ -141,7 +141,7 @@ input[type="radio"]{
   /*width: 100vw;
   height: 100vh;*/
   grid-area: main;
-  place-self:stretch;
+  place-self: stretch;
 
   /*position: fixed;
   overflow: hidden;*/
@@ -165,7 +165,6 @@ input[type="radio"]{
 }
 
 .promptText {
-
   font-size: 4vw;
   font-weight: normal;
   font-family: "Courier New", Courier, monospace;
@@ -183,7 +182,6 @@ input[type="radio"]{
 
   /*object-fit: contain;*/
 }
-
 
 .catGif {
   /*width: 100%;
@@ -204,7 +202,6 @@ input[type="radio"]{
   margin-right: 10%;
 }
 /*---------------------*/
-
 
 /* home button*/
 .home-btn-con {
@@ -232,6 +229,23 @@ input[type="radio"]{
   background-repeat: no-repeat;
   background-image: url(./components/animation/assets/normal.png);
   background-size: contain;
+}
+
+.miniPrompt {
+  position: relative;
+  grid-area: top;
+  text-align: center;
+  /* align-self: center;
+  justify-self: center; */
+  place-self: stretch;
+}
+
+.miniP {
+  margin-top: 2vw;
+  text-align: center;
+  font-size: 2vw;
+  font-weight: normal;
+  color: #72a3a0;
 }
 
 .home-btn:hover {
