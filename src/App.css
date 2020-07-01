@@ -1,25 +1,23 @@
-.generic{
+.generic {
   display: grid;
   grid-area: main;
   place-self: stretch;
 }
 
-.GridLayout{
+.GridLayout {
   display: grid;
   grid-template-columns: [vstart] 15% [v1] auto [v2] 15%[vend];
   grid-template-rows: [hstart] 20% [h1] auto [h2] 20% [hend];
-  grid-template-areas: 
-  "corner1 top corner2"
-  "left main right"
-  "corner3 bottom corner4";
+  grid-template-areas:
+    "corner1 top corner2"
+    "left main right"
+    "corner3 bottom corner4";
   width: 100vw;
   height: 100vh;
-
 }
 
-
 /*Main grid layout*/
-.MainLayout{
+.MainLayout {
   /*display: grid;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-areas:
@@ -30,17 +28,15 @@
   grid-area: main;
 }
 
-
 /*home page layout*/
-.main{
+.main {
   display: grid;
   grid-area: main;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-areas:
-  "main1"
-  "main2"
-  "main3";
-
+    "main1"
+    "main2"
+    "main3";
 }
 
 .WorkInput {
@@ -48,24 +44,21 @@
   text-align: center;
   align-self: center;
   justify-self: center;
-
 }
 
 .BreakInput {
   grid-area: main2;
   text-align: center;
   justify-self: center;
-  align-self:center;
-
+  align-self: center;
 }
 
-.startBttn{
+.startBttn {
   grid-area: main3;
   text-align: center;
   align-self: center;
   justify-self: center;
 }
-
 
 /*---------------------*/
 
@@ -88,34 +81,32 @@ input[type="radio"]{
   cursor:pointer;
 }*/
 
-
 /*Countdown Display*/
-.CountdownWrapper{
+.CountdownWrapper {
   display: grid;
   grid-area: main;
   place-self: stretch;
 
   grid-template-rows: 2fr 1fr;
   grid-template-areas:
-  "main1"
-  "main2";
+    "main1"
+    "main2";
 }
 
-.pauseBttn{
+.pauseBttn {
   grid-area: main2;
   text-align: center;
   align-self: center;
   justify-self: center;
 }
 
-.countdownDisplay{
+.countdownDisplay {
   grid-area: main1;
   text-align: center;
   align-self: center;
-  justify-self:center;
+  justify-self: center;
 }
 /*---------------------*/
-
 
 /*Settings*/
 .Settings {
@@ -123,20 +114,18 @@ input[type="radio"]{
   grid-row-end: 3;         effect on the layout. There are also no lines named 1 and 3
   grid-column-start: 3;    cuz I custome named them in GridLayout ;-;
   grid-column-end: 3;*/
-  display:grid;
+  display: grid;
   grid-area: corner2;
   place-self: stretch;
 }
 /*---------------------*/
 
-
 /* Animation*/
-.AnimationController{
+.AnimationController {
   display: grid;
   grid-area: left;
   align-self: center;
 }
-
 
 /*.animation{
   display: grid;
@@ -146,41 +135,74 @@ input[type="radio"]{
 }*/
 /*---------------------*/
 
-
 /*prompt*/
-.intermission{
+.intermission {
   display: grid;
+  width: 100vw;
+  height: 100vh;
   grid-area: main;
-  place-self: stretch;
+
+  position: fixed;
+  overflow: hidden;
+
+  left: 0;
+
   grid-template-rows: 1fr 1fr;
-  grid-template-areas: 
-  "prompt"
-  "cat";
+  grid-template-areas:
+    "prompt"
+    "cat";
 }
 
-.prompt{
+.prompt {
   grid-area: prompt;
+
+  margin-top: 5vw;
+
   text-align: center;
   align-self: center;
-  justify-self:center;
-  font-size: 4vw;
-  font-weight: normal;
-  font-family: 'Courier New', Courier, monospace;
+  justify-self: center;
 }
 
-.cat{
-  grid-area:cat;
+.promptText {
+  font-size: 4vw;
+  font-weight: normal;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.cat {
+  grid-area: cat;
   text-align: center;
   align-self: start;
-  justify-self:center;
+  justify-self: center;
+  object-fit: contain;
+  width: 40vw;
+  height: 40vh;
+  margin-bottom: 20vh;
+
+  object-fit: contain;
 }
 /*---------------------*/
 
+.catGif {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.full_cat {
+  display: relative;
+  left: 10vw;
+}
+.fullcatGif {
+  object-fit: contain;
+  width: 80%;
+  margin-left: 10vw;
+  margin-right: 10vw;
+}
 .home-btn-con {
   display: grid;
   grid-area: corner1;
   place-self: stretch;
-
 
   /*z-index: 1000001;*/
 }
@@ -194,25 +216,25 @@ input[type="radio"]{
   /*top: 2vw;*/
   /*left: 2.5vmin;*/
   cursor: pointer;
-  
+
   margin-top: 2vw;
   margin-left: 2.5vmin;
-  
 
-  
   background-color: transparent;
   background-repeat: no-repeat;
-  background-image: url(./components/animation/assets/normelhome.png);
+  background-image: url(./components/animation/assets/normal.png);
   background-size: contain;
 }
 
 .home-btn:hover {
-  background-image: url(./components/animation/assets/hoverhome.png);
+  background-image: url(./components/animation/assets/hover.png);
+  width: 7vmin;
+  height: 6.3vmin;
 }
 
 .home-btn:active {
-  background-image: url(./components/animation/assets/clickhome.png);
-  transform: translateY(0.07vmin);
+  background-image: url(./components/animation/assets/clicked.png);
+  transform: translateY(0.4vmin);
   width: 7vmin;
   height: 6.3vmin;
   top: 2vw;
@@ -220,7 +242,7 @@ input[type="radio"]{
   background-repeat: no-repeat;
   margin-top: 2vw;
   margin-left: 2.5vmin;
-  
+
   cursor: pointer;
   background-color: transparent;
   padding-top: 5vw;
@@ -230,7 +252,7 @@ input[type="radio"]{
 
 .canvas {
   position: absolute;
-  z-index:-10000000;
+  z-index: -10000000;
 }
 
 .App-logo {

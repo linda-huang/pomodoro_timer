@@ -3,30 +3,30 @@
   font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 
-  background: #8eb6bf;
+  background: #eea6a6;
 
   border: none;
 }
 
 .btn-secondary {
   /* color: #f4f4f4; */
-  color: #272343;
+  color: #094b68;
   font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 
-  background: #ffd803;
+  background: #ffe484;
   /* background: #c9c9c9; */
 
   border: none;
 }
 
 button.btn-primary:hover {
-  background: #7fa2aa;
+  background: #de7e7f;
   outline: none;
 }
 
 button.btn-secondary:hover {
-  background: #bdbdbd;
+  background: #edc432;
   outline: none;
 }
 
@@ -37,8 +37,8 @@ button.btn-secondary:hover {
 } */
 
 .btn-medium {
-  width: 12vmin;
-  height: 5.4vmin;
+  width: 13.7vmin;
+  height: 6.5vmin;
   font-size: 2vmin;
   border-radius: 8vmin;
   box-shadow: 0vmin 0.6vmin 0.6vmin rgba(0, 0, 0, 0.3);
@@ -57,8 +57,8 @@ button.btn-small:active {
 }
 
 .btn-small {
-  width: 7vmin;
-  height: 3.6vmin;
+  width: 7.2vmin;
+  height: 3.9vmin;
   font-size: 1.8vmin;
   border-radius: 6vmin;
   box-shadow: 0vmin 0.4vmin 0.4vmin rgba(0, 0, 0, 0.3);
