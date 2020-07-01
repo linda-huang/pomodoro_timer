@@ -16,7 +16,7 @@ function Sound ({countdown_state, pause, work_music, break_music, animation_stat
     
     const audioPromise = useRef(undefined);
 
-    const prevState = useRef(null);
+
     
 
     /* switch audio file when the animation changes*/
@@ -130,21 +130,34 @@ function Sound ({countdown_state, pause, work_music, break_music, animation_stat
     useEffect(() => {
         if(!pause){
             audio.current.volume = 0.75;
-            if (countdown_state === WORK && work_music){ 
-                    audioPromise.current = audio.current.play();     
+            audioPromise.current = audio.current.play();
+            if (countdown_state === WORK){ 
+                if (work_music){
+                    audioPromise.current = audio.current.play();  
+                }  
+                else if (audioPromise.current !== undefined){
+                    audioPromise.current.then(_ => {
+                        audio.current.pause();
+                    })
+                    .catch(error => {
+                        console.log("problem pausing audio");
+                    })  
+                }
             }
-            else if (countdown_state === BREAK && break_music){
+            else {
+                if (break_music){
                     audioPromise.current = audio.current.play();
                 }     
+                else if (audioPromise.current !== undefined){
+                    audioPromise.current.then(_ => {
+                        audio.current.pause();
+                    })
+                    .catch(error => {
+                        console.log("problem pausing audio");
+                    })  
+                }
             }
-            else if (audioPromise.current !== undefined){
-                audioPromise.current.then(_ => {
-                    audio.current.pause();
-                })
-                .catch(error => {
-                    console.log("problem pausing audio");
-                })  
-            }
+        }
         else{
             if(audioPromise !== undefined){
                 audioPromise.current.then(_ => {
