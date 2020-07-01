@@ -3,12 +3,13 @@ import {connect} from 'react-redux';
 
 import AnimationWrapper from '../animation/animation-wrapper';
 
-import { setPrevState, setCountdownState, NONE, WORK, BREAK, INTERMEDIATE } from './timerDucks';
+import { setPrevState, setCountdownState, NONE, WORK, BREAK, INTERMEDIATE, SESSION_END } from './timerDucks';
 import { setNumRepeats } from '../settings/settingsDucks';
 import AddTime from './addTime/add-button';
 
-import './addTime/add-buttons.scss';
 import './timer.css';
+import './addTime/add-buttons.scss';
+
 import Sound from '../audio/sound';
 
 
@@ -19,11 +20,11 @@ function Countdown ({pause, work_time, break_time, countdown_state, num_repeats,
     // const [displaySecond, setDisplaySecond] = useState(work_sec);
     const [totalTime, setTotalTime] = useState((countdown_state === WORK) ? work_time : break_time);
 
-    console.log(totalTime)
+    
+
     useEffect(()=>{  
         if (!pause && (countdown_state !== NONE && countdown_state !== INTERMEDIATE)) {
             const interval = setInterval(() => {
-                console.log(totalTime);
                 setTotalTime(totalTime - 1);
                 updateTime(totalTime);
                 // if (displaySecond > 0){
@@ -71,7 +72,7 @@ function Countdown ({pause, work_time, break_time, countdown_state, num_repeats,
                 setNumRepeats(num_repeats-1);
                 rewindToWork();
             } else if (countdown_state === BREAK) {
-                setCountdownState(NONE)
+                setCountdownState(SESSION_END)
                 setPrevState(BREAK)
             }   
         }
@@ -96,6 +97,8 @@ function Countdown ({pause, work_time, break_time, countdown_state, num_repeats,
    
     useEffect(() => {
         if (countdown_state === WORK) {  
+            console.log("updating to work time");
+            console.log("work time", work_time);
             setTotalTime(work_time);
             console.log(work_time)
             // setDisplayHour(work_hour)
@@ -103,6 +106,8 @@ function Countdown ({pause, work_time, break_time, countdown_state, num_repeats,
             // setDisplaySecond(work_sec)
         }
         else if (countdown_state === BREAK) {
+            console.log("updating to break time");
+            console.log("break time", break_time);
             setTotalTime(break_time)
 
             // setDisplayHour(break_hour)
@@ -110,7 +115,7 @@ function Countdown ({pause, work_time, break_time, countdown_state, num_repeats,
             // setDisplaySecond(break_sec)
         }
         
-    }, [countdown_state, break_time, work_time])
+    }, [countdown_state, work_time, break_time])
 
 
     return (        
@@ -120,13 +125,13 @@ function Countdown ({pause, work_time, break_time, countdown_state, num_repeats,
             <div className='child'>
                 <div className='content'>
                     <h1 className='item'>
-                        {Math.floor(totalTime / 3600) < 10 ? `0${Math.floor(totalTime / 3600)}` : Math.floor(totalTime / 3600)}h
+                        {Math.floor(totalTime / 3600) < 10 ? `0${Math.floor(totalTime / 3600)}` : Math.floor(totalTime / 3600)}h 
                     </h1>
                     <h1 className='item'>
                         {Math.floor((totalTime % 3600) / 60) < 10 ? `0${Math.floor((totalTime % 3600) / 60)}` : Math.floor((totalTime % 3600) / 60)}m 
                     </h1>
                     <h1 className='item'>
-                        {Math.floor(totalTime % 60) < 10 ? `0${Math.floor(totalTime % 60)}` :  Math.floor(totalTime % 60)}s
+                        {Math.floor(totalTime % 60) < 10 ? `0${Math.floor(totalTime % 60)}` :  Math.floor(totalTime % 60)}s 
                     </h1>
                 </div>   
             </div>

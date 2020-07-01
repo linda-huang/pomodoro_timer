@@ -1,87 +1,143 @@
-import React, { useState } from 'react';
-import CountdownWrapper from './countdown-wrapper';
+import React, { useState } from "react";
+import CountdownWrapper from "./countdown-wrapper";
 // import BreakInput from '../input/break-input'
-import TimerInput from '../input/work-input';
-import Settings from '../settings/settings-modal-wrapper';
-import AnimationWrapper from '../animation/animation-wrapper';
+import TimerInput from "../input/work-input";
+// import Settings from '../settings/settings-modal-wrapper';
+import Settings from "../settings/sliding-menu";
+import AnimationWrapper from "../animation/animation-wrapper";
+import AnimationController from "../animation/animationController";
 
-import '../../App.css';
+import "../../App.css";
+import Button from "../UIKits/Button";
 
-import { setCountdownState, NONE, WORK, BREAK, INTERMEDIATE } from './timerDucks';
-import { connect } from 'react-redux';
-import { useEffect } from 'react';
-import AnimationController from '../animation/animationController';
+import {
+  setCountdownState,
+  NONE,
+  WORK,
+  BREAK,
+  INTERMEDIATE,
+  setPrevState,
+  setPaused,
+} from "./timerDucks";
+import { connect } from "react-redux";
+import { useEffect } from "react";
 
-function TimerWrapper ({ setCountdownState, countdown_state}) {
+function TimerWrapper({
+  setCountdownState,
+  countdown_state,
+  setPaused,
+  setPrevState,
+}) {
+  // start countdown
+  const [save, setSave] = useState(false);
+  const [workChange, setWorkChange] = useState(false);
+  const [breakChange, setBreakChange] = useState(false);
+  const [totalTime, setTotalTime] = useState();
 
-    // start countdown
-    const [save, setSave] = useState(false);
-    const[workChange, setWorkChange] = useState(false);
-    const[breakChange, setBreakChange] = useState(false);
-    const[totalTime, setTotalTime] = useState();
+  let workLabel = countdown_state === NONE ? <h5>Set Work Time</h5> : null;
+  let breakLabel = countdown_state === NONE ? <h5>Set Break Time</h5> : null;
 
-    let workLabel = (countdown_state === NONE) ? <p>Work Length:</p> : null
-    let breakLabel = (countdown_state === NONE) ? <p>Break Length:</p> : null
+  const handleStartClick = () => {
+    setSave(true);
+    setCountdownState(WORK);
+  };
 
-
-    const handleStartClick = () => {
-        setSave(true);
-        setCountdownState(WORK);
+  useEffect(() => {
+    if (workChange === true && breakChange === true) {
+      setSave(false);
+      setWorkChange(false);
+      setBreakChange(false);
     }
-    
-    useEffect(() => {
-        if (workChange === true && breakChange === true) {
-            setSave(false)
-            setWorkChange(false)
-            setBreakChange(false)
-        }
-    }, [workChange, breakChange])
+  }, [workChange, breakChange]);
 
-    let startButton = (countdown_state !==  NONE) ? null : <button onClick={handleStartClick}>
-        START
-    </button>
+  const handleHomeClick = () => {
+    if (countdown_state !== NONE) {
+      console.log("set curent state to prev");
+      console.log(countdown_state);
+      setPrevState(countdown_state);
+      setPaused(false);
+      setCountdownState(NONE);
+    }
+  };
 
-    return (
-        <div className = "GridLayout">
-            {/*<div className = "MainLayout">*/}
-                <div className = "WorkInput">
-                    {workLabel}
-                    <TimerInput workBreak={WORK} use="countdown" save={save} setWorkChange={(input) => setWorkChange(input)}/>
-                </div>
-                <div className = "BreakInput">
-                    {breakLabel}
-                    <TimerInput workBreak={BREAK} use="countdown" save={save} setBreakChange={(input) => setBreakChange(input)}/>
-                </div>
-                <div className = "startBttn">
-                    {startButton}
-                </div>
+  let startButton =
+    countdown_state !== NONE ? null : (
+      <Button type="primary" size="medium" onClick={handleStartClick}>
+        BEGIN
+      </Button>
+    );
 
-                <CountdownWrapper updateTime={(input) => setTotalTime(input)} />  
-                
-             
-            <div className = "Settings">
-                <Settings start={save}/>
-            </div>
+  let homeBut = (
+    <button className="my-btn home-btn" onClick={handleHomeClick}></button>
+  );
 
-            <div className = "AnimationController">
-                <AnimationController/>
-            </div>
+  return (
+    <div>
+      <div className = "canvas">
+        <AnimationWrapper time={totalTime} />
+      </div>
 
-            <div className = "animation">
-                <AnimationWrapper time={totalTime}/>
-            </div>
-           
+      <div className="GridLayout">
+        {/*<div className = "MainLayout">*/}
+        <div className="main">
+          <div className="WorkInput">
+            {workLabel}
+            <TimerInput
+              workBreak={WORK}
+              use="countdown"
+              save={save}
+              text_size={5}
+              setWorkChange={(input) => setWorkChange(input)}
+            />
+          </div>
+
+          <div className="BreakInput">
+            {breakLabel}
+            <TimerInput
+              workBreak={BREAK}
+              use="countdown"
+              save={save}
+              text_size={5}
+              setBreakChange={(input) => setBreakChange(input)}
+            />
+          </div>
+
+          <div className="startBttn">{startButton}</div>
         </div>
-    )
 
-} 
+        <CountdownWrapper updateTime={(input) => setTotalTime(input)} />
 
-const mapDispatchToProps = dispatch => ({
-    setCountdownState: state => dispatch(setCountdownState(state))
-})
+        <div className="Settings">
+          <Settings start={save} />
+        </div>
 
-const mapStateToProps = state => ({
-    countdown_state : state.countdown.countdown_state
-})
+        <div className="AnimationController">
+          <AnimationController />
+        </div>
 
-export default connect(mapStateToProps, mapDispatchToProps)(TimerWrapper)
+        {/*<div className="animation">
+              <AnimationWrapper time={totalTime} />
+            </div>*/}
+
+        <div className="home-btn-con">
+          <button
+            className="my-btn home-btn"
+            onClick={handleHomeClick}
+          ></button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  setCountdownState: (state) => dispatch(setCountdownState(state)),
+  setPrevState: (state) => dispatch(setPrevState(state)),
+  setPaused: (state) => dispatch(setPaused(state)),
+});
+
+const mapStateToProps = (state) => ({
+  countdown_state: state.countdown.countdown_state,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TimerWrapper);

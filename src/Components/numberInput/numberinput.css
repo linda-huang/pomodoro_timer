@@ -1,0 +1,74 @@
+.input-wrapper{
+    display: flex;
+    /*width:160px;*/
+    height: 4vmin;
+    justify-content: center;
+ }
+ 
+ /* it will support chrome and firefox */
+ .input-wrapper input[type=number]::-webkit-inner-spin-button,
+ .input-wrapper input[type=number]::-webkit-outer-spin-button{
+    -webkit-appearance:none;
+ }
+ 
+ .input-wrapper input{
+    width:5vmin;
+    padding:1vmin;
+    font-size: 2vmin;
+    text-align:center;
+    font-weight: normal;
+    background:white;
+    border:1px solid #aaa;
+    color: #818d97;
+    border-radius: 0.7vmin 0vmin 0vmin 0.7vmin;
+ }
+ 
+ .input-wrapper input:focus{
+    border-radius: 0.7vmin 0vmin 0vmin 0.7vmin;
+    outline: none;
+ }
+
+ .input-wrapper input{
+    border-right:none;
+ }
+
+ .arrows-wrapper{
+    display: flex;
+    flex-direction: column;
+    width: 2vmin;
+    height: 4vmin;
+ }
+
+
+ .arrows-wrapper button{
+    background-color: #f4f4f4;
+    width: 2vmin;
+    height: 2vmin;
+    border: 0.05vmin solid #aaa;
+    position: relative;
+    font-size: 1.5vmin;
+    justify-content: center;
+    color: #818d97;
+    text-align: center; 
+    margin: auto;
+
+
+     
+ }
+
+.plus-btn{
+    border-radius: 0vmin 0.7vmin 0vmin 0vmin;
+}
+
+.minus-btn{
+    border-radius: 0vmin 0vmin 0.7vmin 0vmin;
+}
+
+ .arrows-wrapper button:active{
+    background-color: #8eb6bf;
+
+}
+
+.arrows-wrapper button:focus{
+    outline: none;
+}

@@ -1,30 +1,32 @@
-.container{
-    display: flex;
-    align-items: stretch;
-    justify-content: center;
-    flex-direction: row;
+.container {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: row;
 }
 
-.hideInput{
-    border: none;
-    opacity: 0;
-    position: absolute;
-    padding: 0px 0px;
-    height: 40px;
-    align-self: stretch;
+.hideInput {
+  border: none;
+  opacity: 0;
+  position: absolute;
+  padding: 0px 0px;
+  /*height: 60px;*/
+  align-self: stretch;
 }
 
-.timeDisplay{
-    margin: 0px 0px 0px 0px;
-    color: #999999;
-    
+.timeDisplay {
+  margin: 0px 0px 0px 0px;
+  color: #094b68;
+  font-weight: normal;
+  font-size: 5vmin;
+  font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
-.fakeCursor{
-    margin: 0px 0px 0px 0px;
-    padding: 0px 0px;
-    display: inline;
-
+.fakeCursor {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px;
+  display: inline;
 }
 
 /* *{
