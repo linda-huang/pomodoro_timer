@@ -18,18 +18,13 @@ function CountdownWrapper({ countdown_state, setPaused, pause, updateTime }) {
   };
 
   if (countdown_state === NONE) return null;
+  
   else if (countdown_state === INTERMEDIATE) return <Prompts />;
+
   else {
     return (
       <div className="CountdownWrapper">
-        {/* <div className='parent'>
-                            <div className='child'>
-                                <AddTime/>
-                            </div>
-                            <div className='child'>
-                                <Countdown pause={pause}/>
-                            </div>
-                </div> */}
+
         <div className="countdownDisplay">
           <Countdown pause={pause} updateTime={updateTime} />
         </div>

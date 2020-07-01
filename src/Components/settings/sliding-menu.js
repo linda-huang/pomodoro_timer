@@ -25,11 +25,17 @@ export default function SlidingMenu ({start}) {
         }
     }
 
-    return (<div ref={node}>
+    useEffect(() => {
+        if (start === true) {
+          setHide(true);
+        }
+      }, [start]);
+
+    return (
+        <div ref={node}>
             <Burger hide={hide} setHide={setHide}/>
             <SandboxModal
                 hide={hide}
-                start={start}
                 setHide={(input) => setHide(input)}/>
         </div>
     )

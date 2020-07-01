@@ -25,7 +25,6 @@ function SandboxModal({ setHide,
                         setBreakMusic,
                         break_music,
                         countdown_state,
-                        start,
 }) {
   const [save, setSave] = useState(false);
   const [tempNumRepeats, setTempNumRepeats] = useState(num_repeats);
@@ -35,11 +34,6 @@ function SandboxModal({ setHide,
   const [workChange, setWorkChange] = useState(false);
   const [breakChange, setBreakChange] = useState(false);
 
-  useEffect(() => {
-    if (start === true) {
-      setHide(true);
-    }
-  }, [start]);
 
   useEffect(() => {
     setTempNumRepeats(num_repeats);
@@ -69,7 +63,7 @@ function SandboxModal({ setHide,
   };
 
   let breakInput = countdown_state !== NONE ? (
-                                                  <label> 
+                                                  <label className = "countdown-label"> 
                                                   Set Break Time
                                                     <div className = "inputBox">
                                                       <TimerInput
@@ -85,7 +79,7 @@ function SandboxModal({ setHide,
 
 
   let workInput =countdown_state !== "NONE" ? (
-                                                <label>
+                                                <label className = "countdown-label">
                                                   Set Work Time
                                                   <div className = "inputBox">
                                                     <TimerInput
@@ -99,59 +93,52 @@ function SandboxModal({ setHide,
                                                 </label>
                                                ) : null;
 
-  if (hide) return null;
+//   if (hide) return null;
   
-  else {
+//   else {
     return (
-      <StyledMenu>
+      <StyledMenu hide={hide}>
         <h4> SETTINGS </h4>
         <hr id="firstLine" />
         <form onSubmit={handleConfigSubmit}>
-          {workInput}
-          {breakInput}
-          <div>
-            <label>Number of Repeats</label>
-            {/*<input
-              type="number"
-              min="0"
-              value={tempNumRepeats}
-              onChange={handleRepeatChange}
-            />*/}
-            <div>
-              <NumberInput handleRepeatChange = {(input) => setTempNumRepeats(input)}/>
-            </div>
-          </div>
+        <div className='countdown-settings'> 
+            {workInput}
+            {breakInput}
+        <label className="countdown-label">Number of Work Sessions</label>
+        <div className="num-repeats-div">
+            <NumberInput handleRepeatChange = {(input) => setTempNumRepeats(input)}/>
+        </div>
+        </div>
           <hr id="secondLine" />
           <div className="soundSetting">
-            <label className="soundLabel">Alert Sound</label>
-          
+            <label className="soundLabel">Chime When Timer Ends</label>
+            <div className="toggle-padding">
               <Toggle
                 isChecked={checked1}
                 handleToggle={() => setChecked1(!checked1)}
                 size="small"
               />
-            
+            </div>
           </div>
           <div className="soundSetting">
-            <label className="soundLabel">Work Music</label>
-            <Toggle
-              isChecked={checked2}
-              handleToggle={() => setChecked2(!checked2)}
-              size="small"
-            />
+            <label className="soundLabel">Work Session Music</label>
+            <div className="toggle-padding">
+                <Toggle
+                isChecked={checked2}
+                handleToggle={() => setChecked2(!checked2)}
+                size="small"
+                />
+            </div>
           </div>
           <div className="soundSetting">
-            {/*<input
-                            type = 'checkbox'
-                            checked = {checked3}
-                            onChange = {() => setChecked3(!checked3)}
-                            />*/}
-            <label className="soundLabel">Break Music</label>
-            <Toggle
-              isChecked={checked3}
-              handleToggle={() => setChecked3(!checked3)}
-              size="small"
-            />
+            <label className="soundLabel">Break Session Music</label>
+            <div className="toggle-padding">
+                <Toggle
+                isChecked={checked3}
+                handleToggle={() => setChecked3(!checked3)}
+                size="small"
+                />
+            </div>
           </div>
           <hr id="thirdLine" />
           <button type="submit" className="my-btn btn-primary btn-small">
@@ -160,8 +147,8 @@ function SandboxModal({ setHide,
         </form>
       </StyledMenu>
     );
-  }
 }
+
 /**
  * @constant mapDispatchToProps
  * Returns a plain object, where each field is a separate prop for the Classifier

@@ -22,12 +22,7 @@ import {
 import { connect } from "react-redux";
 import { useEffect } from "react";
 
-function TimerWrapper({
-  setCountdownState,
-  countdown_state,
-  setPaused,
-  setPrevState,
-}) {
+function TimerWrapper({setCountdownState, countdown_state, setPaused, setPrevState}) {
   // start countdown
   const [save, setSave] = useState(false);
   const [workChange, setWorkChange] = useState(false);
@@ -52,8 +47,6 @@ function TimerWrapper({
 
   const handleHomeClick = () => {
     if (countdown_state !== NONE) {
-      console.log("set curent state to prev");
-      console.log(countdown_state);
       setPrevState(countdown_state);
       setPaused(false);
       setCountdownState(NONE);
@@ -67,18 +60,19 @@ function TimerWrapper({
       </Button>
     );
 
-  let homeBut = (
-    <button className="my-btn home-btn" onClick={handleHomeClick}></button>
-  );
+  // let homeBut = (
+  //   <button className="my-btn home-btn" onClick={handleHomeClick}></button>
+  // );
 
   return (
     <div>
+
       <div className="canvas">
         <AnimationWrapper time={totalTime} />
       </div>
 
       <div className="GridLayout">
-        {/*<div className = "MainLayout">*/}
+
         <div className="main">
           <div className="WorkInput">
             {workLabel}
@@ -114,10 +108,6 @@ function TimerWrapper({
         <div className="AnimationController">
           <AnimationController />
         </div>
-
-        {/*<div className="animation">
-              <AnimationWrapper time={totalTime} />
-            </div>*/}
 
         <div className="home-btn-con">
           <button
