@@ -29,17 +29,26 @@ function SandboxModal({ setHide,
 }) {
   const [save, setSave] = useState(false);
   const [tempNumRepeats, setTempNumRepeats] = useState(num_repeats);
-  const [checked1, setChecked1] = useState(alert_sound);
-  const [checked2, setChecked2] = useState(work_music);
-  const [checked3, setChecked3] = useState(break_music);
+
+  const [tempAlert, setTempAlert] = useState(alert_sound);
+  const [tempWorkSound, setTempWorkSound] = useState(work_music);
+  const [tempBreakSound, setTempBreakSound] = useState(break_music);
+
   const [workChange, setWorkChange] = useState(false);
   const [breakChange, setBreakChange] = useState(false);
+
+  /*True states of sound*/
+  const alertSound = useRef(alert_sound);
+  const workSound = useRef(work_music);
+  const breakSound = useRef(break_music);
+
 
   useEffect(() => {
     if (start === true) {
       setHide(true);
     }
   }, [start]);
+
 
   useEffect(() => {
     setTempNumRepeats(num_repeats);
@@ -50,25 +59,58 @@ function SandboxModal({ setHide,
     }
   }, [workChange, breakChange, num_repeats]);
 
+
   const onDialogClick = (event) => {
     event.stopPropagation();
   };
 
+
   const handleConfigSubmit = (event) => {
     setSave(true);
     setNumRepeats(parseInt(tempNumRepeats));
-    console.log("work audio", checked2);
+    console.log("work audio", tempWorkSound);
     
-    setAlertSound(checked1);
-    setWorkMusic(checked2);
-    setBreakMusic(checked3);
+    alertSound.current = tempAlert;
+    workSound.current= tempWorkSound;
+    breakSound.current = tempBreakSound;
+    /*setAlertSound(tempAlert);
+    setWorkMusic(tempWorkSound);
+    setBreakMusic(tempBreakSound);*/
     event.preventDefault();
     if (countdown_state === NONE) setSave(false);
   };
 
+
   const handleRepeatChange = (event) => {
     setTempNumRepeats(event.target.value);
   };
+
+  const alertSoundChange = (event) => {
+    setAlertSound(!tempAlert);
+    setTempAlert(!tempAlert);
+  }
+
+  const workSoundChange = (event) => {
+    setWorkMusic(!tempWorkSound);
+    setTempWorkSound(!tempWorkSound);
+  }
+
+  const breakSoundChange = (event) => {
+    setBreakMusic(!tempBreakSound);
+    setTempBreakSound(!tempBreakSound);
+  }
+
+  useEffect(() => {
+    if(hide){
+        setAlertSound(alertSound.current); 
+        setBreakMusic(breakSound.current);
+        setWorkMusic(workSound.current); 
+        setTempAlert(alertSound.current);
+        setTempBreakSound(breakSound.current);
+        setTempWorkSound(workSound.current);
+    }
+  },[hide])
+
 
   let breakInput = countdown_state !== NONE ? (
                                                   <label> 
@@ -128,8 +170,8 @@ function SandboxModal({ setHide,
             <label className="soundLabel">Alert Sound</label>
           
               <Toggle
-                isChecked={checked1}
-                handleToggle={() => setChecked1(!checked1)}
+                isChecked={tempAlert}
+                handleToggle={alertSoundChange}
                 size="small"
               />
             
@@ -137,21 +179,21 @@ function SandboxModal({ setHide,
           <div className="soundSetting">
             <label className="soundLabel">Work Music</label>
             <Toggle
-              isChecked={checked2}
-              handleToggle={() => setChecked2(!checked2)}
+              isChecked={tempWorkSound}
+              handleToggle={workSoundChange}
               size="small"
             />
           </div>
           <div className="soundSetting">
             {/*<input
                             type = 'checkbox'
-                            checked = {checked3}
-                            onChange = {() => setChecked3(!checked3)}
+                            checked = {tempBreakSound}
+                            onChange = {() => setTempBreakSound(!tempBreakSound)}
                             />*/}
             <label className="soundLabel">Break Music</label>
             <Toggle
-              isChecked={checked3}
-              handleToggle={() => setChecked3(!checked3)}
+              isChecked={tempBreakSound}
+              handleToggle={breakSoundChange}
               size="small"
             />
           </div>

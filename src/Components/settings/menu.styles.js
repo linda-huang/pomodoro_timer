@@ -71,9 +71,9 @@ const StyledMenu = styled.nav`
   .inputBox{
     margin: auto;
     justify-content:center;
-    border-radius: 5px;
+    border-radius: 0.7vmin;
     background-color: white;
-    border: 1px solid #aaa;
+    border: 0.05vmin solid #aaa;
     width: 20vmin;
     height: 3min;
     padding-top: 2%;
