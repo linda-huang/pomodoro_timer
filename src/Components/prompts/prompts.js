@@ -129,17 +129,6 @@ function Prompts({
   }
 }
 
-<<<<<<< HEAD
-const mapStateToProps = state => ({
-    countdown_state : state.countdown.countdown_state,
-    prev_state : state.countdown.prev_state
-})
-
-const mapDispatchToProps = dispatch => ({
-    setCountdownState: state => dispatch(setCountdownState(state)),
-    setPrevState: state => dispatch(setPrevState(state))
-})
-=======
 const mapStateToProps = (state) => ({
   countdown_state: state.countdown.countdown_state,
   prev_state: state.countdown.prev_state,
@@ -149,6 +138,5 @@ const mapDispatchToProps = (dispatch) => ({
   setCountdownState: (state) => dispatch(setCountdownState(state)),
   setPrevState: (state) => dispatch(setPrevState(state)),
 });
->>>>>>> dfbb3eaf79d4c0ad80cb31e23feb66133bec2098
 
 export default connect(mapStateToProps, mapDispatchToProps)(Prompts);
