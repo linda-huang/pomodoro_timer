@@ -5,7 +5,7 @@ const StyledMenu = styled.nav`
   flex-direction: column;
   justify-content: center;
   height: 100vh;
-  width: 28vw;
+  width: 25vw;
   text-align: left;
   padding: 2.5%;
   //background: rgba(10, 186, 181, 0.3);

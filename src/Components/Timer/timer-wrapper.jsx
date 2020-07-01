@@ -73,7 +73,7 @@ function TimerWrapper({
 
   return (
     <div>
-      <div className="canvas">
+      <div className = "canvas">
         <AnimationWrapper time={totalTime} />
       </div>
 

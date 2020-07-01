@@ -42,8 +42,7 @@ function Sound ({countdown_state, pause, work_music, break_music, animation_stat
             workaudio.current.volume = 0.75;
             console.log("volume", workaudio.current.volume);
             if(countdown_state === WORK){  
-                if (work_music){
-                    
+                if (work_music){ 
                     workaudio.current.play();
                 }
                 else{

@@ -1,6 +1,6 @@
 import React, {useEffect, useRef } from 'react';
 import {connect} from 'react-redux';
-import {INTERMEDIATE} from '../timer/timerDucks';
+import {INTERMEDIATE, SESSION_END} from '../timer/timerDucks';
 import audiofile from './Zen_mg_SHIBUYA_long.m4r';
 
 /*Play alert sound when a countdown reaches 0*/
@@ -10,7 +10,7 @@ function Alert ({countdown_state, alert_sound}){
 
     useEffect(() => {
         if (alert_sound){
-            if(countdown_state === INTERMEDIATE){
+            if(countdown_state === INTERMEDIATE || countdown_state === SESSION_END){
                 alertaudio.current.play();
             }
             else{
