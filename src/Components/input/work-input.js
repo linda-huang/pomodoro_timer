@@ -154,7 +154,7 @@ function TimerInput({
   function onlyNum(text) {
     let lastChar = text.slice(-1);
     let ascii = lastChar.charCodeAt(0);
-    console.log("ascii", ascii);
+
     if (48 <= ascii && ascii <= 57) {
       return text;
     } else {
