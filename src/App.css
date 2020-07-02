@@ -165,7 +165,7 @@ input[type="radio"]{
 }
 
 .promptText {
-  font-size: 4vw;
+  font-size: 4vmin;
   font-weight: normal;
   font-family: "Courier New", Courier, monospace;
 }
@@ -272,14 +272,6 @@ input[type="radio"]{
 
 /*---------------------*/
 
-/*.canvas {
-  position: absolute;
-<<<<<<< HEAD
-  z-index: -10000000;
-=======
-  z-index: -1000;
-  background: #fef7e1;
-}*/
 
 .App-logo {
   height: 40vmin;
@@ -314,5 +306,4 @@ input[type="radio"]{
   to {
     transform: rotate(360deg);
   }
->>>>>>> Audio
 }

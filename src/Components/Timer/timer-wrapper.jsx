@@ -60,14 +60,7 @@ function TimerWrapper({setCountdownState, countdown_state, setPaused, setPrevSta
         BEGIN
       </Button>
     );
-
-<<<<<<< HEAD
-  // let homeBut = (
-  //   <button className="my-btn home-btn" onClick={handleHomeClick}></button>
-  // );
-
-=======
->>>>>>> Audio
+    
   return (
     <div>
 
@@ -76,14 +69,10 @@ function TimerWrapper({setCountdownState, countdown_state, setPaused, setPrevSta
       </div>
 
       <div className="GridLayout">
-<<<<<<< HEAD
-
-=======
         <div className="miniPrompt">
           <MiniPrompt time={totalTime} />
         </div>
         {/*<div className = "MainLayout">*/}
->>>>>>> Audio
         <div className="main">
           <div className="WorkInput">
             {workLabel}

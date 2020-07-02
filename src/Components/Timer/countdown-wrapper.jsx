@@ -18,21 +18,11 @@ function CountdownWrapper({ countdown_state, setPaused, pause, updateTime }) {
   };
 
   if (countdown_state === NONE) return null;
-<<<<<<< HEAD
-  
-  else if (countdown_state === INTERMEDIATE) return <Prompts />;
-
-  else {
-    return (
-      <div className="CountdownWrapper">
-
-=======
   else if (countdown_state === INTERMEDIATE || countdown_state === SESSION_END)
     return <Prompts />;
   else {
     return (
       <div className="CountdownWrapper">
->>>>>>> Audio
         <div className="countdownDisplay">
           <Countdown pause={pause} updateTime={updateTime} />
         </div>
