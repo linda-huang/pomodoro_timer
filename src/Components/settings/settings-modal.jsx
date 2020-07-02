@@ -28,11 +28,18 @@ function SandboxModal({ setHide,
 }) {
   const [save, setSave] = useState(false);
   const [tempNumRepeats, setTempNumRepeats] = useState(num_repeats);
-  const [checked1, setChecked1] = useState(alert_sound);
-  const [checked2, setChecked2] = useState(work_music);
-  const [checked3, setChecked3] = useState(break_music);
+
+  const [tempAlert, setTempAlert] = useState(alert_sound);
+  const [tempWorkSound, setTempWorkSound] = useState(work_music);
+  const [tempBreakSound, setTempBreakSound] = useState(break_music);
+
   const [workChange, setWorkChange] = useState(false);
   const [breakChange, setBreakChange] = useState(false);
+
+  /*True states of sound*/
+  const alertSound = useRef(alert_sound);
+  const workSound = useRef(work_music);
+  const breakSound = useRef(break_music);
 
 
   useEffect(() => {
@@ -44,23 +51,55 @@ function SandboxModal({ setHide,
     }
   }, [workChange, breakChange, num_repeats]);
 
+
   const onDialogClick = (event) => {
     event.stopPropagation();
   };
 
+
   const handleConfigSubmit = (event) => {
     setSave(true);
     setNumRepeats(parseInt(tempNumRepeats));
-    setAlertSound(checked1);
-    setWorkMusic(checked2);
-    setBreakMusic(checked3);
+    console.log("work audio", tempWorkSound);
+    
+    alertSound.current = tempAlert;
+    workSound.current= tempWorkSound;
+    breakSound.current = tempBreakSound;
     event.preventDefault();
     if (countdown_state === NONE) setSave(false);
   };
 
+
   const handleRepeatChange = (event) => {
     setTempNumRepeats(event.target.value);
   };
+
+  const alertSoundChange = (event) => {
+    setAlertSound(!tempAlert);
+    setTempAlert(!tempAlert);
+  }
+
+  const workSoundChange = (event) => {
+    setWorkMusic(!tempWorkSound);
+    setTempWorkSound(!tempWorkSound);
+  }
+
+  const breakSoundChange = (event) => {
+    setBreakMusic(!tempBreakSound);
+    setTempBreakSound(!tempBreakSound);
+  }
+
+  useEffect(() => {
+    if(hide){
+        setAlertSound(alertSound.current); 
+        setBreakMusic(breakSound.current);
+        setWorkMusic(workSound.current); 
+        setTempAlert(alertSound.current);
+        setTempBreakSound(breakSound.current);
+        setTempWorkSound(workSound.current);
+    }
+  },[hide])
+
 
   let breakInput = countdown_state !== NONE ? (
                                                   <label className = "countdown-label"> 
@@ -114,31 +153,29 @@ function SandboxModal({ setHide,
             <label className="soundLabel">Chime When Timer Ends</label>
             <div className="toggle-padding">
               <Toggle
-                isChecked={checked1}
-                handleToggle={() => setChecked1(!checked1)}
+                isChecked={tempAlert}
+                handleToggle={alertSoundChange}
+                size="small"
+              />
+            </div>
+            <label className="soundLabel">Work Music</label>
+            <div className="toggle-padding"> 
+            <Toggle
+              isChecked={tempWorkSound}
+              handleToggle={workSoundChange}
+              size="small"
+            />
+            </div>
+          <div className="soundSetting">
+            <label className="soundLabel">Break Music</label>
+            <div className="toggle-padding">
+              <Toggle
+                isChecked={tempBreakSound}
+                handleToggle={breakSoundChange}
                 size="small"
               />
             </div>
           </div>
-          <div className="soundSetting">
-            <label className="soundLabel">Work Session Music</label>
-            <div className="toggle-padding">
-                <Toggle
-                isChecked={checked2}
-                handleToggle={() => setChecked2(!checked2)}
-                size="small"
-                />
-            </div>
-          </div>
-          <div className="soundSetting">
-            <label className="soundLabel">Break Session Music</label>
-            <div className="toggle-padding">
-                <Toggle
-                isChecked={checked3}
-                handleToggle={() => setChecked3(!checked3)}
-                size="small"
-                />
-            </div>
           </div>
           <hr id="thirdLine" />
           <button type="submit" className="my-btn btn-primary btn-small">

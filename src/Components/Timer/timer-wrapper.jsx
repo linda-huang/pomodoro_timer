@@ -6,6 +6,7 @@ import TimerInput from "../input/work-input";
 import Settings from "../settings/sliding-menu";
 import AnimationWrapper from "../animation/animation-wrapper";
 import AnimationController from "../animation/animationController";
+import MiniPrompt from "../prompts/miniPrompt";
 
 import "../../App.css";
 import Button from "../UIKits/Button";
@@ -60,10 +61,13 @@ function TimerWrapper({setCountdownState, countdown_state, setPaused, setPrevSta
       </Button>
     );
 
+<<<<<<< HEAD
   // let homeBut = (
   //   <button className="my-btn home-btn" onClick={handleHomeClick}></button>
   // );
 
+=======
+>>>>>>> Audio
   return (
     <div>
 
@@ -72,7 +76,14 @@ function TimerWrapper({setCountdownState, countdown_state, setPaused, setPrevSta
       </div>
 
       <div className="GridLayout">
+<<<<<<< HEAD
 
+=======
+        <div className="miniPrompt">
+          <MiniPrompt time={totalTime} />
+        </div>
+        {/*<div className = "MainLayout">*/}
+>>>>>>> Audio
         <div className="main">
           <div className="WorkInput">
             {workLabel}

@@ -5,7 +5,7 @@ const StyledMenu = styled.nav`
   flex-direction: column;
   justify-content: center;
   height: 100vh;
-  width: 20vw;
+  width: 25vw;
   text-align: left;
   padding: 2.5%;
   background: rgba(241, 249, 255, 0.9);
@@ -76,12 +76,21 @@ const StyledMenu = styled.nav`
 
   .inputBox{
     margin: auto;
+<<<<<<< HEAD
     justify-content: center;
     border-radius: 5px;
     background-color: white;
     border: 1px solid #aaa;
     width: 18vmin;
     height: 4vmin;
+=======
+    justify-content:center;
+    border-radius: 0.7vmin;
+    background-color: white;
+    border: 0.05vmin solid #aaa;
+    width: 20vmin;
+    height: 3min;
+>>>>>>> Audio
     padding-top: 2%;
     margin-top: 6%;
     margin-bottom: 3%

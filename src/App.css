@@ -138,9 +138,16 @@ input[type="radio"]{
 /*prompt*/
 .intermission {
   display: grid;
+  /*width: 100vw;
+  height: 100vh;*/
   grid-area: main;
   place-self: stretch;
-  grid-template-rows: 1fr 1fr;
+
+  /*position: fixed;
+  overflow: hidden;*/
+
+  /*place-self: stretch;*/
+  grid-template-rows: 1fr 2fr;
   grid-template-areas:
     "prompt"
     "cat";
@@ -148,9 +155,16 @@ input[type="radio"]{
 
 .prompt {
   grid-area: prompt;
+
+  /*margin-top: 5vw;*/
+
   text-align: center;
   align-self: center;
   justify-self: center;
+  /*place-self: stretch;*/
+}
+
+.promptText {
   font-size: 4vw;
   font-weight: normal;
   font-family: "Courier New", Courier, monospace;
@@ -161,9 +175,35 @@ input[type="radio"]{
   text-align: center;
   align-self: start;
   justify-self: center;
+  place-self: stretch;
+  /*width: 40vw;
+  height: 40vh;*/
+  /*margin-bottom: 20vh;*/
+
+  /*object-fit: contain;*/
+}
+
+.catGif {
+  /*width: 100%;
+  height: 100%;*/
+  /*object-fit: cover;*/
+  place-self: center;
+  height: 35vh;
+}
+
+.full_cat {
+  grid-area: cat;
+}
+
+.fullcatGif {
+  object-fit: contain;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 /*---------------------*/
 
+/* home button*/
 .home-btn-con {
   display: grid;
   grid-area: corner1;
@@ -191,6 +231,23 @@ input[type="radio"]{
   background-size: contain;
 }
 
+.miniPrompt {
+  position: relative;
+  grid-area: top;
+  text-align: center;
+  /* align-self: center;
+  justify-self: center; */
+  place-self: stretch;
+}
+
+.miniP {
+  margin-top: 2vw;
+  text-align: center;
+  font-size: 2vw;
+  font-weight: normal;
+  color: #72a3a0;
+}
+
 .home-btn:hover {
   background-image: url(./components/animation/assets/hover.png);
   width: 7vmin;
@@ -215,7 +272,47 @@ input[type="radio"]{
 
 /*---------------------*/
 
-.canvas {
+/*.canvas {
   position: absolute;
+<<<<<<< HEAD
   z-index: -10000000;
+=======
+  z-index: -1000;
+  background: #fef7e1;
+}*/
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #215eda;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+>>>>>>> Audio
 }
