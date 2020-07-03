@@ -43,8 +43,6 @@ class MiniPrompt extends React.Component {
   }
 
   render() {
-    console.log(this.props.time);
-    console.log(this.props.time < 60 ? this.state.laterDis : "");
     if (
       this.props.countdown_state === WORK ||
       this.props.countdown_state === BREAK

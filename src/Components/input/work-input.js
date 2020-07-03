@@ -1,5 +1,5 @@
 import "./inputs.css";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useLayoutEffect} from "react";
 import { connect } from "react-redux";
 import { setWorkTime, setBreakTime } from "./inputDucks";
 import { NONE, WORK, BREAK } from "../timer/timerDucks";
@@ -17,6 +17,7 @@ function TimerInput({
   setWorkChange,
   setBreakChange,
   text_size,
+  hide,
 }) {
   const [totalTime, setTotalTime] = useState(
     workBreak === WORK ? work_time : break_time
@@ -130,7 +131,19 @@ function TimerInput({
   /*Change display size*/
   useEffect(() => {
     setSize(text_size);
-  }, [text_size]);
+  }, [text_size])
+
+
+  /*useEffect(()=>{
+    setTotalTime(workBreak === WORK ? work_time : break_time);
+    console.log(work_time);
+    console.log("total time", totalTime);
+    if(!hide){
+      setHour(Math.floor(totalTime / 3600));
+      setMinute(Math.floor((totalTime % 3600) / 60));
+      setSecond(totalTime % 60);
+    }
+  }, [hide])*/
 
   /*recalculate hours and minutes when minutes > 59
     Parameters:

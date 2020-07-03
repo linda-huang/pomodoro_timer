@@ -12,6 +12,7 @@ import NumberInput from '../numberInput/NumberInput';
 
 import Button from "../UIKits/Button";
 import "../UIKits/Button.css";
+import { cloneElement } from "react";
 // import { Keyboard } from 'react-native';
 
 function SandboxModal({ setHide,
@@ -91,12 +92,13 @@ function SandboxModal({ setHide,
 
   useEffect(() => {
     if(hide){
-        setAlertSound(alertSound.current); 
-        setBreakMusic(breakSound.current);
-        setWorkMusic(workSound.current); 
-        setTempAlert(alertSound.current);
-        setTempBreakSound(breakSound.current);
-        setTempWorkSound(workSound.current);
+
+      setAlertSound(alertSound.current); 
+      setBreakMusic(breakSound.current);
+      setWorkMusic(workSound.current); 
+      setTempAlert(alertSound.current);
+      setTempBreakSound(breakSound.current);
+      setTempWorkSound(workSound.current);
     }
   },[hide])
 
@@ -110,14 +112,16 @@ function SandboxModal({ setHide,
                                                         use="settings"
                                                         save={save}
                                                         text_size={2.3}
-                                                        setBreakChange={(input) => setBreakChange(input)} />
+                                                        setBreakChange={(input) => setBreakChange(input)}
+                                                        hide = {hide}
+                                                      />
                                                     </div>
                                              
                                                 </label>
                                               ) : null;
 
 
-  let workInput =countdown_state !== "NONE" ? (
+  let workInput =countdown_state !== NONE ? (
                                                 <label className = "countdown-label">
                                                   Set Work Time
                                                   <div className = "inputBox">
@@ -127,6 +131,7 @@ function SandboxModal({ setHide,
                                                       save={save}
                                                       text_size={2.3}
                                                       setWorkChange={(input) => setWorkChange(input)}
+                                                      hide = {hide}
                                                     />
                                                     </div>
                                                 </label>
@@ -142,7 +147,7 @@ function SandboxModal({ setHide,
             {breakInput}
             <label className="countdown-label">Number of Work Sessions</label>
             <div className="num-repeats-div">
-              <NumberInput handleRepeatChange = {(input) => setTempNumRepeats(input)}/>
+              <NumberInput handleRepeatChange = {(input) => setTempNumRepeats(input)}  numRepeats = {num_repeats} hide = {hide}/>
             </div>
           </div>
           <hr id="secondLine" />
