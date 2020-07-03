@@ -92,7 +92,6 @@ function SandboxModal({ setHide,
 
   useEffect(() => {
     if(hide){
-
       setAlertSound(alertSound.current); 
       setBreakMusic(breakSound.current);
       setWorkMusic(workSound.current); 
@@ -113,7 +112,6 @@ function SandboxModal({ setHide,
                                                         save={save}
                                                         text_size={2.3}
                                                         setBreakChange={(input) => setBreakChange(input)}
-                                                        hide = {hide}
                                                       />
                                                     </div>
                                              
@@ -131,7 +129,6 @@ function SandboxModal({ setHide,
                                                       save={save}
                                                       text_size={2.3}
                                                       setWorkChange={(input) => setWorkChange(input)}
-                                                      hide = {hide}
                                                     />
                                                     </div>
                                                 </label>
