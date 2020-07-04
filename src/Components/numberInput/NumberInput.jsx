@@ -3,7 +3,7 @@ import './numberinput.css';
 import { connect } from "react-redux";
 
 
-function NumberInput ({handleRepeatChange, num_repeats, hide}){
+function NumberInput ({handleRepeatChange, num_repeats}){
     const[value, setValue] = useState(num_repeats);
 
 
@@ -24,11 +24,11 @@ function NumberInput ({handleRepeatChange, num_repeats, hide}){
         setValue(value-1);
     }
 
-    useEffect(()=>{
+    /*useEffect(()=>{
         if(hide){
             setValue(num_repeats);
         }
-    },[hide])
+    },[hide])*/
 
     
     return(

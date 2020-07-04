@@ -32,7 +32,7 @@ function TimerInput({
 
   const inputText = useRef(null);
 
-  const [size, setSize] = useState(50);
+  const [size, setSize] = useState(0.1);
 
   const changeTime = (event) => {
     const input = event.currentTarget.value;
@@ -134,16 +134,22 @@ function TimerInput({
   }, [text_size])
 
 
-  /*useEffect(()=>{
-    setTotalTime(workBreak === WORK ? work_time : break_time);
-    console.log(work_time);
-    console.log("total time", totalTime);
-    if(!hide){
-      setHour(Math.floor(totalTime / 3600));
-      setMinute(Math.floor((totalTime % 3600) / 60));
-      setSecond(totalTime % 60);
-    }
-  }, [hide])*/
+  // useEffect(()=>{
+  //   if (use === "settings"){
+  //     /*if (hide) {
+
+  //       setTotalTime(workBreak === WORK ? work_time : break_time);
+  //     }*/
+    
+  //     if(hide){
+  //       //setTotalTime(workBreak === WORK ? work_time : break_time);
+  //       console.log("")
+  //       setHour(Math.floor(work_time/ 3600));
+  //       setMinute(Math.floor((work_time % 3600) / 60));
+  //       setSecond(work_time % 60);
+  //     }
+  //   }
+  // }, [hide, work_time])
 
   /*recalculate hours and minutes when minutes > 59
     Parameters:

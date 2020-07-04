@@ -134,57 +134,61 @@ function SandboxModal({ setHide,
                                                 </label>
                                                ) : null;
 
-    return (
-      <StyledMenu hide={hide}>
-        <h4> SETTINGS </h4>
-        <hr id="firstLine" />
-        <form onSubmit={handleConfigSubmit}>
-          <div className='countdown-settings'> 
-            {workInput}
-            {breakInput}
-            <label className="countdown-label">Number of Work Sessions</label>
-            <div className="num-repeats-div">
-              <NumberInput handleRepeatChange = {(input) => setTempNumRepeats(input)}  numRepeats = {num_repeats} hide = {hide}/>
+    if (hide) return null;
+
+    else{
+      return (
+        <StyledMenu hide={hide}>
+          <h4> SETTINGS </h4>
+          <hr id="firstLine" />
+          <form onSubmit={handleConfigSubmit}>
+            <div className='countdown-settings'> 
+              {workInput}
+              {breakInput}
+              <label className="countdown-label">Number of Work Sessions</label>
+              <div className="num-repeats-div">
+                <NumberInput handleRepeatChange = {(input) => setTempNumRepeats(input)}  numRepeats = {num_repeats}/>
+              </div>
             </div>
-          </div>
-          <hr id="secondLine" />
-          <div className="soundSetting">
-            <label className="soundLabel">Chime When Timer Ends</label>
-            {/* <div className="toggle-padding"> */}
+            <hr id="secondLine" />
+            <div className="soundSetting">
+              <label className="soundLabel">Chime When Timer Ends</label>
+              {/* <div className="toggle-padding"> */}
+                <Toggle
+                  isChecked={tempAlert}
+                  handleToggle={alertSoundChange}
+                  size="small"
+                />
+              </div>
+            {/* </div> */}
+            <div className="soundSetting">
+              <label className="soundLabel">Work Session Music</label>
+              {/* <div className="toggle-padding">  */}
               <Toggle
-                isChecked={tempAlert}
-                handleToggle={alertSoundChange}
+                isChecked={tempWorkSound}
+                handleToggle={workSoundChange}
                 size="small"
               />
-            </div>
-          {/* </div> */}
-          <div className="soundSetting">
-            <label className="soundLabel">Work Session Music</label>
-            {/* <div className="toggle-padding">  */}
-            <Toggle
-              isChecked={tempWorkSound}
-              handleToggle={workSoundChange}
-              size="small"
-            />
-            </div>
-          {/* </div> */}
-          <div className="soundSetting">
-            <label className="soundLabel">Break Session Music</label>
-            {/* <div className="toggle-padding"> */}
-              <Toggle
-                isChecked={tempBreakSound}
-                handleToggle={breakSoundChange}
-                size="small"
-              />
-            </div>
-          {/* </div> */}
-          <hr id="thirdLine" />
-          <button type="submit" className="my-btn btn-primary btn-small">
-            Save
-          </button>
-        </form>
-      </StyledMenu>
-    );
+              </div>
+            {/* </div> */}
+            <div className="soundSetting">
+              <label className="soundLabel">Break Session Music</label>
+              {/* <div className="toggle-padding"> */}
+                <Toggle
+                  isChecked={tempBreakSound}
+                  handleToggle={breakSoundChange}
+                  size="small"
+                />
+              </div>
+            {/* </div> */}
+            <hr id="thirdLine" />
+            <button type="submit" className="my-btn btn-primary btn-small">
+              Save
+            </button>
+          </form>
+        </StyledMenu>
+      );
+  }
 }
 
 /**

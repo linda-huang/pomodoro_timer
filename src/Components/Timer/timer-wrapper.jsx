@@ -36,6 +36,7 @@ function TimerWrapper({setCountdownState, countdown_state, setPaused, setPrevSta
   const handleStartClick = () => {
     setSave(true);
     setCountdownState(WORK);
+    setPrevState(NONE);
   };
 
   useEffect(() => {

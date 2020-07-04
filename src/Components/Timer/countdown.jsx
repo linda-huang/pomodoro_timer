@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 import {connect} from 'react-redux';
 
 import AnimationWrapper from '../animation/animation-wrapper';
@@ -13,10 +13,10 @@ import './addTime/add-buttons.scss';
 import Sound from '../audio/sound';
 
 
-function Countdown ({pause, work_time, break_time, countdown_state, num_repeats, setCountdownState, setPrevState, setNumRepeats, updateTime}){
+function Countdown ({pause, work_time, break_time, countdown_state, prev_state, num_repeats, setCountdownState, setPrevState, setNumRepeats, updateTime}){
 
     const [totalTime, setTotalTime] = useState((countdown_state === WORK) ? work_time : break_time);
-
+    const numTimeRun = useRef(0);
     
 
     useEffect(()=>{  
@@ -62,14 +62,33 @@ function Countdown ({pause, work_time, break_time, countdown_state, num_repeats,
 
    
     useEffect(() => {
-        if (countdown_state === WORK) {  
+        //console.log("num time run", numTimeRun.current)
+        //setWorkTime();
+        
+            //console.log("before if", numTimeRun.current)
+            //console.log(countdown_state === WORK && numTimeRun.current < 2 && prev_state === NONE)
+        if (countdown_state === WORK && numTimeRun.current < 2 && prev_state === NONE ) {  
+            numTimeRun.current += 1;
             setTotalTime(work_time);
         }
-        else if (countdown_state === BREAK) {
+
+        //return () => clearTimeout(setter);
+        /*else if (countdown_state === BREAK && currentState.current !== countdown_state) {
             setTotalTime(break_time)
-        }
+            && numTimeRun.current < 2 && prev_state === NONE 
+        }*/
         
-    }, [countdown_state, work_time, break_time])
+    }, [countdown_state, work_time])
+
+
+
+    /*const setWorkTime = async () => {
+        if (countdown_state === WORK && numTimeRun.current < 1 && prev_state === NONE ) {  
+            
+            numTimeRun.current = await numTimeRun.current + 1;
+            setTotalTime(work_time);
+        }
+    }*/
 
 
     return (        
@@ -107,7 +126,8 @@ const mapStateToProps = state => ({
     work_time : state.time.work_time,
     break_time : state.time.break_time,
     countdown_state : state.countdown.countdown_state,
-    num_repeats : state.settings.num_repeats
+    num_repeats : state.settings.num_repeats,
+    prev_state : state.countdown.prev_state
 })
 
 const mapDispatchToProps = dispatch => ({
