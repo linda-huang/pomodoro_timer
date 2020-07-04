@@ -19,22 +19,6 @@ class WaveAnimation extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-<<<<<<< HEAD
-=======
-    /*console.log("component update call");
-    console.log("the state is");
-    console.log(this.props.countdown_state);
-    console.log("the prevstate is ");
-    console.log(prevProps.countdown_state);
-    console.log("this.props.countdown_state !== prevProps.countdown_state is");
-    console.log(this.props.countdown_state != prevProps.countdown_state);
-    console.log(" this.props.countdown_state === NONE");
-    console.log(this.props.countdown_state);
-    console.log(NONE);
-
-    console.log(this.props.countdown_state === NONE);*/
->>>>>>> Audio
-
     if (
       this.props.countdown_state !== prevProps.countdown_state &&
       this.props.countdown_state === WORK
@@ -49,11 +33,6 @@ class WaveAnimation extends React.Component {
       this.props.countdown_state !== prevProps.countdown_state &&
       this.props.countdown_state === NONE
     ) {
-<<<<<<< HEAD
-    
-=======
-      //console.log("in chaging to none");
->>>>>>> Audio
       this.setState({ total: 0, height: 20 });
     }
 
@@ -63,14 +42,6 @@ class WaveAnimation extends React.Component {
     ) {
       if (this.props.time !== prevProps.time) {
         let total = this.state.total;
-<<<<<<< HEAD
-
-=======
-        /*console.log("this is total");
-        console.log(total);
-        console.log("this is current");
-        console.log(this.props.time);*/
->>>>>>> Audio
         if (this.props.time > total) {
           total = this.props.time;
           this.setState({ total: this.props.time });
@@ -79,14 +50,6 @@ class WaveAnimation extends React.Component {
         const percent = (this.props.time / total) * 100;
 
         if (this.props.countdown_state === WORK) {
-<<<<<<< HEAD
-          
-          this.setState({ height: 100 - percent });
-
-        } else if (this.props.countdown_state === BREAK) {
-          this.setState({ height: percent });
-       
-=======
           //console.log("in work");
           if (100 - percent < 3) {
             this.setState({ height: 3 });
@@ -103,19 +66,12 @@ class WaveAnimation extends React.Component {
           /*console.log("in break");
           console.log("height");
           console.log(this.state.height);*/
->>>>>>> Audio
         }
       }
     }
   }
 
   render() {
-<<<<<<< HEAD
-
-=======
-    /*console.log("height");
-    console.log(this.state.height);*/
->>>>>>> Audio
     return (
       <section id="container">
         <div

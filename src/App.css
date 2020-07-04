@@ -233,19 +233,22 @@ input[type="radio"]{
 
 .miniPrompt {
   position: relative;
-  grid-area: top;
+  grid-area: corner1;
   text-align: center;
   /* align-self: center;
   justify-self: center; */
-  place-self: stretch;
+  /* place-self: stretch; */
+  margin-top: 10vmin;
+  margin-left: 1.7vmin;
+  width: 8.4vmin;
 }
 
 .miniP {
-  margin-top: 2vw;
+  margin-top: 0.5vw;
   text-align: center;
-  font-size: 2vw;
+  font-size: 1.4vw;
   font-weight: normal;
-  color: #72a3a0;
+  color: #828b93;
 }
 
 .home-btn:hover {
@@ -274,9 +277,6 @@ input[type="radio"]{
 
 /*.canvas {
   position: absolute;
-<<<<<<< HEAD
-  z-index: -10000000;
-=======
   z-index: -1000;
   background: #fef7e1;
 }*/
@@ -314,5 +314,4 @@ input[type="radio"]{
   to {
     transform: rotate(360deg);
   }
->>>>>>> Audio
 }

@@ -23,7 +23,12 @@ import {
 import { connect } from "react-redux";
 import { useEffect } from "react";
 
-function TimerWrapper({setCountdownState, countdown_state, setPaused, setPrevState}) {
+function TimerWrapper({
+  setCountdownState,
+  countdown_state,
+  setPaused,
+  setPrevState,
+}) {
   // start countdown
   const [save, setSave] = useState(false);
   const [workChange, setWorkChange] = useState(false);
@@ -61,29 +66,17 @@ function TimerWrapper({setCountdownState, countdown_state, setPaused, setPrevSta
       </Button>
     );
 
-<<<<<<< HEAD
-  // let homeBut = (
-  //   <button className="my-btn home-btn" onClick={handleHomeClick}></button>
-  // );
-
-=======
->>>>>>> Audio
   return (
     <div>
-
       <div className="canvas">
         <AnimationWrapper time={totalTime} />
       </div>
 
       <div className="GridLayout">
-<<<<<<< HEAD
-
-=======
         <div className="miniPrompt">
           <MiniPrompt time={totalTime} />
         </div>
         {/*<div className = "MainLayout">*/}
->>>>>>> Audio
         <div className="main">
           <div className="WorkInput">
             {workLabel}
