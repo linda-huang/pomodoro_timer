@@ -165,7 +165,7 @@ input[type="radio"]{
 }
 
 .promptText {
-  font-size: 4vw;
+  font-size: 4vmin;
   font-weight: normal;
   font-family: "Courier New", Courier, monospace;
 }
@@ -274,12 +274,6 @@ input[type="radio"]{
 }
 
 /*---------------------*/
-
-/*.canvas {
-  position: absolute;
-  z-index: -1000;
-  background: #fef7e1;
-}*/
 
 .App-logo {
   height: 40vmin;

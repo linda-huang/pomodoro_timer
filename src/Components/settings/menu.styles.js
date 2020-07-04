@@ -5,9 +5,11 @@ const StyledMenu = styled.nav`
   flex-direction: column;
   justify-content: center;
   height: 100vh;
-  width: 25vw;
+  width: 24vw;
   text-align: left;
-  padding: 2.5%;
+  padding-top: 2vh;
+  padding-right: 2.5%;
+  padding-left: 2.5%;
   background: rgba(241, 249, 255, 0.9);
   position: absolute;
   top: 0;
@@ -51,11 +53,11 @@ const StyledMenu = styled.nav`
   }
 
   form {
-      height: 80%;
+      height: 80vh;
   }
 
   .countdown-label {
-    font-size: 40%;
+    font-size: 50%;
   }
 
   .repeatNum{
@@ -76,21 +78,12 @@ const StyledMenu = styled.nav`
 
   .inputBox{
     margin: auto;
-<<<<<<< HEAD
     justify-content: center;
     border-radius: 5px;
     background-color: white;
     border: 1px solid #aaa;
     width: 18vmin;
     height: 4vmin;
-=======
-    justify-content:center;
-    border-radius: 0.7vmin;
-    background-color: white;
-    border: 0.05vmin solid #aaa;
-    width: 20vmin;
-    height: 3min;
->>>>>>> Audio
     padding-top: 2%;
     margin-top: 6%;
     margin-bottom: 3%
@@ -98,7 +91,7 @@ const StyledMenu = styled.nav`
 
   .soundLabel{
     font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 40%;
+    font-size: 50%;
     color: #779da6;
     margin-top: 5%;
     margin-right: 20%;

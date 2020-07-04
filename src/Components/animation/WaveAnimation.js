@@ -56,16 +56,8 @@ class WaveAnimation extends React.Component {
           } else {
             this.setState({ height: 100 - percent });
           }
-
-          /*console.log("height is set");
-          console.log(100 - percent);
-          console.log("current height setted");
-          console.log(this.state.height);*/
         } else if (this.props.countdown_state === BREAK) {
           this.setState({ height: percent });
-          /*console.log("in break");
-          console.log("height");
-          console.log(this.state.height);*/
         }
       }
     }

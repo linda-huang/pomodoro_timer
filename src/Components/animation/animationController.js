@@ -6,18 +6,17 @@ import "./wavestyle.css";
 import "../../App.css";
 
 class AnimationController extends React.Component {
-  constructor(props) {
-    super(props);
-    this.ballClick = this.ballClick.bind(this);
-    this.waveClick = this.waveClick.bind(this);
-  }
+    constructor(props){
+        super(props);
+        this.ballClick = this.ballClick.bind(this);
+        this.waveClick = this.waveClick.bind(this);
+    }
 
-  ballClick() {
-    if (
-      this.props.animation_state !== BALL &&
-      this.props.animation_state !== HIDE
-    ) {
-      this.props.setAnimationState(BALL);
+    ballClick(){
+      
+        if (this.props.animation_state!== BALL &&this.props.animation_state!==HIDE){
+            this.props.setAnimationState(BALL);
+        }
     }
   }
 
