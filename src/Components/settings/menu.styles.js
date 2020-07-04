@@ -14,13 +14,14 @@ const StyledMenu = styled.nav`
   position: absolute;
   top: 0;
   right: 0;
-  transform: ${({ hide }) => (hide) ? "translateX(+100%)" : "translateX(0)"};
+  transform: ${({ hide }) => (hide ? "translateX(+100%)" : "translateX(0)")};
   transition: transform 0.3s ease-in-out;
   z-index : 1000000;
   font-size: 4.5vmin;
 
   h4 {
-    font-size: 2vw;
+    font-size: 3.5vw;
+    color:#828b93
   }
 
   #firstLine {
