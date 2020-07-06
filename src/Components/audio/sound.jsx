@@ -3,10 +3,11 @@ import {connect} from 'react-redux';
 import {WORK, BREAK} from '../timer/timerDucks';
 import {WAVE, BALL} from '../animation/animationDucks.js';
 
-import oceanwaves from "./OceanWaves.mp3";
-import reflections from "./Toshifumi Hinata-Reflections.mp3";
+//import oceanwaves from "./OceanWaves.mp3";
+import reflections from "./1 - Fire.mp3";
 import water from './18 - Water Lapping Wind.mp3';
 import rain from './9 - Rain On Rooftop.mp3';
+
 
 /* Play Sound during work countdown and break countdown*/
 function Sound ({countdown_state, pause, work_music, break_music, animation_state}){
