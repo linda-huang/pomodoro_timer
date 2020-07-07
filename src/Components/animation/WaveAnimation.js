@@ -33,7 +33,6 @@ class WaveAnimation extends React.Component {
       this.props.countdown_state !== prevProps.countdown_state &&
       this.props.countdown_state === NONE
     ) {
-    
       this.setState({ total: 0, height: 20 });
     }
 
@@ -57,7 +56,6 @@ class WaveAnimation extends React.Component {
           } else {
             this.setState({ height: 100 - percent });
           }
-
         } else if (this.props.countdown_state === BREAK) {
           this.setState({ height: percent });
         }
@@ -66,7 +64,6 @@ class WaveAnimation extends React.Component {
   }
 
   render() {
-
     return (
       <section id="container">
         <div

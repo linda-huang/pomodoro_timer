@@ -9,13 +9,11 @@ class MiniPrompt extends React.Component {
 
     if (this.props.countdown_state === WORK) {
       this.state = {
-        displayState: "work hard",
-        laterDis: "break is coming soon!",
+        displayState: "WORK",
       };
     } else if (this.props.countdown_state === BREAK) {
       this.state = {
-        displayState: "play harder!",
-        laterDis: "take a deep breath work is starting soon!",
+        displayState: "BREAK",
       };
     } else {
       this.state = { displayState: "" };
@@ -28,16 +26,14 @@ class MiniPrompt extends React.Component {
       this.props.countdown_state === WORK
     ) {
       this.setState({
-        displayState: "work hard!",
-        laterDis: "break is coming soon!",
+        displayState: "WORK",
       });
     } else if (
       this.props.countdown_state !== prevProps.countdown_state &&
       this.props.countdown_state === BREAK
     ) {
       this.setState({
-        displayState: "play harder!",
-        laterDis: "take a deep breath work is starting soon!",
+        displayState: "BREAK",
       });
     }
   }
@@ -50,9 +46,6 @@ class MiniPrompt extends React.Component {
       return (
         <div>
           <h3 className="miniP">{this.state.displayState}</h3>
-          <h3 className="miniP">
-            {this.props.time < 60 ? this.state.laterDis : ""}
-          </h3>
         </div>
       );
     } else {

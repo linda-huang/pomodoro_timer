@@ -23,7 +23,12 @@ import {
 import { connect } from "react-redux";
 import { useEffect } from "react";
 
-function TimerWrapper({setCountdownState, countdown_state, setPaused, setPrevState}) {
+function TimerWrapper({
+  setCountdownState,
+  countdown_state,
+  setPaused,
+  setPrevState,
+}) {
   // start countdown
   const [save, setSave] = useState(false);
   const [workChange, setWorkChange] = useState(false);
@@ -61,10 +66,9 @@ function TimerWrapper({setCountdownState, countdown_state, setPaused, setPrevSta
         BEGIN
       </Button>
     );
-    
+
   return (
     <div>
-
       <div className="canvas">
         <AnimationWrapper time={totalTime} />
       </div>
