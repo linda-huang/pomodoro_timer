@@ -7,21 +7,20 @@ const StyledMenu = styled.nav`
   height: 100vh;
   width: 24vw;
   text-align: left;
-  padding-top: 2vh;
+  padding-top: 2%;
   padding-right: 2.5%;
   padding-left: 2.5%;
   background: rgba(241, 249, 255, 0.9);
   position: absolute;
   top: 0;
   right: 0;
-  transform: ${({ hide }) => (hide ? "translateX(+100%)" : "translateX(0)")};
-  transition: transform 0.3s ease-in-out;
+  // transform: ${({ hide }) => (hide) ? "translateX(+100%)" : "translateX(0)"};
+  // transition: transform 0.3s ease-in-out;
   z-index : 1000000;
   font-size: 4.5vmin;
 
   h4 {
-    font-size: 3.5vw;
-    color:#828b93
+    font-size: 2vw;
   }
 
   #firstLine {

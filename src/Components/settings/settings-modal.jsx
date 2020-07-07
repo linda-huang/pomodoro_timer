@@ -101,7 +101,6 @@ function SandboxModal({
       setTempBreakSound(breakSound.current);
       setTempWorkSound(workSound.current);
     }
-<<<<<<< HEAD
   },[hide])
 
 
@@ -192,97 +191,6 @@ function SandboxModal({
         </StyledMenu>
       );
   }
-=======
-  }, [hide]);
-
-  let breakInput =
-    countdown_state !== NONE ? (
-      <label className="countdown-label">
-        Set Break Time
-        <div className="inputBox">
-          <TimerInput
-            workBreak={BREAK}
-            use="settings"
-            save={save}
-            text_size={2.3}
-            setBreakChange={(input) => setBreakChange(input)}
-          />
-        </div>
-      </label>
-    ) : null;
-
-  let workInput =
-    countdown_state !== NONE ? (
-      <label className="countdown-label">
-        Set Work Time
-        <div className="inputBox">
-          <TimerInput
-            workBreak={WORK}
-            use="settings"
-            save={save}
-            text_size={2.3}
-            setWorkChange={(input) => setWorkChange(input)}
-          />
-        </div>
-      </label>
-    ) : null;
-
-  return (
-    <StyledMenu hide={hide}>
-      <h4> Settings </h4>
-      <hr id="firstLine" />
-      <form onSubmit={handleConfigSubmit}>
-        <div className="countdown-settings">
-          {workInput}
-          {breakInput}
-          <label className="countdown-label">Number of Work Sessions</label>
-          <div className="num-repeats-div">
-            <NumberInput
-              handleRepeatChange={(input) => setTempNumRepeats(input)}
-              numRepeats={num_repeats}
-              hide={hide}
-            />
-          </div>
-        </div>
-        <hr id="secondLine" />
-        <div className="soundSetting">
-          <label className="soundLabel">Chime When Timer Ends</label>
-          {/* <div className="toggle-padding"> */}
-          <Toggle
-            isChecked={tempAlert}
-            handleToggle={alertSoundChange}
-            size="small"
-          />
-        </div>
-        {/* </div> */}
-        <div className="soundSetting">
-          <label className="soundLabel">Work Session Music</label>
-          {/* <div className="toggle-padding">  */}
-          <Toggle
-            isChecked={tempWorkSound}
-            handleToggle={workSoundChange}
-            size="small"
-          />
-        </div>
-        {/* </div> */}
-        <div className="soundSetting">
-          <label className="soundLabel">Break Session Music</label>
-          {/* <div className="toggle-padding"> */}
-          <Toggle
-            isChecked={tempBreakSound}
-            handleToggle={breakSoundChange}
-            size="small"
-          />
-        </div>
-        {/* </div> */}
-        <hr id="thirdLine" />
-        <button type="submit" className="my-btn btn-primary btn-small">
-          Save
-        </button>
-      </form>
-    </StyledMenu>
-  );
->>>>>>> color
 }
 
 /**

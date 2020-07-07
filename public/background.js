@@ -4,7 +4,7 @@
 
 
 chrome.contextMenus.create({ 
-    id: 'SandboxTimer',
+    id: 'PawmodoroTimer',
     title: 'Start Timer',
     contexts: ['all']
   });
@@ -15,8 +15,8 @@ chrome.contextMenus.onClicked.addListener(
       chrome.windows.create({
         url: chrome.runtime.getURL("index.html"),
         type: "popup",
+        height: 360,
         width: 300,
-        height: 300
       })
 
 });

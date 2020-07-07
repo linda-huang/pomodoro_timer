@@ -58,22 +58,22 @@ export const StyledBurger = styled.button`
   div {
     flex: 1;
     width: 100%;
-    height: 0.1vmin;
+    height: 0.5vmin;
     background: #828b93;
     border-color: #828b93;
     border-radius: 10vmin;
     transition: all 0.3s linear;
     position: relative;
     transform-origin: 1px;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
+    // box-sizing: border-box;
+    // -moz-box-sizing: border-box;
+    // -webkit-box-sizing: border-box;
 
-    border: 0.9vmin solid rgba(0, 0, 0, 0);
+    // border: 0.9vmin solid rgba(0, 0, 0, 0);
 
-    //padding-bottom: 1vmin;
+    // padding-bottom: 2vmin;
 
-    margin-bottom: 19vmin;
+    margin-bottom: 1vmin;
 
     :first-child {
       transform: ${({ hide }) => (hide ? "rotate(0)" : "rotate(45deg)")};
