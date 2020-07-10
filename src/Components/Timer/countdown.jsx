@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import AnimationWrapper from '../animation/animation-wrapper';
 
 import { setPrevState, setCountdownState, NONE, WORK, BREAK, INTERMEDIATE, SESSION_END } from './timerDucks';
-import { setNumRepeats } from '../settings/settingsDucks';
+import { setNumSessions } from '../settings/settingsDucks';
 import AddTime from './addTime/add-button';
 
 import './timer.css';
@@ -13,7 +13,7 @@ import './addTime/add-buttons.scss';
 import Sound from '../audio/sound';
 
 
-function Countdown ({pause, work_time, break_time, countdown_state, prev_state, num_repeats, setCountdownState, setPrevState, setNumRepeats, updateTime}){
+function Countdown ({pause, work_time, break_time, countdown_state, prev_state, num_sessions, setCountdownState, setPrevState, setNumSessions, updateTime}){
 
     const [totalTime, setTotalTime] = useState((countdown_state === WORK) ? work_time : break_time);
     const numTimeRun = useRef(0);
@@ -37,10 +37,10 @@ function Countdown ({pause, work_time, break_time, countdown_state, prev_state, 
                 setPrevState(WORK)
                 rewindToBreak();
          
-            } else if (num_repeats !== 0 && countdown_state === BREAK) {
+            } else if (num_sessions !== 1 && countdown_state === BREAK) {
                 setCountdownState(INTERMEDIATE)
                 setPrevState(BREAK)
-                setNumRepeats(num_repeats-1);
+                setNumSessions(num_sessions-1);
                 rewindToWork();
 
             } else if (countdown_state === BREAK) {
@@ -126,14 +126,14 @@ const mapStateToProps = state => ({
     work_time : state.time.work_time,
     break_time : state.time.break_time,
     countdown_state : state.countdown.countdown_state,
-    num_repeats : state.settings.num_repeats,
+    num_sessions : state.settings.num_sessions,
     prev_state : state.countdown.prev_state
 })
 
 const mapDispatchToProps = dispatch => ({
     setCountdownState: state => dispatch(setCountdownState(state)),
     setPrevState : state => dispatch(setPrevState(state)),
-    setNumRepeats: repeats => dispatch(setNumRepeats(repeats))
+    setNumSessions: repeats => dispatch(setNumSessions(repeats))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Countdown)

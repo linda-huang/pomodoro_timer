@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from "react";
 import TimerInput from "../input/work-input";
 import { connect } from "react-redux";
 import {
-  setNumRepeats,
+  setNumSessions,
   setAlertSound,
   setWorkMusic,
   setBreakMusic,
@@ -23,8 +23,8 @@ import { cloneElement } from "react";
 function SandboxModal({
   setHide,
   hide,
-  setNumRepeats,
-  num_repeats,
+  setNumSessions,
+  num_sessions,
   setAlertSound,
   alert_sound,
   setWorkMusic,
@@ -34,7 +34,7 @@ function SandboxModal({
   countdown_state,
 }) {
   const [save, setSave] = useState(false);
-  const [tempNumRepeats, setTempNumRepeats] = useState(num_repeats);
+  const [tempNumRepeats, setTempNumRepeats] = useState(num_sessions);
 
   const [tempAlert, setTempAlert] = useState(alert_sound);
   const [tempWorkSound, setTempWorkSound] = useState(work_music);
@@ -49,13 +49,13 @@ function SandboxModal({
   const breakSound = useRef(break_music);
 
   useEffect(() => {
-    setTempNumRepeats(num_repeats);
+    setTempNumRepeats(num_sessions);
     if (workChange === true && breakChange === true) {
       setSave(false);
       setWorkChange(false);
       setBreakChange(false);
     }
-  }, [workChange, breakChange, num_repeats]);
+  }, [workChange, breakChange, num_sessions]);
 
   const onDialogClick = (event) => {
     event.stopPropagation();
@@ -63,7 +63,7 @@ function SandboxModal({
 
   const handleConfigSubmit = (event) => {
     setSave(true);
-    setNumRepeats(parseInt(tempNumRepeats));
+    setNumSessions(parseInt(tempNumRepeats));
     console.log("work audio", tempWorkSound);
 
     alertSound.current = tempAlert;
@@ -149,7 +149,7 @@ function SandboxModal({
               {breakInput}
               <label className="countdown-label">Number of Work Sessions</label>
               <div className="num-repeats-div">
-                <NumberInput handleRepeatChange = {(input) => setTempNumRepeats(input)}  numRepeats = {num_repeats}/>
+                <NumberInput handleRepeatChange = {(input) => setTempNumRepeats(input)}  numRepeats = {num_sessions}/>
               </div>
             </div>
             <hr id="secondLine" />
@@ -208,14 +208,14 @@ function SandboxModal({
  * it is a convention to  name the field key the same name as the action creator.
  */
 const mapDispatchToProps = (dispatch) => ({
-  setNumRepeats: (num_repeats) => dispatch(setNumRepeats(num_repeats)),
+  setNumSessions: (num_sessions) => dispatch(setNumSessions(num_sessions)),
   setAlertSound: (state) => dispatch(setAlertSound(state)),
   setWorkMusic: (state) => dispatch(setWorkMusic(state)),
   setBreakMusic: (state) => dispatch(setBreakMusic(state)),
 });
 
 const mapStateToProps = (state) => ({
-  num_repeats: state.settings.num_repeats,
+  num_sessions: state.settings.num_sessions,
   countdown_state: state.countdown.countdown_state,
   prev_state: state.countdown.prev_state,
   alert_sound: state.settings.alert_sound,

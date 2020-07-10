@@ -3,8 +3,8 @@ import './numberinput.css';
 import { connect } from "react-redux";
 
 
-function NumberInput ({handleRepeatChange, num_repeats}){
-    const[value, setValue] = useState(num_repeats);
+function NumberInput ({handleRepeatChange, num_sessions}){
+    const[value, setValue] = useState(num_sessions);
 
 
     const changeInput = (event) => {
@@ -26,7 +26,7 @@ function NumberInput ({handleRepeatChange, num_repeats}){
 
     /*useEffect(()=>{
         if(hide){
-            setValue(num_repeats);
+            setValue(num_sessions);
         }
     },[hide])*/
 
@@ -43,7 +43,7 @@ function NumberInput ({handleRepeatChange, num_repeats}){
 }
 
 const mapStateToProps = (state) => ({
-    num_repeats: state.settings.num_repeats,
+    num_sessions: state.settings.num_sessions,
 });
 
 export default connect(mapStateToProps)(NumberInput)

@@ -45,6 +45,7 @@ function TimerInput({
       setHour(0);
       setMinute(0);
       setSecond(0);
+      
     } else if (temp > 9999) {
       const tempHour = Math.floor(temp / 10000);
       const temp2 = temp % (tempHour * 10000);
@@ -160,9 +161,16 @@ function TimerInput({
     inputSecond and inputMinute are integers*/
   function recalibrate(inputSecond, inputMinute) {
     let seconds = hour * 3600 + minute * 60 + second;
-    setHour(Math.floor(seconds / 3600));
-    setMinute(Math.floor((seconds % 3600) / 60));
-    setSecond(seconds % 60);
+    if (seconds > 359999){
+      setHour(99);
+      setMinute(59);
+      setSecond(59);
+    }
+    else{
+      setHour(Math.floor(seconds / 3600));
+      setMinute(Math.floor((seconds % 3600) / 60));
+      setSecond(seconds % 60);
+    }
   }
 
   /* Extract only numbers out of input box and returns a string of text containing at most 6 numbers

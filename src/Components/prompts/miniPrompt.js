@@ -57,7 +57,7 @@ class MiniPrompt extends React.Component {
 const mapStateToProps = (state) => ({
   countdown_state: state.countdown.countdown_state,
   prev_state: state.countdown.prev_state,
-  num_repeats: state.settings.num_repeats,
+  num_sessions: state.settings.num_sessions,
 });
 
 export default connect(mapStateToProps)(MiniPrompt);

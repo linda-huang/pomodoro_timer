@@ -6,9 +6,9 @@
 
   "description": "A chill little timer that fills up like a fishtank or drains like an hourglass as it counts down.",
   "icons": {
-    "16": "sandcat16.png",
-    "48": "sandcat48.png",
-    "128": "sandcat128.png"
+    "16": "favicon16.png",
+    "48": "favicon32.png",
+    "128": "favicon128.png"
   },
 
   "permissions": [
@@ -21,7 +21,7 @@
   },
     
     "browser_action": {
-    "default_popup": "index.html"
+    "default_title": "Pawmodoro Timer"
   }
     
 

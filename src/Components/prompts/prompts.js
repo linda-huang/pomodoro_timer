@@ -27,10 +27,10 @@ function randomInt(min, max) {
 function Prompts({
   countdown_state,
   prev_state,
-  num_repeats,
+  num_sessions,
   setPrevState,
   setCountdownState,
-  setNumRepeats,
+  setNumSessions,
 }) {
   const [prompt, setPrompt] = useState(null);
   const [img, setImg] = useState(null);
