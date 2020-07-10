@@ -20,7 +20,7 @@ const StyledMenu = styled.nav`
   font-size: 4.5vmin;
 
   h4 {
-    font-size: 2vw;
+    font-size: 2vmin;
     color: #828b93;
   }
 
@@ -29,7 +29,7 @@ const StyledMenu = styled.nav`
     height: 2px
     margin-left: 2.5%;
     margin-right: 2.5%;
-    margin-top: 5%;
+    margin-top: 2.5vmin;
     border-style: inset;
   }
 
@@ -38,8 +38,8 @@ const StyledMenu = styled.nav`
     height: 2px
     margin-left: 2.5%;
     margin-right: 2.5%;
-    margin-top: 8%;
-    margin-bottom: 2%;
+    margin-top: 2.5vmin;
+    margin-bottom: 2.5vmin;
     border-style: inset;
   }
 
@@ -48,8 +48,8 @@ const StyledMenu = styled.nav`
     height: 2px
     margin-left: 2.5%;
     margin-right: 2.5%;
-    margin-top: 8%;
-    margin-bottom: 2%;
+    margin-top: 2.5vmin;
+    margin-bottom: 2.5vmin;
     border-style: inset;
   }
 
@@ -82,19 +82,19 @@ const StyledMenu = styled.nav`
     justify-content: center;
     border-radius: 5px;
     background-color: white;
-    border: 1px solid #aaa;
+    border: 0.1vmin solid #aaa;
     width: 18vmin;
     height: 4vmin;
     padding-top: 2%;
-    margin-top: 6%;
-    margin-bottom: 3%
+    margin-top: 1vmin;
+    margin-bottom: 1.5vmin;
   }
 
   .soundLabel{
     font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 50%;
     color: #779da6;
-    margin-top: 5%;
+    margin-top: 1vmin;
     margin-right: 20%;
     width: 80%;
     text-align: left;
@@ -104,14 +104,14 @@ const StyledMenu = styled.nav`
 label {
   font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   color: #779da6;
-  margin-top: 1%;
-  margin-bottom: 1%;
+  margin-top: 0.2vmin;
+  margin-bottom: 0.2vmin;
   
 
 }
 
 .num-repeats-div {
-  margin-top: 5%;
+  margin-top: 1vmin;
 }
 
 .soundSetting {

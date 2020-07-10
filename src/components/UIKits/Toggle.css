@@ -101,7 +101,7 @@ input:checked + .slider.tg-small:before {
 }
 
 div.toggle {
-  margin-top: 10%;
+  margin-top: 2.7vmin;
 
-  margin-bottom: 0.5%;
+  /*margin-bottom: 0.5vmin;*/
 }
