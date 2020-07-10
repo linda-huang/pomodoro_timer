@@ -1,10 +1,10 @@
 {
   "manifest_version": 2,
   "short_name": "Break_Timer",
-  "name": "The Sandbox Timer Testing",
+  "name": "Pawmodoro Timer",
   "version": "1.0",
 
-  "description": "A chill little timer that fills up like a fishtank or drains like an hourglass as it counts down, perfect for scheduling work sessions and break sessions in the pomodoro style.",
+  "description": "A chill little timer that fills up like a fishtank or drains like an hourglass as it counts down.",
   "icons": {
     "16": "sandcat16.png",
     "48": "sandcat48.png",
