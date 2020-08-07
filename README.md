@@ -1,68 +1,38 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<!-- ![Alt text](./readme_assets/cat_banner.png?raw=true "Pawmodoro Timer") -->
+<img src="./readme_assets/cat_banner.png" height='300'/>
 
-## Available Scripts
+A chill little pomodoro timer that reflects countdowns visually via animations (a rising tide, or disappearing bubbles of light). Users can customize the length of time to work and break for; the timer automatically switches between work and break sessions for you.
 
-In the project directory, you can run:
+[found here in the Google Web Store](https://chrome.google.com/webstore/detail/pawmodoro-timer/pigkacakkilmgbkoelcdacjhgkehhccm)
 
-### `yarn start`
+## Features
+<!-- --- -->
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Animations
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+<img src="./readme_assets/wave_animation.gif" width='405'/> <img src="./readme_assets/ball_animation.gif" width='405'/>
 
-### `yarn test`
+Animations sync to the amount of time left on the countdown, serving as a dynamic indicator of countdown progress. Integration into React done using CSS, requestAnimationFrame, and Canvas.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `yarn build`
+### Interactive Elements
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<img src="./readme_assets/input_box.gif" width='300'/> <img src="./readme_assets/add_time.gif" width='480'/>
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Easy to use interfaces allow users to personlize timer settings, and adjust the length of work and break intervals midway through the countdown. Component placement done via CSS grid and CSS flexbox.   
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `yarn eject`
+### Self-designed Static Assets
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+<img src="./readme_assets/animation_toggle.gif" width='250'/>
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Static assets coded from scratch, allowing for greater customizability. Designs created using Figma and incorporated into CSS checkboxes and radio buttons. 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

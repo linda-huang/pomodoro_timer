@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "xstyled-components";
 
 const StyledMenu = styled.nav`
   display: flex;
