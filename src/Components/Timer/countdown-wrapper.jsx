@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 //import AddTime from './addTime/add-button';
 import Countdown from "./countdown";
 import Prompts from "../prompts/prompts";
-import { NONE, INTERMEDIATE, setPaused } from "./timerDucks";
+import { NONE, INTERMEDIATE, setPaused, SESSION_END } from "./timerDucks";
 import "./timer.css";
 
 import "../../App.css";
@@ -18,18 +18,11 @@ function CountdownWrapper({ countdown_state, setPaused, pause, updateTime }) {
   };
 
   if (countdown_state === NONE) return null;
-  else if (countdown_state === INTERMEDIATE) return <Prompts />;
+  else if (countdown_state === INTERMEDIATE || countdown_state === SESSION_END)
+    return <Prompts />;
   else {
     return (
       <div className="CountdownWrapper">
-        {/* <div className='parent'>
-                            <div className='child'>
-                                <AddTime/>
-                            </div>
-                            <div className='child'>
-                                <Countdown pause={pause}/>
-                            </div>
-                </div> */}
         <div className="countdownDisplay">
           <Countdown pause={pause} updateTime={updateTime} />
         </div>

@@ -10,6 +10,7 @@ export const NONE = 'NONE';
 export const WORK = 'WORK';
 export const BREAK = 'BREAK';
 export const INTERMEDIATE = 'INTERMEDIATE';
+export const SESSION_END = 'SESSION_END'
 export const PAUSED = 'PAUSED';
 
 /**

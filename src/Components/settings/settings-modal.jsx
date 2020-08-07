@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import "./modal.css";
+//import "./modal.css";
 // import TimerInput from '../input/break-input';
 import TimerInput from "../input/work-input";
 import { connect } from "react-redux";
@@ -9,13 +9,15 @@ import {
   setWorkMusic,
   setBreakMusic,
 } from "./settingsDucks";
+
 import { NONE, WORK, BREAK, INTERMEDIATE } from "../timer/timerDucks";
 import Toggle from "../UIKits/Toggle";
 import StyledMenu from "./menu.styles";
+import NumberInput from "../numberInput/NumberInput";
 
 import Button from "../UIKits/Button";
 import "../UIKits/Button.css";
-
+import { cloneElement } from "react";
 // import { Keyboard } from 'react-native';
 
 function SandboxModal({
@@ -30,21 +32,21 @@ function SandboxModal({
   setBreakMusic,
   break_music,
   countdown_state,
-  start,
 }) {
   const [save, setSave] = useState(false);
   const [tempNumRepeats, setTempNumRepeats] = useState(num_repeats);
-  const [checked1, setChecked1] = useState(alert_sound);
-  const [checked2, setChecked2] = useState(work_music);
-  const [checked3, setChecked3] = useState(break_music);
+
+  const [tempAlert, setTempAlert] = useState(alert_sound);
+  const [tempWorkSound, setTempWorkSound] = useState(work_music);
+  const [tempBreakSound, setTempBreakSound] = useState(break_music);
+
   const [workChange, setWorkChange] = useState(false);
   const [breakChange, setBreakChange] = useState(false);
 
-  useEffect(() => {
-    if (start === true) {
-      setHide(true);
-    }
-  }, [start]);
+  /*True states of sound*/
+  const alertSound = useRef(alert_sound);
+  const workSound = useRef(work_music);
+  const breakSound = useRef(break_music);
 
   useEffect(() => {
     setTempNumRepeats(num_repeats);
@@ -62,9 +64,11 @@ function SandboxModal({
   const handleConfigSubmit = (event) => {
     setSave(true);
     setNumRepeats(parseInt(tempNumRepeats));
-    setAlertSound(checked1);
-    setWorkMusic(checked2);
-    setBreakMusic(checked3);
+    console.log("work audio", tempWorkSound);
+
+    alertSound.current = tempAlert;
+    workSound.current = tempWorkSound;
+    breakSound.current = tempBreakSound;
     event.preventDefault();
     if (countdown_state === NONE) setSave(false);
   };
@@ -73,90 +77,121 @@ function SandboxModal({
     setTempNumRepeats(event.target.value);
   };
 
+  const alertSoundChange = (event) => {
+    setAlertSound(!tempAlert);
+    setTempAlert(!tempAlert);
+  };
+
+  const workSoundChange = (event) => {
+    setWorkMusic(!tempWorkSound);
+    setTempWorkSound(!tempWorkSound);
+  };
+
+  const breakSoundChange = (event) => {
+    setBreakMusic(!tempBreakSound);
+    setTempBreakSound(!tempBreakSound);
+  };
+
+  useEffect(() => {
+    if (hide) {
+      setAlertSound(alertSound.current);
+      setBreakMusic(breakSound.current);
+      setWorkMusic(workSound.current);
+      setTempAlert(alertSound.current);
+      setTempBreakSound(breakSound.current);
+      setTempWorkSound(workSound.current);
+    }
+  }, [hide]);
+
   let breakInput =
     countdown_state !== NONE ? (
-      <label className>
+      <label className="countdown-label">
         Set Break Time
-        <TimerInput
-          workBreak={BREAK}
-          use="settings"
-          save={save}
-          text_size={2}
-          setBreakChange={(input) => setBreakChange(input)}
-        />
-      </label>
-    ) : null;
-  let workInput =
-    countdown_state !== "NONE" ? (
-      <label className>
-        Set Work Time
-        <TimerInput
-          workBreak={WORK}
-          use="settings"
-          save={save}
-          text_size={2}
-          setWorkChange={(input) => setWorkChange(input)}
-        />
+        <div className="inputBox">
+          <TimerInput
+            workBreak={BREAK}
+            use="settings"
+            save={save}
+            text_size={2.3}
+            setBreakChange={(input) => setBreakChange(input)}
+          />
+        </div>
       </label>
     ) : null;
 
-  if (hide) return null;
-  else {
-    return (
-      <StyledMenu>
-        <h4> SETTINGS </h4>
-        <hr id="firstLine" />
-        <form onSubmit={handleConfigSubmit}>
+  let workInput =
+    countdown_state !== NONE ? (
+      <label className="countdown-label">
+        Set Work Time
+        <div className="inputBox">
+          <TimerInput
+            workBreak={WORK}
+            use="settings"
+            save={save}
+            text_size={2.3}
+            setWorkChange={(input) => setWorkChange(input)}
+          />
+        </div>
+      </label>
+    ) : null;
+
+  return (
+    <StyledMenu hide={hide}>
+      <h4> Settings </h4>
+      <hr id="firstLine" />
+      <form onSubmit={handleConfigSubmit}>
+        <div className="countdown-settings">
           {workInput}
           {breakInput}
-          <div>
-            <label className>Number of Repeats</label>
-            <input
-              type="number"
-              min="0"
-              value={tempNumRepeats}
-              onChange={handleRepeatChange}
+          <label className="countdown-label">Number of Work Sessions</label>
+          <div className="num-repeats-div">
+            <NumberInput
+              handleRepeatChange={(input) => setTempNumRepeats(input)}
+              numRepeats={num_repeats}
+              hide={hide}
             />
           </div>
-          <hr id="secondLine" />
-          <div className="soundSetting">
-            <label className="soundLabel">Alert Sound</label>
-            <Toggle
-              isChecked={checked1}
-              handleToggle={() => setChecked1(!checked1)}
-              size="small"
-            />
-          </div>
-          <div className="soundSetting">
-            <label className="soundLabel">Work Music</label>
-            <Toggle
-              isChecked={checked2}
-              handleToggle={() => setChecked2(!checked2)}
-              size="small"
-            />
-          </div>
-          <div className="soundSetting">
-            {/*<input
-                            type = 'checkbox'
-                            checked = {checked3}
-                            onChange = {() => setChecked3(!checked3)}
-                            />*/}
-            <label className="soundLabel">Break Music</label>
-            <Toggle
-              isChecked={checked3}
-              handleToggle={() => setChecked3(!checked3)}
-              size="small"
-            />
-          </div>
-          <hr id="thirdLine" />
-          <button type="submit" className="my-btn btn-primary btn-small">
-            Save
-          </button>
-        </form>
-      </StyledMenu>
-    );
-  }
+        </div>
+        <hr id="secondLine" />
+        <div className="soundSetting">
+          <label className="soundLabel">Chime When Timer Ends</label>
+          {/* <div className="toggle-padding"> */}
+          <Toggle
+            isChecked={tempAlert}
+            handleToggle={alertSoundChange}
+            size="small"
+          />
+        </div>
+        {/* </div> */}
+        <div className="soundSetting">
+          <label className="soundLabel">Work Session Music</label>
+          {/* <div className="toggle-padding">  */}
+          <Toggle
+            isChecked={tempWorkSound}
+            handleToggle={workSoundChange}
+            size="small"
+          />
+        </div>
+        {/* </div> */}
+        <div className="soundSetting">
+          <label className="soundLabel">Break Session Music</label>
+          {/* <div className="toggle-padding"> */}
+          <Toggle
+            isChecked={tempBreakSound}
+            handleToggle={breakSoundChange}
+            size="small"
+          />
+        </div>
+        {/* </div> */}
+        <hr id="thirdLine" />
+        <button type="submit" className="my-btn btn-primary btn-small">
+          Save
+        </button>
+      </form>
+    </StyledMenu>
+  );
 }
+
 /**
  * @constant mapDispatchToProps
  * Returns a plain object, where each field is a separate prop for the Classifier
@@ -187,6 +222,4 @@ const mapStateToProps = (state) => ({
   break_music: state.settings.break_music,
 });
 
-/* Merges the return of the mapDispatchToProps function to SandboxModal component 
-as props.*/
 export default connect(mapStateToProps, mapDispatchToProps)(SandboxModal);
