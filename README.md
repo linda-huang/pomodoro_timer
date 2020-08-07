@@ -1,3 +1,48 @@
+<Banner>
+About Me:
+    I'm a chill little pomodoro timer that fills your screen with water when I count down. If you are afraid of drowning, I can also animate light dots that disappear overtime. I am here to increase your productivity.
+
+<cat gif>
+
+
+Features:
+
+    Timer Input - 
+    <GIF here>
+    - flexbox
+    - add time
+
+
+    Animation:
+    Waves
+    <GIF here>
+    - pure css
+
+
+    Light Dots 
+    <GIF here>
+    - request animation frame
+    - canvas
+
+    
+    Animation Toggle:
+    - radio button
+    - labels of radio buttons are drawn in Figma
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
