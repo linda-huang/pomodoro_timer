@@ -14,7 +14,7 @@ Animations sync to the amount of time left on the countdown, serving as a dynami
 
 ### Interactive Elements
 
-<img src="./readme_assets/input_box.gif" width='300'/> <img src="./readme_assets/add_time.gif" width='400'/>
+<img src="./readme_assets/input_box.gif" width='300'/> <img src="./readme_assets/add_time.gif" width='450'/>
 
 Easy to use interfaces allow users to personlize timer settings, and adjust the length of work and break intervals midway through the countdown. Component placement done via CSS grid and CSS flexbox.   
 
