@@ -8,7 +8,7 @@ A chill little pomodoro timer that reflects countdowns visually via animations (
 
 ### Animations
 
-<img src="./readme_assets/wave_animation.gif" width='400'/> <img src="./readme_assets/ball_animation.gif" width='400'/>
+<img src="./readme_assets/wave_animation.gif" width='450'/> <img src="./readme_assets/ball_animation.gif" width='450'/>
 
 
 
