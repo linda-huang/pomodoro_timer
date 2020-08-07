@@ -20,7 +20,7 @@ Animations sync to the amount of time left on the countdown, serving as a dynami
 
 <img src="./readme_assets/input_box.gif" width='300'/> <img src="./readme_assets/add_time.gif" width='480'/>
 
-Easy to use interfaces allow users to personlize timer settings, and adjust the length of work and break intervals midway through the countdown. Component placement done via CSS grid and CSS flexbox.   
+Easy to use interfaces allow users to personalize timer settings, and adjust the length of work and break intervals midway through the countdown. Component placement done via CSS grid and CSS flexbox; utilized Redux for state information communication.
 
 ---
 
@@ -29,7 +29,6 @@ Easy to use interfaces allow users to personlize timer settings, and adjust the 
 <img src="./readme_assets/animation_toggle.gif" width='250'/>
 
 Static assets coded from scratch, allowing for greater customizability. Designs created using Figma and incorporated into CSS checkboxes and radio buttons. 
-
 
 
 
