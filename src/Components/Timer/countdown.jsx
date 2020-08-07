@@ -7,24 +7,27 @@ import { setPrevState, setCountdownState, NONE, WORK, BREAK, INTERMEDIATE } from
 import { setNumRepeats } from '../settings/settingsDucks';
 import AddTime from './addTime/add-button';
 
-
 import './timer.css';
-import './addTime/add-buttons.css';
+import './addTime/add-buttons.scss';
 
 import Sound from '../audio/sound';
 
 
-function Countdown ({pause, work_time, break_time, countdown_state, num_repeats, setCountdownState, setPrevState, setNumRepeats}){
+function Countdown ({pause, work_time, break_time, countdown_state, num_repeats, setCountdownState, setPrevState, setNumRepeats, updateTime}){
 
     // const [displayHour, setDisplayHour] = useState(work_hour);
     // const [displayMinute, setDisplayMinute] = useState(work_min);
     // const [displaySecond, setDisplaySecond] = useState(work_sec);
     const [totalTime, setTotalTime] = useState((countdown_state === WORK) ? work_time : break_time);
 
+    
+
     useEffect(()=>{  
         if (!pause && (countdown_state !== NONE && countdown_state !== INTERMEDIATE)) {
             const interval = setInterval(() => {
-                setTotalTime(totalTime -1)
+                console.log(totalTime);
+                setTotalTime(totalTime - 1);
+                updateTime(totalTime);
                 // if (displaySecond > 0){
                 //     setDisplaySecond(displaySecond - 1);
                 // }
@@ -74,9 +77,7 @@ function Countdown ({pause, work_time, break_time, countdown_state, num_repeats,
                 setPrevState(BREAK)
             }   
         }
-    }, [
-        // displayHour, displayMinute, displaySecond, 
-        totalTime, countdown_state])
+    }, [totalTime, countdown_state])
 
     
     const rewindToWork = () => {
@@ -96,36 +97,42 @@ function Countdown ({pause, work_time, break_time, countdown_state, num_repeats,
 
    
     useEffect(() => {
-        if (countdown_state === WORK) {    
+        if (countdown_state === WORK) {  
+            console.log("updating to work time");
+            console.log("work time", work_time);
             setTotalTime(work_time);
+            console.log(work_time)
             // setDisplayHour(work_hour)
             // setDisplayMinute(work_min)
             // setDisplaySecond(work_sec)
         }
         else if (countdown_state === BREAK) {
+            console.log("updating to break time");
+            console.log("break time", break_time);
             setTotalTime(break_time)
 
             // setDisplayHour(break_hour)
             // setDisplayMinute(break_min)
             // setDisplaySecond(break_sec)
         }
-    }, [countdown_state])
+        
+    }, [countdown_state, work_time, break_time])
 
 
     return (        
         <div className='parent'>
-            <AnimationWrapper time={totalTime} />
-          
+            
+
             <div className='child'>
                 <div className='content'>
                     <h1 className='item'>
-                        {Math.floor(totalTime / 3600) < 10 ? `0${Math.floor(totalTime / 3600)}` : Math.floor(totalTime / 3600)}h
+                        {Math.floor(totalTime / 3600) < 10 ? `0${Math.floor(totalTime / 3600)}` : Math.floor(totalTime / 3600)}h 
                     </h1>
                     <h1 className='item'>
                         {Math.floor((totalTime % 3600) / 60) < 10 ? `0${Math.floor((totalTime % 3600) / 60)}` : Math.floor((totalTime % 3600) / 60)}m 
                     </h1>
                     <h1 className='item'>
-                        {Math.floor(totalTime % 60) < 10 ? `0${Math.floor(totalTime % 60)}` :  Math.floor(totalTime % 60)}s
+                        {Math.floor(totalTime % 60) < 10 ? `0${Math.floor(totalTime % 60)}` :  Math.floor(totalTime % 60)}s 
                     </h1>
                 </div>   
             </div>

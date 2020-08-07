@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {INTERMEDIATE} from '../timer/timerDucks';
 import audiofile from './Zen_mg_SHIBUYA_long.m4r';
 
-//Play alert sound when a countdown reaches 0
+/*Play alert sound when a countdown reaches 0*/
 function Alert ({countdown_state, alert_sound}){
 
     const alertaudio = useRef(null)

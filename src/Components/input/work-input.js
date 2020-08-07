@@ -5,21 +5,24 @@ import { setWorkTime, setBreakTime } from './inputDucks';
 import {NONE, WORK, BREAK} from '../timer/timerDucks';
 
 //sleek google version
-function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time, break_time, countdown_state, setWorkChange, setBreakChange}){
+function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time, break_time, countdown_state, setWorkChange, setBreakChange, text_size}){
     
-    //const [totalTime, setTotalTime] = useState((workBreak===WORK) ? work_time : break_time);
+    const [totalTime, setTotalTime] = useState((workBreak===WORK) ? work_time : break_time);
 
-    const [hour, setHour] = useState(0);
-    const [minute, setMinute] = useState(0);
-    const [second, setSecond] = useState(0);
+    const [hour, setHour] = useState(Math.floor(totalTime / 3600));
+    const [minute, setMinute] = useState(Math.floor((totalTime % 3600)/60));
+    const [second, setSecond] = useState(totalTime % 60);
 
-    const [color, setColor] = useState();
+    const [color, setColor] = useState(); //display color
+    const [focused, setFocused] = useState(false); //whethere the input box was clicked
 
     const inputText = useRef(null);
     
+    const [size, setSize] = useState(50);
+
     const changeTime = (event) => {
         const input = event.currentTarget.value;
-        let time = extractNum(input);
+        let time = onlyNum(input);
         inputText.current.value = time;
         let temp = parseInt(time);
         
@@ -57,17 +60,52 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
 
     const blur = (event) => {
         inputText.current.value = ''; //clear input box when user clicks out of textbox
-        setColor("#999999");
+        if(hour === 0 && minute === 0 && second === 0){
+            (workBreak===WORK) ? setMinute(25) : setMinute(5);
+        }
+        else{
+            recalibrate();
+        }
+        setColor("#4D737C");
+        setFocused(false);
         if (thecursor.current !== null) {thecursor.current.style.display = "none"};
-        if (fakeline.current !== null) {fakeline.current.style.visibility = "hidden"};
+        if (fakeline.current !== null) {
+            fakeline.current.style.visibility = "hidden";
+            
+        };
 
     }
 
+
     const focus = (event) => {       
-        setColor("#CCCCCC");
+        setColor("#BDD1D6");
+        setHour(0);
+        setMinute(0);
+        setSecond(0);
+        setFocused(true);
         if (thecursor.current !== null) {thecursor.current.style.display = "inline"};
-        if (fakeline.current !== null) {fakeline.current.style.visibility = "visible"};
+        if (fakeline.current !== null) {
+            fakeline.current.color = "#8eb6bf"};
+            fakeline.current.style.visibility = "visible";
     } 
+
+
+    const mouseLeave = (event) =>{
+        if(!focused){
+            setColor("#4D737C");
+            fakeline.current.style.visibility = "hidden";
+        }
+    }
+
+
+    const mouseEnter = (event) =>{
+        if(!focused){
+        fakeline.current.style.visibility = "visible";
+        fakeline.current.color = "#bbbbbb";
+        setColor("#BDD1D6");
+        }
+    }
+
 
     useEffect(() => {
         if (save === true) {
@@ -81,36 +119,48 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
         }
     }, [save])
 
-    //recalculate hours and minutes when minutes > 59
-    // function recalibrate (inputSecond, inputMinute){
-    //     console.log("recalibrating");
-    //     let actionHour = hour
-    //     let actionMinute = minute
-    //     let actionSecond = second
 
-    //     if (second > 59){
-    //         let extraMinute = Math.floor(inputSecond/60);
-    //         inputSecond = inputSecond % 60;
-    //         actionMinute = minute + extraMinute;
-    //         actionSecond = inputSecond;
-    //     }
+    /*Change display size*/
+    useEffect(() => {
+        setSize(text_size);
+    }, [text_size])
 
-    //     if (minute > 59){
-    //         let extraHour = Math.floor(inputMinute/60);
-    //         inputMinute = inputMinute % 60;
-    //         actionHour = hour + extraHour;
-    //         actionMinute = inputMinute;
-    //     }
-    //     setWorkMin(actionMinute);
-    //     setWorkHour(actionHour);
-    //     setWorkSec(actionSecond);
-    // }
+
+    /*recalculate hours and minutes when minutes > 59
+    Parameters:
+    inputSecond: seconds inputed by user
+    inputMinute: minutes inputed by user
+    
+    Precondition:
+    inputSecond and inputMinute are integers*/
+    function recalibrate (inputSecond, inputMinute){
+
+        let seconds = hour*3600 + minute*60 + second;
+        setHour(Math.floor(seconds / 3600));
+        setMinute(Math.floor((seconds % 3600)/60));
+        setSecond(seconds % 60);
+     }
 
 
    
     /* Extract only numbers out of input box and returns a string of text containing at most 6 numbers
     Parameter: text is a string
     Returns a string of only numbers or empty string*/
+
+    //more efficient version without loop
+    function onlyNum(text){
+        let lastChar = text.slice(-1);
+        let ascii = lastChar.charCodeAt(0);
+        console.log("ascii", ascii);
+        if (48 <= ascii && ascii <= 57){
+            return text;
+        }
+        else{
+            return text.slice(0,-1);
+        }
+    }
+
+    /* Less efficient version
 
     //list of acceptable characters
     const numList = ['0','1','2','3','4','5','6','7','8','9'];
@@ -125,11 +175,12 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
         else{
             return text.slice(0,-1);
         }
-    }
+    }*/
 
 
+    
     if (use === 'countdown' && (countdown_state !== NONE)) {
-        return null
+        return null;
     }
 
     else {
@@ -142,26 +193,37 @@ function TimerInput ({setWorkTime, setBreakTime, workBreak, save, use, work_time
                             type = "text"
                             className = "hideInput"
                             maxLength = "6"
-                            size = "31"
+                            size = {size*22/25}
+                            style = {{ 
+                                height: `${size*1.5}vmin`,
+                                width: `${size*6.4}vmin`
+                            }}
                             onBlur = {blur}
                             onFocus = {focus}
+                            onMouseEnter = {mouseEnter}
+                            onMouseLeave = {mouseLeave}
                             onChange = {changeTime}    
                         />
                     </div>
     
                     <div>
-                        <h1 className = "timeDisplay"
+                        <h3 className = "timeDisplay" 
                             style = {{
-                                color: color
+                                color: color,
+                                fontSize: `${size}vmin`,
+                                lineHeight: `${size*7/5}vmin`,
                             }}>
                            {hour < 10 ? `0${hour}` : hour}h &#160;
                            {minute < 10 ? `0${minute}` : minute}m &#160;
                            {second < 10 ? `0${second}` :  second}
-                           <hr className = "fakeCursor" ref = {thecursor} style = {{display : "none"}} width = "1" size = "35"></hr>
+                           <hr className = "fakeCursor" ref = {thecursor} style = {{display : "none"}} width = "1" ></hr>
                            s   
-                        </h1>
+                        </h3>
                         <hr ref = {fakeline} style = {{
-                            visibility: "hidden"
+                            visibility: "hidden",
+                            marginBottom: `${1}vmin`,
+                            border: "none",
+                            height: `${1}%`
                         }}></hr>
                     </div>  
                 </div>

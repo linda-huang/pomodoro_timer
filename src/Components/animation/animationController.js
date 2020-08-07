@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { WAVE, BALL , HIDE} from "./animationDucks";
 import {setAnimationState} from './animationDucks';
 import "./wavestyle.css";
+import "../../App.css";
 
 
 class AnimationController extends React.Component {
@@ -36,36 +37,36 @@ class AnimationController extends React.Component {
     render(){
         return (
           <div id="animation_con">
-            <label htmlFor="wave" className="block animation_lab">
-              
-            </label>
+            <label
+              htmlFor="wave_input"
+              id="wave_lab"
+              className="block animation_lab"
+            ></label>
             <input
-              id="wave"
+              id="wave_input"
               onClick={this.waveClick}
               type="radio"
               name="animation_con"
               defaultChecked={this.props.animation_state === WAVE}
             />
-            <label htmlFor="ball" className="block animation_lab">
-              
-            </label>
+
+            <label
+              htmlFor="ball_input"
+              id="ball_lab"
+              className="block animation_lab"
+            ></label>
             <input
-              id="ball"
+              id="ball_input"
               onClick={this.ballClick}
               type="radio"
               name="animation_con"
               defaultChecked={this.props.animation_state === BALL}
             />
+
             <span id="animation_slider"></span>
           </div>
         );
-    }
-
-
-
-
-
-
+      }
 }
 
 

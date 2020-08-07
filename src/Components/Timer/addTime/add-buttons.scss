@@ -1,0 +1,135 @@
+$bubble-d: 10rem; // bubble diameter
+$bubble-r: .5*$bubble-d; // bubble-radius
+
+@mixin bubble($ext) {
+  transform: scale(1);
+  border-color: rgb(116, 188, 98);
+  border-width: $ext;
+}
+
+.button > span {
+    display: none;
+    color: whitesmoke;
+    font-size: 4vw;
+}
+
+.parentTimer {
+  display: grid;
+  //grid-template-columns: 250px 1fr;
+  //grid-template-rows: 150px 1fr;
+}
+
+.content {
+    align-items: center;
+    width: 70vw;
+    height: 100%;
+    //height: 60px;
+    border: 0px; 
+    display: inline-flex;
+    min-width: 100%;
+    flex-direction: row;
+    //padding-top: 50px;
+  }
+
+.button {
+    flex: 1;
+    background-color: rgba(52, 52, 52, 0);
+    border: none;
+    z-index: 1051;
+    transition-duration: 0.4s;
+    border-radius:8px;
+    outline: none;
+    height: 100%;
+    place-self: stretch;
+    cursor: pointer;
+
+    
+}
+
+.item {
+  flex: 1;
+  align-items: stretch; 
+  
+  border: none;
+  z-index: 1050;
+  border-radius:8px;
+  justify-content : center;
+  align-content: center;
+  padding-left: 2%;
+  padding-right: 2%;
+  width: 32%;
+  height: 100%;
+
+}
+
+.countdown {
+    position : absolute;
+    flex: 0;
+    text-overflow: ellipsis;
+    z-index: 50;
+    text-align: center;
+    margin: 10px 5px 10px 0px;
+}
+
+.button:hover {
+    background-color:rgba(52, 52, 52, 0.3); /* Green */
+    /* color: white; */
+  }
+
+ .button:hover span{
+    display: block;
+ } 
+
+ @keyframes plus {
+  0%, 17.5% { font-size: 0; }
+}
+
+@keyframes bubble {
+  15% { @include bubble($bubble-r); }
+  30%, 100% { @include bubble(0); }
+}
+
+.button:active {
+  background-color: rgba(0, 78, 56, 0.5);
+}
+
+.button:active > span{
+  will-change: font-size;
+  animation: plus 1s cubic-bezier(.17, .89, .32, 1.49);
+  
+  &:before, &:after {
+      animation: inherit;
+      animation-timing-function: cubic-bezier(.21, .61, .35, 1);
+  }
+  
+  &:before {
+      will-change: transform, border-width, border-color;
+      animation-name: bubble;
+  }
+}
+
+.button:active > span {
+  align-self: center;
+  position: relative;
+  color:   rgb(242,197, 174);
+  // rgb(145, 238, 145);
+  font-size: 9em;
+  cursor: pointer;
+  
+  &:before, &:after {
+      position: absolute;
+      z-index: 1050;
+      top: 50%; left: 50%;
+      border-radius: 50%;
+      content: '';
+  }
+  
+  &:before {
+      box-sizing: border-box;
+      margin: -$bubble-r;
+      border: solid $bubble-r  rgb(242,197, 174);
+      //  rgba(152, 255, 152, 0.6);
+      width: $bubble-d; height: $bubble-d;
+      transform: scale(0);
+  }
+}   
