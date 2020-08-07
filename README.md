@@ -1,5 +1,5 @@
 <!-- ![Alt text](./readme_assets/cat_banner.png?raw=true "Pawmodoro Timer") -->
-<img src="./readme_assets/cat_banner.png" width="100" height="40" />
+<img src="./readme_assets/cat_banner.png" width="500" height="100" />
 
 A chill little pomodoro timer that reflects countdowns visually via animations (a rising tide, or disappearing bubbles of light). 
 
@@ -8,7 +8,7 @@ A chill little pomodoro timer that reflects countdowns visually via animations (
 
 ### Animations
 
-<img src="./readme_assets/wave_animation.gif" width="50" height="70" /> <img src="./readme_assets/ball_animation.gif" width="50" height="70" />
+<img src="./readme_assets/wave_animation.gif" width="300" height="400" /> <img src="./readme_assets/ball_animation.gif" width="300" height="400" />
 
 
 
