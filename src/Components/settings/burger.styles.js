@@ -19,42 +19,6 @@ export const StyledBurger = styled.button`
     outline: none;
   }
 
-  // #first-burger {
-  //   width: 100%;
-  //   height: 0.5vmin;
-  //   margin-top: 3px;
-  //   background: rgb(52, 52, 52);
-  //   border-radius: 10px;
-  //   transition: all 0.3s linear;
-  //   position: relative;
-  //   transform-origin: 1px;
-
-  // }
-
-  // #second-burger{
-  //   width: 100%;
-  //   height: 0.5vmin;
-  //   margin-top: 3px;
-  //   background: rgb(52, 52, 52);
-  //   border-radius: 10px;
-  //   transition: all 0.3s linear;
-  //   position: relative;
-  //   transform-origin: 1px;
-
-  // }
-
-  // #third-burger{
-  //   width: 100%;
-  //   height: 0.5vmin;
-  //   margin-top: 3px;
-  //   background: rgb(52, 52, 52);
-  //   border-radius: 10px;
-  //   transition: all 0.3s linear;
-  //   position: relative;
-  //   transform-origin: 1px;
-
-  // }
-
   div {
     flex: 1;
     width: 100%;

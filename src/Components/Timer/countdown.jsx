@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {connect} from 'react-redux';
 
 import AnimationWrapper from '../animation/animation-wrapper';
@@ -62,33 +62,12 @@ function Countdown ({pause, work_time, break_time, countdown_state, prev_state, 
 
    
     useEffect(() => {
-        //console.log("num time run", numTimeRun.current)
-        //setWorkTime();
-        
-            //console.log("before if", numTimeRun.current)
-            //console.log(countdown_state === WORK && numTimeRun.current < 2 && prev_state === NONE)
         if (countdown_state === WORK && numTimeRun.current < 2 && prev_state === NONE ) {  
             numTimeRun.current += 1;
             setTotalTime(work_time);
         }
 
-        //return () => clearTimeout(setter);
-        /*else if (countdown_state === BREAK && currentState.current !== countdown_state) {
-            setTotalTime(break_time)
-            && numTimeRun.current < 2 && prev_state === NONE 
-        }*/
-        
     }, [countdown_state, work_time])
-
-
-
-    /*const setWorkTime = async () => {
-        if (countdown_state === WORK && numTimeRun.current < 1 && prev_state === NONE ) {  
-            
-            numTimeRun.current = await numTimeRun.current + 1;
-            setTotalTime(work_time);
-        }
-    }*/
 
 
     return (        

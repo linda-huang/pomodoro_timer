@@ -5,20 +5,6 @@ import "./wavestyle.css";
 
 //import css
 
-// I decided to put everything inside the same component fk it
-
-/////////////////random generation///////////////////////////////
-// function to generate random int if min and max is int
-
-// const time_minute = 30;
-// const time_second = time_minute * 60;
-// const time_Milsecond = time_minute * 60 * 500;
-// var time_left_ball_second = time_second;
-
-// const ball_rad_work = 26;
-// const ball_rad_break= 28;
-// const ball_rad_none = 24;
-
 const ball_rad_work = 0.024;
 const ball_rad_break = 0.028;
 const ball_rad_none = 0.03;
@@ -31,8 +17,6 @@ const maxBallNum = 120; // max number of ball
 const ve_work = 0.5;
 const ve_break = 0.8;
 
-//const background_Col = "#f5e8ce";
-// const background_Col = "white";
 const color_options = [
   "rgba(242, 197, 174, 0.4)",
   "rgba(129, 141, 151, 0.4)",
@@ -40,10 +24,6 @@ const color_options = [
   "rgba(119, 157, 166, 0.4)",
   "rgba(141, 182, 191, 0.4)",
 ];
-
-//ball expansion
-// const ball_fat = 18;
-// const rad_f_m = 40;
 
 function randomInt(min, max) {
   const num = Math.floor(Math.random() * (max - min + 1)) + min;

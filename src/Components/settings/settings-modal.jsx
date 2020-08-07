@@ -1,6 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-//import "./modal.css";
-// import TimerInput from '../input/break-input';
 import TimerInput from "../input/work-input";
 import { connect } from "react-redux";
 import {
@@ -15,10 +13,7 @@ import Toggle from "../UIKits/Toggle";
 import StyledMenu from "./menu.styles";
 import NumberInput from "../numberInput/NumberInput";
 
-import Button from "../UIKits/Button";
 import "../UIKits/Button.css";
-import { cloneElement } from "react";
-// import { Keyboard } from 'react-native';
 
 function SandboxModal({
   setHide,
