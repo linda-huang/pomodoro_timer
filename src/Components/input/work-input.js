@@ -135,23 +135,6 @@ function TimerInput({
   }, [text_size])
 
 
-  // useEffect(()=>{
-  //   if (use === "settings"){
-  //     /*if (hide) {
-
-  //       setTotalTime(workBreak === WORK ? work_time : break_time);
-  //     }*/
-    
-  //     if(hide){
-  //       //setTotalTime(workBreak === WORK ? work_time : break_time);
-  //       console.log("")
-  //       setHour(Math.floor(work_time/ 3600));
-  //       setMinute(Math.floor((work_time % 3600) / 60));
-  //       setSecond(work_time % 60);
-  //     }
-  //   }
-  // }, [hide, work_time])
-
   /*recalculate hours and minutes when minutes > 59
     Parameters:
     inputSecond: seconds inputed by user
@@ -188,23 +171,6 @@ function TimerInput({
       return text.slice(0, -1);
     }
   }
-
-  /* Less efficient version
-
-    //list of acceptable characters
-    const numList = ['0','1','2','3','4','5','6','7','8','9'];
-    function extractNum(text) {
-        //last character in the string
-        let lastChar = text.slice(-1); 
-
-        //Check if the lastChar is in list of acceptable characters
-        if (numList.includes(lastChar)){
-            return text;
-        }
-        else{
-            return text.slice(0,-1);
-        }
-    }*/
 
   if (use === "countdown" && countdown_state !== NONE) {
     return null;

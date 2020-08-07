@@ -1,7 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-// import {connect} from 'react-redux';
-// import { WORK, BREAK } from '../timerDucks';
-//import { setWorkHour, setWorkMin, setWorkSec, setBreakHour, setBreakMin, setBreakSec } from '../../input/inputDucks'
 import './add-buttons.scss';
 import '../timer.css';
 // import './add-plus.scss';

@@ -24,13 +24,6 @@ function NumberInput ({handleRepeatChange, num_sessions}){
         setValue(value-1);
     }
 
-    /*useEffect(()=>{
-        if(hide){
-            setValue(num_sessions);
-        }
-    },[hide])*/
-
-    
     return(
         <div className="input-wrapper">
              <input className="quantity" id="id_form-0-quantity" min="0" name="form-0-quantity" value={value} type="number" onChange = {changeInput}/>
