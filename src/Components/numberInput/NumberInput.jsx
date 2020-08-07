@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './numberinput.css';
+import { connect } from "react-redux";
 
-export default function NumberInput ({handleRepeatChange}){
-    const[value, setValue] = useState(0);
+
+function NumberInput ({handleRepeatChange, num_sessions}){
+    const[value, setValue] = useState(num_sessions);
 
 
     const changeInput = (event) => {
@@ -21,6 +23,7 @@ export default function NumberInput ({handleRepeatChange}){
         handleRepeatChange(value-1);
         setValue(value-1);
     }
+
     return(
         <div className="input-wrapper">
              <input className="quantity" id="id_form-0-quantity" min="0" name="form-0-quantity" value={value} type="number" onChange = {changeInput}/>
@@ -31,3 +34,9 @@ export default function NumberInput ({handleRepeatChange}){
         </div>
     )
 }
+
+const mapStateToProps = (state) => ({
+    num_sessions: state.settings.num_sessions,
+});
+
+export default connect(mapStateToProps)(NumberInput)

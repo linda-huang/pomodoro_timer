@@ -10,7 +10,7 @@ const Toggle = ({ isChecked, handleToggle, size }) => {
         <input
           type="checkbox"
           className="toggle-checkbox"
-          defaultChecked={isChecked}
+          checked={isChecked}
           onChange={handleToggle}
         />
         <span className={`slider tg-${size}`}></span>

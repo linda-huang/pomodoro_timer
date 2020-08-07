@@ -1,46 +1,35 @@
-.generic{
+.generic {
   display: grid;
   grid-area: main;
   place-self: stretch;
 }
 
-.GridLayout{
+.GridLayout {
   display: grid;
   grid-template-columns: [vstart] 15% [v1] auto [v2] 15%[vend];
   grid-template-rows: [hstart] 20% [h1] auto [h2] 20% [hend];
-  grid-template-areas: 
-  "corner1 top corner2"
-  "left main right"
-  "corner3 bottom corner4";
+  grid-template-areas:
+    "corner1 top corner2"
+    "left main right"
+    "corner3 bottom corner4";
   width: 100vw;
   height: 100vh;
-
 }
 
-
 /*Main grid layout*/
-.MainLayout{
-  /*display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
-  grid-template-areas:
-  "main1"
-  "main2"
-  "main3";
-  place-self: stretch;*/
+.MainLayout {
   grid-area: main;
 }
 
-
 /*home page layout*/
-.main{
+.main {
   display: grid;
   grid-area: main;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-areas:
-  "main1"
-  "main2"
-  "main3";
-
+    "main1"
+    "main2"
+    "main3";
 }
 
 .WorkInput {
@@ -48,183 +37,193 @@
   text-align: center;
   align-self: center;
   justify-self: center;
-
 }
 
 .BreakInput {
   grid-area: main2;
   text-align: center;
   justify-self: center;
-  align-self:center;
-
+  align-self: center;
 }
 
-.startBttn{
+.startBttn {
   grid-area: main3;
   text-align: center;
   align-self: center;
   justify-self: center;
 }
 
-
 /*---------------------*/
 
-/*.block {
-  display:grid;
-  grid-area: left;
-} 
-
-input[type="radio"]{
-  position:absolute;
-  right:1000%;
-}
-
-.animation_lab{
-
-  width:15%; padding-bottom:15%;
-  margin:0 2.5%;
-  background:rgba(247, 46, 46, 0.2);
-  border-radius:50%;
-  cursor:pointer;
-}*/
-
-
 /*Countdown Display*/
-.CountdownWrapper{
+.CountdownWrapper {
   display: grid;
   grid-area: main;
   place-self: stretch;
 
   grid-template-rows: 2fr 1fr;
   grid-template-areas:
-  "main1"
-  "main2";
+    "main1"
+    "main2";
 }
 
-.pauseBttn{
+.pauseBttn {
   grid-area: main2;
   text-align: center;
   align-self: center;
   justify-self: center;
 }
 
-.countdownDisplay{
+.countdownDisplay {
   grid-area: main1;
   text-align: center;
   align-self: center;
-  justify-self:center;
+  justify-self: center;
 }
 /*---------------------*/
-
 
 /*Settings*/
 .Settings {
-  /*grid-row-start: 1;     This part is unnecessary because it actually has no
-  grid-row-end: 3;         effect on the layout. There are also no lines named 1 and 3
-  grid-column-start: 3;    cuz I custome named them in GridLayout ;-;
-  grid-column-end: 3;*/
   display: grid;
   grid-area: corner2;
   place-self: stretch;
-
 }
 /*---------------------*/
 
-
 /* Animation*/
-.AnimationController{
-  display:grid;
+.AnimationController {
+  display: grid;
   grid-area: left;
   align-self: center;
 }
 
-
-.animation{
-  display: grid;
-  z-index: -10000;
-  grid-column: vstart / vend;
-  grid-row: hstart/ hend;
-}
 /*---------------------*/
-
 
 /*prompt*/
-.intermission{
+.intermission {
   display: grid;
+  /*width: 100vw;
+  height: 100vh;*/
   grid-area: main;
   place-self: stretch;
-  grid-template-rows: 1fr 1fr;
-  grid-template-areas: 
-  "prompt"
-  "cat";
+
+  /*position: fixed;
+  overflow: hidden;*/
+
+  /*place-self: stretch;*/
+  grid-template-rows: 1fr 2fr;
+  grid-template-areas:
+    "prompt"
+    "cat";
 }
 
-.prompt{
+.prompt {
   grid-area: prompt;
+
+  /*margin-top: 5vw;*/
+
   text-align: center;
   align-self: center;
-  justify-self:center;
-  font-size: 4vw;
-  font-weight: normal;
-  font-family: 'Courier New', Courier, monospace;
+  justify-self: center;
+  /*place-self: stretch;*/
 }
 
-.cat{
-  grid-area:cat;
+.promptText {
+  font-size: 4vmin;
+  font-weight: normal;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.cat {
+  grid-area: cat;
   text-align: center;
   align-self: start;
-  justify-self:center;
+  justify-self: center;
+  place-self: stretch;
+}
+
+.catGif {
+  place-self: center;
+  height: 35vh;
+}
+
+.full_cat {
+  grid-area: cat;
+}
+
+.fullcatGif {
+  object-fit: contain;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 /*---------------------*/
 
+/* home button*/
 .home-btn-con {
   display: grid;
   grid-area: corner1;
   place-self: stretch;
 
-
   /*z-index: 1000001;*/
 }
 
 .home-btn {
-  /*display: absolute;*/
   border: none;
-
-  width: 35%;
-  top: 10%;
+  width: 7vmin;
+  height: 6.3vmin;
   cursor: pointer;
-  
-  margin-top: 20%;
-  margin-left: 12.2%;
-  height: 50%;
-  padding-top: 5vw;
-  
+
+  margin-top: 2vw;
+  margin-left: 2.5vmin;
+
   background-color: transparent;
   background-repeat: no-repeat;
-  background-image: url(./components/animation/assets/normelhome.png);
+  background-image: url(./components/animation/assets/normal.png);
   background-size: contain;
 }
 
+.miniPrompt {
+  position: relative;
+  grid-area: corner1;
+  text-align: center;
+  margin-top: 10vmin;
+  margin-left: 1.1vmin;
+  width: 8.8vmin;
+}
+
+.miniP {
+  margin-top: 0.4vmin;
+  text-align: center;
+  font-size: 3.5vmin;
+
+  font-weight: normal;
+  color: #828b93;
+}
+
 .home-btn:hover {
-  background-image: url(./components/animation/assets/hoverhome.png);
+  background-image: url(./components/animation/assets/hover.png);
+  width: 7vmin;
+  height: 6.3vmin;
 }
 
 .home-btn:active {
-  background-image: url(./components/animation/assets/clickhome.png);
-  transform: translateY(0.07vw);
-  width: 30%;
-  top: 10%;
+  background-image: url(./components/animation/assets/clicked.png);
+  transform: translateY(0.4vmin);
+  width: 7vmin;
+  height: 6.3vmin;
+  top: 2vw;
+  left: 2.5vmin;
   background-repeat: no-repeat;
-  margin-top: 20%;
-  margin-left: 14%;
-  height: 40%;
+  margin-top: 2vw;
+  margin-left: 2.5vmin;
+
   cursor: pointer;
   background-color: transparent;
   padding-top: 5vw;
 }
 
 /*---------------------*/
-
 
 .App-logo {
   height: 40vmin;

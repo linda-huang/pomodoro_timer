@@ -3,7 +3,7 @@
  * following contains the action and reducer to indicate current mission state
  */
 
-const NUM_REPEATS = 'NUM_REPEATS';
+const NUM_SESSIONS = 'NUM_SESSIONS';
 const ALERT_SOUND = 'ALERT_SOUND';
 const WORK_MUSIC = 'WORK_MUSIC';
 const BREAK_MUSIC = 'BREAK_MUSIC';
@@ -13,10 +13,10 @@ const BREAK_MUSIC = 'BREAK_MUSIC';
  * a redux action defined to be called in the pomodoroReducer to define break_length
  */
 
-export const setNumRepeats = num_repeats => (
+export const setNumSessions = num_sessions => (
     {
-        type: NUM_REPEATS,
-        num_repeats
+        type: NUM_SESSIONS,
+        num_sessions
     }
 )
 
@@ -46,7 +46,7 @@ export const setBreakMusic = state => (
  */
 
 const initialSettings = {
-    num_repeats : 0,
+    num_sessions : 1,
     alert_sound : true,
     work_music : true,
     break_music : true,
@@ -70,9 +70,9 @@ const initialSettings = {
 
 export function settingsReducer (state = initialSettings, action) {
     switch (action.type) {
-        case NUM_REPEATS:
+        case NUM_SESSIONS:
             return Object.assign({}, state, {
-                num_repeats : action.num_repeats
+                num_sessions : action.num_sessions
             })
         case ALERT_SOUND:
             return Object.assign({}, state, {
