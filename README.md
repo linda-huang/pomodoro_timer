@@ -1,7 +1,7 @@
 <!-- ![Alt text](./readme_assets/cat_banner.png?raw=true "Pawmodoro Timer") -->
 <img src="./readme_assets/cat_banner.png" height='300'/>
 
-A chill little pomodoro timer that reflects countdowns visually via animations (a rising tide, or disappearing bubbles of light). 
+A chill little pomodoro timer that reflects countdowns visually via animations (a rising tide, or disappearing bubbles of light). Users can customize the length of time to work and break for; the timer automatically switches between work and break sessions for you.
 
 ## Features
 <!-- --- -->
@@ -10,34 +10,19 @@ A chill little pomodoro timer that reflects countdowns visually via animations (
 
 <img src="./readme_assets/wave_animation.gif" width='405'/> <img src="./readme_assets/ball_animation.gif" width='405'/>
 
+Animations sync to the amount of time left on the countdown, serving as a dynamic indicator of countdown progress. Integration into React done using CSS, requestAnimationFrame, and Canvas.
 
+### Interactive Elements
 
+<img src="./readme_assets/input_box" width='405'/> <img src="./readme_assets/add_time.gif" width='405'/>
 
-    Timer Input - 
-    <GIF here>
-    - flexbox
-    - add time
+Easy to use interfaces allow users to personlize timer settings, and adjust the length of work and break intervals midway through the countdown. Component placement done via CSS grid and CSS flexbox.   
 
+### Self-designed Static Assets
 
-    Animation:
-    Waves
-    <GIF here>
-    - pure css
+<img src="./readme_assets/animation_toggle" width='405'/>
 
-
-    Light Dots 
-    <GIF here>
-    - request animation frame
-    - canvas
-
-    
-    Animation Toggle:
-    - radio button
-    - labels of radio buttons are drawn in Figma
-
-    
-
-
+Static assets coded from scratch, allowing for greater customizability. Designs created using Figma and incorporated into CSS checkboxes and radio buttons. 
 
 
 
