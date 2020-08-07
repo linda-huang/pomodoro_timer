@@ -3,29 +3,35 @@ import React, { useEffect, useState, useRef } from "react";
 // import TimerInput from '../input/break-input';
 import TimerInput from "../input/work-input";
 import { connect } from "react-redux";
-import {setNumRepeats, setAlertSound, setWorkMusic, setBreakMusic} from "./settingsDucks";
+import {
+  setNumRepeats,
+  setAlertSound,
+  setWorkMusic,
+  setBreakMusic,
+} from "./settingsDucks";
 
 import { NONE, WORK, BREAK, INTERMEDIATE } from "../timer/timerDucks";
 import Toggle from "../UIKits/Toggle";
 import StyledMenu from "./menu.styles";
-import NumberInput from '../numberInput/NumberInput';
+import NumberInput from "../numberInput/NumberInput";
 
 import Button from "../UIKits/Button";
 import "../UIKits/Button.css";
+import { cloneElement } from "react";
 // import { Keyboard } from 'react-native';
 
-function SandboxModal({ setHide,
-                        hide,
-                        setNumRepeats,
-                        num_repeats,
-                        setAlertSound,
-                        alert_sound,
-                        setWorkMusic,
-                        work_music,
-                        setBreakMusic,
-                        break_music,
-                        countdown_state,
-                        start,
+function SandboxModal({
+  setHide,
+  hide,
+  setNumRepeats,
+  num_repeats,
+  setAlertSound,
+  alert_sound,
+  setWorkMusic,
+  work_music,
+  setBreakMusic,
+  break_music,
+  countdown_state,
 }) {
   const [save, setSave] = useState(false);
   const [tempNumRepeats, setTempNumRepeats] = useState(num_repeats);
@@ -42,14 +48,6 @@ function SandboxModal({ setHide,
   const workSound = useRef(work_music);
   const breakSound = useRef(break_music);
 
-
-  useEffect(() => {
-    if (start === true) {
-      setHide(true);
-    }
-  }, [start]);
-
-
   useEffect(() => {
     setTempNumRepeats(num_repeats);
     if (workChange === true && breakChange === true) {
@@ -59,27 +57,21 @@ function SandboxModal({ setHide,
     }
   }, [workChange, breakChange, num_repeats]);
 
-
   const onDialogClick = (event) => {
     event.stopPropagation();
   };
-
 
   const handleConfigSubmit = (event) => {
     setSave(true);
     setNumRepeats(parseInt(tempNumRepeats));
     console.log("work audio", tempWorkSound);
-    
+
     alertSound.current = tempAlert;
-    workSound.current= tempWorkSound;
+    workSound.current = tempWorkSound;
     breakSound.current = tempBreakSound;
-    /*setAlertSound(tempAlert);
-    setWorkMusic(tempWorkSound);
-    setBreakMusic(tempBreakSound);*/
     event.preventDefault();
     if (countdown_state === NONE) setSave(false);
   };
-
 
   const handleRepeatChange = (event) => {
     setTempNumRepeats(event.target.value);
@@ -88,124 +80,118 @@ function SandboxModal({ setHide,
   const alertSoundChange = (event) => {
     setAlertSound(!tempAlert);
     setTempAlert(!tempAlert);
-  }
+  };
 
   const workSoundChange = (event) => {
     setWorkMusic(!tempWorkSound);
     setTempWorkSound(!tempWorkSound);
-  }
+  };
 
   const breakSoundChange = (event) => {
     setBreakMusic(!tempBreakSound);
     setTempBreakSound(!tempBreakSound);
-  }
+  };
 
   useEffect(() => {
-    if(hide){
-        setAlertSound(alertSound.current); 
-        setBreakMusic(breakSound.current);
-        setWorkMusic(workSound.current); 
-        setTempAlert(alertSound.current);
-        setTempBreakSound(breakSound.current);
-        setTempWorkSound(workSound.current);
+    if (hide) {
+      setAlertSound(alertSound.current);
+      setBreakMusic(breakSound.current);
+      setWorkMusic(workSound.current);
+      setTempAlert(alertSound.current);
+      setTempBreakSound(breakSound.current);
+      setTempWorkSound(workSound.current);
     }
-  },[hide])
+  }, [hide]);
 
+  let breakInput =
+    countdown_state !== NONE ? (
+      <label className="countdown-label">
+        Set Break Time
+        <div className="inputBox">
+          <TimerInput
+            workBreak={BREAK}
+            use="settings"
+            save={save}
+            text_size={2.3}
+            setBreakChange={(input) => setBreakChange(input)}
+          />
+        </div>
+      </label>
+    ) : null;
 
-  let breakInput = countdown_state !== NONE ? (
-                                                  <label> 
-                                                  Set Break Time
-                                                    <div className = "inputBox">
-                                                      <TimerInput
-                                                        workBreak={BREAK}
-                                                        use="settings"
-                                                        save={save}
-                                                        text_size={2.3}
-                                                        setBreakChange={(input) => setBreakChange(input)} />
-                                                    </div>
-                                             
-                                                </label>
-                                              ) : null;
+  let workInput =
+    countdown_state !== NONE ? (
+      <label className="countdown-label">
+        Set Work Time
+        <div className="inputBox">
+          <TimerInput
+            workBreak={WORK}
+            use="settings"
+            save={save}
+            text_size={2.3}
+            setWorkChange={(input) => setWorkChange(input)}
+          />
+        </div>
+      </label>
+    ) : null;
 
-
-  let workInput =countdown_state !== "NONE" ? (
-                                                <label>
-                                                  Set Work Time
-                                                  <div className = "inputBox">
-                                                    <TimerInput
-                                                      workBreak={WORK}
-                                                      use="settings"
-                                                      save={save}
-                                                      text_size={2.3}
-                                                      setWorkChange={(input) => setWorkChange(input)}
-                                                    />
-                                                    </div>
-                                                </label>
-                                               ) : null;
-
-  if (hide) return null;
-  
-  else {
-    return (
-      <StyledMenu>
-        <h4> SETTINGS </h4>
-        <hr id="firstLine" />
-        <form onSubmit={handleConfigSubmit}>
+  return (
+    <StyledMenu hide={hide}>
+      <h4> Settings </h4>
+      <hr id="firstLine" />
+      <form onSubmit={handleConfigSubmit}>
+        <div className="countdown-settings">
           {workInput}
           {breakInput}
-          <div>
-            <label>Number of Repeats</label>
-            {/*<input
-              type="number"
-              min="0"
-              value={tempNumRepeats}
-              onChange={handleRepeatChange}
-            />*/}
-            <div>
-              <NumberInput handleRepeatChange = {(input) => setTempNumRepeats(input)}/>
-            </div>
-          </div>
-          <hr id="secondLine" />
-          <div className="soundSetting">
-            <label className="soundLabel">Alert Sound</label>
-          
-              <Toggle
-                isChecked={tempAlert}
-                handleToggle={alertSoundChange}
-                size="small"
-              />
-            
-          </div>
-          <div className="soundSetting">
-            <label className="soundLabel">Work Music</label>
-            <Toggle
-              isChecked={tempWorkSound}
-              handleToggle={workSoundChange}
-              size="small"
+          <label className="countdown-label">Number of Work Sessions</label>
+          <div className="num-repeats-div">
+            <NumberInput
+              handleRepeatChange={(input) => setTempNumRepeats(input)}
+              numRepeats={num_repeats}
+              hide={hide}
             />
           </div>
-          <div className="soundSetting">
-            {/*<input
-                            type = 'checkbox'
-                            checked = {tempBreakSound}
-                            onChange = {() => setTempBreakSound(!tempBreakSound)}
-                            />*/}
-            <label className="soundLabel">Break Music</label>
-            <Toggle
-              isChecked={tempBreakSound}
-              handleToggle={breakSoundChange}
-              size="small"
-            />
-          </div>
-          <hr id="thirdLine" />
-          <button type="submit" className="my-btn btn-primary btn-small">
-            Save
-          </button>
-        </form>
-      </StyledMenu>
-    );
-  }
+        </div>
+        <hr id="secondLine" />
+        <div className="soundSetting">
+          <label className="soundLabel">Chime When Timer Ends</label>
+          {/* <div className="toggle-padding"> */}
+          <Toggle
+            isChecked={tempAlert}
+            handleToggle={alertSoundChange}
+            size="small"
+          />
+        </div>
+        {/* </div> */}
+        <div className="soundSetting">
+          <label className="soundLabel">Work Session Music</label>
+          {/* <div className="toggle-padding">  */}
+          <Toggle
+            isChecked={tempWorkSound}
+            handleToggle={workSoundChange}
+            size="small"
+          />
+        </div>
+        {/* </div> */}
+        <div className="soundSetting">
+          <label className="soundLabel">Break Session Music</label>
+          {/* <div className="toggle-padding"> */}
+          <Toggle
+            isChecked={tempBreakSound}
+            handleToggle={breakSoundChange}
+            size="small"
+          />
+        </div>
+        {/* </div> */}
+        <hr id="thirdLine" />
+        <button type="submit" className="my-btn btn-primary btn-small">
+          Save
+        </button>
+      </form>
+    </StyledMenu>
+  );
 }
+
 /**
  * @constant mapDispatchToProps
  * Returns a plain object, where each field is a separate prop for the Classifier
@@ -236,4 +222,4 @@ const mapStateToProps = (state) => ({
   break_music: state.settings.break_music,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SandboxModal)
+export default connect(mapStateToProps, mapDispatchToProps)(SandboxModal);

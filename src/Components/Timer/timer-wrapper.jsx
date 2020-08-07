@@ -53,8 +53,6 @@ function TimerWrapper({
 
   const handleHomeClick = () => {
     if (countdown_state !== NONE) {
-      console.log("set curent state to prev");
-      console.log(countdown_state);
       setPrevState(countdown_state);
       setPaused(false);
       setCountdownState(NONE);
@@ -114,10 +112,6 @@ function TimerWrapper({
         <div className="AnimationController">
           <AnimationController />
         </div>
-
-        {/*<div className="animation">
-              <AnimationWrapper time={totalTime} />
-            </div>*/}
 
         <div className="home-btn-con">
           <button
