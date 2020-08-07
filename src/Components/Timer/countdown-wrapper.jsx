@@ -23,14 +23,6 @@ function CountdownWrapper({ countdown_state, setPaused, pause, updateTime }) {
   else {
     return (
       <div className="CountdownWrapper">
-        {/* <div className='parent'>
-                            <div className='child'>
-                                <AddTime/>
-                            </div>
-                            <div className='child'>
-                                <Countdown pause={pause}/>
-                            </div>
-                </div> */}
         <div className="countdownDisplay">
           <Countdown pause={pause} updateTime={updateTime} />
         </div>

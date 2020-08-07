@@ -56,11 +56,8 @@ function random(min, max) {
 }
 //return random position the ball should spawn
 function randomPosition(radius, width, height) {
-  // console.log(width);
   var pos = {};
   const x_coor = random(0 + radius, width - radius);
-  //console.log("x coor");
-  //console.log(x_coor);
   const y_coor = random(0 + radius, height - radius);
   pos.x = x_coor;
   pos.y = y_coor;
@@ -79,7 +76,6 @@ function Ball(pos, velX, velY, size) {
   this.velX = velX;
   this.velY = velY;
   this.color = randomColor(color_options);
-  // this.color = "blue"
   this.size = size;
 }
 
@@ -172,7 +168,6 @@ class BallAnimation extends React.Component {
         velocity: ve_work,
       };
     }
-    //console.log(` totoal time in second${tolsec}`);
   }
 
   componentDidMount() {
@@ -214,7 +209,6 @@ class BallAnimation extends React.Component {
   }
 
   componentWillUnmount() {
-    // console.log("unmount");
     window.removeEventListener("resize", this.updateWindowDimensions);
     cancelAnimationFrame(this.rAF);
   }

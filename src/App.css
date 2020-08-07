@@ -141,7 +141,7 @@ input[type="radio"]{
   /*width: 100vw;
   height: 100vh;*/
   grid-area: main;
-  place-self:stretch;
+  place-self: stretch;
 
   /*position: fixed;
   overflow: hidden;*/
@@ -165,8 +165,7 @@ input[type="radio"]{
 }
 
 .promptText {
-
-  font-size: 4vw;
+  font-size: 4vmin;
   font-weight: normal;
   font-family: "Courier New", Courier, monospace;
 }
@@ -183,7 +182,6 @@ input[type="radio"]{
 
   /*object-fit: contain;*/
 }
-
 
 .catGif {
   /*width: 100%;
@@ -204,7 +202,6 @@ input[type="radio"]{
   margin-right: 10%;
 }
 /*---------------------*/
-
 
 /* home button*/
 .home-btn-con {
@@ -234,6 +231,26 @@ input[type="radio"]{
   background-size: contain;
 }
 
+.miniPrompt {
+  position: relative;
+  grid-area: corner1;
+  text-align: center;
+  /* align-self: center;
+  justify-self: center; */
+  /* place-self: stretch; */
+  margin-top: 10vmin;
+  margin-left: 1.7vmin;
+  width: 8.4vmin;
+}
+
+.miniP {
+  margin-top: 0.5vw;
+  text-align: center;
+  font-size: 1.4vw;
+  font-weight: normal;
+  color: #828b93;
+}
+
 .home-btn:hover {
   background-image: url(./components/animation/assets/hover.png);
   width: 7vmin;
@@ -257,12 +274,6 @@ input[type="radio"]{
 }
 
 /*---------------------*/
-
-/*.canvas {
-  position: absolute;
-  z-index: -1000;
-  background: #fef7e1;
-}*/
 
 .App-logo {
   height: 40vmin;

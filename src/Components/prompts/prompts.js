@@ -78,12 +78,12 @@ function Prompts({
   );
 
   const workDone = [
-    "YAY! You've finished work!",
-    "Good Work",
-    "Have a nice long break",
+    "YAY! You've finished your work!",
+    "good work!",
+    "Have a nice long break ~",
   ];
-  const breakDone = ["Time to get to work!", "One more push"];
-  const endSession = ["Congratulation!!! you are done", "great work"];
+  const breakDone = ["Time to get to work!", "one more push!"];
+  const endSession = ["Congratulations!!! We're done!", "great work!"];
 
   const workDonePic = [pawn, tailCat, sleep, realsleep];
   const breakDonePic = [pawn, hide, study];
