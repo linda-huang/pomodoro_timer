@@ -36,7 +36,9 @@ Easy to use interfaces allow users to personalize timer settings, and adjust the
 
 Static assets coded from scratch, allowing for greater customizability. Designs created using Figma and incorporated into CSS checkboxes and radio buttons. 
 
+### Authors
 
+Doanh Tran, Linda Huang Sijia, Mina Prapakamol
 
 
 
