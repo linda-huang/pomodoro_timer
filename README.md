@@ -36,4 +36,4 @@ Static assets coded from scratch, allowing for greater customizability. Designs 
 
 ### Authors
 
-Doanh Tran, Huang Sijia Linda, Mina Prapakamol
+Doanh Tran, Linda Huang Sijia, Mina Prapakamol
