@@ -32,7 +32,9 @@ Easy to use interfaces allow users to personalize timer settings, and adjust the
 
 <img src="./readme_assets/animation_toggle.gif" width='250'/>
 
-Static assets coded from scratch, allowing for greater customizability. Designs created using Figma and incorporated into CSS checkboxes and radio buttons. [Checkout our design journey, UI Kits and assets](https://www.figma.com/file/y7ELBtICzex2nBgItxX1Tm/Break_Timer?node-id=769%3A8)
+Static assets coded from scratch, allowing for greater customizability. Designs created using Figma and incorporated into CSS checkboxes and radio buttons. 
+
+[Checkout our design journey, UI Kits and assets](https://www.figma.com/file/y7ELBtICzex2nBgItxX1Tm/Break_Timer?node-id=769%3A8)
 
 ### Authors
 
