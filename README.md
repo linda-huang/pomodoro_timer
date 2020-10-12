@@ -20,7 +20,6 @@ Animations sync to the amount of time left on the countdown, serving as a dynami
 ---
 
 ### Interactive Elements
-
 <p align="center">
 <img src="./readme_assets/input_box.gif" width='300'/> <img src="./readme_assets/add_time.gif" width='480'/>
 </p>
@@ -36,10 +35,8 @@ Easy to use interfaces allow users to personalize timer settings, and adjust the
 
 Static assets coded from scratch, allowing for greater customizability. Designs created using Figma and incorporated into CSS checkboxes and radio buttons. 
 
+[Checkout our design journey, UI Kits and assets](https://www.figma.com/file/y7ELBtICzex2nBgItxX1Tm/Break_Timer?node-id=769%3A8)
+
 ### Authors
 
 Doanh Tran, Linda Huang Sijia, Mina Prapakamol
-
-
-
-
